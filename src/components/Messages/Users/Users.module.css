@@ -1,0 +1,25 @@
+.dialogUser {
+    color: white;
+    text-decoration: none;
+    margin-top: -16%;
+    margin-bottom: 10%;
+    margin-left: 25%;
+}
+
+.active {
+    color: rgb(164, 174, 206);
+    text-decoration: none;
+}
+
+.pfp img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    margin-top: -5%;
+}
+
+.messagesText {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 7%;
+}

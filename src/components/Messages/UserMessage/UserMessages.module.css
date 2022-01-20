@@ -1,0 +1,30 @@
+.myPfp img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-left: 100%;
+}
+
+.theirPfp img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-right: 100%;
+}
+
+.fromMe {
+    margin-top: -5%;
+    margin-bottom: 5%;
+    margin-right: 2%;
+    color: white;
+    text-align: left;
+    float: right;
+}
+
+.fromThem {
+    margin-top: -5%;
+    margin-bottom: 5%;
+    margin-left: 7.5%;
+    color: white;
+    text-align: left;
+}

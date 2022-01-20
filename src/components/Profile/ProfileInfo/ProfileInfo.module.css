@@ -1,0 +1,29 @@
+.banner {
+    width: 111%;
+    height: 250px;
+    margin-bottom: 1%;
+    margin-left: -5.5%;
+    margin-top: -1%
+}
+
+.pfpAndDetails {
+    display: grid;
+    grid-template-areas:
+      "p d"
+      "p d";
+  
+    grid-template-columns: 3fr 5fr;
+
+}
+
+.pfp img{
+    width: 45%;
+    height: 100%;
+    display: block;
+    grid-area: p;
+}
+
+.details {
+    grid-area: d;
+}
+
