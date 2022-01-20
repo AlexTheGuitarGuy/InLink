@@ -105,6 +105,7 @@ let sendMessage = () => {
         
     }
     state.profilePage.storedText = '';
+    state.profilePage.storedText = '';
 }
 
 
