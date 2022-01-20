@@ -116,4 +116,4 @@ let subscribe = (observer) => {
 export let functions = { addPost, storeText, sendMessage, subscribe };
 
 
-export default state
+export default state;
