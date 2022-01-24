@@ -1,17 +1,18 @@
 import React from 'react';
 import s from './Publish.module.css';
+import { storeTextActionCreator, addPostActionCreator } from '../../../../redux/state';
 
 const Publish = (props) => {
 
     let newPost = React.createRef();
 
     let post = () => {
-        props.dispatch({type: "ADD-POST"});
+        props.dispatch(addPostActionCreator());
     }
 
     let takeText = () => { 
         let text = newPost.current.value;
-        props.dispatch({type: "STORE-TEXT", text: text});
+        props.dispatch(storeTextActionCreator(text));
     }
 
     return (

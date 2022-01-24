@@ -1,3 +1,7 @@
+const STORE_TEXT = 'STORE-TEXT';
+const ADD_POST = 'ADD-POST';
+const SEND_MESSAGE = 'SEND-MESSAGE';
+
 let store = {
 
     _state: {
@@ -80,11 +84,11 @@ let store = {
 
     dispatch(action) {
 
-        if (action.type === 'STORE-TEXT') {
+        if (action.type === STORE_TEXT) {
             this._state.userData.storedText = action.text;
             this._callSubscriber(this._state);
         }
-        else if (action.type === 'ADD-POST') {
+        else if (action.type === ADD_POST) {
             if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
                 let newPost = {
                     id: this._state.profilePage.posts.length + 1,
@@ -98,7 +102,7 @@ let store = {
             this._callSubscriber(this._state);
             this._state.userData.storedText = '';
         }
-        else if (action.type === 'SEND-MESSAGE') {
+        else if (action.type === SEND_MESSAGE) {
 
             if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
 
@@ -113,11 +117,15 @@ let store = {
             this._callSubscriber(this._state);
             this._state.userData.storedText = '';
         }
-        else (alert(`no such method: ${action.type}`))
+        else (alert(`no such action type: ${action.type}`))
 
     },
 
 }
+
+export const storeTextActionCreator = (text) => ({type:STORE_TEXT, text: text});
+export const addPostActionCreator = () => ({type:ADD_POST});
+export const sendMessageActionCreator = () => ({type:SEND_MESSAGE});
 
 window.store = store;
 

@@ -1,17 +1,18 @@
 import React from 'react'
 import s from './SendText.module.css'
+import {storeTextActionCreator, sendMessageActionCreator} from '../../../redux/state';
 
 const SendText = (props) => {
     
     let newPost = React.createRef();
 
     let post = () => {
-        props.dispatch({type: "SEND-MESSAGE"});
+        props.dispatch(sendMessageActionCreator());
     }
 
     let takeText = () => {
         let text = newPost.current.value;
-        props.dispatch({type: "STORE-TEXT", text: text});
+        props.dispatch(storeTextActionCreator(text));
     }
 
     return (
