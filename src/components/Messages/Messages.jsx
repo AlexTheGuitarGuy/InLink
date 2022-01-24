@@ -28,8 +28,7 @@ const Messages = (props) => {
                     <Route exact strict path='/' element={userDialogElements} />
 
                 </Routes>
-                <SendText sendMessage={props.sendMessage}
-                    storeText={props.storeText} 
+                <SendText dispatch={props.dispatch}
                     storedText = {props.storedText}/>
             </div>
 

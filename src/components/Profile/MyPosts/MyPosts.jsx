@@ -9,8 +9,7 @@ const MyPosts = (props) => {
     return (
         <div>
             <div>
-                <Publish addPost={props.addPost}
-                    storeText={props.storeText}
+                <Publish dispatch={props.dispatch}
                     storedText={props.storedText} />
                 {postElements.reverse()}
             </div>

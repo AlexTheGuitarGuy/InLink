@@ -6,13 +6,12 @@ const Publish = (props) => {
     let newPost = React.createRef();
 
     let post = () => {
-        let text = newPost.current.value;
-        props.addPost(text);
+        props.dispatch({type: "ADD-POST"});
     }
 
-    let takeText = () => {
+    let takeText = () => { 
         let text = newPost.current.value;
-        props.storeText(text);
+        props.dispatch({type: "STORE-TEXT", text: text});
     }
 
     return (
@@ -22,7 +21,7 @@ const Publish = (props) => {
             <textarea
                 ref={newPost}
                 value={props.storedText}
-                onChange={(e) => takeText(e.nativeEvent.data)}
+                onChange={() => takeText()}
                 onKeyPress={(e) => {
                     if (e.key === 'Enter') post();
                 }}

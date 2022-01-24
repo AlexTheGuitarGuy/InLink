@@ -1,9 +1,5 @@
 let store = {
 
-    _callSubscriber() {
-        console.log("rerendered");
-    },
-
     _state: {
         userData: {
             profileData: { id: 0, name: "Me", pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u0.jpg")} alt='My pfp' /> },
@@ -72,44 +68,55 @@ let store = {
         return (this._state);
     },
 
-    storeText(text) {
-        this._state.userData.storedText = text;
-        this._callSubscriber(this._state);
-    },
-
-    addPost() {
-        if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
-            let newPost = {
-                id: this._state.profilePage.posts.length + 1,
-                text: this._state.userData.storedText,
-                likes: 0,
-            };
-
-            this._state.profilePage.posts.push(newPost);
-
-        }
-        this._callSubscriber(this._state);
-        this._state.userData.storedText = '';
-    },
-
-    sendMessage() {
-        if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
-
-            let newMessage = {
-                text: this._state.userData.storedText,
-                from: "me",
-            };
-
-            this._state.dialogsPage.userMessages[3].push(newMessage);
-
-        }
-        this._callSubscriber(this._state);
-        this._state.userData.storedText = '';
+    _callSubscriber() {
+        console.log("rerendered");
     },
 
     subscribe(observer) {
         this._callSubscriber = observer;
     },
+
+    //dispatch methods below
+
+    dispatch(action) {
+
+        if (action.type === 'STORE-TEXT') {
+            this._state.userData.storedText = action.text;
+            this._callSubscriber(this._state);
+        }
+        else if (action.type === 'ADD-POST') {
+            if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
+                let newPost = {
+                    id: this._state.profilePage.posts.length + 1,
+                    text: this._state.userData.storedText,
+                    likes: 0,
+                };
+
+                this._state.profilePage.posts.push(newPost);
+
+            }
+            this._callSubscriber(this._state);
+            this._state.userData.storedText = '';
+        }
+        else if (action.type === 'SEND-MESSAGE') {
+
+            if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
+
+                let newMessage = {
+                    text: this._state.userData.storedText,
+                    from: "me",
+                };
+
+                this._state.dialogsPage.userMessages[3].push(newMessage);
+
+            }
+            this._callSubscriber(this._state);
+            this._state.userData.storedText = '';
+        }
+        else (alert(`no such method: ${action.type}`))
+
+    },
+
 }
 
 window.store = store;

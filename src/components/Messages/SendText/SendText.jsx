@@ -6,13 +6,12 @@ const SendText = (props) => {
     let newPost = React.createRef();
 
     let post = () => {
-        let text = newPost.current.value;
-        props.sendMessage(text);
+        props.dispatch({type: "SEND-MESSAGE"});
     }
 
     let takeText = () => {
         let text = newPost.current.value;
-        props.storeText(text);
+        props.dispatch({type: "STORE-TEXT", text: text});
     }
 
     return (
@@ -20,7 +19,7 @@ const SendText = (props) => {
             <textarea className={s.textArea}
                 ref={newPost}
                 value={props.storedText}
-                onChange={(e) => takeText(e.nativeEvent.data)}
+                onChange={() => takeText()}
                 onKeyPress={(e) => {
                     if (e.key === 'Enter') post();
                 }}></textarea>
