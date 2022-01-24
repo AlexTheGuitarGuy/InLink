@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './SendText.module.css'
-import {storeTextActionCreator, sendMessageActionCreator} from '../../../redux/state';
+import {storeMessageTextActionCreator, sendMessageActionCreator} from '../../../redux/state';
 
 const SendText = (props) => {
     
@@ -12,7 +12,7 @@ const SendText = (props) => {
 
     let takeText = () => {
         let text = newPost.current.value;
-        props.dispatch(storeTextActionCreator(text));
+        props.dispatch(storeMessageTextActionCreator(text));
     }
 
     return (
@@ -23,7 +23,8 @@ const SendText = (props) => {
                 onChange={() => takeText()}
                 onKeyPress={(e) => {
                     if (e.key === 'Enter') post();
-                }}></textarea>
+                }}
+                placeholder='Enter your message'></textarea>
 
             <div className={s.button}>
                 <button onClick={post}>Send</button>

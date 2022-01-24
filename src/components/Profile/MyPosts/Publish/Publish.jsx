@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Publish.module.css';
-import { storeTextActionCreator, addPostActionCreator } from '../../../../redux/state';
+import { storePostTextActionCreator, addPostActionCreator } from '../../../../redux/state';
 
 const Publish = (props) => {
 
@@ -12,7 +12,7 @@ const Publish = (props) => {
 
     let takeText = () => { 
         let text = newPost.current.value;
-        props.dispatch(storeTextActionCreator(text));
+        props.dispatch(storePostTextActionCreator(text));
     }
 
     return (
@@ -26,7 +26,7 @@ const Publish = (props) => {
                 onKeyPress={(e) => {
                     if (e.key === 'Enter') post();
                 }}
-            />
+                placeholder='Type what you think'/>
 
             <div className={s.button}>
                 <button

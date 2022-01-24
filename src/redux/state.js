@@ -1,4 +1,5 @@
-const STORE_TEXT = 'STORE-TEXT';
+const STORE_POST_TEXT = 'STORE-POST-TEXT';
+const STORE_MESSAGE_TEXT = 'STORE-MESSAGE-TEXT';
 const ADD_POST = 'ADD-POST';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
@@ -7,7 +8,7 @@ let store = {
     _state: {
         userData: {
             profileData: { id: 0, name: "Me", pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u0.jpg")} alt='My pfp' /> },
-            storedText: '',
+            
         },
 
         profilePage: {
@@ -16,6 +17,7 @@ let store = {
                 { id: 2, text: 'Futeo nahui', likes: 228 },
                 { id: 3, text: 'Welcome to the club, buddy.', likes: 69 },
             ],
+            storedText: '',
         },
 
         dialogsPage: {
@@ -25,7 +27,6 @@ let store = {
                 { id: 3, name: ["Boss", " Of This Gym"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u3.jpg")} alt='User3 pfp' /> },
                 { id: 4, name: ["Dungeon", " Master"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u4.jpg")} alt='User4 pfp' /> },
             ],
-
             userMessages: [
                 [
                     { text: "Woah! Nice website :)", from: "them" },
@@ -54,6 +55,7 @@ let store = {
                     { text: "babushka", from: "me" },
                 ],
             ],
+            storedText: '',
         },
 
         sidebar: {
@@ -84,15 +86,19 @@ let store = {
 
     dispatch(action) {
 
-        if (action.type === STORE_TEXT) {
-            this._state.userData.storedText = action.text;
+        if (action.type === STORE_POST_TEXT) {
+            this._state.profilePage.storedText = action.text;
+            this._callSubscriber(this._state);
+        }
+        else if (action.type === STORE_MESSAGE_TEXT) {
+            this._state.dialogsPage.storedText = action.text;
             this._callSubscriber(this._state);
         }
         else if (action.type === ADD_POST) {
-            if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
+            if (this._state.profilePage.storedText !== '' && this._state.profilePage.storedText !== '\n') {
                 let newPost = {
                     id: this._state.profilePage.posts.length + 1,
-                    text: this._state.userData.storedText,
+                    text: this._state.profilePage.storedText,
                     likes: 0,
                 };
 
@@ -100,14 +106,14 @@ let store = {
 
             }
             this._callSubscriber(this._state);
-            this._state.userData.storedText = '';
+            this._state.profilePage.storedText = '';
         }
         else if (action.type === SEND_MESSAGE) {
 
-            if (this._state.userData.storedText !== '' && this._state.userData.storedText !== '\n') {
+            if (this._state.dialogsPage.storedText !== '' && this._state.dialogsPage.storedText !== '\n') {
 
                 let newMessage = {
-                    text: this._state.userData.storedText,
+                    text: this._state.dialogsPage.storedText,
                     from: "me",
                 };
 
@@ -115,7 +121,7 @@ let store = {
 
             }
             this._callSubscriber(this._state);
-            this._state.userData.storedText = '';
+            this._state.dialogsPage.storedText = '';
         }
         else (alert(`no such action type: ${action.type}`))
 
@@ -123,7 +129,8 @@ let store = {
 
 }
 
-export const storeTextActionCreator = (text) => ({type:STORE_TEXT, text: text});
+export const storePostTextActionCreator = (text) => ({type:STORE_POST_TEXT, text: text});
+export const storeMessageTextActionCreator = (text) => ({type:STORE_MESSAGE_TEXT, text: text});
 export const addPostActionCreator = () => ({type:ADD_POST});
 export const sendMessageActionCreator = () => ({type:SEND_MESSAGE});
 

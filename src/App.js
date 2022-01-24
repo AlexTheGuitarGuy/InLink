@@ -27,13 +27,13 @@ const App = (props) => {
             <Route path='/profile'
               element={<Profile state={props.state.profilePage}
                 profileData={props.state.userData.profileData}
-                storedText={props.state.userData.storedText}
+                storedText={props.state.profilePage.storedText}
                 dispatch={props.dispatch} />} />
 
             <Route path='/messages'
               element={<Messages state={props.state.dialogsPage}
                 profileData={props.state.userData.profileData}
-                storedText={props.state.userData.storedText}
+                storedText={props.state.dialogsPage.storedText}
                 dispatch={props.dispatch} />} />
 
             <Route path='/news' element={<News />} />
