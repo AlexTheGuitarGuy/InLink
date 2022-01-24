@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import s from './Messages.module.css';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
@@ -28,7 +28,9 @@ const Messages = (props) => {
                     <Route exact strict path='/' element={userDialogElements} />
 
                 </Routes>
-                <SendText sendMessage = {props.sendMessage} storeText = {props.storeText}/>
+                <SendText sendMessage={props.sendMessage}
+                    storeText={props.storeText} 
+                    storedText = {props.storedText}/>
             </div>
 
         </div >

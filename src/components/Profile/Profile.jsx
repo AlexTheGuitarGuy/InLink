@@ -4,15 +4,16 @@ import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props) => {
+
     return (
         <div className={s.content}>
             <div className={s.formatting}>
                 <ProfileInfo pfp={props.profileData.pfp} />
 
                 <MyPosts posts={props.state.posts}
-                    addPost={props.addPost}
+                    storedText={props.storedText} 
                     storeText={props.storeText} 
-                    storedText = {props.state.storedText}/>
+                    addPost = {props.addPost}/>
             </div>
         </div>
 

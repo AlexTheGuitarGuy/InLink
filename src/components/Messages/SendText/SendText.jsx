@@ -2,13 +2,12 @@ import React from 'react'
 import s from './SendText.module.css'
 
 const SendText = (props) => {
-
+    
     let newPost = React.createRef();
 
     let post = () => {
         let text = newPost.current.value;
         props.sendMessage(text);
-        newPost.current.value = '';
     }
 
     let takeText = () => {
@@ -20,6 +19,7 @@ const SendText = (props) => {
         <div>
             <textarea className={s.textArea}
                 ref={newPost}
+                value={props.storedText}
                 onChange={(e) => takeText(e.nativeEvent.data)}
                 onKeyPress={(e) => {
                     if (e.key === 'Enter') post();

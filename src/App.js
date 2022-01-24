@@ -11,39 +11,42 @@ import Preferences from './components/Preferences/Preferences';
 import Home from './components/Home/Home';
 
 const App = (props) => {
+
   return (
-      <div className='app-wrapper'>
-        <Header />
+    <div className='app-wrapper'>
+      <Header />
 
-        <Nav state={props.state.sidebar}
-          friends={props.state.dialogsPage.users} />
+      <Nav state={props.state.sidebar}
+        friends={props.state.dialogsPage.users} />
 
-        <div className='app-wrapper-content'>
+      <div className='app-wrapper-content'>
 
-          <div className='app-wrapper-content-formating'>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/profile'
-                element={<Profile state={props.state.profilePage}
-                  profileData={props.state.userData.profileData}
-                  addPost={props.functions.addPost}
-                  storeText = {props.functions.storeText}/>} />
+        <div className='app-wrapper-content-formating'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/profile'
+              element={<Profile state={props.state.profilePage}
+                profileData={props.state.userData.profileData}
+                storedText={props.state.userData.storedText}
+                storeText={props.storeText}
+                addPost={props.addPost} />} />
 
-              <Route path='/messages'
-                element={<Messages state={props.state.dialogsPage}
-                  profileData={props.state.userData.profileData} 
-                  sendMessage={props.functions.sendMessage}
-                  storeText = {props.functions.storeText}/>} />
+            <Route path='/messages'
+              element={<Messages state={props.state.dialogsPage}
+                profileData={props.state.userData.profileData}
+                sendMessage={props.sendMessage}
+                storeText={props.storeText}
+                storedText={props.state.userData.storedText} />} />
 
-              <Route path='/news' element={<News />} />
-              <Route path='/music' element={<Music />} />
-              <Route path='/preferences' element={<Preferences />} />
-            </Routes>
-          </div>
-
+            <Route path='/news' element={<News />} />
+            <Route path='/music' element={<Music />} />
+            <Route path='/preferences' element={<Preferences />} />
+          </Routes>
         </div>
 
-      </div >
+      </div>
+
+    </div >
   );
 }
 

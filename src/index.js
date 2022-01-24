@@ -1,7 +1,7 @@
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import state, { functions } from './redux/state';
+import store from './redux/state';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -9,15 +9,17 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-let rerenderApp = (props) => {
+//store.storeText, store.addPost, store.sendMessage
 
-
+let rerenderApp = (state) => {
   ReactDOM.render(
 
     <React.StrictMode>
       <BrowserRouter>
-        <App state={props.state}
-          functions={props.functions} />
+        <App state={state}
+          storeText={store.storeText.bind(store)}
+          addPost={store.addPost.bind(store)}
+          sendMessage={store.sendMessage.bind(store)} />
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
@@ -26,9 +28,9 @@ let rerenderApp = (props) => {
 
 }
 
-rerenderApp({state, functions});
+rerenderApp(store.getState());
 
-functions.subscribe (rerenderApp);
+store.subscribe(rerenderApp);
 
 
 // If you want to start measuring performance in your app, pass a function
