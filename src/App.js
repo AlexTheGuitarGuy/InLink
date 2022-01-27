@@ -11,7 +11,6 @@ import Preferences from './components/Preferences/Preferences';
 import Home from './components/Home/Home';
 
 const App = (props) => {
-
   return (
     <div className='app-wrapper'>
       <Header />

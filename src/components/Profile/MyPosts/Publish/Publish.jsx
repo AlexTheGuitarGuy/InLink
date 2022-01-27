@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Publish.module.css';
-import { storePostTextActionCreator, addPostActionCreator } from '../../../../redux/state';
+import { storePostTextActionCreator, addPostActionCreator } from '../../../../redux/profile-reducer';
 
 const Publish = (props) => {
 

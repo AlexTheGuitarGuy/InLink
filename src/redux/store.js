@@ -1,7 +1,8 @@
-const STORE_POST_TEXT = 'STORE-POST-TEXT';
-const STORE_MESSAGE_TEXT = 'STORE-MESSAGE-TEXT';
-const ADD_POST = 'ADD-POST';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+import dialogsReducer from './dialogs-reducer';
+import profileReducer from './profile-reducer';
+import userReducer from './user-reducer';
+import sidebarReducer from './sidebar-reducer';
+
 
 let store = {
 
@@ -85,55 +86,14 @@ let store = {
     //dispatch methods below
 
     dispatch(action) {
-
-        if (action.type === STORE_POST_TEXT) {
-            this._state.profilePage.storedText = action.text;
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === STORE_MESSAGE_TEXT) {
-            this._state.dialogsPage.storedText = action.text;
-            this._callSubscriber(this._state);
-        }
-        else if (action.type === ADD_POST) {
-            if (this._state.profilePage.storedText !== '' && this._state.profilePage.storedText !== '\n') {
-                let newPost = {
-                    id: this._state.profilePage.posts.length + 1,
-                    text: this._state.profilePage.storedText,
-                    likes: 0,
-                };
-
-                this._state.profilePage.posts.push(newPost);
-
-            }
-            this._callSubscriber(this._state);
-            this._state.profilePage.storedText = '';
-        }
-        else if (action.type === SEND_MESSAGE) {
-
-            if (this._state.dialogsPage.storedText !== '' && this._state.dialogsPage.storedText !== '\n') {
-
-                let newMessage = {
-                    text: this._state.dialogsPage.storedText,
-                    from: "me",
-                };
-
-                this._state.dialogsPage.userMessages[3].push(newMessage);
-
-            }
-            this._callSubscriber(this._state);
-            this._state.dialogsPage.storedText = '';
-        }
-        else (alert(`no such action type: ${action.type}`))
-
+ 
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        
+        this._callSubscriber(this._state);
     },
 
 }
-
-export const storePostTextActionCreator = (text) => ({type:STORE_POST_TEXT, text: text});
-export const storeMessageTextActionCreator = (text) => ({type:STORE_MESSAGE_TEXT, text: text});
-export const addPostActionCreator = () => ({type:ADD_POST});
-export const sendMessageActionCreator = () => ({type:SEND_MESSAGE});
-
 window.store = store;
 
 export default store;
