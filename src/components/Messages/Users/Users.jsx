@@ -20,12 +20,12 @@ const Users = (props) => {
     });
 
     return (
-        <nav >
+        <div className={s.overall}>
             <div className={s.messagesText}>
                 Messages:
             </div>
             {userElements}
-        </nav>
+        </div>
     );
 }
 

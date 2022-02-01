@@ -13,11 +13,14 @@ const Post = (post) => {
                     <div className={s.text}>
                         {post.text}
                     </div>
-
-                    <div className={s.likeCount}>
-                        ❤{post.likeCount}
+                    <div >
+                        <div className={s.likeSymbol}>
+                            ❤
+                        </div>
+                        <div className={s.likeCount}>
+                            {post.likeCount}
+                        </div>
                     </div>
-                    
                 </div>
             </div>
 
