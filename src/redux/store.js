@@ -4,7 +4,7 @@ import userReducer from './user-reducer';
 import sidebarReducer from './sidebar-reducer';
 
 
-let store = {
+/*let store = {
 
     _state: {
         userData: {
@@ -18,6 +18,7 @@ let store = {
                 { id: 2, text: 'Futeo nahui', likes: 228 },
                 { id: 3, text: 'Welcome to the club, buddy.', likes: 69 },
             ],
+            
             storedText: '',
         },
 
@@ -86,14 +87,14 @@ let store = {
     //dispatch methods below
 
     dispatch(action) {
- 
+        debugger;
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         
         this._callSubscriber(this._state);
     },
 
-}
+}*/
 window.store = store;
 
 export default store;

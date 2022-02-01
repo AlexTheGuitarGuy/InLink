@@ -1,18 +1,17 @@
 import React from 'react';
 import s from './Publish.module.css';
-import { storePostTextActionCreator, addPostActionCreator } from '../../../../redux/profile-reducer';
 
 const Publish = (props) => {
 
     let newPost = React.createRef();
 
     let post = () => {
-        props.dispatch(addPostActionCreator());
+        props.post();
     }
 
     let takeText = () => { 
         let text = newPost.current.value;
-        props.dispatch(storePostTextActionCreator(text));
+        props.storeText(text);
     }
 
     return (

@@ -7,12 +7,12 @@ const SendText = (props) => {
     let newPost = React.createRef();
 
     let post = () => {
-        props.dispatch(sendMessageActionCreator());
+        props.send();
     }
 
     let takeText = () => {
         let text = newPost.current.value;
-        props.dispatch(storeMessageTextActionCreator(text));
+        props.storeText(text);
     }
 
     return (

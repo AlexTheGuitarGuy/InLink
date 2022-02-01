@@ -11,8 +11,7 @@ const Profile = (props) => {
                 <ProfileInfo pfp={props.profileData.pfp} />
 
                 <MyPosts posts={props.state.posts}
-                    storedText={props.storedText} 
-                    dispatch={props.dispatch}/>
+                    store = {props.store}/>
             </div>
         </div>
 

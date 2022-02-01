@@ -4,6 +4,7 @@ import s from './Messages.module.css';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
 import SendText from './SendText/SendText';
+import SendTextContainer from './SendText/SendTextContainer';
 
 const Messages = (props) => {
 
@@ -28,8 +29,7 @@ const Messages = (props) => {
                     <Route exact strict path='/' element={userDialogElements} />
 
                 </Routes>
-                <SendText dispatch={props.dispatch}
-                    storedText = {props.storedText}/>
+                <SendTextContainer store = {props.store}/>
             </div>
 
         </div >

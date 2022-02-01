@@ -27,6 +27,7 @@ const profileReducer = (state = defaultState, action) => {
                 state.posts.push(newPost);
 
             }
+            
             state.storedText = '';
             return (state);
         default: return (state);
