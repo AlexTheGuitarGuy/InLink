@@ -9,7 +9,7 @@ const MyPosts = (props) => {
     return (
         <div>
             <div>
-                <PublishContainer store = {props.store} />
+                <PublishContainer />
                 {postElements.reverse()}
             </div>
         </div>

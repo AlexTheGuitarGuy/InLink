@@ -11,7 +11,7 @@ const Profile = (props) => {
                 <ProfileInfo pfp={props.profileData.pfp} />
 
                 <MyPosts posts={props.state.posts}
-                    store = {props.store}/>
+                    />
             </div>
         </div>
 
