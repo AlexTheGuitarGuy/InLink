@@ -7,8 +7,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import StoreContext from './redux/StoreContext';
-
+import {Provider} from './redux/StoreContext';
 
 //store.storeText, store.addPost, store.sendMessage
 
@@ -16,13 +15,13 @@ let rerenderApp = (state) => {
   ReactDOM.render(
 
     <React.StrictMode>
-      <StoreContext.Provider value = {store}>
+      <Provider store = {store}>
         <BrowserRouter>
           <App state={state}
             dispatch={store.dispatch.bind(store)}
             />
         </BrowserRouter>
-      </StoreContext.Provider>
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 
