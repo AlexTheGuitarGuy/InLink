@@ -5,7 +5,7 @@ import SendText from './SendText';
 
 const SendTextContainer = (props) => {
 
-    let storedText = props.store.getState().dialogsPage.storedText;
+    let memoryText = props.store.getState().dialogsPage.storedText;
     let send = () => {
         props.store.dispatch(sendMessageActionCreator());
     }
@@ -17,7 +17,7 @@ const SendTextContainer = (props) => {
     return (
         <SendText send = {send} 
         storeText = {storeText}
-        storedText = {storedText}/>
+        memoryText = {memoryText}/>
     );
 }
 

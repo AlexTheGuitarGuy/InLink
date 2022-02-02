@@ -4,7 +4,7 @@ import Publish from './Publish';
 
 const PublishContainer = (props) => {
 
-    let storedText = props.store.getState().profilePage.storedText;
+    let memoryText = props.store.getState().profilePage.storedText;
 
     let post = () => {
         
@@ -18,7 +18,7 @@ const PublishContainer = (props) => {
     return (
         <Publish storeText={storeText}
             post={post} 
-            storedText = {storedText}/>
+            memoryText = {memoryText}/>
     );
 }
 

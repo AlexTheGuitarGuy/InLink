@@ -20,7 +20,7 @@ const Publish = (props) => {
 
             <textarea
                 ref={newPost}
-                value={props.storedText}
+                value={props.memoryText}
                 onChange={() => takeText()}
                 onKeyPress={(e) => {
                     if (e.key === 'Enter') post();
