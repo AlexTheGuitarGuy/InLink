@@ -1,10 +1,10 @@
-import React from 'react'
 
 import { storeMessageTextActionCreator, sendMessageActionCreator } from '../../../redux/dialogs-reducer';
-import StoreContext from '../../../redux/StoreContext';
 import SendText from './SendText';
+import { connect } from 'react-redux'
 
-const SendTextContainer = () => {
+
+/*const SendTextContainer = () => {
 
 
 
@@ -25,6 +25,21 @@ const SendTextContainer = () => {
             }}
         </StoreContext.Consumer>
     );
+}*/
+
+let mapStateToProps = (state) => {
+    return {
+        memoryText: state.dialogsPage.storedText,
+    }
 }
 
-export default SendTextContainer;
+let mapDispatchToProps = (dispatch) => {
+    return {
+        storeText: (text) => {dispatch(storeMessageTextActionCreator(text))},
+        send: () => {dispatch(sendMessageActionCreator())},
+    }
+}
+
+export const SendTextContainer = connect(mapStateToProps, mapDispatchToProps)(SendText);
+
+//export default SendTextContainer;

@@ -3,8 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import s from './Messages.module.css';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
-import SendText from './SendText/SendText';
-import SendTextContainer from './SendText/SendTextContainer';
+import {SendTextContainer} from './SendText/SendTextContainer';
 
 const Messages = (props) => {
 

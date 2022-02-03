@@ -1,31 +1,47 @@
-import React from 'react';
+
 import { storePostTextActionCreator, addPostActionCreator } from '../../../../redux/profile-reducer';
-import StoreContext from '../../../../redux/StoreContext';
 import Publish from './Publish';
+import { connect } from 'react-redux'
 
-const PublishContainer = () => {
+// const hui = () => {
 
-    return (
-        <StoreContext.Consumer>{
-            (store) => {
-                let memoryText = store.getState().profilePage.storedText;
+//     return (
+//         <StoreContext.Consumer>{
+//             (store) => {
+//                 let memoryText = store.getState().profilePage.storedText;
 
-                let post = () => {
+//                 let post = () => {
 
-                    store.dispatch(addPostActionCreator());
-                }
+//                     store.dispatch(addPostActionCreator());
+//                 }
 
-                let storeText = (text) => {
-                    store.dispatch(storePostTextActionCreator(text));
-                }
+//                 let storeText = (text) => {
+//                     store.dispatch(storePostTextActionCreator(text));
+//                 }
 
-                return (<Publish storeText={storeText}
-                    post={post}
-                    memoryText={memoryText} />)
-            }
-        }
-        </StoreContext.Consumer>
-    )
+//                 return (<Publish storeText={storeText}
+//                     post={post}
+//                     memoryText={memoryText} />)
+//             }
+//         }
+//         </StoreContext.Consumer>
+//     )
+// }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        storeText: (text) => {dispatch(storePostTextActionCreator(text))},
+        post: () => {dispatch(addPostActionCreator())},
+    }
 }
 
-export default PublishContainer;
+let mapStateToProps = (state) => {
+
+    return {
+        memoryText: state.profilePage.storedText,
+    }
+}
+
+export const PublishContainer = connect(mapDispatchToProps, mapStateToProps)(Publish);
+
+//export default PublishContainer;

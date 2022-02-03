@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from './Post/Post.jsx'
-import PublishContainer from './Publish/PublishContainer';
+import {PublishContainer} from './Publish/PublishContainer';
 
 const MyPosts = (props) => {
 

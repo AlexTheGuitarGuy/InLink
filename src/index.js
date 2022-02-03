@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import {Provider} from './redux/StoreContext';
+import {Provider} from 'react-redux'
 
 //store.storeText, store.addPost, store.sendMessage
 

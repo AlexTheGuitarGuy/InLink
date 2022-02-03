@@ -44,28 +44,33 @@ const dialogsReducer = (state = defaultState, action) => {
     switch (action.type) {
 
         case STORE_MESSAGE_TEXT:
-            state.storedText = action.text;
-            return (state);
+            return {
+                ...state,
+                storedText: action.text,
+            }
         case SEND_MESSAGE:
 
             if (state.storedText !== '' && state.storedText !== '\n') {
-
-                let newMessage = {
-                    text: state.storedText,
-                    from: "me",
-                };
-
-                state.userMessages[3].push(newMessage);
+                return {
+                    ...state,
+                    userMessages: [...state.userMessages, {
+                        text: state.storedText,
+                        from: "me",
+                    }],
+                    storedText: '',
+                }
 
             }
-            state.storedText = '';
-            return (state);
+            return {
+                ...state,
+                storedText: '',
+            }
         default: return (state);
 
     }
 }
 
-export const sendMessageActionCreator = () => ({type:SEND_MESSAGE});
-export const storeMessageTextActionCreator = (text) => ({type:STORE_MESSAGE_TEXT, text: text});
+export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
+export const storeMessageTextActionCreator = (text) => ({ type: STORE_MESSAGE_TEXT, text: text });
 
 export default dialogsReducer;
