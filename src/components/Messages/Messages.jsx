@@ -3,10 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import s from './Messages.module.css';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
-import {SendTextContainer} from './SendText/SendTextContainer';
+import SendText from './SendText/SendText';
 
 const Messages = (props) => {
-
+debugger;
     let userDialogElements = [];
     for (let i = 0; i < props.state.userMessages.length; i++) {
         userDialogElements[i] = props.state.userMessages[i].map(e => {
@@ -28,7 +28,9 @@ const Messages = (props) => {
                     <Route exact strict path='/' element={userDialogElements} />
 
                 </Routes>
-                <SendTextContainer />
+                <SendText memoryText = {props.memoryText} 
+                storeText = {props.storeText}
+                send = {props.send}/>
             </div>
 
         </div >

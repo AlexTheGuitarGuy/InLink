@@ -49,14 +49,14 @@ const dialogsReducer = (state = defaultState, action) => {
                 storedText: action.text,
             }
         case SEND_MESSAGE:
-
+            
             if (state.storedText !== '' && state.storedText !== '\n') {
+                let newMessages = [...state.userMessages, ];
+                newMessages[3].push({text: state.storedText, from: 'me'})
                 return {
                     ...state,
-                    userMessages: [...state.userMessages, {
-                        text: state.storedText,
-                        from: "me",
-                    }],
+                    userMessages: newMessages,
+
                     storedText: '',
                 }
 

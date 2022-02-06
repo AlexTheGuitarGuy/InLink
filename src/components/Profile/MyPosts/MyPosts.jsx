@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from './Post/Post.jsx'
-import {PublishContainer} from './Publish/PublishContainer';
+import Publish from './Publish/Publish.jsx';
+
 
 const MyPosts = (props) => {
 
@@ -9,7 +10,9 @@ const MyPosts = (props) => {
     return (
         <div>
             <div>
-                <PublishContainer />
+                <Publish post={props.post}
+                    storeText={props.storeText} 
+                    memoryText = {props.memoryText}/>
                 {postElements.reverse()}
             </div>
         </div>

@@ -3,12 +3,12 @@ import React from 'react';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
-import Messages from './components/Messages/Messages';
 import {Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Preferences from './components/Preferences/Preferences';
 import Home from './components/Home/Home';
+import { MessagesContainer } from './components/Messages/MessagesContainer';
 
 const App = (props) => {
   return (
@@ -29,7 +29,7 @@ const App = (props) => {
                 />} />
 
             <Route path='/messages'
-              element={<Messages state={props.state.dialogsPage}
+              element={<MessagesContainer state={props.state.dialogsPage}
                 profileData={props.state.userData.profileData}
                 />} />
 

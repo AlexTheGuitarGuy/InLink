@@ -21,6 +21,7 @@ const profileReducer = (state = defaultState, action) => {
         }
         case ADD_POST: {
             if (state.storedText !== '' && state.storedText !== '\n') {
+                
                 return {
                     ...state,
                     posts: [...state.posts, {

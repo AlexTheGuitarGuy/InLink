@@ -14,7 +14,6 @@ const SendText = (props) => {
         let text = newPost.current.value;
         props.storeText(text);
     }
-
     return (
         <div>
             <textarea className={s.textArea}
