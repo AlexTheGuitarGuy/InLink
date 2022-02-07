@@ -5,7 +5,7 @@ import s from './Users.module.css';
 const Users = (props) => {
     let userElements = props.state.map(e => {
         return (
-            <div>
+            <div key = {e.id}>
                 <NavLink to={"/messages/" + e.id} className={DialogUsersData => DialogUsersData.isActive ? s.active : s.dialogUser}>
                     <div className={s.pfp}>
                         {e.pfp}

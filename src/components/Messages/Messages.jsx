@@ -6,12 +6,11 @@ import Users from './Users/Users';
 import SendText from './SendText/SendText';
 
 const Messages = (props) => {
-debugger;
     let userDialogElements = [];
     for (let i = 0; i < props.state.userMessages.length; i++) {
         userDialogElements[i] = props.state.userMessages[i].map(e => {
             return (
-                <div >
+                <div key={e.id}>
                     <UserMessage message={e} theirPfp={props.state.users[i].pfp} myPfp={props.profileData.pfp} />
                 </div>
             );
@@ -25,12 +24,15 @@ debugger;
             </div>
             <div className={s.messages}>
                 <Routes>
-                    <Route exact strict path='/' element={userDialogElements} />
-
+                    <Route exact strict path='/' element={userDialogElements[0]} />
+                    <Route exact strict path='/1' element={userDialogElements[0]} />
+                    <Route exact strict path='/2' element={userDialogElements[1]} />
+                    <Route exact strict path='/3' element={userDialogElements[2]} />
+                    <Route exact strict path='/4' element={userDialogElements[3]} />
                 </Routes>
-                <SendText memoryText = {props.memoryText} 
-                storeText = {props.storeText}
-                send = {props.send}/>
+                <SendText memoryText={props.memoryText}
+                    storeText={props.storeText}
+                    send={props.send} />
             </div>
 
         </div >

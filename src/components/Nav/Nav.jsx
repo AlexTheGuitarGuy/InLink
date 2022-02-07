@@ -7,8 +7,8 @@ const Nav = (props) => {
 
     let navElements = props.state.navItems.map(e => {
         return (
-            <div >
-                <NavLink to={e.to} className={navData => navData.isActive ? s.active : s.item}>
+            <div key = {e.id}>
+                <NavLink to={e.to}  className={navData => navData.isActive ? s.active : s.item}>
                     {e.name}
                 </NavLink>
             </div>

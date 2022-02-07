@@ -28,7 +28,7 @@ const App = (props) => {
                 profileData={props.state.userData.profileData}
                 />} />
 
-            <Route path='/messages'
+            <Route path='/messages/*'
               element={<MessagesContainer state={props.state.dialogsPage}
                 profileData={props.state.userData.profileData}
                 />} />

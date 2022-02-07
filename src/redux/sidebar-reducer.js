@@ -3,12 +3,12 @@ const STORE_MESSAGE_TEXT = 'STORE-MESSAGE-TEXT';
 
 let defaultState = {
     navItems: [
-        { to: '/', name: "Home" },
-        { to: '/profile', name: "Profile" },
-        { to: '/messages', name: "Messages" },
-        { to: '/news', name: "News" },
-        { to: '/music', name: "Music" },
-        { to: '/preferences', name: "Preferences" },
+        { id: 1, to: '/', name: "Home" },
+        { id: 2, to: '/profile', name: "Profile" },
+        { id: 3, to: '/messages', name: "Messages" },
+        { id: 4, to: '/news', name: "News" },
+        { id: 5, to: '/music', name: "Music" },
+        { id: 6, to: '/preferences', name: "Preferences" },
     ]
 }
 

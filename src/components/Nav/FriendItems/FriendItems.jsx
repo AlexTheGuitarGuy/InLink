@@ -5,7 +5,7 @@ const FriendItems = (props) => {
 
     let friendList = props.friends.map(e => {
         return (
-            <div className={s.friendItem}>
+            <div className={s.friendItem} key = {e.id}>
                 {e.pfp}
                 <div className={s.friendName}>
                     {e.name[0] + e.name[1][0] + e.name[1][1] + '.'}

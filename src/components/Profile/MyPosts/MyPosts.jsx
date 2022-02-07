@@ -5,7 +5,7 @@ import Publish from './Publish/Publish.jsx';
 
 const MyPosts = (props) => {
 
-    let postElements = props.posts.map(e => <Post text={e.text} likeCount={e.likes} />);
+    let postElements = props.posts.map(e => <Post key = {e.id} text={e.text} likeCount={e.likes} />);
 
     return (
         <div>
