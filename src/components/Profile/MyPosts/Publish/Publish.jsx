@@ -9,7 +9,7 @@ const Publish = (props) => {
         props.post();
     }
 
-    let takeText = () => { 
+    let takeText = () => {
         let text = newPost.current.value;
         props.storeText(text);
     }
@@ -19,17 +19,17 @@ const Publish = (props) => {
             <div className={s.newPost}>New post</div>
 
             <textarea
+                className={s.textarea}
                 ref={newPost}
                 value={props.memoryText}
                 onChange={() => takeText()}
                 onKeyPress={(e) => {
                     if (e.key === 'Enter') post();
                 }}
-                placeholder='Type what you think'/>
-
-            <div className={s.button}>
+                placeholder='Type what you think...' />
+            <div>
                 <button
-                    onClick={post}>
+                    onClick={post} className={s.button}>
                     Publish
                 </button>
             </div>

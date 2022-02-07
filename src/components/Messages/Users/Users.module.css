@@ -9,6 +9,9 @@
 .active {
     color: rgb(164, 174, 206);
     text-decoration: none;
+    margin-top: -14%;
+    margin-bottom: 10%;
+    margin-left: 25%;
 }
 
 .pfp img {

@@ -1,12 +1,11 @@
 .button {
-    margin-top: 0.25%;
-    margin-bottom: 1%;
-    margin-right: 21%;
+
     text-align: center;
+    display: block;
+    width:101.3%;
 }
 
 .textArea {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    width:100%;
 }

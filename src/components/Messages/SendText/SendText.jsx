@@ -25,8 +25,8 @@ const SendText = (props) => {
                 }}
                 placeholder='Enter your message'></textarea>
 
-            <div className={s.button}>
-                <button onClick={post}>Send</button>
+            <div >
+                <button onClick={post} className={s.button}>Send</button>
             </div>
         </div>
     );

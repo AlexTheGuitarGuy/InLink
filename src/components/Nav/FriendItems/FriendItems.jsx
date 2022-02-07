@@ -19,7 +19,7 @@ const FriendItems = (props) => {
             <div className={s.friendsText}>
                 Buddies:
             </div>
-            <div>
+            <div className={s.friendElems}>
                 {friendList}
             </div>
         </div>

@@ -13,22 +13,26 @@
 }
 
 .friendItem {
-  float: left;
   margin-bottom: 7%;
   margin-left: 2%;
   margin-right: 2%;
 
-  
+
 }
 
 .friendName {
   margin-top: 5%;
   color: white;
-  font-size: 50%;
+  font-size: 70%;
   text-align: center;
 }
 
 .friendsText {
   color: white;
   margin-bottom: 7%;
+}
+
+.friendElems {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
