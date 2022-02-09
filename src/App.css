@@ -1,4 +1,5 @@
 .app-wrapper {
+
   display: grid;
 
   width: 1200px;
@@ -10,14 +11,15 @@
 
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
+
   /* grid-gap: 10px; */
 }
 
 .app-wrapper-content {
   grid-area: c;
   background-color: cornflowerblue;
-  /* For browsers that do not support gradients */
-  background-image: linear-gradient(to bottom right, rgb(74, 78, 138), rgb(160, 160, 67));
+  /* For browsers that do not support gradients rgb(74, 78, 138)*/
+  background-image: linear-gradient(to bottom right,  rgb(74, 78, 138), rgb(160, 160, 67));
 }
 
 .app-wrapper-content-formating {

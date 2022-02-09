@@ -3,10 +3,10 @@ const STORE_MESSAGE_TEXT = 'STORE-MESSAGE-TEXT';
 
 let defaultState = {
     users: [
-        { id: 1, name: ["Boy", " Nextdoor"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u1.jpg")} alt='User1 pfp' /> },
-        { id: 2, name: ["Fucking", " Slave"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u2.png")} alt='User2 pfp' /> },
-        { id: 3, name: ["Boss", " Of This Gym"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u3.jpg")} alt='User3 pfp' /> },
-        { id: 4, name: ["Dungeon", " Master"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u4.jpg")} alt='User4 pfp' /> },
+        { id: 1, name: ["Boy", "Nextdoor"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u1.jpg")} alt='User1 pfp' /> },
+        { id: 2, name: ["Fucking", "Slave"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u2.png")} alt='User2 pfp' /> },
+        { id: 3, name: ["Boss", "Of This Gym"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u3.jpg")} alt='User3 pfp' /> },
+        { id: 4, name: ["Dungeon", "Master"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u4.jpg")} alt='User4 pfp' /> },
     ],
     userMessages: [
         [
@@ -51,11 +51,13 @@ const dialogsReducer = (state = defaultState, action) => {
         case SEND_MESSAGE:
 
             if (state.storedText !== '' && state.storedText !== '\n') {
-                let newMessages = [...state.userMessages,];
-                newMessages[3].push({id: state.userMessages[3].length + 1, text: state.storedText, from: 'me' })
                 return {
                     ...state,
-                    userMessages: newMessages,
+                    userMessages: [...state.userMessages.map((e, i) => {
+                        if(i == 3)
+                            e.push({id: state.userMessages[3].length + 1, text: state.storedText, from: 'me' });
+                        return e;
+                    })],
                     storedText: '',
                 }
 

@@ -8,7 +8,7 @@ const FriendItems = (props) => {
             <div className={s.friendItem} key = {e.id}>
                 {e.pfp}
                 <div className={s.friendName}>
-                    {e.name[0] + e.name[1][0] + e.name[1][1] + '.'}
+                    {e.name[0] + ' ' + e.name[1][0] + '.'}
                 </div>
             </div>
         )

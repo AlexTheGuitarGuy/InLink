@@ -1,6 +1,5 @@
 import React from 'react'
 import s from './SendText.module.css'
-import {storeMessageTextActionCreator, sendMessageActionCreator} from '../../../redux/dialogs-reducer';
 
 const SendText = (props) => {
     
@@ -15,7 +14,7 @@ const SendText = (props) => {
         props.storeText(text);
     }
     return (
-        <div>
+        <div className={s.sendText}>
             <textarea className={s.textArea}
                 ref={newPost}
                 value={props.memoryText}

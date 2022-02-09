@@ -4,7 +4,6 @@ import s from './Users.module.css';
 
 const Users = (props) => {
     let userElements = props.state.map(e => {
-        debugger;
         return (
             <div key={e.id}>
                 <NavLink to={"/messages/" + e.id} className={navData => navData.isActive ? s.active : s.dialogUser}>
@@ -13,7 +12,7 @@ const Users = (props) => {
                     </div>
 
                     <div className={s.dialogUser}>
-                        {e.name}
+                        {e.name[0] + ' ' + e.name[1]}
                     </div>
                 </NavLink>
             </div>
