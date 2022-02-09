@@ -6,7 +6,7 @@ const SendText = (props) => {
     let newPost = React.createRef();
 
     let post = () => {
-        props.send();
+        props.send(props.id);
     }
 
     let takeText = () => {

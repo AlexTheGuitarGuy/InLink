@@ -19,7 +19,13 @@ const Messages = (props) => {
 
     let routes = userDialogElements.map((e, i) => {
         return (
-            <Route exact strict path={'/' + (i + 1)} element={userDialogElements[i]} />
+            <Route exact strict path={'/' + (i + 1)} key={i}
+                element={<>
+                    {userDialogElements[i]}
+                    <SendText memoryText={props.memoryText}
+                    storeText={props.storeText}
+                    send={props.send} id = {i}/>
+                </>} />
         )
     })
 
@@ -33,9 +39,6 @@ const Messages = (props) => {
                     <Route exact strict path='/' element={userDialogElements[0]} />
                     {routes}
                 </Routes>
-                <SendText memoryText={props.memoryText}
-                    storeText={props.storeText}
-                    send={props.send} />
             </div>
 
         </div >

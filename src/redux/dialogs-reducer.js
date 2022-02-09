@@ -54,8 +54,8 @@ const dialogsReducer = (state = defaultState, action) => {
                 return {
                     ...state,
                     userMessages: [...state.userMessages.map((e, i) => {
-                        if(i == 3)
-                            e.push({id: state.userMessages[3].length + 1, text: state.storedText, from: 'me' });
+                        if(i == action.to)
+                            e.push({id: state.userMessages[action.to].length + 1, text: state.storedText, from: 'me' });
                         return e;
                     })],
                     storedText: '',
@@ -71,7 +71,7 @@ const dialogsReducer = (state = defaultState, action) => {
     }
 }
 
-export const sendMessageActionCreator = (id) => ({ type: SEND_MESSAGE });
+export const sendMessageActionCreator = (id) => ({ type: SEND_MESSAGE, to: id});
 export const storeMessageTextActionCreator = (text) => ({ type: STORE_MESSAGE_TEXT, text: text });
 
 export default dialogsReducer;
