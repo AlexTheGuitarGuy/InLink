@@ -53,11 +53,11 @@ const dialogsReducer = (state = defaultState, action) => {
             if (state.storedText !== '' && state.storedText !== '\n') {
                 return {
                     ...state,
-                    userMessages: [...state.userMessages.map((e, i) => {
+                    userMessages: state.userMessages.map((e, i) => {
                         if(i == action.to)
                             e.push({id: state.userMessages[action.to].length + 1, text: state.storedText, from: 'me' });
                         return e;
-                    })],
+                    }),
                     storedText: '',
                 }
 

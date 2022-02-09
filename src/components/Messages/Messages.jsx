@@ -23,8 +23,8 @@ const Messages = (props) => {
                 element={<>
                     {userDialogElements[i]}
                     <SendText memoryText={props.memoryText}
-                    storeText={props.storeText}
-                    send={props.send} id = {i}/>
+                        storeText={props.storeText}
+                        send={props.send} id={i} />
                 </>} />
         )
     })
@@ -36,7 +36,12 @@ const Messages = (props) => {
             </div>
             <div className={s.messages}>
                 <Routes>
-                    <Route exact strict path='/' element={userDialogElements[0]} />
+                    <Route exact strict path='/' element={<>
+                        {userDialogElements[0]}
+                        <SendText memoryText={props.memoryText}
+                            storeText={props.storeText}
+                            send={props.send} id={0} />
+                    </>} />
                     {routes}
                 </Routes>
             </div>
