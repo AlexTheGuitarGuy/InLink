@@ -1,6 +1,3 @@
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const STORE_MESSAGE_TEXT = 'STORE-MESSAGE-TEXT';
-
 let defaultState = {
     navItems: [
         { id: 1, to: '/', name: "Home" },
@@ -16,13 +13,8 @@ let defaultState = {
 const sidebarReducer = (state = defaultState, action) => {
 
     switch (action.type) {
-
         default: return (state);
-
     }
 }
-
-export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
-export const storeMessageTextActionCreator = (text) => ({ type: STORE_MESSAGE_TEXT, text: text });
 
 export default sidebarReducer;

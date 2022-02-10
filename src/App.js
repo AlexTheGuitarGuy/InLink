@@ -15,7 +15,6 @@ import { UsersContainer } from './components/Users/UsersContainer';
 
 
 const App = (props) => {
-  document.body.style = 'background: rgb(61, 65, 90);';
   return (
     <div className='app-wrapper'>
       <Header />

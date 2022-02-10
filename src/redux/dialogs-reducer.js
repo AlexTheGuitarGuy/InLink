@@ -3,10 +3,10 @@ const STORE_MESSAGE_TEXT = 'STORE-MESSAGE-TEXT';
 
 let defaultState = {
     users: [
-        { id: 1, name: ["Boy", "Nextdoor"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u1.jpg")} alt='User1 pfp' /> },
-        { id: 2, name: ["Fucking", "Slave"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u2.png")} alt='User2 pfp' /> },
-        { id: 3, name: ["Boss", "Of This Gym"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u3.jpg")} alt='User3 pfp' /> },
-        { id: 4, name: ["Dungeon", "Master"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u4.jpg")} alt='User4 pfp' /> },
+        { id: 1, name: ["Boy", "Nextdoor"], pfp: <img src={require("./photos/UsersPfp/u1.jpg")} alt='User1 pfp' /> },
+        { id: 2, name: ["Fucking", "Slave"], pfp: <img src={require("./photos/UsersPfp/u2.png")} alt='User2 pfp' /> },
+        { id: 3, name: ["Boss", "Of This Gym"], pfp: <img src={require("./photos/UsersPfp/u3.jpg")} alt='User3 pfp' /> },
+        { id: 4, name: ["Dungeon", "Master"], pfp: <img src={require("./photos/UsersPfp/u4.jpg")} alt='User4 pfp' /> },
     ],
     userMessages: [
         [
@@ -54,7 +54,7 @@ const dialogsReducer = (state = defaultState, action) => {
                 return {
                     ...state,
                     userMessages: state.userMessages.map((e, i) => {
-                        if(i == action.to)
+                        if(i === action.to)
                             e.push({id: state.userMessages[action.to].length + 1, text: state.storedText, from: 'me' });
                         return e;
                     }),
@@ -72,6 +72,6 @@ const dialogsReducer = (state = defaultState, action) => {
 }
 
 export const sendMessageActionCreator = (id) => ({ type: SEND_MESSAGE, to: id});
-export const storeMessageTextActionCreator = (text) => ({ type: STORE_MESSAGE_TEXT, text: text });
+export const storeMessageTextActionCreator = (text) => ({ type: STORE_MESSAGE_TEXT, text });
 
 export default dialogsReducer;
