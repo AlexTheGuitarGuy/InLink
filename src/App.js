@@ -11,43 +11,49 @@ import Home from './components/Home/Home';
 import { MessagesContainer } from './components/Messages/MessagesContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 
-
-
-
 const App = (props) => {
   return (
-    <div className='app-wrapper'>
+    <div className="app-wrapper">
       <Header />
 
-      <Nav state={props.state.sidebar}
-        friends={props.state.dialogsPage.users} />
+      <Nav
+        state={props.state.sidebar}
+        friends={props.state.dialogsPage.users}
+      />
 
-      <div className='app-wrapper-content'>
-
-        <div className='app-wrapper-content-formating'>
+      <div className="app-wrapper-content">
+        <div className="app-wrapper-content-formating">
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/profile'
-              element={<Profile state={props.state.profilePage}
-                profileData={props.state.userData.profileData}
-              />} />
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  state={props.state.profilePage}
+                  profileData={props.state.userData.profileData}
+                />
+              }
+            />
 
-            <Route path='/messages/*'
-              element={<MessagesContainer state={props.state.dialogsPage}
-                profileData={props.state.userData.profileData}
-              />} />
+            <Route
+              path="/messages/*"
+              element={
+                <MessagesContainer
+                  state={props.state.dialogsPage}
+                  profileData={props.state.userData.profileData}
+                />
+              }
+            />
 
-            <Route path='/users' element={<UsersContainer />} />
-            <Route path='/news' element={<News />} />
-            <Route path='/music' element={<Music />} />
-            <Route path='/preferences' element={<Preferences />} />
+            <Route path="/users" element={<UsersContainer />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/preferences" element={<Preferences />} />
           </Routes>
         </div>
-
       </div>
-
-    </div >
+    </div>
   );
-}
+};
 
 export default App;

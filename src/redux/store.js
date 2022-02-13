@@ -3,7 +3,6 @@ import profileReducer from './profile-reducer';
 import userReducer from './user-reducer';
 import sidebarReducer from './sidebar-reducer';
 
-
 /*let store = {
 
     _state: {

@@ -1,20 +1,28 @@
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Users from './Users';
-import { changeFollowStatusAC, setUsersAC } from './../../redux/users-page-reducer';
+import {
+  changeFollowStatusAC,
+  setUsersAC,
+} from './../../redux/users-page-reducer';
 
 let mapStateToProps = (state) => {
   return {
     state: state.usersPage,
-  }
-}
+  };
+};
 
 let mapDispatchToProps = (dispatch) => {
-  return{
+  return {
     changeFollowStatus: (id) => {
-      dispatch(changeFollowStatusAC(id))
+      dispatch(changeFollowStatusAC(id));
     },
-    setUsers: (users) => {dispatch(setUsersAC(users))},
-  }
-}
+    setUsers: (users) => {
+      dispatch(setUsersAC(users));
+    },
+  };
+};
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Users);

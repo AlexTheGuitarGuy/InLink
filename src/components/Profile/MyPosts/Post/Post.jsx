@@ -2,31 +2,18 @@ import React from 'react';
 import s from './Post.module.css';
 import pfp from './pfp.jpg';
 
-const Post = (post) => {
-    return (
-        <div>
+const Post = (props) => {
+  return (
+    <div className={s.item}>
+      <img src={pfp} alt='poster_pfp' />
 
-            <div>
-                <div className={s.item}>
-                    <img src={pfp} alt='poster_pfp' />
-
-                    <div className={s.text}>
-                        {post.text}
-                    </div>
-                    <div >
-                        <div className={s.likeSymbol}>
-                            ❤
-                        </div>
-                        <div className={s.likeCount}>
-                            {post.likeCount}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    );
-}
+      <div className={s.text}>{props.text}</div>
+      <div>
+        <div className={s.likeSymbol}>❤</div>
+        <div className={s.likeCount}>{props.likeCount}</div>
+      </div>
+    </div>
+  );
+};
 
 export default Post;
