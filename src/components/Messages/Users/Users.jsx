@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
 
 const Users = (props) => {
@@ -8,11 +8,15 @@ const Users = (props) => {
       <div key={e.id}>
         <NavLink
           to={'/messages/' + e.id}
-          className={(navData) => (navData.isActive ? s.active : s.dialogUser)}
+          className={(navData) =>
+            navData.isActive ? s.active : s.dialogUser
+          }
         >
           <div className={s.pfp}>{e.pfp}</div>
 
-          <div className={s.dialogUser}>{e.name[0] + ' ' + e.name[1]}</div>
+          <div className={s.dialogUser}>
+            {e.name[0] + ' ' + e.name[1]}
+          </div>
         </NavLink>
       </div>
     );
