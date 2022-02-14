@@ -2,41 +2,81 @@ import React from 'react';
 import s from './Users.module.css';
 import * as axios from 'axios';
 
-const Users = (props) => {
-  if (props.state.users.length === 0) {
+class Users extends React.Component {
+  componentDidMount() {
     axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`,
+      )
       .then((response) => {
-        props.setUsers(response.data.items);
+        this.props.setUsers(response.data.items);
+        this.props.setTotalUsers(response.data.totalCount);
       });
   }
 
-  let mappedUsers = props.state.users.map((e) => {
-    let changeFollowStatus = () => {
-      props.changeFollowStatus(e.id);
-    };
+  changePage(page) {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+        this.props.setPage(page);
+      });
+  }
+
+  render() {
+    let mappedUsers = this.props.state.users.map((e) => {
+      let changeFollowStatus = () => {
+        this.props.changeFollowStatus(e.id);
+      };
+
+      return (
+        <div className={s.user} key={e.id}>
+          <div>
+            {e.photos.small != null ? (
+              <img src={e.photos.small} alt="userPfp" />
+            ) : (
+              <img
+                src={require('../../assets/pfps/placeholder.jpg')}
+                alt="empty_pfp"
+              />
+            )}
+          </div>
+          <div>{e.name}</div>
+          <button onClick={changeFollowStatus}>
+            {e.isFollowing ? 'Unfollow' : 'Follow'}
+          </button>
+        </div>
+      );
+    });
+
+    let pagesNb = Math.ceil(
+      this.props.totalUsers / this.props.pageSize,
+    );
+
+    let mappedPages = [];
+    for (let i = 1; i <= pagesNb; i++) {
+      mappedPages[i] = (
+        <span
+          key={i}
+          onClick={() => {
+            this.changePage(i);
+          }}
+          className={i === this.props.page && s.chosenPage}
+        >
+          {`${i} `}
+        </span>
+      );
+    }
 
     return (
-      <div className={s.user} key={e.id}>
-        <div>
-          {e.photos.small != null ? (
-            e.photos.small
-          ) : (
-            <img
-              src={require('../../assets/pfps/placeholder.jpg')}
-              alt="empty_pfp"
-            />
-          )}
-        </div>
-        <div>{e.name}</div>
-        <button onClick={changeFollowStatus}>
-          {e.isFollowing ? 'Unfollow' : 'Follow'}
-        </button>
+      <div>
+        {mappedPages}
+        {mappedUsers}
       </div>
     );
-  });
-
-  return <div>{mappedUsers}</div>;
-};
+  }
+}
 
 export default Users;

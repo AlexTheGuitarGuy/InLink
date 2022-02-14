@@ -4,9 +4,7 @@ import s from './ProfileInfo.module.css';
 const ProfileInfo = (props) => {
   return (
     <div>
-      <div>
-        <img src={banner} alt="banner" className={s.banner} />
-      </div>
+      <img src={banner} alt="banner" className={s.banner} />
 
       <div className={s.pfpAndDetails}>
         <div className={s.pfp}>{props.pfp}</div>

@@ -1,5 +1,7 @@
 const CHANGE_FOLLOW_STATUS = 'CHANGE-FOLLOW-STATUS';
 const SET_USERS = 'SET-USERS';
+const SET_PAGE = 'SET-PAGE';
+const SET_USERS_NB = 'SET-USERS_NB';
 
 let defaultState = {
   users: [
@@ -58,6 +60,9 @@ let defaultState = {
     },
   */
   ],
+  pageSize: 5,
+  page: 1,
+  totalUsers: 0,
 };
 
 const usersPageReducer = (state = defaultState, action) => {
@@ -75,6 +80,16 @@ const usersPageReducer = (state = defaultState, action) => {
         ...state,
         users: [...action.users],
       };
+    case SET_PAGE:
+      return {
+        ...state,
+        page: action.page,
+      };
+    case SET_USERS_NB:
+      return {
+        ...state,
+        totalUsers: action.totalUsers,
+      };
     default:
       return state;
   }
@@ -85,5 +100,12 @@ export const changeFollowStatusAC = (id) => ({
   id,
 });
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
+
+export const setPageAC = (page) => ({ type: SET_PAGE, page });
+
+export const setTotalUsersAC = (totalUsers) => ({
+  type: SET_USERS_NB,
+  totalUsers,
+});
 
 export default usersPageReducer;
