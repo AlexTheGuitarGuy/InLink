@@ -9,7 +9,7 @@ import Music from './components/Music/Music';
 import Preferences from './components/Preferences/Preferences';
 import Home from './components/Home/Home';
 import { MessagesContainer } from './components/Messages/MessagesContainer';
-import { UsersContainer } from './components/Users/UsersContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 const App = (props) => {
   return (

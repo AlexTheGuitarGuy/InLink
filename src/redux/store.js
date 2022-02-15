@@ -94,6 +94,6 @@ import sidebarReducer from './sidebar-reducer';
     },
 
 }*/
-window.store = store;
+//window.store = store;
 
 export default store;

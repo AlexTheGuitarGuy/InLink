@@ -1,133 +1,116 @@
 import React from 'react';
 import s from './Users.module.css';
-import * as axios from 'axios';
 
-class Users extends React.Component {
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`,
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsers(response.data.totalCount);
-      });
-  }
-
-  changePage(page) {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setPage(page);
-      });
-  }
-
-  render() {
-    let mappedUsers = this.props.state.users.map((e) => {
-      let changeFollowStatus = () => {
-        this.props.changeFollowStatus(e.id);
-      };
-
-      return (
-        <div className={s.user} key={e.id}>
-          <div>
-            {e.photos.small != null ? (
-              <img src={e.photos.small} alt="userPfp" />
-            ) : (
-              <img
-                src={require('../../assets/pfps/placeholder.jpg')}
-                alt="empty_pfp"
-              />
-            )}
-          </div>
-          <div>{e.name}</div>
-          <button onClick={changeFollowStatus}>
-            {e.isFollowing ? 'Unfollow' : 'Follow'}
-          </button>
-        </div>
-      );
-    });
-
-    let pagesNb = Math.ceil(
-      this.props.totalUsers / this.props.pageSize,
-    );
-
-    let mappedPages = [];
-    for (let i = 1; i <= pagesNb; i++) {
-      mappedPages[i] = (
-        <span
-          key={i}
-          onClick={() => {
-            this.changePage(i);
-          }}
-          className={
-            (i === this.props.page && s.chosenPage) || s.page
-          }
-        >
-          {`${i} `}
-        </span>
-      );
-    }
-
-    let currentPages = [];
-    for (
-      let i = this.props.currentPagesBeginning, lim = i + 10;
-      i < lim;
-      i++
-    ) {
-      currentPages[i] = mappedPages[i];
-    }
-
-    let pagesBefore = (
-      <span
-        onClick={() => {
-          if (
-            this.props.currentPagesBeginning > 1 &&
-            this.props.page === this.props.currentPagesBeginning + 1
-          )
-            this.props.setCurrentPages(
-              this.props.currentPagesBeginning - 5,
-            );
-          this.changePage(this.props.page - 1);
-        }}
-      >
-        {'< '}
-      </span>
-    );
-
-    let pagesAfter = (
-      <span
-        onClick={() => {
-          if (
-            this.props.currentPagesBeginning < pagesNb - 10 &&
-            this.props.page === this.props.currentPagesBeginning + 8
-          )
-            this.props.setCurrentPages(
-              this.props.currentPagesBeginning + 4,
-            );
-          this.changePage(this.props.page + 1);
-        }}
-      >
-        {'  >'}
-      </span>
-    );
+const Users = (props) => {
+  let mappedUsers = props.state.users.map((e) => {
+    let changeFollowStatus = () => {
+      props.changeFollowStatus(e.id);
+    };
 
     return (
-      <div>
-        <span className={s.pages}>
-          <div align="center">
-            {pagesBefore}
-            {currentPages}
-            {pagesAfter}
-          </div>
-        </span>
-        <div>{mappedUsers}</div>
+      <div className={s.user} key={e.id}>
+        <div>
+          {e.photos.small != null ? (
+            <img src={e.photos.small} alt="userPfp" />
+          ) : (
+            <img
+              src={require('../../assets/pfps/placeholder.jpg')}
+              alt="empty_pfp"
+            />
+          )}
+        </div>
+        <div>{e.name}</div>
+        <button onClick={changeFollowStatus}>
+          {e.isFollowing ? 'Unfollow' : 'Follow'}
+        </button>
       </div>
     );
+  });
+
+  let pagesNb = Math.ceil(props.totalUsers / props.pageSize);
+
+  let mappedPages = [];
+  for (let i = 1; i <= pagesNb; i++) {
+    mappedPages[i] = (
+      <span
+        key={i}
+        onClick={() => {
+          if (i === props.currentPagesBeginning) {
+            if (props.currentPagesBeginning - 5 < 1) {
+              props.setCurrentPages(1);
+            } else
+              props.setCurrentPages(props.currentPagesBeginning - 5);
+          } else if (i === props.currentPagesBeginning + 9) {
+            if (props.currentPagesBeginning + 4 > pagesNb - 10) {
+              props.setCurrentPages(pagesNb - 10);
+            } else
+              props.setCurrentPages(props.currentPagesBeginning + 4);
+          }
+          props.changePage(i);
+        }}
+        className={(i === props.page && s.chosenPage) || s.page}
+      >
+        {`${i} `}
+      </span>
+    );
   }
-}
+
+  let currentPages = [];
+  for (
+    let i = props.currentPagesBeginning, lim = i + 10;
+    i < lim;
+    i++
+  ) {
+    currentPages[i] = mappedPages[i];
+  }
+
+  let pagesBefore = (
+    <span
+      onClick={() => {
+        if (props.page > 1) {
+          if (props.page === props.currentPagesBeginning + 1)
+            if (props.currentPagesBeginning - 5 < 1) {
+              props.setCurrentPages(1);
+            } else
+              props.setCurrentPages(props.currentPagesBeginning - 5);
+          props.changePage(props.page - 1);
+        }
+      }}
+    >
+      {'< '}
+    </span>
+  );
+
+  let pagesAfter = (
+    <span
+      onClick={() => {
+        if (props.currentPagesBeginning < pagesNb - 10) {
+          if (props.page === props.currentPagesBeginning + 8) {
+            if (props.currentPagesBeginning + 4 > pagesNb - 10) {
+              props.setCurrentPages(pagesNb - 10);
+            } else
+              props.setCurrentPages(props.currentPagesBeginning + 4);
+          }
+          props.changePage(props.page + 1);
+        }
+      }}
+    >
+      {'  >'}
+    </span>
+  );
+
+  return (
+    <div>
+      <span className={s.pages}>
+        <div align="center">
+          {pagesBefore}
+          {currentPages}
+          {pagesAfter}
+        </div>
+      </span>
+      <div>{mappedUsers}</div>
+    </div>
+  );
+};
 
 export default Users;
