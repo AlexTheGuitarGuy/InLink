@@ -3,7 +3,11 @@ const ADD_POST = 'ADD-POST';
 
 let defaultState = {
   posts: [
-    { id: 1, text: 'Swallow my cum ;)', likes: 420 },
+    {
+      id: 1,
+      text: 'Hey buddy I think you got the wrong door the leather club is two blocks down!',
+      likes: 420,
+    },
     { id: 2, text: 'Hello', likes: 228 },
     { id: 3, text: 'Welcome to the club, buddy.', likes: 69 },
   ],
