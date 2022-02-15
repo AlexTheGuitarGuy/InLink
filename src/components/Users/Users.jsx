@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Users.module.css';
-import load from '../../assets/loading.jpg';
+import Loading from './../common/Loading';
 
 const Users = (props) => {
   let mappedUsers = props.state.users.map((e) => {
@@ -103,7 +103,9 @@ const Users = (props) => {
   return (
     <>
       {props.isLoading ? (
-        <img src={load} alt="loading..." className={s.loadImg} />
+        <div>
+          <Loading class={s.loadImg} />
+        </div>
       ) : (
         <div>
           <span className={s.pages}>
