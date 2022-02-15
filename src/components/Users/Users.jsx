@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Users.module.css';
+import load from '../../assets/loading.jpg';
 
 const Users = (props) => {
   let mappedUsers = props.state.users.map((e) => {
@@ -98,18 +99,24 @@ const Users = (props) => {
       {'  >'}
     </span>
   );
-
+  window.loading = props.isLoading;
   return (
-    <div>
-      <span className={s.pages}>
-        <div align="center">
-          {pagesBefore}
-          {currentPages}
-          {pagesAfter}
+    <>
+      {props.isLoading ? (
+        <img src={load} alt="loading..." className={s.loadImg} />
+      ) : (
+        <div>
+          <span className={s.pages}>
+            <div align="center">
+              {pagesBefore}
+              {currentPages}
+              {pagesAfter}
+            </div>
+          </span>
+          <div>{mappedUsers}</div>{' '}
         </div>
-      </span>
-      <div>{mappedUsers}</div>
-    </div>
+      )}
+    </>
   );
 };
 

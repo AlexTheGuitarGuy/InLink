@@ -1,8 +1,9 @@
-const CHANGE_FOLLOW_STATUS = 'CHANGE-FOLLOW-STATUS';
+const TOGGLE_FOLLOW_STATUS = 'CHANGE-FOLLOW-STATUS';
 const SET_USERS = 'SET-USERS';
 const SET_PAGE = 'SET-PAGE';
 const SET_USERS_NB = 'SET-USERS-NB';
 const SET_CURRENT_PAGES = 'SET-CURRENT-PAGES';
+const TOGGLE_LOADING = 'TOGGLE-LOADING';
 
 let defaultState = {
   users: [
@@ -65,11 +66,12 @@ let defaultState = {
   page: 1,
   totalUsers: 0,
   currentPagesBeginning: 1,
+  isLoading: false,
 };
 
 const usersPageReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case CHANGE_FOLLOW_STATUS:
+    case TOGGLE_FOLLOW_STATUS:
       return {
         ...state,
         users: state.users.map((e) => {
@@ -97,13 +99,18 @@ const usersPageReducer = (state = defaultState, action) => {
         ...state,
         currentPagesBeginning: action.newBeginning,
       };
+    case TOGGLE_LOADING:
+      return {
+        ...state,
+        isLoading: !state.isLoading,
+      };
     default:
       return state;
   }
 };
 
 export const changeFollowStatusAC = (id) => ({
-  type: CHANGE_FOLLOW_STATUS,
+  type: TOGGLE_FOLLOW_STATUS,
   id,
 });
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
@@ -118,6 +125,10 @@ export const setTotalUsersAC = (totalUsers) => ({
 export const setCurrentPagesAC = (newBeginning) => ({
   type: SET_CURRENT_PAGES,
   newBeginning,
+});
+
+export const toggleLoadingAC = () => ({
+  type: TOGGLE_LOADING,
 });
 
 export default usersPageReducer;

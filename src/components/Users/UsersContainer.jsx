@@ -6,12 +6,14 @@ import {
   setPageAC,
   setTotalUsersAC,
   setCurrentPagesAC,
+  toggleLoadingAC,
 } from './../../redux/users-page-reducer';
 import * as axios from 'axios';
 import React from 'react';
 
 class UsersContainer extends React.Component {
   componentDidMount = () => {
+    this.props.toggleLoading();
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.page}&count=${this.props.pageSize}`,
@@ -19,10 +21,12 @@ class UsersContainer extends React.Component {
       .then((response) => {
         this.props.setUsers(response.data.items);
         this.props.setTotalUsers(response.data.totalCount);
+        this.props.toggleLoading();
       });
   };
 
   changePage = (page) => {
+    this.props.toggleLoading();
     this.props.setPage(page);
     axios
       .get(
@@ -30,6 +34,7 @@ class UsersContainer extends React.Component {
       )
       .then((response) => {
         this.props.setUsers(response.data.items);
+        this.props.toggleLoading();
       });
   };
 
@@ -44,6 +49,7 @@ class UsersContainer extends React.Component {
         page={this.props.page}
         currentPagesBeginning={this.props.currentPagesBeginning}
         setCurrentPages={this.props.setCurrentPages}
+        isLoading={this.props.isLoading}
       />
     );
   }
@@ -56,6 +62,7 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsers: state.usersPage.totalUsers,
     currentPagesBeginning: state.usersPage.currentPagesBeginning,
+    isLoading: state.usersPage.isLoading,
   };
 };
 
@@ -75,6 +82,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setCurrentPages: (newBeginning) => {
       dispatch(setCurrentPagesAC(newBeginning));
+    },
+    toggleLoading: () => {
+      dispatch(toggleLoadingAC());
     },
   };
 };
