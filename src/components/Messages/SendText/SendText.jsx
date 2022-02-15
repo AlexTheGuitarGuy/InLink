@@ -22,7 +22,8 @@ const SendText = (props) => {
         onKeyPress={(e) => {
           if (e.key === 'Enter') post();
         }}
-        placeholder='Enter your message'
+        rows="1"
+        placeholder="Enter your message"
       ></textarea>
 
       <div>

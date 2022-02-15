@@ -25,7 +25,8 @@ const Publish = (props) => {
         onKeyPress={(e) => {
           if (e.key === 'Enter') post();
         }}
-        placeholder='Type what you think...'
+        rows="1"
+        placeholder="Type what you think..."
       />
       <div>
         <button onClick={post} className={s.button}>
