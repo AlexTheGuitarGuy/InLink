@@ -6,8 +6,19 @@
 
 .user {
   margin-bottom: 3%;
+  margin-top: 3%;
 }
 
 .chosenPage {
   font-weight: bold;
+}
+
+.page {
+  font-size: 100%;
+}
+
+.pages {
+  color: white;
+  cursor: pointer;
+  font-size: 135%;
 }

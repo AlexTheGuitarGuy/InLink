@@ -5,6 +5,7 @@ import {
   setUsersAC,
   setPageAC,
   setTotalUsersAC,
+  setCurrentPagesAC,
 } from './../../redux/users-page-reducer';
 
 let mapStateToProps = (state) => {
@@ -13,6 +14,7 @@ let mapStateToProps = (state) => {
     page: state.usersPage.page,
     pageSize: state.usersPage.pageSize,
     totalUsers: state.usersPage.totalUsers,
+    currentPagesBeginning: state.usersPage.currentPagesBeginning,
   };
 };
 
@@ -29,6 +31,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setTotalUsers: (totalUsers) => {
       dispatch(setTotalUsersAC(totalUsers));
+    },
+    setCurrentPages: (newBeginning) => {
+      dispatch(setCurrentPagesAC(newBeginning));
     },
   };
 };

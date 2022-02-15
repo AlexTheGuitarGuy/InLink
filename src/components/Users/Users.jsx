@@ -63,17 +63,68 @@ class Users extends React.Component {
           onClick={() => {
             this.changePage(i);
           }}
-          className={i === this.props.page && s.chosenPage}
+          className={
+            (i === this.props.page && s.chosenPage) || s.page
+          }
         >
           {`${i} `}
         </span>
       );
     }
 
+    let currentPages = [];
+    for (
+      let i = this.props.currentPagesBeginning, lim = i + 10;
+      i < lim;
+      i++
+    ) {
+      currentPages[i] = mappedPages[i];
+    }
+
+    let pagesBefore = (
+      <span
+        onClick={() => {
+          if (
+            this.props.currentPagesBeginning > 1 &&
+            this.props.page === this.props.currentPagesBeginning - 9
+          )
+            this.props.setCurrentPages(
+              this.props.currentPagesBeginning - 5,
+            );
+          this.changePage(this.props.page - 1);
+        }}
+      >
+        {'< '}
+      </span>
+    );
+
+    let pagesAfter = (
+      <span
+        onClick={() => {
+          if (
+            this.props.currentPagesBeginning < pagesNb - 10 &&
+            this.props.page === this.props.currentPagesBeginning + 9
+          )
+            this.props.setCurrentPages(
+              this.props.currentPagesBeginning + 5,
+            );
+          this.changePage(this.props.page + 1);
+        }}
+      >
+        {'  >'}
+      </span>
+    );
+
     return (
       <div>
-        {mappedPages}
-        {mappedUsers}
+        <span className={s.pages}>
+          <div align="center">
+            {pagesBefore}
+            {currentPages}
+            {pagesAfter}
+          </div>
+        </span>
+        <div>{mappedUsers}</div>
       </div>
     );
   }

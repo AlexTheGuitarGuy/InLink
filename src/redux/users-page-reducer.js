@@ -1,7 +1,8 @@
 const CHANGE_FOLLOW_STATUS = 'CHANGE-FOLLOW-STATUS';
 const SET_USERS = 'SET-USERS';
 const SET_PAGE = 'SET-PAGE';
-const SET_USERS_NB = 'SET-USERS_NB';
+const SET_USERS_NB = 'SET-USERS-NB';
+const SET_CURRENT_PAGES = 'SET-CURRENT-PAGES';
 
 let defaultState = {
   users: [
@@ -63,6 +64,7 @@ let defaultState = {
   pageSize: 5,
   page: 1,
   totalUsers: 0,
+  currentPagesBeginning: 1,
 };
 
 const usersPageReducer = (state = defaultState, action) => {
@@ -90,6 +92,11 @@ const usersPageReducer = (state = defaultState, action) => {
         ...state,
         totalUsers: action.totalUsers,
       };
+    case SET_CURRENT_PAGES:
+      return {
+        ...state,
+        currentPagesBeginning: action.newBeginning,
+      };
     default:
       return state;
   }
@@ -106,6 +113,11 @@ export const setPageAC = (page) => ({ type: SET_PAGE, page });
 export const setTotalUsersAC = (totalUsers) => ({
   type: SET_USERS_NB,
   totalUsers,
+});
+
+export const setCurrentPagesAC = (newBeginning) => ({
+  type: SET_CURRENT_PAGES,
+  newBeginning,
 });
 
 export default usersPageReducer;
