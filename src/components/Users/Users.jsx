@@ -86,7 +86,7 @@ class Users extends React.Component {
         onClick={() => {
           if (
             this.props.currentPagesBeginning > 1 &&
-            this.props.page === this.props.currentPagesBeginning - 9
+            this.props.page === this.props.currentPagesBeginning + 1
           )
             this.props.setCurrentPages(
               this.props.currentPagesBeginning - 5,
@@ -103,10 +103,10 @@ class Users extends React.Component {
         onClick={() => {
           if (
             this.props.currentPagesBeginning < pagesNb - 10 &&
-            this.props.page === this.props.currentPagesBeginning + 9
+            this.props.page === this.props.currentPagesBeginning + 8
           )
             this.props.setCurrentPages(
-              this.props.currentPagesBeginning + 5,
+              this.props.currentPagesBeginning + 4,
             );
           this.changePage(this.props.page + 1);
         }}
