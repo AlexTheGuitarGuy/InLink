@@ -7,7 +7,9 @@ const ProfileInfo = (props) => {
       <img src={banner} alt="banner" className={s.banner} />
 
       <div className={s.pfpAndDetails}>
-        <div className={s.pfp}>{props.pfp}</div>
+        <div className={s.pfp}>
+          <img src={props.pfp} alt={'pfp'} />{' '}
+        </div>
 
         <div className={s.details}>
           description + description + description + description +

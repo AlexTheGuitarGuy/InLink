@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Users.module.css';
 import Loading from './../common/Loading';
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
   let mappedUsers = props.state.users.map((e) => {
@@ -10,7 +11,7 @@ const Users = (props) => {
 
     return (
       <div className={s.user} key={e.id}>
-        <div>
+        <NavLink to={'/profile/' + e.id}>
           {e.photos.small != null ? (
             <img src={e.photos.small} alt="userPfp" />
           ) : (
@@ -19,7 +20,7 @@ const Users = (props) => {
               alt="empty_pfp"
             />
           )}
-        </div>
+        </NavLink>
         <div>{e.name}</div>
         <button onClick={changeFollowStatus}>
           {e.isFollowing ? 'Unfollow' : 'Follow'}

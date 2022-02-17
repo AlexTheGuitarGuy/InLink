@@ -2,7 +2,6 @@ import './App.css';
 import React from 'react';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import Profile from './components/Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -10,6 +9,7 @@ import Preferences from './components/Preferences/Preferences';
 import Home from './components/Home/Home';
 import { MessagesContainer } from './components/Messages/MessagesContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 const App = (props) => {
   return (
@@ -25,15 +25,7 @@ const App = (props) => {
         <div className="app-wrapper-content-formating">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  state={props.state.profilePage}
-                  profileData={props.state.userData.profileData}
-                />
-              }
-            />
+            <Route path="/profile/*" element={<ProfileContainer />} />
 
             <Route
               path="/messages/*"

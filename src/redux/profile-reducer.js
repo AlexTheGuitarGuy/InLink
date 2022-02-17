@@ -1,5 +1,7 @@
-const STORE_POST_TEXT = 'STORE-POST-TEXT';
-const ADD_POST = 'ADD-POST';
+const STORE_TEXT = 'STORE-TEXT';
+const POST = 'POST';
+const SET_PROFILE = 'SET-PROFILE';
+const TOGGLE_LOADING = 'TOGGLE-LOADING';
 
 let defaultState = {
   posts: [
@@ -12,17 +14,19 @@ let defaultState = {
     { id: 3, text: 'Welcome to the club, buddy.', likes: 69 },
   ],
   storedText: '',
+  profileData: null,
+  isLoading: false,
 };
 
 const profileReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case STORE_POST_TEXT: {
+    case STORE_TEXT: {
       return {
         ...state,
         storedText: action.text,
       };
     }
-    case ADD_POST: {
+    case POST: {
       if (state.storedText !== '' && state.storedText !== '\n') {
         return {
           ...state,
@@ -43,15 +47,33 @@ const profileReducer = (state = defaultState, action) => {
         storedText: '',
       };
     }
+
+    case SET_PROFILE: {
+      return {
+        ...state,
+        profileData: action.data,
+      };
+    }
+    case TOGGLE_LOADING:
+      return {
+        ...state,
+        isLoading: !state.isLoading,
+      };
     default:
       return state;
   }
 };
 
 export const storeText = (text) => ({
-  type: STORE_POST_TEXT,
+  type: STORE_TEXT,
   text,
 });
-export const post = () => ({ type: ADD_POST });
+export const post = () => ({ type: POST });
+
+export const setProfile = (data) => ({ type: SET_PROFILE, data });
+
+export const toggleLoading = () => ({
+  type: TOGGLE_LOADING,
+});
 
 export default profileReducer;

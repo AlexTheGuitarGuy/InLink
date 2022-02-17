@@ -4,6 +4,7 @@ const SET_PAGE = 'SET-PAGE';
 const SET_USERS_NB = 'SET-USERS-NB';
 const SET_CURRENT_PAGES = 'SET-CURRENT-PAGES';
 const TOGGLE_LOADING = 'TOGGLE-LOADING';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
 let defaultState = {
   users: [
@@ -129,6 +130,11 @@ export const setCurrentPages = (newBeginning) => ({
 
 export const toggleLoading = () => ({
   type: TOGGLE_LOADING,
+});
+
+export const goToPage = (id) => ({
+  type: SET_USER_PROFILE,
+  id,
 });
 
 export default usersPageReducer;
