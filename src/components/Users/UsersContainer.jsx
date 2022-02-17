@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import Users from './Users';
 import {
-  changeFollowStatusAC,
-  setUsersAC,
-  setPageAC,
-  setTotalUsersAC,
-  setCurrentPagesAC,
-  toggleLoadingAC,
+  changeFollowStatus,
+  setUsers,
+  setPage,
+  setTotalUsers,
+  setCurrentPages,
+  toggleLoading,
 } from './../../redux/users-page-reducer';
 import * as axios from 'axios';
 import React from 'react';
@@ -66,30 +66,11 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    changeFollowStatus: (id) => {
-      dispatch(changeFollowStatusAC(id));
-    },
-    setUsers: (users) => {
-      dispatch(setUsersAC(users));
-    },
-    setPage: (page) => {
-      dispatch(setPageAC(page));
-    },
-    setTotalUsers: (totalUsers) => {
-      dispatch(setTotalUsersAC(totalUsers));
-    },
-    setCurrentPages: (newBeginning) => {
-      dispatch(setCurrentPagesAC(newBeginning));
-    },
-    toggleLoading: () => {
-      dispatch(toggleLoadingAC());
-    },
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(UsersContainer);
+export default connect(mapStateToProps, {
+  changeFollowStatus,
+  setUsers,
+  setPage,
+  setTotalUsers,
+  setCurrentPages,
+  toggleLoading,
+})(UsersContainer);

@@ -109,25 +109,25 @@ const usersPageReducer = (state = defaultState, action) => {
   }
 };
 
-export const changeFollowStatusAC = (id) => ({
+export const changeFollowStatus = (id) => ({
   type: TOGGLE_FOLLOW_STATUS,
   id,
 });
-export const setUsersAC = (users) => ({ type: SET_USERS, users });
+export const setUsers = (users) => ({ type: SET_USERS, users });
 
-export const setPageAC = (page) => ({ type: SET_PAGE, page });
+export const setPage = (page) => ({ type: SET_PAGE, page });
 
-export const setTotalUsersAC = (totalUsers) => ({
+export const setTotalUsers = (totalUsers) => ({
   type: SET_USERS_NB,
   totalUsers,
 });
 
-export const setCurrentPagesAC = (newBeginning) => ({
+export const setCurrentPages = (newBeginning) => ({
   type: SET_CURRENT_PAGES,
   newBeginning,
 });
 
-export const toggleLoadingAC = () => ({
+export const toggleLoading = () => ({
   type: TOGGLE_LOADING,
 });
 

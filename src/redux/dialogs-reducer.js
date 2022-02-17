@@ -116,11 +116,11 @@ const dialogsReducer = (state = defaultState, action) => {
   }
 };
 
-export const sendMessageActionCreator = (id) => ({
+export const send = (id) => ({
   type: SEND_MESSAGE,
   to: id,
 });
-export const storeMessageTextActionCreator = (text) => ({
+export const storeText = (text) => ({
   type: STORE_MESSAGE_TEXT,
   text,
 });

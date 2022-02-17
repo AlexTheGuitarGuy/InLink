@@ -48,10 +48,10 @@ const profileReducer = (state = defaultState, action) => {
   }
 };
 
-export const storePostTextActionCreator = (text) => ({
+export const storeText = (text) => ({
   type: STORE_POST_TEXT,
   text,
 });
-export const addPostActionCreator = () => ({ type: ADD_POST });
+export const post = () => ({ type: ADD_POST });
 
 export default profileReducer;
