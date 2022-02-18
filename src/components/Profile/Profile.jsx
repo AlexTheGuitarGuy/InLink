@@ -8,14 +8,12 @@ const Profile = (props) => {
   return (
     <div className={s.content}>
       <div className={s.formatting}>
-        <ProfileInfo
-          pfp={
-            (props.state.profileData &&
-              props.state.profileData.photos.large) || (
-              <Loading class={s.loadImg} />
-            )
-          }
-        />
+        {(props.state.profileData && (
+          <ProfileInfo
+            pfp={props.state.profileData.photos.large}
+            profileData={props.state.profileData}
+          />
+        )) || <Loading class={s.loadImg} />}
         <MyPostsContainer />
       </div>
     </div>

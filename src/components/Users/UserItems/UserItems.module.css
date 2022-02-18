@@ -1,0 +1,45 @@
+.user img {
+  width: 30%;
+  height: 30%;
+  border-radius: 100px;
+}
+
+.user {
+  margin-bottom: 3%;
+  margin-top: 3%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.followButton {
+  margin-top: 3%;
+  margin-left: 5%;
+}
+
+.unfollowButton {
+  margin-top: 3%;
+  margin-left: 3%;
+}
+
+.content {
+  border-radius: 25px;
+  background: rgb(76, 81, 138);
+  border: 2px solid rgb(164, 174, 206);
+  padding: 20px;
+  margin-left: -30%;
+}
+
+.name {
+  color: white;
+  font-size: 130%;
+}
+
+.bio {
+  color: rgb(189, 189, 189);
+  margin-top: 4%;
+  margin-bottom: auto;
+}

@@ -1,34 +1,9 @@
 import React from 'react';
 import s from './Users.module.css';
 import Loading from './../common/Loading';
-import { NavLink } from 'react-router-dom';
+import UserItems from './UserItems/UserItems';
 
 const Users = (props) => {
-  let mappedUsers = props.state.users.map((e) => {
-    let changeFollowStatus = () => {
-      props.changeFollowStatus(e.id);
-    };
-
-    return (
-      <div className={s.user} key={e.id}>
-        <NavLink to={'/profile/' + e.id}>
-          {e.photos.small != null ? (
-            <img src={e.photos.small} alt="userPfp" />
-          ) : (
-            <img
-              src={require('../../assets/pfps/placeholder.jpg')}
-              alt="empty_pfp"
-            />
-          )}
-        </NavLink>
-        <div>{e.name}</div>
-        <button onClick={changeFollowStatus}>
-          {e.isFollowing ? 'Unfollow' : 'Follow'}
-        </button>
-      </div>
-    );
-  });
-
   let pagesNb = Math.ceil(props.totalUsers / props.pageSize);
 
   let mappedPages = [];
@@ -44,7 +19,7 @@ const Users = (props) => {
               props.setCurrentPages(props.currentPagesBeginning - 5);
           } else if (i === props.currentPagesBeginning + 9) {
             if (props.currentPagesBeginning + 4 > pagesNb - 10) {
-              props.setCurrentPages(pagesNb - 10);
+              props.setCurrentPages(pagesNb - 9);
             } else
               props.setCurrentPages(props.currentPagesBeginning + 4);
           }
@@ -66,6 +41,16 @@ const Users = (props) => {
     currentPages[i] = mappedPages[i];
   }
 
+  let firstPage = (
+    <span
+      onClick={() => {
+        props.setCurrentPages(1);
+        props.changePage(1);
+      }}
+    >
+      {'<< '}
+    </span>
+  );
   let pagesBefore = (
     <span
       onClick={() => {
@@ -83,13 +68,24 @@ const Users = (props) => {
     </span>
   );
 
+  let lastPage = (
+    <span
+      onClick={() => {
+        props.setCurrentPages(pagesNb - 9);
+        props.changePage(pagesNb);
+      }}
+    >
+      {'  >>'}
+    </span>
+  );
+
   let pagesAfter = (
     <span
       onClick={() => {
-        if (props.currentPagesBeginning < pagesNb - 10) {
+        if (props.page < pagesNb) {
           if (props.page === props.currentPagesBeginning + 8) {
             if (props.currentPagesBeginning + 4 > pagesNb - 10) {
-              props.setCurrentPages(pagesNb - 10);
+              props.setCurrentPages(pagesNb - 9);
             } else
               props.setCurrentPages(props.currentPagesBeginning + 4);
           }
@@ -100,7 +96,7 @@ const Users = (props) => {
       {'  >'}
     </span>
   );
-  window.loading = props.isLoading;
+
   return (
     <>
       {props.isLoading ? (
@@ -109,14 +105,19 @@ const Users = (props) => {
         </div>
       ) : (
         <div>
+          <UserItems
+            users={props.state.users}
+            changeFollowStatus={props.changeFollowStatus}
+          />
           <span className={s.pages}>
             <div align="center">
+              {firstPage}
               {pagesBefore}
               {currentPages}
               {pagesAfter}
+              {lastPage}
             </div>
           </span>
-          <div>{mappedUsers}</div>{' '}
         </div>
       )}
     </>

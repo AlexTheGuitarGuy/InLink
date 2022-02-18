@@ -1,29 +1,74 @@
 .banner {
-    width: 111%;
-    height: 250px;
-    margin-bottom: 1%;
-    margin-left: -5.5%;
-    margin-top: -1%
+  width: 111%;
+  height: 250px;
+  margin-bottom: 1%;
+  margin-left: -5.5%;
+  margin-top: -1%;
 }
 
 .pfpAndDetails {
-    display: grid;
-    grid-template-areas:
-      "p d"
-      "p d";
-  
-    grid-template-columns: 3fr 5fr;
+  display: grid;
+  grid-template-areas:
+    'p d'
+    'j d';
 
+  grid-template-columns: 2fr 3fr;
 }
 
-.pfp img{
-    width: 45%;
-    height: 100%;
-    display: block;
-    grid-area: p;
+.job {
+  margin-top: 4%;
+  grid-area: j;
+}
+
+.job img {
+  width: 5%;
+}
+
+.jobText {
+  color: white;
+  margin-left: 3%;
+}
+
+.jobDescription {
+  color: white;
+  margin-top: 1%;
+  margin-left: 8%;
+}
+
+.pfp img {
+  width: 45%;
+  height: 100%;
+  display: block;
+  grid-area: p;
 }
 
 .details {
-    grid-area: d;
+  grid-area: d;
+  margin-left: -20%;
+  display: grid;
 }
 
+.username {
+  color: white;
+  font-size: 210%;
+}
+
+.description {
+  margin-top: 2%;
+  font-size: 140%;
+  color: white;
+}
+
+.contacts {
+  margin-top: 4%;
+  color: white;
+}
+
+.contactImages {
+  display: inline-block;
+}
+
+.contactImages img {
+  margin-right: 2%;
+  width: 6%;
+}

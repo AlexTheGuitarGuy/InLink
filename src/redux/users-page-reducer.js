@@ -76,7 +76,7 @@ const usersPageReducer = (state = defaultState, action) => {
       return {
         ...state,
         users: state.users.map((e) => {
-          if (e.id === action.id) e.isFollowing = !e.isFollowing;
+          if (e.id === action.id) e.followed = !e.followed;
           return e;
         }),
       };

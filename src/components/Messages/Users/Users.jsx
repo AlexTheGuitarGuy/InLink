@@ -5,18 +5,17 @@ import s from './Users.module.css';
 const Users = (props) => {
   let userElements = props.state.map((e) => {
     return (
-      <div key={e.id}>
+      <div className={s.dialogUser} key={e.id}>
+        <NavLink to={'/messages/' + e.id} className={s.pfp}>
+          {e.pfp}
+        </NavLink>
         <NavLink
           to={'/messages/' + e.id}
           className={(navData) =>
-            navData.isActive ? s.active : s.dialogUser
+            navData.isActive ? s.active : s.username
           }
         >
-          <div className={s.pfp}>{e.pfp}</div>
-
-          <div className={s.dialogUser}>
-            {e.name[0] + ' ' + e.name[1]}
-          </div>
+          {e.name[0] + ' ' + e.name[1]}
         </NavLink>
       </div>
     );
