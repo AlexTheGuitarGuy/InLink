@@ -1,7 +1,11 @@
 import banner from '../../../assets/banner.jfif';
 import s from './ProfileInfo.module.css';
+import Loading from './../../common/Loading';
 
 const ProfileInfo = (props) => {
+  if (!props.profileData) {
+    return <Loading class={s.loadImg} />;
+  }
   let redirect = (link) => {
     //should implement
   };
@@ -26,7 +30,9 @@ const ProfileInfo = (props) => {
                 {'is looking for a job'}
               </span>
               <div className={s.jobDescription}>
-                {props.profileData.lookingForAJobDescription}
+                {'"' +
+                  props.profileData.lookingForAJobDescription +
+                  '"'}
               </div>
             </div>
           )}
@@ -93,7 +99,7 @@ const ProfileInfo = (props) => {
 
               {contacts.github && (
                 <img
-                  src="http://assets.stickpng.com/images/5847f98fcef1014c0b5e48c0.png"
+                  src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
                   alt="github"
                   onClick={() => {
                     redirect(contacts.github);

@@ -6,8 +6,6 @@ import {
   setProfile,
   toggleLoading,
 } from './../../redux/profile-reducer';
-import Loading from '../common/Loading';
-import s from './Profile.module.css';
 
 class ProfileContainer extends React.Component {
   componentDidMount = () => {
@@ -21,15 +19,7 @@ class ProfileContainer extends React.Component {
   };
 
   render() {
-    return (
-      <>
-        {this.props.isLoading ? (
-          <Loading class={s.loadImg} />
-        ) : (
-          <Profile {...this.props} />
-        )}
-      </>
-    );
+    return <Profile {...this.props} />;
   }
 }
 
