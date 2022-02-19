@@ -25,7 +25,10 @@ const App = (props) => {
         <div className="app-wrapper-content-formating">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/profile/*" element={<ProfileContainer />} />
+            <Route
+              path="/profile/:uid"
+              element={<ProfileContainer />}
+            />
 
             <Route
               path="/messages/*"

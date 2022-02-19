@@ -7,11 +7,33 @@ import {
   toggleLoading,
 } from './../../redux/profile-reducer';
 
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
+
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return (
+      <Component {...props} router={{ location, navigate, params }} />
+    );
+  }
+
+  return ComponentWithRouterProp;
+}
+
 class ProfileContainer extends React.Component {
   componentDidMount = () => {
     this.props.toggleLoading();
+    let uid = this.props.router.params.uid;
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/profile/${uid}`,
+      )
       .then((response) => {
         this.props.setProfile(response.data);
         this.props.toggleLoading();
@@ -31,7 +53,9 @@ const mapStateToProps = (state) => {
   };
 };
 
+let WithURLDataContainerComponent = withRouter(ProfileContainer);
+
 export default connect(mapStateToProps, {
   setProfile,
   toggleLoading,
-})(ProfileContainer);
+})(WithURLDataContainerComponent);

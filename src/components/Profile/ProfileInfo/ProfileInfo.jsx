@@ -1,11 +1,7 @@
 import banner from '../../../assets/banner.jfif';
 import s from './ProfileInfo.module.css';
-import Loading from './../../common/Loading';
 
 const ProfileInfo = (props) => {
-  if (!props.profileData) {
-    return <Loading class={s.loadImg} />;
-  }
   let redirect = (link) => {
     //should implement
   };
