@@ -29,6 +29,7 @@ const App = (props) => {
               path="/profile/:uid"
               element={<ProfileContainer />}
             />
+            <Route path="/profile" element={<ProfileContainer />} />
 
             <Route
               path="/messages/*"
