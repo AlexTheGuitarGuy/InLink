@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './UserItems.module.css';
+import * as axios from 'axios';
 
 export default function UserItems(props) {
   let mappedUsers = props.users.map((e) => {
@@ -26,14 +27,47 @@ export default function UserItems(props) {
 
           {e.followed ? (
             <button
-              onClick={changeFollowStatus}
+              onClick={() =>
+                axios
+                  .delete(
+                    `https://social-network.samuraijs.com/api/1.0/follow/${e.id}`,
+                    {
+                      withCredentials: true,
+                      headers: {
+                        'API-KEY':
+                          '5e1fbd4d-d92a-43c5-b75a-b5fe33f28f28',
+                      },
+                    },
+                  )
+                  .then((response) => {
+                    if (response.data.resultCode === 0)
+                      changeFollowStatus();
+                  })
+              }
               className={s.unfollowButton}
             >
               Unfollow
             </button>
           ) : (
             <button
-              onClick={changeFollowStatus}
+              onClick={() =>
+                axios
+                  .post(
+                    `https://social-network.samuraijs.com/api/1.0/follow/${e.id}`,
+                    {},
+                    {
+                      withCredentials: true,
+                      headers: {
+                        'API-KEY':
+                          '5e1fbd4d-d92a-43c5-b75a-b5fe33f28f28',
+                      },
+                    },
+                  )
+                  .then((response) => {
+                    if (response.data.resultCode === 0)
+                      changeFollowStatus();
+                  })
+              }
               className={s.followButton}
             >
               Follow
