@@ -3,9 +3,7 @@ import s from './ProfileInfo.module.css';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 
 const ProfileInfo = (props) => {
-  let redirect = (link) => {
-    //should implement
-  };
+  let redirect = (link) => {};
   let contacts = props.profileData.contacts;
 
   let isEmpty = true,

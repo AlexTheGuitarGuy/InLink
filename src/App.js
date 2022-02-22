@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import { Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
@@ -10,11 +9,12 @@ import Home from './components/Home/Home';
 import { MessagesContainer } from './components/Messages/MessagesContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 const App = (props) => {
   return (
     <div className="app-wrapper">
-      <Header />
+      <HeaderContainer />
 
       <Nav
         state={props.state.sidebar}
