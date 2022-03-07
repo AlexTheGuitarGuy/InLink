@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
@@ -6,6 +5,7 @@ import {
   setProfile,
   toggleLoading,
 } from './../../redux/profile-reducer';
+import { userAPI } from './../../api/API';
 
 import {
   useLocation,
@@ -31,14 +31,10 @@ class ProfileContainer extends React.Component {
     this.props.toggleLoading();
     let uid = this.props.router.params.uid;
     if (!uid) uid = 2;
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/profile/${uid}`,
-      )
-      .then((response) => {
-        this.props.setProfile(response.data);
-        this.props.toggleLoading();
-      });
+    userAPI.loadProfile(uid).then((data) => {
+      this.props.setProfile(data);
+      this.props.toggleLoading();
+    });
   };
 
   render() {
