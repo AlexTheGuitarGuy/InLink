@@ -5,6 +5,7 @@ const SET_USERS_NB = 'SET-USERS-NB';
 const SET_CURRENT_PAGES = 'SET-CURRENT-PAGES';
 const TOGGLE_LOADING = 'TOGGLE-LOADING';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const UPDATE_FOLLOW_QUEUE = 'UPDATE-FOLLOW-QUEUE';
 
 let defaultState = {
   users: [
@@ -68,6 +69,7 @@ let defaultState = {
   totalUsers: 0,
   currentPagesBeginning: 1,
   isLoading: false,
+  followQueue: [],
 };
 
 const usersPageReducer = (state = defaultState, action) => {
@@ -105,6 +107,15 @@ const usersPageReducer = (state = defaultState, action) => {
         ...state,
         isLoading: !state.isLoading,
       };
+    case UPDATE_FOLLOW_QUEUE:
+      return {
+        ...state,
+        followQueue: state.followQueue.some(
+          (elem) => elem === action.id,
+        )
+          ? state.followQueue.filter((value) => value !== action.id)
+          : [...state.followQueue, action.id],
+      };
     default:
       return state;
   }
@@ -134,6 +145,11 @@ export const toggleLoading = () => ({
 
 export const goToPage = (id) => ({
   type: SET_USER_PROFILE,
+  id,
+});
+
+export const updateFollowQueue = (id) => ({
+  type: UPDATE_FOLLOW_QUEUE,
   id,
 });
 

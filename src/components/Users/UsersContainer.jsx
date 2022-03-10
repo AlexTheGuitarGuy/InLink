@@ -7,6 +7,7 @@ import {
   setTotalUsers,
   setCurrentPages,
   toggleLoading,
+  updateFollowQueue,
 } from './../../redux/users-page-reducer';
 import React from 'react';
 import { userAPI } from './../../api/API';
@@ -44,6 +45,8 @@ class UsersContainer extends React.Component {
         currentPagesBeginning={this.props.currentPagesBeginning}
         setCurrentPages={this.props.setCurrentPages}
         isLoading={this.props.isLoading}
+        followQueue={this.props.followQueue}
+        updateFollowQueue={this.props.updateFollowQueue}
       />
     );
   }
@@ -57,6 +60,7 @@ let mapStateToProps = (state) => {
     totalUsers: state.usersPage.totalUsers,
     currentPagesBeginning: state.usersPage.currentPagesBeginning,
     isLoading: state.usersPage.isLoading,
+    followQueue: state.usersPage.followQueue,
   };
 };
 
@@ -67,4 +71,5 @@ export default connect(mapStateToProps, {
   setTotalUsers,
   setCurrentPages,
   toggleLoading,
+  updateFollowQueue,
 })(UsersContainer);

@@ -9,6 +9,9 @@ export default function UserItems(props) {
       props.changeFollowStatus(e.id);
     };
 
+    let buttonText = e.followed ? 'Unfollow' : 'Follow';
+    let buttonAction = e.followed ? userAPI.unfollow : userAPI.follow;
+
     return (
       <div className={s.user} key={e.id}>
         <div className={s.interact}>
@@ -25,29 +28,19 @@ export default function UserItems(props) {
             </NavLink>
           </div>
 
-          {e.followed ? (
-            <button
-              onClick={() =>
-                userAPI.unfollow(e.id).then((data) => {
-                  if (data.resultCode === 0) changeFollowStatus();
-                })
-              }
-              className={s.unfollowButton}
-            >
-              Unfollow
-            </button>
-          ) : (
-            <button
-              onClick={() =>
-                userAPI.follow(e.id).then((data) => {
-                  if (data.resultCode === 0) changeFollowStatus();
-                })
-              }
-              className={s.followButton}
-            >
-              Follow
-            </button>
-          )}
+          <button
+            disabled={props.followQueue.some((elem) => elem === e.id)}
+            onClick={() => {
+              props.updateFollowQueue(e.id);
+              buttonAction(e.id).then((data) => {
+                if (data.resultCode === 0) changeFollowStatus();
+                props.updateFollowQueue(e.id);
+              });
+            }}
+            className={s.unfollowButton}
+          >
+            {buttonText}
+          </button>
         </div>
 
         <div className={s.content}>

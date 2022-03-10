@@ -106,6 +106,8 @@ const Users = (props) => {
       ) : (
         <div>
           <UserItems
+            followQueue={props.followQueue}
+            updateFollowQueue={props.updateFollowQueue}
             users={props.state.users}
             changeFollowStatus={props.changeFollowStatus}
           />
