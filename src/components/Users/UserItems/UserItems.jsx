@@ -2,15 +2,22 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './UserItems.module.css';
 import { userAPI } from './../../../api/API';
+import placeholder from '../../../assets/pfps/placeholder.jpg';
 
-export default function UserItems(props) {
-  let mappedUsers = props.users.map((e) => {
+const UserItems = ({
+  users,
+  changeFollowStatus,
+  followQueue,
+  updateFollowQueue,
+}) => {
+  let mappedUsers = users.map((e) => {
     let changeFollowStatus = () => {
-      props.changeFollowStatus(e.id);
+      changeFollowStatus(e.id);
     };
 
     let buttonText = e.followed ? 'Unfollow' : 'Follow';
     let buttonAction = e.followed ? userAPI.unfollow : userAPI.follow;
+    let buttonClass = e.followed ? s.unfollowButton : s.followButton;
 
     return (
       <div className={s.user} key={e.id}>
@@ -20,24 +27,21 @@ export default function UserItems(props) {
               {e.photos.small != null ? (
                 <img src={e.photos.small} alt="userPfp" />
               ) : (
-                <img
-                  src={require('../../../assets/pfps/placeholder.jpg')}
-                  alt="empty_pfp"
-                />
+                <img src={placeholder} alt="empty_pfp" />
               )}
             </NavLink>
           </div>
 
           <button
-            disabled={props.followQueue.some((elem) => elem === e.id)}
+            disabled={followQueue.some((elem) => elem === e.id)}
             onClick={() => {
-              props.updateFollowQueue(e.id);
+              updateFollowQueue(e.id);
               buttonAction(e.id).then((data) => {
                 if (data.resultCode === 0) changeFollowStatus();
-                props.updateFollowQueue(e.id);
+                updateFollowQueue(e.id);
               });
             }}
-            className={s.unfollowButton}
+            className={buttonClass}
           >
             {buttonText}
           </button>
@@ -51,4 +55,6 @@ export default function UserItems(props) {
     );
   });
   return <div>{mappedUsers}</div>;
-}
+};
+
+export default UserItems;
