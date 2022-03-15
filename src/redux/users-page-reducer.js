@@ -81,7 +81,7 @@ const usersPageReducer = (state = defaultState, action) => {
         ...state,
         users: state.users.map((e) => {
           if (e.id === action.id) {
-            e.followed = !e.followed;
+            e.followed = action.payload;
           }
           return e;
         }),
@@ -109,7 +109,7 @@ const usersPageReducer = (state = defaultState, action) => {
     case TOGGLE_LOADING:
       return {
         ...state,
-        isLoading: !state.isLoading,
+        isLoading: action.payload,
       };
     case UPDATE_FOLLOW_QUEUE:
       return {
@@ -125,9 +125,10 @@ const usersPageReducer = (state = defaultState, action) => {
   }
 };
 
-export const changeFollowStatus = (id) => ({
+export const toggleFollowStatus = (id, payload) => ({
   type: TOGGLE_FOLLOW_STATUS,
   id,
+  payload,
 });
 export const setUsers = (users) => ({ type: SET_USERS, users });
 
@@ -143,8 +144,9 @@ export const setCurrentPages = (newBeginning) => ({
   newBeginning,
 });
 
-export const toggleLoading = () => ({
+export const toggleLoading = (payload) => ({
   type: TOGGLE_LOADING,
+  payload,
 });
 
 export const goToPage = (id) => ({
@@ -158,11 +160,11 @@ export const updateFollowQueue = (id) => ({
 });
 
 export const getUsers = (page, pageSize) => (dispatch) => {
-  dispatch(toggleLoading());
+  dispatch(toggleLoading(true));
   userAPI.getUsers(page, pageSize).then((data) => {
     dispatch(setUsers(data.items));
     dispatch(setTotalUsers(data.totalCount));
-    dispatch(toggleLoading());
+    dispatch(toggleLoading(false));
   });
 };
 
@@ -170,7 +172,7 @@ export const follow = (id) => (dispatch) => {
   dispatch(updateFollowQueue(id));
   userAPI.follow(id).then((data) => {
     if (data.resultCode === 0) {
-      dispatch(changeFollowStatus(id));
+      dispatch(toggleFollowStatus(id, true));
     }
     dispatch(updateFollowQueue(id));
   });
@@ -180,7 +182,7 @@ export const unfollow = (id) => (dispatch) => {
   dispatch(updateFollowQueue(id));
   userAPI.unfollow(id).then((data) => {
     if (data.resultCode === 0) {
-      dispatch(changeFollowStatus(id));
+      dispatch(toggleFollowStatus(id, false));
     }
     dispatch(updateFollowQueue(id));
   });

@@ -4,7 +4,6 @@ import {
   getUsers,
   follow,
   unfollow,
-  changeFollowStatus,
   setPage,
   setCurrentPages,
   updateFollowQueue,
@@ -25,7 +24,6 @@ class UsersContainer extends React.Component {
     return (
       <Users
         state={this.props.state}
-        changeFollowStatus={this.props.changeFollowStatus}
         totalUsers={this.props.totalUsers}
         pageSize={this.props.pageSize}
         changePage={this.changePage}
@@ -58,7 +56,6 @@ export default connect(mapStateToProps, {
   getUsers,
   follow,
   unfollow,
-  changeFollowStatus,
   setPage,
   setCurrentPages,
   updateFollowQueue,

@@ -59,7 +59,7 @@ const profileReducer = (state = defaultState, action) => {
     case TOGGLE_LOADING:
       return {
         ...state,
-        isLoading: !state.isLoading,
+        isLoading: action.payload,
       };
     default:
       return state;
@@ -74,16 +74,17 @@ export const post = () => ({ type: POST });
 
 export const setProfile = (data) => ({ type: SET_PROFILE, data });
 
-export const toggleLoading = () => ({
+export const toggleLoading = (payload) => ({
   type: TOGGLE_LOADING,
+  payload,
 });
 
 export const getProfile = (uid) => (dispatch) => {
-  dispatch(toggleLoading());
+  dispatch(toggleLoading(true));
   if (!uid) uid = 2;
   userAPI.loadProfile(uid).then((data) => {
     dispatch(setProfile(data));
-    dispatch(toggleLoading());
+    dispatch(toggleLoading(false));
   });
 };
 
