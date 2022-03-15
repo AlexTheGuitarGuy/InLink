@@ -1,3 +1,5 @@
+import { userAPI } from './../api/API';
+
 const TOGGLE_FOLLOW_STATUS = 'CHANGE-FOLLOW-STATUS';
 const SET_USERS = 'SET-USERS';
 const SET_PAGE = 'SET-PAGE';
@@ -78,7 +80,9 @@ const usersPageReducer = (state = defaultState, action) => {
       return {
         ...state,
         users: state.users.map((e) => {
-          if (e.id === action.id) e.followed = !e.followed;
+          if (e.id === action.id) {
+            e.followed = !e.followed;
+          }
           return e;
         }),
       };
@@ -152,5 +156,34 @@ export const updateFollowQueue = (id) => ({
   type: UPDATE_FOLLOW_QUEUE,
   id,
 });
+
+export const getUsers = (page, pageSize) => (dispatch) => {
+  dispatch(toggleLoading());
+  userAPI.getUsers(page, pageSize).then((data) => {
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsers(data.totalCount));
+    dispatch(toggleLoading());
+  });
+};
+
+export const follow = (id) => (dispatch) => {
+  dispatch(updateFollowQueue(id));
+  userAPI.follow(id).then((data) => {
+    if (data.resultCode === 0) {
+      dispatch(changeFollowStatus(id));
+    }
+    dispatch(updateFollowQueue(id));
+  });
+};
+
+export const unfollow = (id) => (dispatch) => {
+  dispatch(updateFollowQueue(id));
+  userAPI.unfollow(id).then((data) => {
+    if (data.resultCode === 0) {
+      dispatch(changeFollowStatus(id));
+    }
+    dispatch(updateFollowQueue(id));
+  });
+};
 
 export default usersPageReducer;

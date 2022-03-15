@@ -110,6 +110,8 @@ const Users = (props) => {
             updateFollowQueue={props.updateFollowQueue}
             users={props.state.users}
             changeFollowStatus={props.changeFollowStatus}
+            follow={props.follow}
+            unfollow={props.unfollow}
           />
           <span className={s.pages}>
             <div align="center">

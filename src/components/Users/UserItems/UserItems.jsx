@@ -1,22 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './UserItems.module.css';
-import { userAPI } from './../../../api/API';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 
-const UserItems = ({
-  users,
-  changeFollowStatus,
-  followQueue,
-  updateFollowQueue,
-}) => {
+const UserItems = ({ users, followQueue, follow, unfollow }) => {
   let mappedUsers = users.map((e) => {
-    let changeFollowStatus = () => {
-      changeFollowStatus(e.id);
-    };
-
     let buttonText = e.followed ? 'Unfollow' : 'Follow';
-    let buttonAction = e.followed ? userAPI.unfollow : userAPI.follow;
+    let buttonAction = e.followed ? unfollow : follow;
     let buttonClass = e.followed ? s.unfollowButton : s.followButton;
 
     return (
@@ -35,11 +25,7 @@ const UserItems = ({
           <button
             disabled={followQueue.some((elem) => elem === e.id)}
             onClick={() => {
-              updateFollowQueue(e.id);
-              buttonAction(e.id).then((data) => {
-                if (data.resultCode === 0) changeFollowStatus();
-                updateFollowQueue(e.id);
-              });
+              buttonAction(e.id);
             }}
             className={buttonClass}
           >

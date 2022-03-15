@@ -1,36 +1,24 @@
 import { connect } from 'react-redux';
 import Users from './Users';
 import {
+  getUsers,
+  follow,
+  unfollow,
   changeFollowStatus,
-  setUsers,
   setPage,
-  setTotalUsers,
   setCurrentPages,
-  toggleLoading,
   updateFollowQueue,
 } from './../../redux/users-page-reducer';
 import React from 'react';
-import { userAPI } from './../../api/API';
 
 class UsersContainer extends React.Component {
   componentDidMount = () => {
-    this.props.toggleLoading();
-    userAPI
-      .getUsers(this.props.page, this.props.pageSize)
-      .then((data) => {
-        this.props.setUsers(data.items);
-        this.props.setTotalUsers(data.totalCount);
-        this.props.toggleLoading();
-      });
+    this.props.getUsers(this.props.page, this.props.pageSize);
   };
 
   changePage = (page) => {
-    this.props.toggleLoading();
+    this.props.getUsers(page, this.props.pageSize);
     this.props.setPage(page);
-    userAPI.getUsers(page, this.props.pageSize).then((data) => {
-      this.props.setUsers(data.items);
-      this.props.toggleLoading();
-    });
   };
 
   render() {
@@ -47,6 +35,8 @@ class UsersContainer extends React.Component {
         isLoading={this.props.isLoading}
         followQueue={this.props.followQueue}
         updateFollowQueue={this.props.updateFollowQueue}
+        follow={this.props.follow}
+        unfollow={this.props.unfollow}
       />
     );
   }
@@ -65,11 +55,11 @@ let mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
+  getUsers,
+  follow,
+  unfollow,
   changeFollowStatus,
-  setUsers,
   setPage,
-  setTotalUsers,
   setCurrentPages,
-  toggleLoading,
   updateFollowQueue,
 })(UsersContainer);

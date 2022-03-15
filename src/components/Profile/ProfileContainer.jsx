@@ -1,11 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import {
-  setProfile,
-  toggleLoading,
-} from './../../redux/profile-reducer';
-import { userAPI } from './../../api/API';
+import { getProfile } from './../../redux/profile-reducer';
 
 import {
   useLocation,
@@ -25,16 +21,9 @@ function withRouter(Component) {
 
   return ComponentWithRouterProp;
 }
-
 class ProfileContainer extends React.Component {
   componentDidMount = () => {
-    this.props.toggleLoading();
-    let uid = this.props.router.params.uid;
-    if (!uid) uid = 2;
-    userAPI.loadProfile(uid).then((data) => {
-      this.props.setProfile(data);
-      this.props.toggleLoading();
-    });
+    this.props.getProfile(this.props.router.params.uid);
   };
 
   render() {
@@ -53,6 +42,5 @@ const mapStateToProps = (state) => {
 let WithURLDataContainerComponent = withRouter(ProfileContainer);
 
 export default connect(mapStateToProps, {
-  setProfile,
-  toggleLoading,
+  getProfile,
 })(WithURLDataContainerComponent);

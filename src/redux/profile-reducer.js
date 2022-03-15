@@ -1,3 +1,5 @@
+import { userAPI } from './../api/API';
+
 const STORE_TEXT = 'STORE-TEXT';
 const POST = 'POST';
 const SET_PROFILE = 'SET-PROFILE';
@@ -75,5 +77,14 @@ export const setProfile = (data) => ({ type: SET_PROFILE, data });
 export const toggleLoading = () => ({
   type: TOGGLE_LOADING,
 });
+
+export const getProfile = (uid) => (dispatch) => {
+  dispatch(toggleLoading());
+  if (!uid) uid = 2;
+  userAPI.loadProfile(uid).then((data) => {
+    dispatch(setProfile(data));
+    dispatch(toggleLoading());
+  });
+};
 
 export default profileReducer;
