@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getProfile } from './../../redux/profile-reducer';
+import { Navigate } from 'react-router-dom';
 
 import {
   useLocation,
@@ -27,6 +28,7 @@ class ProfileContainer extends React.Component {
   };
 
   render() {
+    if (!this.props.isLoggedin) return <Navigate to="/login" />;
     return <Profile {...this.props} />;
   }
 }
@@ -36,6 +38,7 @@ const mapStateToProps = (state) => {
     state: state.profilePage,
     profileData: state.userData.profileData,
     isLoading: state.profilePage.isLoading,
+    isLoggedin: state.auth.isLoggedIn,
   };
 };
 

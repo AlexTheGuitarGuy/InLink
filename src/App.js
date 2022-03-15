@@ -6,10 +6,11 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Preferences from './components/Preferences/Preferences';
 import Home from './components/Home/Home';
-import { MessagesContainer } from './components/Messages/MessagesContainer';
+import MessagesContainer from './components/Messages/MessagesContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
 
 const App = (props) => {
   return (
@@ -33,14 +34,10 @@ const App = (props) => {
 
             <Route
               path="/messages/*"
-              element={
-                <MessagesContainer
-                  state={props.state.dialogsPage}
-                  profileData={props.state.userData.profileData}
-                />
-              }
+              element={<MessagesContainer />}
             />
 
+            <Route path="/login" element={<Login />} />
             <Route path="/users" element={<UsersContainer />} />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
