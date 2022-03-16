@@ -9,7 +9,8 @@ import {
   updateFollowQueue,
 } from './../../redux/users-page-reducer';
 import React from 'react';
-
+import withAuthRedirect from './../HOC/withAuthRedirect';
+import { compose } from 'redux';
 class UsersContainer extends React.Component {
   componentDidMount = () => {
     this.props.getUsers(this.props.page, this.props.pageSize);
@@ -52,11 +53,14 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  getUsers,
-  follow,
-  unfollow,
-  setPage,
-  setCurrentPages,
-  updateFollowQueue,
-})(UsersContainer);
+export default compose(
+  withAuthRedirect,
+  connect(mapStateToProps, {
+    getUsers,
+    follow,
+    unfollow,
+    setPage,
+    setCurrentPages,
+    updateFollowQueue,
+  }),
+)(UsersContainer);
