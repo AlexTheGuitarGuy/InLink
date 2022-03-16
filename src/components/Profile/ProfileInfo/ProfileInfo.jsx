@@ -6,8 +6,8 @@ const ProfileInfo = (props) => {
   let redirect = (link) => {};
   let contacts = props.profileData.contacts;
 
-  let isEmpty = true,
-    i;
+  let isEmpty = true;
+  let i;
   for (i in contacts)
     if (contacts.hasOwnProperty(i)) {
       if (contacts[i]) {
