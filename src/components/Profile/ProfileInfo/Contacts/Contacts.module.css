@@ -1,0 +1,13 @@
+.contacts {
+  margin-top: 4%;
+  color: white;
+}
+
+.contactImages {
+  display: inline-block;
+}
+
+.contactImages img {
+  margin-right: 2%;
+  width: 6%;
+}

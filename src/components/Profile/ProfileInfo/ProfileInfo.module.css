@@ -16,31 +16,6 @@
   grid-template-columns: 2fr 3fr;
 }
 
-.job {
-  border-radius: 25px;
-  background: rgb(64, 68, 109);
-  border: 2px solid rgb(164, 174, 206);
-  margin-top: 4%;
-  grid-area: j;
-  width: 55%;
-}
-
-.job img {
-  width: 7%;
-  margin-left: 5%;
-}
-
-.jobText {
-  color: white;
-  margin-left: 3%;
-}
-
-.jobDescription {
-  color: white;
-  margin-top: 1%;
-  margin-left: 12%;
-}
-
 .pfp img {
   margin-left: 6%;
   width: 45%;
@@ -64,18 +39,4 @@
   margin-top: -1%;
   font-size: 140%;
   color: white;
-}
-
-.contacts {
-  margin-top: 4%;
-  color: white;
-}
-
-.contactImages {
-  display: inline-block;
-}
-
-.contactImages img {
-  margin-right: 2%;
-  width: 6%;
 }
