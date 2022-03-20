@@ -14,10 +14,10 @@ const Publish = (props) => {
   };
 
   return (
-    <div>
+    <div className={s.all}>
       <div className={s.newPost}>New post</div>
 
-      <textarea
+      <input
         className={s.textarea}
         ref={newPost}
         value={props.memoryText}
@@ -25,7 +25,6 @@ const Publish = (props) => {
         onKeyPress={(e) => {
           if (e.key === 'Enter') post();
         }}
-        rows="1"
         placeholder="Type what you think..."
       />
       <div>

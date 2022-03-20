@@ -14,7 +14,7 @@ const SendText = (props) => {
   };
   return (
     <div className={s.sendText}>
-      <textarea
+      <input
         className={s.textArea}
         ref={newPost}
         value={props.memoryText}
@@ -22,9 +22,8 @@ const SendText = (props) => {
         onKeyPress={(e) => {
           if (e.key === 'Enter') post();
         }}
-        rows="1"
         placeholder="Enter your message"
-      ></textarea>
+      />
 
       <div>
         <button onClick={post} className={s.button}>

@@ -3,8 +3,20 @@ import s from './ProfileInfo.module.css';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
+import { Description } from './Description/Description';
 
-const ProfileInfo = ({profileData, pfp}) => {
+const ProfileInfo = ({ profileData, pfp, isEditing, editMode }) => {
+  let jobInfoParams = {
+    lookingForAJob: profileData.lookingForAJob,
+    lookingForAJobDescription: profileData.lookingForAJobDescription,
+  };
+
+  let descriptionParams = {
+    isEditing,
+    aboutMe: profileData.aboutMe,
+    editMode,
+  };
+
   return (
     <div>
       <img src={banner} alt="banner" className={s.banner} />
@@ -14,17 +26,11 @@ const ProfileInfo = ({profileData, pfp}) => {
           <img src={pfp || placeholder} alt={'pfp'} />
         </div>
 
-        <JobInfo profileData={profileData}/>
+        <JobInfo {...jobInfoParams} />
 
         <div className={s.details}>
-          <div className={s.username}>
-            {profileData.fullName}
-          </div>
-
-          <div className={s.description}>
-            {profileData.aboutMe}
-          </div>
-
+          <div className={s.username}>{profileData.fullName}</div>
+          <Description {...descriptionParams} />
           <Contacts contacts={profileData.contacts} />
         </div>
       </div>

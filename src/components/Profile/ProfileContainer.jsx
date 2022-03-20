@@ -2,15 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getProfile } from '../../redux/profile-reducer';
-import { Navigate } from 'react-router-dom';
-import withAuthRedirect from './../HOC/withAuthRedirect';
-import { compose } from 'redux';
-
 import {
+  Navigate,
   useLocation,
   useNavigate,
   useParams,
 } from 'react-router-dom';
+import withAuthRedirect from './../HOC/withAuthRedirect';
+import { compose } from 'redux';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -25,13 +24,22 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 class ProfileContainer extends React.Component {
+  state = {
+    isEditing: false,
+  };
+
+  editMode = (payload) => {
+    this.setState({ isEditing: payload });
+  };
+
   componentDidMount = () => {
     this.props.getProfile(this.props.router.params.uid);
   };
 
   render() {
+    let props = { ...this.props, ...this.state };
     if (!this.props.isLoggedIn) return <Navigate to="/login" />;
-    return <Profile {...this.props} />;
+    return <Profile {...props} editMode={this.editMode} />;
   }
 }
 

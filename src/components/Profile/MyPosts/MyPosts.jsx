@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from './Post/Post.jsx';
 import Publish from './Publish/Publish.jsx';
+import s from './MyPosts.module.css';
 
 const MyPosts = (props) => {
   const postElements = props.posts.map((e) => (
@@ -8,15 +9,13 @@ const MyPosts = (props) => {
   ));
 
   return (
-    <div>
-      <div>
-        <Publish
-          post={props.post}
-          storeText={props.storeText}
-          memoryText={props.memoryText}
-        />
-        {postElements.reverse()}
-      </div>
+    <div className={s.all}>
+      <Publish
+        post={props.post}
+        storeText={props.storeText}
+        memoryText={props.memoryText}
+      />
+      {postElements.reverse()}
     </div>
   );
 };

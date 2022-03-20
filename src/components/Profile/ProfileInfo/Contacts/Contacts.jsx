@@ -13,85 +13,86 @@ const Contacts = ({contacts}) => {
       }
     }
 
+  let {facebook, vk, twitter, instagram, youtube, github, website, mainLink} = contacts
 
   return <>{!isEmpty && (
     <div className={s.contacts}>
       Contacts:
       <div>
                 <span className={s.contactImages}>
-                  {contacts.facebook && (
+                  {facebook && (
                     <img
                       src="https://pnggrid.com/wp-content/uploads/2021/05/Facebook-logo-2021.png"
                       alt="facebook"
                       onClick={() => {
-                        redirect(contacts.facebook);
+                        redirect(facebook);
                       }}
                     />
                   )}
 
-                  {contacts.vk && (
+                  {vk && (
                     <img
                       src="https://freepikpsd.com/file/2019/10/vk-logo-png-7-Transparent-Images.png"
                       alt="vk"
                       onClick={() => {
-                        redirect(contacts.vk);
+                        redirect(vk);
                       }}
                     />
                   )}
 
-                  {contacts.twitter && (
+                  {twitter && (
                     <img
                       src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-logo-vector-png-clipart-1.png"
                       alt="twitter"
                       onClick={() => {
-                        redirect(contacts.twitter);
+                        redirect(twitter);
                       }}
                     />
                   )}
 
-                  {contacts.instagram && (
+                  {instagram && (
                     <img
                       src="https://straightarrowfilms.com/wp-content/uploads/2020/05/new-instagram-logo-png-transparent-light.png"
                       alt="instagram"
                       onClick={() => {
-                        redirect(contacts.instagram);
+                        redirect(instagram);
                       }}
                     />
                   )}
 
-                  {contacts.youtube && (
+                  {youtube && (
                     <img
                       src="https://www.designbust.com/download/1005/png/transparent_background_youtube_logo_png512.png"
                       alt="youtube"
                       onClick={() => {
-                        redirect(contacts.youtube);
+                        redirect(youtube);
                       }}
                     />
                   )}
 
-                  {contacts.github && (
+                  {github && (
                     <img
                       src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
                       alt="github"
                       onClick={() => {
-                        redirect(contacts.github);
+                        redirect(github);
                       }}
                     />
                   )}
                 </span>
-        {contacts.website && (
+        {website && (
           <div
             onClick={() => {
-              redirect(contacts.website);
+              redirect(website);
             }}
           >
             website
           </div>
         )}
-        {contacts.mainLink && (
+        {mainLink && (
           <div
             onClick={() => {
-              redirect(contacts.mainLink);
+              redirect(mainLink);
             }}
           >
             main link

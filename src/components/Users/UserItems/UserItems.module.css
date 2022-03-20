@@ -26,9 +26,9 @@
 }
 
 .content {
-  border-radius: 25px;
-  background: rgb(64, 68, 109);
-  border: 2px solid rgb(164, 174, 206);
+  border-radius: 0.5rem;
+  background-color: rgb(102, 100, 154);
+  border: 0.1rem solid rgb(164, 174, 206);
   padding: 20px;
   margin-left: -30%;
 }

@@ -6,7 +6,7 @@ import FriendItems from './FriendItems/FriendItems';
 const Nav = (props) => {
   let navElements = props.state.navItems.map((e) => {
     return (
-      <div key={e.id}>
+      <div key={e.id} className={s.navText}>
         <NavLink
           to={e.to}
           className={(navData) =>

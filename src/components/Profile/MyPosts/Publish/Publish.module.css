@@ -1,9 +1,10 @@
+.all {
+    margin-top: -2rem;
+}
+
 .button {
-    margin-top: 0.25%;
-    margin-bottom: 5%;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0.25% auto 5%;
     width: 46%;
 }
 

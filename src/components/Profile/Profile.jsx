@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import { MyPostsContainer } from './MyPosts/MyPostsContainer';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 import Loading from '../common/Loading';
 
 const Profile = (props) => {
@@ -12,6 +12,8 @@ const Profile = (props) => {
           <ProfileInfo
             pfp={props.state.profileData.photos.large}
             profileData={props.state.profileData}
+            isEditing = {props.isEditing}
+            editMode = {props.editMode}
           />
         )) || <Loading class={s.loadImg} />}
         <MyPostsContainer />

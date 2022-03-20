@@ -1,0 +1,17 @@
+.descriptionText {
+    margin-top: -1%;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.descriptionEdit {
+    width: fit-content;
+    height: fit-content;
+}
+
+.descriptionText:hover {
+    background-color: rgba(21, 12, 94, 0.28);
+}

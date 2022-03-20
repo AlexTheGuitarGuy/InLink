@@ -1,6 +1,13 @@
 import { connect } from 'react-redux';
-import { storeText, post } from '../../../redux/profile-reducer';
+import { post, storeText } from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts.jsx';
+import React from 'react';
+
+class MyPostsContainer extends React.Component {
+  render(){
+    return <MyPosts {...this.props}/>
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -9,7 +16,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export const MyPostsContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   storeText,
   post,
-})(MyPosts);
+})(MyPostsContainer);

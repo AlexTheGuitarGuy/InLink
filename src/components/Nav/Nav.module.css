@@ -5,6 +5,9 @@
   padding: 10%
 }
 
+.navText {
+  font-size: 1.25rem;
+}
 
 .item {
   color: white;
