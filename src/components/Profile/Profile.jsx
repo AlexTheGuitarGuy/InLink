@@ -6,18 +6,17 @@ import Loading from '../common/Loading';
 
 const Profile = (props) => {
   return (
-    <div className={s.content}>
-      <div className={s.formatting}>
-        {(!props.isLoading && props.state.profileData && (
-          <ProfileInfo
-            pfp={props.state.profileData.photos.large}
-            profileData={props.state.profileData}
-            isEditing = {props.isEditing}
-            editMode = {props.editMode}
-          />
-        )) || <Loading class={s.loadImg} />}
-        <MyPostsContainer />
-      </div>
+    <div>
+      {(!props.isLoading && props.state.profileData && (
+        <ProfileInfo
+          pfp={props.state.profileData.photos.large}
+          profileData={props.state.profileData}
+          profileStatus={props.state.profileStatus}
+          updateStatus={props.updateStatus}
+          canEdit={props.canEdit}
+        />
+      )) || <Loading class={s.loadImg} />}
+      <MyPostsContainer />
     </div>
   );
 };

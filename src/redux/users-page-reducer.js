@@ -1,4 +1,4 @@
-import { userAPI } from './../api/API';
+import { userAPI } from '../api/API';
 
 const TOGGLE_FOLLOW_STATUS = 'CHANGE-FOLLOW-STATUS';
 const SET_USERS = 'SET-USERS';
@@ -6,7 +6,6 @@ const SET_PAGE = 'SET-PAGE';
 const SET_USERS_NB = 'SET-USERS-NB';
 const SET_CURRENT_PAGES = 'SET-CURRENT-PAGES';
 const TOGGLE_LOADING = 'TOGGLE-LOADING';
-const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const UPDATE_FOLLOW_QUEUE = 'UPDATE-FOLLOW-QUEUE';
 
 let defaultState = {
@@ -14,7 +13,7 @@ let defaultState = {
     /*
     {
       id: 1,
-      name: ['Boy', 'Nextdoor'],
+      name: ['Boy', 'Next-door'],
       bio: "Get up you lazy cow. Where's my breakfast?",
       location: { country: 'Belarus', city: 'Minsk' },
       isFollowing: true,
@@ -29,7 +28,7 @@ let defaultState = {
       id: 2,
       name: ['Fucking', 'Slave'],
       bio: 'LIKE EMBARRASSING ME, HUH?',
-      location: { country: 'Ukraine', city: 'Kyiv' },
+      location: { country: 'Ukraine', city: 'Kivy' },
       isFollowing: false,
       pfp: (
         <img
@@ -148,12 +147,6 @@ export const toggleLoading = (payload) => ({
   type: TOGGLE_LOADING,
   payload,
 });
-
-export const goToPage = (id) => ({
-  type: SET_USER_PROFILE,
-  id,
-});
-
 export const updateFollowQueue = (id) => ({
   type: UPDATE_FOLLOW_QUEUE,
   id,

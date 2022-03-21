@@ -24,6 +24,10 @@
   grid-area: p;
 }
 
+.pfp img {
+  width: 20rem;
+}
+
 .details {
   background-color: rgb(102, 100, 154);
   padding: 0.5rem;

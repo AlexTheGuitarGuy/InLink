@@ -1,8 +1,10 @@
-import { userAPI } from './../api/API';
+import { profileAPI } from '../api/API';
 
 const STORE_TEXT = 'STORE-TEXT';
 const POST = 'POST';
 const SET_PROFILE = 'SET-PROFILE';
+const SET_STATUS = 'SET-STATUS';
+const SET_CAN_EDIT = 'SET-CAN-EDIT';
 const TOGGLE_LOADING = 'TOGGLE-LOADING';
 
 let defaultState = {
@@ -17,7 +19,9 @@ let defaultState = {
   ],
   storedText: '',
   profileData: null,
+  profileStatus: null,
   isLoading: false,
+  canEdit: null,
 };
 
 const profileReducer = (state = defaultState, action) => {
@@ -56,6 +60,20 @@ const profileReducer = (state = defaultState, action) => {
         profileData: action.data,
       };
     }
+    case SET_STATUS: {
+      return {
+        ...state,
+        profileStatus: action.data,
+      };
+    }
+
+    case SET_CAN_EDIT: {
+      return {
+        ...state,
+        canEdit: action.data,
+      };
+    }
+
     case TOGGLE_LOADING:
       return {
         ...state,
@@ -74,6 +92,13 @@ export const post = () => ({ type: POST });
 
 export const setProfile = (data) => ({ type: SET_PROFILE, data });
 
+export const setStatus = (data) => ({ type: SET_STATUS, data });
+
+export const setCanEdit = (data) => ({
+  type: SET_CAN_EDIT,
+  data,
+});
+
 export const toggleLoading = (payload) => ({
   type: TOGGLE_LOADING,
   payload,
@@ -81,10 +106,23 @@ export const toggleLoading = (payload) => ({
 
 export const getProfile = (uid) => (dispatch) => {
   dispatch(toggleLoading(true));
-  if (!uid) uid = 2;
-  userAPI.loadProfile(uid).then((data) => {
+  profileAPI.getProfile(uid).then((data) => {
     dispatch(setProfile(data));
     dispatch(toggleLoading(false));
+  });
+};
+
+export const getStatus = (uid) => (dispatch) => {
+  dispatch(toggleLoading(true));
+  profileAPI.getStatus(uid).then((data) => {
+    dispatch(setStatus(data));
+    dispatch(toggleLoading(false));
+  });
+};
+
+export const updateStatus = (payload) => (dispatch) => {
+  profileAPI.updateStatus(payload).then((result) => {
+    if (result === 0) dispatch(setStatus(payload));
   });
 };
 

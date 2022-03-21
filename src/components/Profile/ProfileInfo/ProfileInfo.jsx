@@ -3,18 +3,18 @@ import s from './ProfileInfo.module.css';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
-import { Description } from './Description/Description';
+import Status from './Status/Status';
 
-const ProfileInfo = ({ profileData, pfp, isEditing, editMode }) => {
+const ProfileInfo = ({
+  profileData,
+  profileStatus,
+  pfp,
+  updateStatus,
+  canEdit,
+}) => {
   let jobInfoParams = {
     lookingForAJob: profileData.lookingForAJob,
     lookingForAJobDescription: profileData.lookingForAJobDescription,
-  };
-
-  let descriptionParams = {
-    isEditing,
-    aboutMe: profileData.aboutMe,
-    editMode,
   };
 
   return (
@@ -30,7 +30,11 @@ const ProfileInfo = ({ profileData, pfp, isEditing, editMode }) => {
 
         <div className={s.details}>
           <div className={s.username}>{profileData.fullName}</div>
-          <Description {...descriptionParams} />
+          <Status
+            status={profileStatus}
+            updateStatus={updateStatus}
+            canEdit={canEdit}
+          />
           <Contacts contacts={profileData.contacts} />
         </div>
       </div>

@@ -1,5 +1,8 @@
+.all {
+    margin-top: -10%;
+}
+
 .descriptionText {
-    margin-top: -1%;
     color: white;
     width: fit-content;
     height: fit-content;
@@ -8,6 +11,8 @@
 }
 
 .descriptionEdit {
+    margin-top: 1%;
+    margin-left: 1%;
     width: fit-content;
     height: fit-content;
 }

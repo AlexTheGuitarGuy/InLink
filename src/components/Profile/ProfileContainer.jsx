@@ -1,54 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getProfile } from '../../redux/profile-reducer';
 import {
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+  getProfile,
+  getStatus,
+  setCanEdit,
+  updateStatus,
+} from '../../redux/profile-reducer';
+import { Navigate, useLocation, useParams } from 'react-router-dom';
 import withAuthRedirect from './../HOC/withAuthRedirect';
 import { compose } from 'redux';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     let location = useLocation();
-    let navigate = useNavigate();
     let params = useParams();
-    return (
-      <Component {...props} router={{ location, navigate, params }} />
-    );
+    return <Component {...props} router={{ location, params }} />;
   }
 
   return ComponentWithRouterProp;
 }
 class ProfileContainer extends React.Component {
-  state = {
-    isEditing: false,
-  };
-
-  editMode = (payload) => {
-    this.setState({ isEditing: payload });
-  };
-
   componentDidMount = () => {
-    this.props.getProfile(this.props.router.params.uid);
+    let uid = this.props.router.params.uid || this.props.uid;
+
+    if (uid === this.props.uid) {
+      this.props.setCanEdit(true);
+    } else {
+      this.props.setCanEdit(false);
+    }
+    this.props.getProfile(uid);
+    this.props.getStatus(uid);
   };
 
   render() {
-    let props = { ...this.props, ...this.state };
+    let props = { ...this.props };
     if (!this.props.isLoggedIn) return <Navigate to="/login" />;
-    return <Profile {...props} editMode={this.editMode} />;
+    return <Profile {...props} />;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     state: state.profilePage,
-    profileData: state.userData.profileData,
     isLoading: state.profilePage.isLoading,
     isLoggedIn: state.auth.isLoggedIn,
+    uid: state.auth.id,
+    canEdit: state.profilePage.canEdit,
   };
 };
 
@@ -57,5 +55,8 @@ export default compose(
   withRouter,
   connect(mapStateToProps, {
     getProfile,
+    getStatus,
+    updateStatus,
+    setCanEdit,
   }),
 )(ProfileContainer);

@@ -30,11 +30,25 @@ export const userAPI = {
       )
       .then((response) => response.data);
   },
+};
 
-  loadProfile: (uid) => {
+export const profileAPI = {
+  getProfile: (uid) => {
     return instance
       .get(`profile/${uid}`)
       .then((response) => response.data);
+  },
+
+  getStatus: (uid) => {
+    return instance
+      .get(`profile/status/${uid}`)
+      .then((response) => response.data);
+  },
+
+  updateStatus: (status) => {
+    return instance
+      .put(`profile/status`, { status })
+      .then((response) => response.data.resultCode);
   },
 };
 
