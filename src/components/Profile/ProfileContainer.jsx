@@ -24,11 +24,8 @@ class ProfileContainer extends React.Component {
   componentDidMount = () => {
     let uid = this.props.router.params.uid || this.props.uid;
 
-    if (uid === this.props.uid) {
-      this.props.setCanEdit(true);
-    } else {
-      this.props.setCanEdit(false);
-    }
+    if (uid === this.props.uid) this.props.setCanEdit(true);
+    else this.props.setCanEdit(false);
     this.props.getProfile(uid);
     this.props.getStatus(uid);
   };
