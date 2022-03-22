@@ -19,6 +19,14 @@ class Status extends Component {
     });
   };
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.status !== prevProps.status) {
+      this.setState({
+        status: this.props.status,
+      });
+    }
+  }
+
   render() {
     return (
       <div className={s.all}>
