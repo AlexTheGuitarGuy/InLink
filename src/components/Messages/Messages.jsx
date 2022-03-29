@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import s from './Messages.module.css';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
@@ -33,7 +33,6 @@ const Messages = (props) => {
             {userDialogElements[i]}
             <SendText
               memoryText={props.memoryText}
-              storeText={props.storeText}
               send={props.send}
               id={i}
             />
@@ -53,13 +52,12 @@ const Messages = (props) => {
           <Route
             exact
             strict
-            path='/'
+            path="/"
             element={
               <>
                 {userDialogElements[0]}
                 <SendText
                   memoryText={props.memoryText}
-                  storeText={props.storeText}
                   send={props.send}
                   id={0}
                 />

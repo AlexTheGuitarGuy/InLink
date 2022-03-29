@@ -1,6 +1,5 @@
 import { profileAPI } from '../api/API';
 
-const STORE_TEXT = 'STORE-TEXT';
 const POST = 'POST';
 const SET_PROFILE = 'SET-PROFILE';
 const SET_STATUS = 'SET-STATUS';
@@ -17,7 +16,6 @@ let defaultState = {
     { id: 2, text: 'Hello', likes: 228 },
     { id: 3, text: 'Welcome to the club, buddy.', likes: 69 },
   ],
-  storedText: '',
   profileData: null,
   profileStatus: null,
   isLoading: false,
@@ -26,25 +24,18 @@ let defaultState = {
 
 const profileReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case STORE_TEXT: {
-      return {
-        ...state,
-        storedText: action.text,
-      };
-    }
     case POST: {
-      if (state.storedText !== '' && state.storedText !== '\n') {
+      if (action.data) {
         return {
           ...state,
           posts: [
             ...state.posts,
             {
               id: state.posts.length + 1,
-              text: state.storedText,
+              text: action.data,
               likes: 0,
             },
           ],
-          storedText: '',
         };
       }
 
@@ -84,11 +75,7 @@ const profileReducer = (state = defaultState, action) => {
   }
 };
 
-export const storeText = (text) => ({
-  type: STORE_TEXT,
-  text,
-});
-export const post = () => ({ type: POST });
+export const post = (data) => ({ type: POST, data });
 
 export const setProfile = (data) => ({ type: SET_PROFILE, data });
 

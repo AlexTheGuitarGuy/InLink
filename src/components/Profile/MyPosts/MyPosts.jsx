@@ -10,11 +10,7 @@ const MyPosts = (props) => {
 
   return (
     <div className={s.all}>
-      <Publish
-        post={props.post}
-        storeText={props.storeText}
-        memoryText={props.memoryText}
-      />
+      <Publish post={props.post} memoryText={props.memoryText} />
       {postElements.reverse()}
     </div>
   );

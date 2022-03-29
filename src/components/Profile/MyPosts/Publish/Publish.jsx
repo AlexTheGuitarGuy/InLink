@@ -1,37 +1,37 @@
 import React from 'react';
 import s from './Publish.module.css';
+import { Field, reduxForm } from 'redux-form';
+
+const PublishForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        className={s.textarea}
+        placeholder={'Type what you think...'}
+        component={'input'}
+        name={'post'}
+      />
+      <div>
+        <button className={s.button}>Publish</button>
+      </div>
+    </form>
+  );
+};
+
+const ReduxPublish = reduxForm({
+  form: 'login',
+})(PublishForm);
 
 const Publish = (props) => {
-  const newPost = React.createRef();
-
-  const post = () => {
-    props.post();
-  };
-
-  const takeText = () => {
-    const text = newPost.current.value;
-    props.storeText(text);
+  const handleSubmit = (e) => {
+    props.post(e.post);
+    e.post = '';
   };
 
   return (
     <div className={s.all}>
       <div className={s.newPost}>New post</div>
-
-      <input
-        className={s.textarea}
-        ref={newPost}
-        value={props.memoryText}
-        onChange={() => takeText()}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter') post();
-        }}
-        placeholder="Type what you think..."
-      />
-      <div>
-        <button onClick={post} className={s.button}>
-          Publish
-        </button>
-      </div>
+      <ReduxPublish {...props} onSubmit={handleSubmit} />
     </div>
   );
 };

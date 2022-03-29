@@ -1,37 +1,35 @@
 import React from 'react';
 import s from './SendText.module.css';
+import { Field, reduxForm } from 'redux-form';
 
-const SendText = (props) => {
-  let newPost = React.createRef();
-
-  let post = () => {
-    props.send(props.id);
-  };
-
-  let takeText = () => {
-    let text = newPost.current.value;
-    props.storeText(text);
-  };
+const SendForm = (props) => {
   return (
-    <div className={s.sendText}>
-      <input
+    <form className={s.sendText} onSubmit={props.handleSubmit}>
+      <Field
         className={s.textArea}
-        ref={newPost}
-        value={props.memoryText}
-        onChange={() => takeText()}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter') post();
-        }}
-        placeholder="Enter your message"
+        placeholder={'Enter your message'}
+        component={'input'}
+        name={'send'}
       />
 
       <div>
-        <button onClick={post} className={s.button}>
-          Send
-        </button>
+        <button className={s.button}>Send</button>
       </div>
-    </div>
+    </form>
   );
+};
+
+const ReduxSendText = reduxForm({
+  form: 'login',
+})(SendForm);
+
+const SendText = (props) => {
+  const handleSubmit = (e) => {
+    props.send(props.id, e.send);
+    e.send = '';
+  };
+
+  return <ReduxSendText {...props} onSubmit={handleSubmit} />;
 };
 
 export default SendText;

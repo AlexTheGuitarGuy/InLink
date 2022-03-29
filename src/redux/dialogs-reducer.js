@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SEND_MESSAGE = 'SEND-MESSAGE';
-const STORE_MESSAGE_TEXT = 'STORE-MESSAGE-TEXT';
 
 const defaultState = {
   users: [
@@ -81,48 +80,37 @@ const defaultState = {
       { id: 4, text: 'babushka', from: 'me' },
     ],
   ],
-  storedText: '',
 };
 
 const dialogsReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case STORE_MESSAGE_TEXT:
-      return {
-        ...state,
-        storedText: action.text,
-      };
     case SEND_MESSAGE:
-      if (state.storedText !== '' && state.storedText !== '\n') {
+      if (action.data) {
         return {
           ...state,
           userMessages: state.userMessages.map((e, i) => {
             if (i === action.to)
               e.push({
                 id: state.userMessages[action.to].length + 1,
-                text: state.storedText,
+                text: action.data,
                 from: 'me',
               });
             return e;
           }),
-          storedText: '',
         };
       }
       return {
         ...state,
-        storedText: '',
       };
     default:
       return state;
   }
 };
 
-export const send = (id) => ({
+export const send = (id, data) => ({
   type: SEND_MESSAGE,
   to: id,
-});
-export const storeText = (text) => ({
-  type: STORE_MESSAGE_TEXT,
-  text,
+  data,
 });
 
 export default dialogsReducer;
