@@ -29,14 +29,14 @@ const Messages = (props) => {
         path={'/' + (i + 1)}
         key={i}
         element={
-          <>
+          <div className={s.dialog}>
             {userDialogElements[i]}
             <SendText
               memoryText={props.memoryText}
               send={props.send}
               id={i}
             />
-          </>
+          </div>
         }
       />
     );
@@ -44,24 +44,24 @@ const Messages = (props) => {
 
   return (
     <div className={s.repartition}>
-      <div className={s.dialogs}>
+      <div className={s.dialogPeople}>
         <Users state={props.state.users} />
       </div>
-      <div className={s.messages}>
+      <div className={s.dialogs}>
         <Routes>
           <Route
             exact
             strict
             path="/"
             element={
-              <>
+              <div className={s.dialog}>
                 {userDialogElements[0]}
                 <SendText
                   memoryText={props.memoryText}
                   send={props.send}
                   id={0}
                 />
-              </>
+              </div>
             }
           />
           {routes}

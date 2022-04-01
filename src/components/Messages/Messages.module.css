@@ -9,16 +9,14 @@
     padding: 3%;
 }
 
-.dialogs {
+.dialogPeople {
     grid-area: d;
     border-right: 1px solid rgb(153, 152, 115);
     height: auto;
 }
 
-.messages {
+.dialogs {
     grid-area: m;
     margin-left: 10%;
     margin-top: 5%;
 }
-
-
