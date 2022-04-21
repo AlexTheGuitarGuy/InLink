@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import Users from './Users';
 import {
-  getUsers,
   follow,
-  unfollow,
-  setPage,
+  getUsers,
   setCurrentPages,
+  setPage,
+  unfollow,
   updateFollowQueue,
-} from './../../redux/users-page-reducer';
+} from '../../redux/users-page-reducer';
 import React from 'react';
-import withAuthRedirect from './../HOC/withAuthRedirect';
+import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
+
 class UsersContainer extends React.Component {
   componentDidMount = () => {
     this.props.getUsers(this.props.page, this.props.pageSize);

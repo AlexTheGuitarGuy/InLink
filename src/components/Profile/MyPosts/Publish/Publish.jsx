@@ -8,7 +8,7 @@ const PublishForm = (props) => {
       <Field
         className={s.textarea}
         placeholder={'Type what you think...'}
-        component={'input'}
+        component={'textarea'}
         name={'post'}
       />
       <div>

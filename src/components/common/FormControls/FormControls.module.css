@@ -1,0 +1,7 @@
+.input.error input {
+    border: 1.5px solid red
+}
+
+.input.error span {
+    color: red
+}

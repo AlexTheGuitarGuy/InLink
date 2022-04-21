@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Users.module.css';
-import Loading from './../common/Loading';
+import Loading from '../common/Loading/Loading';
 import UserItems from './UserItems/UserItems';
 
 const Users = (props) => {

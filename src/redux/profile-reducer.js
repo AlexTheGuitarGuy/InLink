@@ -10,11 +10,15 @@ let defaultState = {
   posts: [
     {
       id: 1,
-      text: 'Hey buddy I think you got the wrong door the leather club is two blocks down!',
-      likes: 420,
+      text: 'I like coding in React!',
+      likes: 333,
     },
-    { id: 2, text: 'Hello', likes: 228 },
-    { id: 3, text: 'Welcome to the club, buddy.', likes: 69 },
+    { id: 2, text: 'I really do', likes: 222 },
+    {
+      id: 3,
+      text: 'Especially when everything is already done on stack overflow',
+      likes: 111,
+    },
   ],
   profileData: null,
   profileStatus: null,

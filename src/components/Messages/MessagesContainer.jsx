@@ -2,7 +2,7 @@ import { send } from '../../redux/dialogs-reducer';
 import { connect } from 'react-redux';
 import Messages from './Messages';
 import React from 'react';
-import withAuthRedirect from './../HOC/withAuthRedirect';
+import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
 
 class MessagesContainer extends React.Component {

@@ -8,7 +8,7 @@ import {
   updateStatus,
 } from '../../redux/profile-reducer';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
-import withAuthRedirect from './../HOC/withAuthRedirect';
+import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
 
 function withRouter(Component) {

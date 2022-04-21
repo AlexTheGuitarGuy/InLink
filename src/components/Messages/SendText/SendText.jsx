@@ -8,7 +8,7 @@ const SendForm = (props) => {
       <Field
         className={s.textArea}
         placeholder={'Enter your message'}
-        component={'input'}
+        component={'textarea'}
         name={'send'}
       />
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { maxLen, required } from '../../utils/validators/validators';
+import { Input } from '../common/FormControls/FormControls';
 
 const LoginForm = (props) => {
   return (
@@ -7,15 +9,17 @@ const LoginForm = (props) => {
       <div>
         <Field
           placeholder={'Login'}
-          component={'input'}
           name={'login'}
+          component={Input}
+          validate={[required, props.maxLen]}
         />
       </div>
       <div>
         <Field
           placeholder={'Password'}
-          component={'input'}
           name={'password'}
+          component={Input}
+          validate={[required, props.maxLen]}
         />
       </div>
       <div>
@@ -38,10 +42,11 @@ const ReduxLogin = reduxForm({
 })(LoginForm);
 
 const Login = () => {
+  const maxLen15 = maxLen(15);
   return (
     <div>
       <h1>Login</h1>
-      <ReduxLogin />
+      <ReduxLogin maxLen={maxLen15} />
     </div>
   );
 };
