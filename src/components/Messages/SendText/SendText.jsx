@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './SendText.module.css';
 import { Field, reduxForm } from 'redux-form';
+import { Textarea } from '../../common/FormControls/FormControls';
 
 const SendForm = (props) => {
   return (
@@ -8,7 +9,7 @@ const SendForm = (props) => {
       <Field
         className={s.textArea}
         placeholder={'Enter your message'}
-        component={'textarea'}
+        component={Textarea}
         name={'send'}
       />
 

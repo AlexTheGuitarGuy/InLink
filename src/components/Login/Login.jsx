@@ -2,14 +2,18 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { maxLen, required } from '../../utils/validators/validators';
 import { Input } from '../common/FormControls/FormControls';
+import { connect } from 'react-redux';
+import { login } from '../../redux/auth-reducer';
+import s from './Login.module.css';
+import { Navigate } from 'react-router-dom';
 
 const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
-          placeholder={'Login'}
-          name={'login'}
+          placeholder={'Email'}
+          name={'email'}
           component={Input}
           validate={[required, props.maxLen]}
         />
@@ -18,6 +22,7 @@ const LoginForm = (props) => {
         <Field
           placeholder={'Password'}
           name={'password'}
+          type={'password'}
           component={Input}
           validate={[required, props.maxLen]}
         />
@@ -33,6 +38,19 @@ const LoginForm = (props) => {
       <div>
         <button> Log in </button>
       </div>
+      {props.captcha ? (
+        <div className={s.captcha}>
+          <img src={props.captcha} alt={'captcha'} />
+          <Field
+            placeholder={'captcha'}
+            name={'captcha'}
+            component={Input}
+            validate={[required, props.maxLen]}
+          />{' '}
+        </div>
+      ) : (
+        <></>
+      )}
     </form>
   );
 };
@@ -41,14 +59,34 @@ const ReduxLogin = reduxForm({
   form: 'login',
 })(LoginForm);
 
-const Login = () => {
-  const maxLen15 = maxLen(15);
+const Login = (props) => {
+  if (props.isLoggedIn) return <Navigate to={'/profile'} />;
+
+  const maxLen40 = maxLen(40);
+
+  const onSubmit = (payload) => {
+    props.login(
+      payload.email,
+      payload.password,
+      payload.rememberMe,
+      payload.captcha,
+    );
+  };
   return (
     <div>
-      <h1>Login</h1>
-      <ReduxLogin maxLen={maxLen15} />
+      <h1 className={s.loginText}>Login</h1>
+      <ReduxLogin
+        maxLen={maxLen40}
+        onSubmit={onSubmit}
+        captcha={props.captcha}
+      />
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn,
+  captcha: state.auth.captchaURL,
+});
+
+export default connect(mapStateToProps, { login })(Login);

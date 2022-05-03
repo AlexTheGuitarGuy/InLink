@@ -1,7 +1,8 @@
-.input.error input {
-    border: 1.5px solid red
+.text.error input {
+    border: 1.5px solid red;
 }
 
-.input.error span {
-    color: red
+.text.error span {
+    color: red;
+    margin-left: 0.5rem;
 }

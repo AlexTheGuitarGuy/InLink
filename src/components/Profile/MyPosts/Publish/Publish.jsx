@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Publish.module.css';
 import { Field, reduxForm } from 'redux-form';
+import { Textarea } from '../../../common/FormControls/FormControls';
 
 const PublishForm = (props) => {
   return (
@@ -8,7 +9,7 @@ const PublishForm = (props) => {
       <Field
         className={s.textarea}
         placeholder={'Type what you think...'}
-        component={'textarea'}
+        component={Textarea}
         name={'post'}
       />
       <div>
