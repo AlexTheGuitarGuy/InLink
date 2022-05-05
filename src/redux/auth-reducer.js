@@ -1,4 +1,5 @@
 import { authAPI } from '../api/API';
+import { stopSubmit } from 'redux-form';
 
 const SET_DATA = 'SET-DATA';
 const SET_CAPTCHA = 'SET_CAPTCHA';
@@ -65,10 +66,14 @@ export const login =
       .then((data) => {
         if (data.resultCode === 0) {
           dispatch(auth());
-        } else if (data.resultCode === 10) {
-          dispatch(getCaptchaURL());
         } else {
-          alert(data.messages[0]);
+          if (data.resultCode === 10) dispatch(getCaptchaURL());
+
+          let message =
+            data.messages[0].length > 0
+              ? data.messages[0]
+              : 'An error has occurred';
+          dispatch(stopSubmit('login', { _error: message }));
         }
       });
   };
@@ -76,7 +81,8 @@ export const login =
 export const logout = () => (dispatch) => {
   authAPI.logout().then((data) => {
     if (data.resultCode === 0) {
-      dispatch(setData(null, null, null, false, null));
+      dispatch(setData(null, null, null, false));
+      dispatch(setCaptcha(null));
     }
   });
 };

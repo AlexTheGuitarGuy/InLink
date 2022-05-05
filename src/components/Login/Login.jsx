@@ -5,12 +5,16 @@ import { Input } from '../common/FormControls/FormControls';
 import { connect } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import s from './Login.module.css';
+import e from '../common/FormControls/FormControls.module.css';
 import { Navigate } from 'react-router-dom';
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <div>
+    <form onSubmit={props.handleSubmit} className={s.form}>
+      {props.error && (
+        <div className={e.summaryError}>{props.error}</div>
+      )}
+      <div className={s.email}>
         <Field
           placeholder={'Email'}
           name={'email'}
@@ -18,7 +22,7 @@ const LoginForm = (props) => {
           validate={[required, props.maxLen]}
         />
       </div>
-      <div>
+      <div className={s.password}>
         <Field
           placeholder={'Password'}
           name={'password'}
@@ -27,16 +31,16 @@ const LoginForm = (props) => {
           validate={[required, props.maxLen]}
         />
       </div>
-      <div>
+      <div className={s.rememberMe}>
         <Field
           type={'checkbox'}
           component={'input'}
           name={'rememberMe'}
         />{' '}
-        remember me
+        <span className={s.loginText}>remember me</span>
       </div>
       <div>
-        <button> Log in </button>
+        <button className={s.loginButton}> Log in </button>
       </div>
       {props.captcha ? (
         <div className={s.captcha}>
@@ -73,7 +77,7 @@ const Login = (props) => {
     );
   };
   return (
-    <div>
+    <div className={s.body}>
       <h1 className={s.loginText}>Login</h1>
       <ReduxLogin
         maxLen={maxLen40}

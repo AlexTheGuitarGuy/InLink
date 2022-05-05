@@ -20,6 +20,7 @@ function withRouter(Component) {
 
   return ComponentWithRouterProp;
 }
+
 class ProfileContainer extends React.Component {
   componentDidMount = () => {
     let uid = this.props.router.params.uid || this.props.uid;

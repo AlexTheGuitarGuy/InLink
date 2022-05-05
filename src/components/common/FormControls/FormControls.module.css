@@ -3,6 +3,24 @@
 }
 
 .text.error span {
-    color: red;
+    border-radius: 0.25rem;
+    color: white;
+    box-sizing: border-box;
+    border: 1px solid red;
+    background: #8d1313;
+    width: fit-content;
+    height: fit-content;
     margin-left: 0.5rem;
+}
+
+.summaryError {
+    border-radius: 0.25rem;
+    padding: 0.1rem 0.5rem;
+    color: white;
+    box-sizing: border-box;
+    border: 1px solid red;
+    background: #8d1313;
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: 0.5rem;
 }
