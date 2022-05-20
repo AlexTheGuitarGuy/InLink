@@ -44,7 +44,7 @@ export const setCaptcha = (URL) => {
 };
 
 export const auth = () => (dispatch) => {
-  authAPI.me().then((data) => {
+  return authAPI.me().then((data) => {
     if (data.resultCode === 0) {
       let { email, id, login } = data.data;
       dispatch(setData(id, login, email, true, null));

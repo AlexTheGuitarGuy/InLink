@@ -4,6 +4,11 @@ import Messages from './Messages';
 import React from 'react';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
+import {
+  getDialogsPage,
+  getStoredText,
+} from '../../redux/dialogs-selector';
+import { getProfileData } from '../../redux/user-selector';
 
 class MessagesContainer extends React.Component {
   render() {
@@ -13,9 +18,9 @@ class MessagesContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    memoryText: state.dialogsPage.storedText,
-    state: state.dialogsPage,
-    profileData: state.userData.profileData,
+    memoryText: getStoredText(state),
+    state: getDialogsPage(state),
+    profileData: getProfileData(state),
   };
 };
 

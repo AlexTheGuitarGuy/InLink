@@ -7,9 +7,15 @@ import {
   setCanEdit,
   updateStatus,
 } from '../../redux/profile-reducer';
-import { Navigate, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
+import {
+  getCanEdit,
+  getIsLoading,
+  getProfilePage,
+} from '../../redux/profile-selector';
+import { getIsLoggedIn, getUID } from '../../redux/auth-selector';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -27,24 +33,24 @@ class ProfileContainer extends React.Component {
 
     if (uid === this.props.uid) this.props.setCanEdit(true);
     else this.props.setCanEdit(false);
+
     this.props.getProfile(uid);
     this.props.getStatus(uid);
   };
 
   render() {
     let props = { ...this.props };
-    if (!this.props.isLoggedIn) return <Navigate to="/login" />;
     return <Profile {...props} />;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    state: state.profilePage,
-    isLoading: state.profilePage.isLoading,
-    isLoggedIn: state.auth.isLoggedIn,
-    uid: state.auth.id,
-    canEdit: state.profilePage.canEdit,
+    state: getProfilePage(state),
+    isLoading: getIsLoading(state),
+    isLoggedIn: getIsLoggedIn(state),
+    uid: getUID(state),
+    canEdit: getCanEdit(state),
   };
 };
 

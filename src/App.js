@@ -11,42 +11,58 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
+import { connect } from 'react-redux';
+import { initializeApp } from './redux/app-reducer';
+import Loading from './components/common/Loading/Loading';
 
-const App = (props) => {
-  return (
-    <div className="app-wrapper">
-      <HeaderContainer />
+class App extends React.Component {
+  componentDidMount() {
+    this.props.initializeApp();
+  }
 
-      <Nav
-        state={props.state.sidebar}
-        friends={props.state.dialogsPage.users}
-      />
+  render() {
+    if (!this.props.isAppInitialized)
+      return <Loading class="mx-auto" />;
 
-      <div className="app-wrapper-content">
-        <div className="app-wrapper-content-formating">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/profile/:uid"
-              element={<ProfileContainer />}
-            />
-            <Route path="/profile" element={<ProfileContainer />} />
+    return (
+      <div className="app-wrapper">
+        <HeaderContainer />
 
-            <Route
-              path="/messages/*"
-              element={<MessagesContainer />}
-            />
+        <Nav
+          state={this.props.state.sidebar}
+          friends={this.props.state.dialogsPage.users}
+        />
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/users" element={<UsersContainer />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/music" element={<Music />} />
-            <Route path="/preferences" element={<Preferences />} />
-          </Routes>
+        <div className="app-wrapper-content">
+          <div className="app-wrapper-content-formating">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/profile/:uid"
+                element={<ProfileContainer />}
+              />
+              <Route path="/profile" element={<ProfileContainer />} />
+
+              <Route
+                path="/messages/*"
+                element={<MessagesContainer />}
+              />
+
+              <Route path="/login" element={<Login />} />
+              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/music" element={<Music />} />
+              <Route path="/preferences" element={<Preferences />} />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default App;
+const mstp = (state) => ({
+  isAppInitialized: state.app.isAppInitialized,
+});
+
+export default connect(mstp, { initializeApp })(App);
