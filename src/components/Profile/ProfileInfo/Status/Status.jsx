@@ -1,57 +1,44 @@
 import s from './Status.module.css';
-import { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
-class Status extends Component {
-  state = {
-    isEditing: false,
-    status: this.props.status,
+const Status = (props) => {
+  const [isEditing, setEditing] = useState(false);
+  const [status, setStatus] = useState(props.status);
+
+  const activateEdit = () => {
+    if (props.canEdit) setEditing(true);
+  };
+  const deactivateEdit = () => {
+    setEditing(false);
+    props.updateStatus(status);
   };
 
-  editMode = (payload) => {
-    this.setState({ isEditing: payload });
-    if (payload === false && payload !== '')
-      this.props.updateStatus(this.state.status);
+  const editLocalStatus = (e) => {
+    setStatus(e.currentTarget.value);
   };
 
-  editLocalStatus = (e) => {
-    this.setState({
-      status: e.currentTarget.value,
-    });
-  };
+  useEffect(() => {
+    setStatus(props.status);
+  }, [props.status]);
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.status !== prevProps.status) {
-      this.setState({
-        status: this.props.status,
-      });
-    }
-  }
-
-  render() {
-    return (
-      <div className={s.all}>
-        {(!this.state.isEditing && (
-          <div
-            className={s.descriptionText}
-            onClick={() => {
-              if (this.props.canEdit) return this.editMode(true);
-            }}
-          >
-            {this.props.status || 'No status'}
-          </div>
-        )) ||
-          (this.state.isEditing && (
-            <input
-              onChange={this.editLocalStatus}
-              className={s.descriptionEdit}
-              autoFocus={true}
-              onBlur={() => this.editMode(false)}
-              defaultValue={this.state.status}
-            />
-          ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={s.all}>
+      {(!isEditing && (
+        <div className={s.descriptionText} onClick={activateEdit}>
+          {props.status || 'No status'}
+        </div>
+      )) ||
+        (isEditing && (
+          <input
+            onChange={editLocalStatus}
+            className={s.descriptionEdit}
+            autoFocus={true}
+            onBlur={deactivateEdit}
+            defaultValue={status}
+          />
+        ))}
+    </div>
+  );
+};
 
 export default Status;

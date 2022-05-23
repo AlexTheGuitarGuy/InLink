@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Nav from './components/Nav/Nav';
 import { Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
@@ -15,51 +15,48 @@ import { connect } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Loading from './components/common/Loading/Loading';
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.initializeApp();
-  }
+const App = (props) => {
+  useEffect(() => {
+    props.initializeApp();
+  }, [props.isAppInitialized]);
 
-  render() {
-    if (!this.props.isAppInitialized)
-      return <Loading class="mx-auto" />;
+  if (!props.isAppInitialized) return <Loading class="mx-auto" />;
 
-    return (
-      <div className="app-wrapper">
-        <HeaderContainer />
+  return (
+    <div className="app-wrapper">
+      <HeaderContainer />
 
-        <Nav
-          state={this.props.state.sidebar}
-          friends={this.props.state.dialogsPage.users}
-        />
+      <Nav
+        state={props.state.sidebar}
+        friends={props.state.dialogsPage.users}
+      />
 
-        <div className="app-wrapper-content">
-          <div className="app-wrapper-content-formating">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="/profile/:uid"
-                element={<ProfileContainer />}
-              />
-              <Route path="/profile" element={<ProfileContainer />} />
+      <div className="app-wrapper-content">
+        <div className="app-wrapper-content-formating">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/profile/:uid"
+              element={<ProfileContainer />}
+            />
+            <Route path="/profile" element={<ProfileContainer />} />
 
-              <Route
-                path="/messages/*"
-                element={<MessagesContainer />}
-              />
+            <Route
+              path="/messages/*"
+              element={<MessagesContainer />}
+            />
 
-              <Route path="/login" element={<Login />} />
-              <Route path="/users" element={<UsersContainer />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/music" element={<Music />} />
-              <Route path="/preferences" element={<Preferences />} />
-            </Routes>
-          </div>
+            <Route path="/login" element={<Login />} />
+            <Route path="/users" element={<UsersContainer />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/preferences" element={<Preferences />} />
+          </Routes>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mstp = (state) => ({
   isAppInitialized: state.app.isAppInitialized,

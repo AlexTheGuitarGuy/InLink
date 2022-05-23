@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import {
@@ -27,22 +27,22 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 
-class ProfileContainer extends React.Component {
-  componentDidMount = () => {
-    let uid = this.props.router.params.uid || this.props.uid;
+const ProfileContainer = (props) => {
+  let loggedUser = props.uid;
+  let currentUserPage = props.router.params.uid;
 
-    if (uid === this.props.uid) this.props.setCanEdit(true);
-    else this.props.setCanEdit(false);
+  useEffect(() => {
+    let user = currentUserPage || loggedUser;
 
-    this.props.getProfile(uid);
-    this.props.getStatus(uid);
-  };
+    if (user === loggedUser) props.setCanEdit(true);
+    else props.setCanEdit(false);
 
-  render() {
-    let props = { ...this.props };
-    return <Profile {...props} />;
-  }
-}
+    props.getProfile(user);
+    props.getStatus(user);
+  }, [loggedUser, currentUserPage]);
+
+  return <Profile {...props} />;
+};
 
 const mapStateToProps = (state) => {
   return {

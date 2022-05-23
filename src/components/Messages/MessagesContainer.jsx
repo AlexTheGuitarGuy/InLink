@@ -10,11 +10,9 @@ import {
 } from '../../redux/dialogs-selector';
 import { getProfileData } from '../../redux/user-selector';
 
-class MessagesContainer extends React.Component {
-  render() {
-    return <Messages {...this.props} />;
-  }
-}
+const MessagesContainer = (props) => {
+  return <Messages {...props} />;
+};
 
 let mapStateToProps = (state) => {
   return {

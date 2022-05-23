@@ -7,11 +7,9 @@ import {
   getStoredText,
 } from '../../../redux/profile-selector';
 
-class MyPostsContainer extends React.Component {
-  render() {
-    return <MyPosts {...this.props} />;
-  }
-}
+const MyPostsContainer = (props) => {
+  return <MyPosts {...props} />;
+};
 
 const mapStateToProps = (state) => {
   return {
