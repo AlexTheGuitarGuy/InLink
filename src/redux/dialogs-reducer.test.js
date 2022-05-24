@@ -1,10 +1,10 @@
-import React from 'react';
+import dialogsReducer, {
+  deleteMessage,
+  editMessage,
+  sendMessage,
+} from './dialogs-reducer';
 
-const SEND_MESSAGE = 'SEND_MESSAGE';
-const DELETE_MESSAGE = 'DELETE_MESSAGE';
-const EDIT_MESSAGE = 'EDIT_MESSAGE';
-
-const defaultState = {
+const state = {
   users: [
     {
       id: 1,
@@ -35,7 +35,6 @@ const defaultState = {
       ),
     },
   ],
-
   userMessages: [
     [
       { id: 1, text: 'Woah! Nice website :)', from: 'them' },
@@ -85,71 +84,46 @@ const defaultState = {
   ],
 };
 
-const dialogsReducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case SEND_MESSAGE:
-      if (action.data) {
-        return {
-          ...state,
-          userMessages: state.userMessages.map((e, i) => {
-            if (i === action.to)
-              e.push({
-                id: state.userMessages[action.to].length + 1,
-                text: action.data,
-                from: 'me',
-              });
-            return e;
-          }),
-        };
-      }
-      return {
-        ...state,
-      };
+it('should increment userMessages[0] array length', () => {
+  let action = sendMessage(
+    0,
+    'Hello fellow human being, I am Mark Zuckerberg',
+  );
 
-    case DELETE_MESSAGE:
-      return {
-        ...state,
-        userMessages: state.userMessages.map((e, i) => {
-          if (i === action.userId)
-            return e.filter((m) => m.id !== action.messageId);
-          return e;
-        }),
-      };
+  let newState = dialogsReducer(state, action);
 
-    case EDIT_MESSAGE:
-      return {
-        ...state,
-        userMessages: state.userMessages.map((e, i) => {
-          if (i === action.userId)
-            return e.map((m) => {
-              if (m.id === action.messageId) m.text = action.data;
-              return m;
-            });
-          return e;
-        }),
-      };
-    default:
-      return state;
-  }
-};
-
-export const sendMessage = (id, data) => ({
-  type: SEND_MESSAGE,
-  to: id,
-  data,
+  expect(newState.userMessages[0].length).toBe(4);
 });
 
-export const deleteMessage = (userId, messageId) => ({
-  type: DELETE_MESSAGE,
-  userId,
-  messageId,
+it('should add message "Hello fellow human being, I am Mark Zuckerberg" to userMessages[0] array', () => {
+  let action = sendMessage(
+    0,
+    'Hello fellow human being, I am Mark Zuckerberg',
+  );
+
+  let newState = dialogsReducer(state, action);
+
+  expect(newState.userMessages[0][3].text).toBe(
+    'Hello fellow human being, I am Mark Zuckerberg',
+  );
 });
 
-export const editMessage = (userId, messageId, data) => ({
-  type: EDIT_MESSAGE,
-  userId,
-  messageId,
-  data,
+it('should delete element with id 2 from userMessages[0] array', () => {
+  let action = deleteMessage(0, 2);
+
+  let newState = dialogsReducer(state, action);
+
+  expect(newState.userMessages[0].find((e) => e.id === 2)).toBe(
+    undefined,
+  );
 });
 
-export default dialogsReducer;
+it('should edit element with id 2 from userMessages[0] array to be "Arigatou gozaimasu"', () => {
+  let action = editMessage(0, 2, 'Arigatou gozaimasu');
+
+  let newState = dialogsReducer(state, action);
+
+  expect(newState.userMessages[0].find((e) => e.id === 2).text).toBe(
+    'Arigatou gozaimasu',
+  );
+});

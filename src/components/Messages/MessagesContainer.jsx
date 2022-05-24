@@ -1,4 +1,4 @@
-import { send } from '../../redux/dialogs-reducer';
+import { sendMessage } from '../../redux/dialogs-reducer';
 import { connect } from 'react-redux';
 import Messages from './Messages';
 import React from 'react';
@@ -25,6 +25,6 @@ let mapStateToProps = (state) => {
 export default compose(
   withAuthRedirect,
   connect(mapStateToProps, {
-    send,
+    send: sendMessage,
   }),
 )(MessagesContainer);

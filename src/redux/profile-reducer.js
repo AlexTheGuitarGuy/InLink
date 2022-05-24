@@ -1,10 +1,12 @@
 import { profileAPI } from '../api/API';
 
 const POST = 'POST';
-const SET_PROFILE = 'SET-PROFILE';
-const SET_STATUS = 'SET-STATUS';
-const SET_CAN_EDIT = 'SET-CAN-EDIT';
-const TOGGLE_LOADING = 'TOGGLE-LOADING';
+const SET_PROFILE = 'SET_PROFILE';
+const SET_STATUS = 'SET_STATUS';
+const SET_CAN_EDIT = 'SET_CAN_EDIT';
+const TOGGLE_LOADING = 'TOGGLE_LOADING';
+const DELETE_POST = 'DELETE_POST';
+const EDIT_POST = 'EDIT_POST';
 
 let defaultState = {
   posts: [
@@ -74,12 +76,35 @@ const profileReducer = (state = defaultState, action) => {
         ...state,
         isLoading: action.payload,
       };
+
+    case DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((p) => p.id !== action.id),
+      };
+
+    case EDIT_POST:
+      return {
+        ...state,
+        posts: state.posts.map((p) => {
+          if (p.id === action.id) p.text = action.data;
+          return p;
+        }),
+      };
     default:
       return state;
   }
 };
 
 export const post = (data) => ({ type: POST, data });
+
+export const deletePost = (id) => ({ type: DELETE_POST, id });
+
+export const editPost = (id, data) => ({
+  type: EDIT_POST,
+  id,
+  data,
+});
 
 export const setProfile = (data) => ({ type: SET_PROFILE, data });
 
