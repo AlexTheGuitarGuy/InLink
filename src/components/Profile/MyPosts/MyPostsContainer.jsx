@@ -6,6 +6,7 @@ import {
   getPosts,
   getStoredText,
 } from '../../../redux/profile-selector';
+import { compose } from 'redux';
 
 const MyPostsContainer = (props) => {
   return <MyPosts {...props} />;
@@ -18,6 +19,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  post,
-})(MyPostsContainer);
+export default compose(
+  connect(mapStateToProps, {
+    post,
+  }),
+  React.memo,
+)(MyPostsContainer);

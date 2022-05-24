@@ -40,7 +40,8 @@ const UserItems = ({ users, followQueue, follow, unfollow }) => {
       </div>
     );
   });
+
   return <div>{mappedUsers}</div>;
 };
 
-export default UserItems;
+export default React.memo(UserItems);

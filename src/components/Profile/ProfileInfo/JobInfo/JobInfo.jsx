@@ -1,4 +1,5 @@
 import s from './JobInfo.module.css';
+import React from 'react';
 
 const JobInfo = ({ lookingForAJob, lookingForAJobDescription }) => {
   return (

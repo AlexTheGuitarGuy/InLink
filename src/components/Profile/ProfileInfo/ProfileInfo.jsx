@@ -4,6 +4,7 @@ import placeholder from '../../../assets/pfps/placeholder.jpg';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
 import Status from './Status/Status';
+import React from 'react';
 
 const ProfileInfo = ({
   profileData,
@@ -42,4 +43,4 @@ const ProfileInfo = ({
   );
 };
 
-export default ProfileInfo;
+export default React.memo(ProfileInfo);

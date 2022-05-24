@@ -1,4 +1,5 @@
 import s from './Contacts.module.css';
+import React from 'react';
 
 const Contacts = ({ contacts }) => {
   let redirect = (link) => {
