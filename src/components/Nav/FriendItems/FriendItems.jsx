@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './FriendItems.module.css';
 
-const FriendItems = (props) => {
-  let friendList = props.friends.map((e, i) => {
+const FriendItems = ({ friends }) => {
+  let friendList = friends.map((e, i) => {
     if (i < 5) {
       return (
         <div className={s.friendItem} key={e.id}>

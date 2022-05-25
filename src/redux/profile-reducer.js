@@ -1,12 +1,13 @@
 import { profileAPI } from '../api/API';
+import { updateObjInArr } from '../utils/object-helpers';
 
-const POST = 'POST';
-const SET_PROFILE = 'SET_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const SET_CAN_EDIT = 'SET_CAN_EDIT';
-const TOGGLE_LOADING = 'TOGGLE_LOADING';
-const DELETE_POST = 'DELETE_POST';
-const EDIT_POST = 'EDIT_POST';
+const POST = 'GACHI_FINDER/PROFILE_REDUCER/POST';
+const SET_PROFILE = 'GACHI_FINDER/PROFILE_REDUCER/SET_PROFILE';
+const SET_STATUS = 'GACHI_FINDER/PROFILE_REDUCER/SET_STATUS';
+const SET_CAN_EDIT = 'GACHI_FINDER/PROFILE_REDUCER/SET_CAN_EDIT';
+const TOGGLE_LOADING = 'GACHI_FINDER/PROFILE_REDUCER/TOGGLE_LOADING';
+const DELETE_POST = 'GACHI_FINDER/PROFILE_REDUCER/DELETE_POST';
+const EDIT_POST = 'GACHI_FINDER/PROFILE_REDUCER/EDIT_POST';
 
 let defaultState = {
   posts: [
@@ -86,9 +87,8 @@ const profileReducer = (state = defaultState, action) => {
     case EDIT_POST:
       return {
         ...state,
-        posts: state.posts.map((p) => {
-          if (p.id === action.id) p.text = action.data;
-          return p;
+        posts: updateObjInArr(state.posts, 'id', action.id, {
+          text: action.data,
         }),
       };
     default:
@@ -120,26 +120,29 @@ export const toggleLoading = (payload) => ({
   payload,
 });
 
-export const getProfile = (uid) => (dispatch) => {
-  dispatch(toggleLoading(true));
-  profileAPI.getProfile(uid).then((data) => {
+export const getProfile = (uid) => {
+  return async (dispatch) => {
+    dispatch(toggleLoading(true));
+    const data = await profileAPI.getProfile(uid);
     dispatch(setProfile(data));
     dispatch(toggleLoading(false));
-  });
+  };
 };
 
-export const getStatus = (uid) => (dispatch) => {
-  dispatch(toggleLoading(true));
-  profileAPI.getStatus(uid).then((data) => {
+export const getStatus = (uid) => {
+  return async (dispatch) => {
+    dispatch(toggleLoading(true));
+    const data = await profileAPI.getStatus(uid);
     dispatch(setStatus(data));
     dispatch(toggleLoading(false));
-  });
+  };
 };
 
-export const updateStatus = (payload) => (dispatch) => {
-  profileAPI.updateStatus(payload).then((result) => {
+export const updateStatus = (payload) => {
+  return async (dispatch) => {
+    const result = await profileAPI.updateStatus(payload);
     if (result === 0) dispatch(setStatus(payload));
-  });
+  };
 };
 
 export default profileReducer;

@@ -1,12 +1,17 @@
 import { userAPI } from '../api/API';
+import { updateObjInArr } from '../utils/object-helpers';
 
-const TOGGLE_FOLLOW_STATUS = 'CHANGE-FOLLOW-STATUS';
-const SET_USERS = 'SET-USERS';
-const SET_PAGE = 'SET-PAGE';
-const SET_USERS_NB = 'SET-USERS-NB';
-const SET_CURRENT_PAGES = 'SET-CURRENT-PAGES';
-const TOGGLE_LOADING = 'TOGGLE-LOADING';
-const UPDATE_FOLLOW_QUEUE = 'UPDATE-FOLLOW-QUEUE';
+const TOGGLE_FOLLOW_STATUS =
+  'GACHI_FINDER/USERS_PAGE_REDUCER/CHANGE_FOLLOW_STATUS';
+const SET_USERS = 'GACHI_FINDER/USERS_PAGE_REDUCER/SET_USERS';
+const SET_PAGE = 'GACHI_FINDER/USERS_PAGE_REDUCER/SET_PAGE';
+const SET_USERS_NB = 'GACHI_FINDER/USERS_PAGE_REDUCER/SET_USERS_NB';
+const SET_CURRENT_PAGES =
+  'GACHI_FINDER/USERS_PAGE_REDUCER/SET_CURRENT_PAGES';
+const TOGGLE_LOADING =
+  'GACHI_FINDER/USERS_PAGE_REDUCER/TOGGLE_LOADING';
+const UPDATE_FOLLOW_QUEUE =
+  'GACHI_FINDER/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE';
 
 let defaultState = {
   users: [
@@ -78,11 +83,8 @@ const usersPageReducer = (state = defaultState, action) => {
     case TOGGLE_FOLLOW_STATUS:
       return {
         ...state,
-        users: state.users.map((e) => {
-          if (e.id === action.id) {
-            e.followed = action.payload;
-          }
-          return e;
+        users: updateObjInArr(state.users, 'id', action.id, {
+          followed: action.payload,
         }),
       };
     case SET_USERS:
@@ -152,33 +154,40 @@ export const updateFollowQueue = (id) => ({
   id,
 });
 
-export const getUsers = (page, pageSize) => (dispatch) => {
-  dispatch(toggleLoading(true));
-  userAPI.getUsers(page, pageSize).then((data) => {
+export const requestUsers = (page, pageSize) => {
+  return async (dispatch) => {
+    dispatch(toggleLoading(true));
+
+    const data = await userAPI.getUsers(page, pageSize);
+
     dispatch(setUsers(data.items));
     dispatch(setTotalUsers(data.totalCount));
     dispatch(toggleLoading(false));
-  });
+  };
 };
 
-export const follow = (id) => (dispatch) => {
-  dispatch(updateFollowQueue(id));
-  userAPI.follow(id).then((data) => {
+export const followUnfollowFlow = (id, request, followStatus) => {
+  return async (dispatch) => {
+    dispatch(updateFollowQueue(id));
+    const data = await request(id);
+
     if (data.resultCode === 0) {
-      dispatch(toggleFollowStatus(id, true));
+      dispatch(toggleFollowStatus(id, followStatus));
     }
     dispatch(updateFollowQueue(id));
-  });
+  };
 };
 
-export const unfollow = (id) => (dispatch) => {
-  dispatch(updateFollowQueue(id));
-  userAPI.unfollow(id).then((data) => {
-    if (data.resultCode === 0) {
-      dispatch(toggleFollowStatus(id, false));
-    }
-    dispatch(updateFollowQueue(id));
-  });
+export const follow = (id) => {
+  return async (dispatch) => {
+    dispatch(followUnfollowFlow(id, userAPI.follow, true));
+  };
+};
+
+export const unfollow = (id) => {
+  return async (dispatch) => {
+    dispatch(followUnfollowFlow(id, userAPI.unfollow, false));
+  };
 };
 
 export default usersPageReducer;

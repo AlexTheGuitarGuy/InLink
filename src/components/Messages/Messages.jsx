@@ -5,16 +5,21 @@ import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
 import SendText from './SendText/SendText';
 
-const Messages = (props) => {
+const Messages = ({
+  state: { userMessages, users },
+  profileData,
+  memoryText,
+  send,
+}) => {
   const userDialogElements = [];
-  for (let i = 0; i < props.state.userMessages.length; i++) {
-    userDialogElements[i] = props.state.userMessages[i].map((e) => {
+  for (let i = 0; i < userMessages.length; i++) {
+    userDialogElements[i] = userMessages[i].map((e) => {
       return (
         <div key={e.id}>
           <UserMessage
             message={e}
-            theirPfp={props.state.users[i].pfp}
-            myPfp={props.profileData.pfp}
+            theirPfp={users[i].pfp}
+            myPfp={profileData.pfp}
           />
         </div>
       );
@@ -31,11 +36,7 @@ const Messages = (props) => {
         element={
           <div className={s.dialog}>
             {userDialogElements[i]}
-            <SendText
-              memoryText={props.memoryText}
-              send={props.send}
-              id={i}
-            />
+            <SendText memoryText={memoryText} send={send} id={i} />
           </div>
         }
       />
@@ -45,7 +46,7 @@ const Messages = (props) => {
   return (
     <div className={s.repartition}>
       <div className={s.dialogPeople}>
-        <Users state={props.state.users} />
+        <Users users={users} />
       </div>
       <div className={s.dialogs}>
         <Routes>
@@ -57,8 +58,8 @@ const Messages = (props) => {
               <div className={s.dialog}>
                 {userDialogElements[0]}
                 <SendText
-                  memoryText={props.memoryText}
-                  send={props.send}
+                  memoryText={memoryText}
+                  send={send}
                   id={0}
                 />
               </div>

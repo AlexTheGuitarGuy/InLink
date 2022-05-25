@@ -1,0 +1,9 @@
+.chosenPage {
+  font-weight: bold;
+}
+
+.pages {
+  color: white;
+  cursor: pointer;
+  font-size: 135%;
+}

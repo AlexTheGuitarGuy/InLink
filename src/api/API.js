@@ -9,76 +9,80 @@ const instance = axios.create({
 });
 
 export const userAPI = {
-  getUsers: (page = 1, pageSize = 10) => {
-    return instance
-      .get(`users?page=${page}&count=${pageSize}`)
-      .then((response) => response.data);
+  getUsers: async (page = 1, pageSize = 10) => {
+    const response = await instance.get(
+      `users?page=${page}&count=${pageSize}`,
+    );
+
+    return response.data;
   },
 
-  unfollow: (id) => {
-    return instance
-      .delete(
-        `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-      )
-      .then((response) => response.data);
+  unfollow: async (id) => {
+    const response = await instance.delete(
+      `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+    );
+
+    return response.data;
   },
 
-  follow: (id) => {
-    return instance
-      .post(
-        `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
-      )
-      .then((response) => response.data);
+  follow: async (id) => {
+    const response = await instance.post(
+      `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
+    );
+
+    return response.data;
   },
 };
 
 export const profileAPI = {
-  getProfile: (uid) => {
-    return instance
-      .get(`profile/${uid}`)
-      .then((response) => response.data);
+  getProfile: async (uid) => {
+    const response = await instance.get(`profile/${uid}`);
+
+    return response.data;
   },
 
-  getStatus: (uid) => {
-    return instance
-      .get(`profile/status/${uid}`)
-      .then((response) => response.data);
+  getStatus: async (uid) => {
+    const response = await instance.get(`profile/status/${uid}`);
+
+    return response.data;
   },
 
-  updateStatus: (status) => {
-    return instance
-      .put(`profile/status`, { status })
-      .then((response) => response.data.resultCode);
+  updateStatus: async (status) => {
+    const response = await instance.put(`profile/status`, { status });
+
+    return response.data.resultCode;
   },
 };
 
 export const authAPI = {
-  me: () => {
-    return instance
-      .get('https://social-network.samuraijs.com/api/1.0/auth/me')
-      .then((response) => response.data);
+  me: async () => {
+    const response = await instance.get(
+      'https://social-network.samuraijs.com/api/1.0/auth/me',
+    );
+
+    return response.data;
   },
 
-  login: (email, password, rememberMe, captcha) => {
-    return instance
-      .post(`auth/login`, {
-        email,
-        password,
-        rememberMe,
-        captcha,
-      })
-      .then((response) => response.data);
+  login: async (email, password, rememberMe, captcha) => {
+    const response = await instance.post(`auth/login`, {
+      email,
+      password,
+      rememberMe,
+      captcha,
+    });
+
+    return response.data;
   },
 
-  logout: () => {
-    return instance
-      .delete(`auth/login`)
-      .then((response) => response.data);
+  logout: async () => {
+    const response = await instance.delete(`auth/login`);
+
+    return response.data;
   },
 
-  getCaptchaURL: () => {
-    return instance
-      .get(`/security/get-captcha-url`)
-      .then((response) => response.data);
+  getCaptchaURL: async () => {
+    const response = await instance.get(`/security/get-captcha-url`);
+
+    return response.data;
   },
 };

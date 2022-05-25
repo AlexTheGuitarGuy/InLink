@@ -7,17 +7,17 @@ import Status from './Status/Status';
 import React from 'react';
 
 const ProfileInfo = ({
-  profileData,
+  profileData: {
+    lookingForAJob,
+    lookingForAJobDescription,
+    fullName,
+    contacts,
+  },
   profileStatus,
   pfp,
   updateStatus,
   canEdit,
 }) => {
-  let jobInfoParams = {
-    lookingForAJob: profileData.lookingForAJob,
-    lookingForAJobDescription: profileData.lookingForAJobDescription,
-  };
-
   return (
     <div>
       <img src={banner} alt="banner" className={s.banner} />
@@ -27,16 +27,19 @@ const ProfileInfo = ({
           <img src={pfp || placeholder} alt={'pfp'} />
         </div>
 
-        <JobInfo {...jobInfoParams} />
+        <JobInfo
+          lookingForAJob={lookingForAJob}
+          lookingForAJobDescription={lookingForAJobDescription}
+        />
 
         <div className={s.details}>
-          <div className={s.username}>{profileData.fullName}</div>
+          <div className={s.username}>{fullName}</div>
           <Status
             status={profileStatus}
             updateStatus={updateStatus}
             canEdit={canEdit}
           />
-          <Contacts contacts={profileData.contacts} />
+          <Contacts contacts={contacts} />
         </div>
       </div>
     </div>

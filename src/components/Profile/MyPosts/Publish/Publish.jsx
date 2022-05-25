@@ -3,9 +3,9 @@ import s from './Publish.module.css';
 import { Field, reduxForm } from 'redux-form';
 import { Textarea } from '../../../common/FormControls/FormControls';
 
-const PublishForm = (props) => {
+const PublishForm = ({ handleSubmit }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field
         className={s.textarea}
         placeholder={'Type what you think...'}
@@ -23,9 +23,9 @@ const ReduxPublish = reduxForm({
   form: 'login',
 })(PublishForm);
 
-const Publish = (props) => {
+const Publish = ({ post, ...props }) => {
   const handleSubmit = (e) => {
-    props.post(e.post);
+    post(e.post);
     e.post = '';
   };
 

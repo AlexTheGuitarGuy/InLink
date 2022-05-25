@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import s from './Nav.module.css';
 import FriendItems from './FriendItems/FriendItems';
 
-const Nav = (props) => {
-  let navElements = props.state.navItems.map((e) => {
+const Nav = ({ state, friends }) => {
+  let navElements = state.navItems.map((e) => {
     return (
       <div key={e.id} className={s.navText}>
         <NavLink
@@ -23,7 +23,7 @@ const Nav = (props) => {
     <nav className={s.nav}>
       {navElements}
       <div>
-        <FriendItems friends={props.friends} />
+        <FriendItems friends={friends} />
       </div>
     </nav>
   );

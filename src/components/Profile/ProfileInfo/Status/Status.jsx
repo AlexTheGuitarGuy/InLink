@@ -1,16 +1,16 @@
 import s from './Status.module.css';
 import React, { useEffect, useState } from 'react';
 
-const Status = (props) => {
+const Status = ({ canEdit, updateStatus, status }) => {
   const [isEditing, setEditing] = useState(false);
-  const [status, setStatus] = useState(props.status);
+  const [localStatus, setStatus] = useState(status);
 
   const activateEdit = () => {
-    if (props.canEdit) setEditing(true);
+    if (canEdit) setEditing(true);
   };
   const deactivateEdit = () => {
     setEditing(false);
-    props.updateStatus(status);
+    updateStatus(localStatus);
   };
 
   const editLocalStatus = (e) => {
@@ -18,14 +18,14 @@ const Status = (props) => {
   };
 
   useEffect(() => {
-    setStatus(props.status);
-  }, [props.status]);
+    setStatus(status);
+  }, [status]);
 
   return (
     <div className={s.all}>
       {(!isEditing && (
         <div className={s.descriptionText} onClick={activateEdit}>
-          {props.status || 'No status'}
+          {status || 'No status'}
         </div>
       )) ||
         (isEditing && (
@@ -34,7 +34,7 @@ const Status = (props) => {
             className={s.descriptionEdit}
             autoFocus={true}
             onBlur={deactivateEdit}
-            defaultValue={status}
+            defaultValue={localStatus}
           />
         ))}
     </div>

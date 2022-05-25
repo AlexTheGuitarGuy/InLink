@@ -3,9 +3,9 @@ import s from './SendText.module.css';
 import { Field, reduxForm } from 'redux-form';
 import { Textarea } from '../../common/FormControls/FormControls';
 
-const SendForm = (props) => {
+const SendForm = ({ handleSubmit }) => {
   return (
-    <form className={s.sendText} onSubmit={props.handleSubmit}>
+    <form className={s.sendText} onSubmit={handleSubmit}>
       <Field
         className={s.textArea}
         placeholder={'Enter your message'}
@@ -24,13 +24,13 @@ const ReduxSendText = reduxForm({
   form: 'login',
 })(SendForm);
 
-const SendText = (props) => {
+const SendText = ({ send, id }) => {
   const handleSubmit = (e) => {
-    props.send(props.id, e.send);
+    send(id, e.send);
     e.send = '';
   };
 
-  return <ReduxSendText {...props} onSubmit={handleSubmit} />;
+  return <ReduxSendText onSubmit={handleSubmit} />;
 };
 
 export default SendText;

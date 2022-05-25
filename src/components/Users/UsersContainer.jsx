@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Users from './Users';
 import {
   follow,
-  getUsers,
+  requestUsers,
   setCurrentPages,
   setPage,
   unfollow,
@@ -16,40 +16,54 @@ import {
   getPage,
   getPageSize,
   getTotalUsers,
-  getUsersPage,
+  getUsers,
 } from '../../redux/users-page-selector';
 
-const UsersContainer = (props) => {
+const UsersContainer = ({
+  users,
+  page,
+  pageSize,
+  totalUsers,
+  currentPagesBeginning,
+  isLoading,
+  followQueue,
+  requestUsers,
+  follow,
+  unfollow,
+  setPage,
+  setCurrentPages,
+  updateFollowQueue,
+}) => {
   const changePage = (page) => {
-    props.getUsers(page, props.pageSize);
-    props.setPage(page);
+    requestUsers(page, pageSize);
+    setPage(page);
   };
 
   useEffect(() => {
-    props.getUsers(props.page, props.pageSize);
-  }, [props.page, props.pageSize]);
+    requestUsers(page, pageSize);
+  }, [page, pageSize]);
 
   return (
     <Users
-      state={props.state}
-      totalUsers={props.totalUsers}
-      pageSize={props.pageSize}
+      users={users}
+      totalUsers={totalUsers}
+      pageSize={pageSize}
       changePage={changePage}
-      page={props.page}
-      currentPagesBeginning={props.currentPagesBeginning}
-      setCurrentPages={props.setCurrentPages}
-      isLoading={props.isLoading}
-      followQueue={props.followQueue}
-      updateFollowQueue={props.updateFollowQueue}
-      follow={props.follow}
-      unfollow={props.unfollow}
+      page={page}
+      currentPagesBeginning={currentPagesBeginning}
+      setCurrentPages={setCurrentPages}
+      isLoading={isLoading}
+      followQueue={followQueue}
+      updateFollowQueue={updateFollowQueue}
+      follow={follow}
+      unfollow={unfollow}
     />
   );
 };
 
 let mapStateToProps = (state) => {
   return {
-    state: getUsersPage(state),
+    users: getUsers(state),
     page: getPage(state),
     pageSize: getPageSize(state),
     totalUsers: getTotalUsers(state),
@@ -60,7 +74,7 @@ let mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  getUsers,
+  requestUsers,
   follow,
   unfollow,
   setPage,

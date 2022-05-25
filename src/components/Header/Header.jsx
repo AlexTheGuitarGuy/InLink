@@ -5,17 +5,13 @@ import { NavLink } from 'react-router-dom';
 import { logout } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
 
-const Header = (props) => {
-  const logout = () => {
-    props.logout();
-  };
-
+const Header = ({ logout, login, isLoggedIn }) => {
   return (
     <header className={s.header}>
       <div className={s.login}>
-        {props.isLoggedIn ? (
+        {isLoggedIn ? (
           <div>
-            <span className={s.username}>{props.login}</span>
+            <span className={s.username}>{login}</span>
             <div>
               <button onClick={logout} className={s.logout}>
                 Log out

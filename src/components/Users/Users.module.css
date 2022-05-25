@@ -1,17 +1,3 @@
-.chosenPage {
-  font-weight: bold;
-}
-
-.page {
-  font-size: 100%;
-}
-
-.pages {
-  color: white;
-  cursor: pointer;
-  font-size: 135%;
-}
-
 .loadImg {
   width: 15%;
   display: block;

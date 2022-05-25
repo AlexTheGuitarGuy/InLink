@@ -1,5 +1,5 @@
-export const getUsersPage = (state) => {
-  return state.usersPage;
+export const getUsers = (state) => {
+  return state.usersPage.users;
 };
 
 export const getPage = (state) => {

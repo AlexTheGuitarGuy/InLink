@@ -2,8 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
 
-const Users = (props) => {
-  let userElements = props.state.map((e) => {
+const Users = ({ users }) => {
+  let userElements = users.map((e) => {
     return (
       <div className={s.dialogUser} key={e.id}>
         <NavLink to={'/messages/' + e.id} className={s.pfp}>

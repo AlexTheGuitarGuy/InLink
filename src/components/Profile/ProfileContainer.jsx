@@ -15,7 +15,7 @@ import {
   getIsLoading,
   getProfilePage,
 } from '../../redux/profile-selector';
-import { getIsLoggedIn, getUID } from '../../redux/auth-selector';
+import { getUID } from '../../redux/auth-selector';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -27,18 +27,25 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 
-const ProfileContainer = (props) => {
-  let loggedUser = props.uid;
-  let currentUserPage = props.router.params.uid;
+const ProfileContainer = ({
+  uid,
+  router,
+  setCanEdit,
+  getProfile,
+  getStatus,
+  ...props
+}) => {
+  let loggedUser = uid;
+  let currentUserPage = router.params.uid;
 
   useEffect(() => {
     let user = currentUserPage || loggedUser;
 
-    if (user === loggedUser) props.setCanEdit(true);
-    else props.setCanEdit(false);
+    if (user === loggedUser) setCanEdit(true);
+    else setCanEdit(false);
 
-    props.getProfile(user);
-    props.getStatus(user);
+    getProfile(user);
+    getStatus(user);
   }, [loggedUser, currentUserPage]);
 
   return <Profile {...props} />;
@@ -48,7 +55,6 @@ const mapStateToProps = (state) => {
   return {
     state: getProfilePage(state),
     isLoading: getIsLoading(state),
-    isLoggedIn: getIsLoggedIn(state),
     uid: getUID(state),
     canEdit: getCanEdit(state),
   };

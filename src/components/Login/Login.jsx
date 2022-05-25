@@ -1,56 +1,69 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { maxLen, required } from '../../utils/validators/validators';
-import { Input } from '../common/FormControls/FormControls';
+import {
+  createField,
+  Input,
+} from '../common/FormControls/FormControls';
 import { connect } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import s from './Login.module.css';
 import e from '../common/FormControls/FormControls.module.css';
 import { Navigate } from 'react-router-dom';
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
   return (
-    <form onSubmit={props.handleSubmit} className={s.form}>
-      {props.error && (
-        <div className={e.summaryError}>{props.error}</div>
-      )}
-      <div className={s.email}>
+    <form onSubmit={handleSubmit} className={s.form}>
+      {error && <div className={e.summaryError}>{error}</div>}
+      {/*      <div className={s.email}>
         <Field
           placeholder={'Email'}
           name={'email'}
           component={Input}
-          validate={[required, props.maxLen]}
+          validate={[required, maxLen]}
         />
+      </div>*/}
+      <div className={s.email}>
+        {createField(
+          'Email',
+          'email',
+          Input,
+          [required, maxLen],
+          null,
+        )}
       </div>
       <div className={s.password}>
-        <Field
-          placeholder={'Password'}
-          name={'password'}
-          type={'password'}
-          component={Input}
-          validate={[required, props.maxLen]}
-        />
+        {createField(
+          'Password',
+          'password',
+          Input,
+          [required, maxLen],
+          'password',
+        )}
       </div>
       <div className={s.rememberMe}>
-        <Field
-          type={'checkbox'}
-          component={'input'}
-          name={'rememberMe'}
-        />{' '}
+        {createField(
+          'RememberMe',
+          'rememberMe',
+          Input,
+          null,
+          'checkbox',
+        )}{' '}
         <span className={s.loginText}>remember me</span>
       </div>
       <div>
         <button className={s.loginButton}> Log in </button>
       </div>
-      {props.captcha ? (
+      {captcha ? (
         <div className={s.captcha}>
-          <img src={props.captcha} alt={'captcha'} />
-          <Field
-            placeholder={'captcha'}
-            name={'captcha'}
-            component={Input}
-            validate={[required, props.maxLen]}
-          />{' '}
+          <img src={captcha} alt={'captcha'} />
+          {createField(
+            'Captcha',
+            'captcha',
+            Input,
+            [required, maxLen],
+            null,
+          )}{' '}
         </div>
       ) : (
         <></>
@@ -63,26 +76,27 @@ const ReduxLogin = reduxForm({
   form: 'login',
 })(LoginForm);
 
-const Login = (props) => {
-  if (props.isLoggedIn) return <Navigate to={'/profile'} />;
+const Login = ({ isLoggedIn, login, captcha }) => {
+  if (isLoggedIn) return <Navigate to={'/profile'} />;
 
   const maxLen40 = maxLen(40);
 
   const onSubmit = (payload) => {
-    props.login(
+    login(
       payload.email,
       payload.password,
       payload.rememberMe,
       payload.captcha,
     );
   };
+
   return (
     <div className={s.body}>
       <h1 className={s.loginText}>Login</h1>
       <ReduxLogin
         maxLen={maxLen40}
         onSubmit={onSubmit}
-        captcha={props.captcha}
+        captcha={captcha}
       />
     </div>
   );

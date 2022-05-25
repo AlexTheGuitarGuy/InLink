@@ -1,8 +1,9 @@
 import React from 'react';
+import { updateObjInArr } from '../utils/object-helpers';
 
-const SEND_MESSAGE = 'SEND_MESSAGE';
-const DELETE_MESSAGE = 'DELETE_MESSAGE';
-const EDIT_MESSAGE = 'EDIT_MESSAGE';
+const SEND_MESSAGE = 'GACHI_FINDER/DIALOGS_REDUCER/SEND_MESSAGE';
+const DELETE_MESSAGE = 'GACHI_FINDER/DIALOGS_REDUCER/DELETE_MESSAGE';
+const EDIT_MESSAGE = 'GACHI_FINDER/DIALOGS_REDUCER/EDIT_MESSAGE';
 
 const defaultState = {
   users: [
@@ -121,10 +122,10 @@ const dialogsReducer = (state = defaultState, action) => {
         ...state,
         userMessages: state.userMessages.map((e, i) => {
           if (i === action.userId)
-            return e.map((m) => {
-              if (m.id === action.messageId) m.text = action.data;
-              return m;
+            return updateObjInArr(e, 'id', action.messageId, {
+              text: action.data,
             });
+
           return e;
         }),
       };
