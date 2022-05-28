@@ -24,9 +24,9 @@ const Status = ({ canEdit, updateStatus, status }) => {
   return (
     <div className={s.all}>
       {(!isEditing && (
-        <div className={s.descriptionText} onClick={activateEdit}>
+        <span className={s.descriptionText} onClick={activateEdit}>
           {status || 'No status'}
-        </div>
+        </span>
       )) ||
         (isEditing && (
           <input

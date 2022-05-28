@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render } from '@testing-library/react';
+import GachiFinderApp from './App';
+import { unmountComponentAtNode } from 'react-dom';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders app', () => {
+  const div = document.createElement('div');
+  render(<GachiFinderApp />);
+  unmountComponentAtNode(div);
 });
