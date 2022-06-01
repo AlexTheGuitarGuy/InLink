@@ -7,8 +7,6 @@ import Paginator from '../common/Paginator/Paginator';
 const Users = ({
   totalUsers,
   pageSize,
-  currentPagesBeginning,
-  setCurrentPages,
   changePage,
   page,
   followQueue,
@@ -17,6 +15,7 @@ const Users = ({
   follow,
   unfollow,
   isLoading,
+  portionSize,
 }) => {
   if (isLoading) return <Loading class={s.loadImg} />;
 
@@ -30,10 +29,9 @@ const Users = ({
         unfollow={unfollow}
       />
       <Paginator
-        totalUsers={totalUsers}
         pageSize={pageSize}
-        currentPagesBeginning={currentPagesBeginning}
-        setCurrentPages={setCurrentPages}
+        portionSize={portionSize}
+        totalUsers={totalUsers}
         changePage={changePage}
         page={page}
       />

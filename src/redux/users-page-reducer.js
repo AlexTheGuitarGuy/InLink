@@ -6,8 +6,6 @@ const TOGGLE_FOLLOW_STATUS =
 const SET_USERS = 'GACHI_FINDER/USERS_PAGE_REDUCER/SET_USERS';
 const SET_PAGE = 'GACHI_FINDER/USERS_PAGE_REDUCER/SET_PAGE';
 const SET_USERS_NB = 'GACHI_FINDER/USERS_PAGE_REDUCER/SET_USERS_NB';
-const SET_CURRENT_PAGES =
-  'GACHI_FINDER/USERS_PAGE_REDUCER/SET_CURRENT_PAGES';
 const TOGGLE_LOADING =
   'GACHI_FINDER/USERS_PAGE_REDUCER/TOGGLE_LOADING';
 const UPDATE_FOLLOW_QUEUE =
@@ -71,9 +69,9 @@ let defaultState = {
   */
   ],
   pageSize: 5,
+  portionSize: 10,
   page: 1,
   totalUsers: 0,
-  currentPagesBeginning: 1,
   isLoading: false,
   followQueue: [],
 };
@@ -102,11 +100,7 @@ const usersPageReducer = (state = defaultState, action) => {
         ...state,
         totalUsers: action.totalUsers,
       };
-    case SET_CURRENT_PAGES:
-      return {
-        ...state,
-        currentPagesBeginning: action.newBeginning,
-      };
+
     case TOGGLE_LOADING:
       return {
         ...state,
@@ -138,11 +132,6 @@ export const setPage = (page) => ({ type: SET_PAGE, page });
 export const setTotalUsers = (totalUsers) => ({
   type: SET_USERS_NB,
   totalUsers,
-});
-
-export const setCurrentPages = (newBeginning) => ({
-  type: SET_CURRENT_PAGES,
-  newBeginning,
 });
 
 export const toggleLoading = (payload) => ({

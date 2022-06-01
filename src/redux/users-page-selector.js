@@ -2,6 +2,10 @@ export const getUsers = (state) => {
   return state.usersPage.users;
 };
 
+export const getPortionSize = (state) => {
+  return state.usersPage.portionSize;
+};
+
 export const getPage = (state) => {
   return state.usersPage.page;
 };

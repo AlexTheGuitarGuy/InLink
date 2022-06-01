@@ -3,18 +3,17 @@ import Users from './Users';
 import {
   follow,
   requestUsers,
-  setCurrentPages,
   setPage,
   unfollow,
   updateFollowQueue,
 } from '../../redux/users-page-reducer';
 import React, { useEffect } from 'react';
 import {
-  getCurrentPagesBeginning,
   getFollowQueue,
   getIsLoading,
   getPage,
   getPageSize,
+  getPortionSize,
   getTotalUsers,
   getUsers,
 } from '../../redux/users-page-selector';
@@ -24,15 +23,14 @@ const UsersContainer = ({
   page,
   pageSize,
   totalUsers,
-  currentPagesBeginning,
   isLoading,
   followQueue,
   requestUsers,
   follow,
   unfollow,
   setPage,
-  setCurrentPages,
   updateFollowQueue,
+  portionSize,
 }) => {
   const changePage = (page) => {
     requestUsers(page, pageSize);
@@ -45,13 +43,12 @@ const UsersContainer = ({
 
   return (
     <Users
+      portionSize={portionSize}
       users={users}
       totalUsers={totalUsers}
       pageSize={pageSize}
       changePage={changePage}
       page={page}
-      currentPagesBeginning={currentPagesBeginning}
-      setCurrentPages={setCurrentPages}
       isLoading={isLoading}
       followQueue={followQueue}
       updateFollowQueue={updateFollowQueue}
@@ -67,9 +64,9 @@ let mapStateToProps = (state) => {
     page: getPage(state),
     pageSize: getPageSize(state),
     totalUsers: getTotalUsers(state),
-    currentPagesBeginning: getCurrentPagesBeginning(state),
     isLoading: getIsLoading(state),
     followQueue: getFollowQueue(state),
+    portionSize: getPortionSize(state),
   };
 };
 
@@ -78,6 +75,5 @@ export default connect(mapStateToProps, {
   follow,
   unfollow,
   setPage,
-  setCurrentPages,
   updateFollowQueue,
 })(UsersContainer);
