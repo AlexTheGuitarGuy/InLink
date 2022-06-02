@@ -1,28 +1,19 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { maxLen, required } from '../../utils/validators/validators';
-import {
-  createField,
-  Input,
-} from '../common/FormControls/FormControls';
+import { createField, Input } from '../common/FormControls/FormControls';
 import { connect } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import s from './Login.module.css';
 import e from '../common/FormControls/FormControls.module.css';
 import { Navigate } from 'react-router-dom';
+import { compose } from 'redux';
 
 const LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
   return (
     <form onSubmit={handleSubmit} className={s.form}>
       {error && <div className={e.summaryError}>{error}</div>}
-      {/*      <div className={s.email}>
-        <Field
-          placeholder={'Email'}
-          name={'email'}
-          component={Input}
-          validate={[required, maxLen]}
-        />
-      </div>*/}
+
       <div className={s.email}>
         {createField(
           'Email',
@@ -107,4 +98,6 @@ const mapStateToProps = (state) => ({
   captcha: state.auth.captchaURL,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default compose(
+  connect(mapStateToProps, { login }))
+(Login);

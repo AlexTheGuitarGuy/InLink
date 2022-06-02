@@ -1,31 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import {
-  getProfile,
-  getStatus,
-  setCanEdit,
-  updateStatus,
-} from '../../redux/profile-reducer';
-import { useLocation, useParams } from 'react-router-dom';
+import { getProfile, getStatus, setCanEdit, updateStatus } from '../../redux/profile-reducer';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
-import {
-  getCanEdit,
-  getIsLoading,
-  getProfilePage,
-} from '../../redux/profile-selector';
+import { getCanEdit, getIsLoading, getProfilePage } from '../../redux/profile-selector';
 import { getUID } from '../../redux/auth-selector';
+import withRouter from '../../HOC/withRouter';
 
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let params = useParams();
-    return <Component {...props} router={{ location, params }} />;
-  }
-
-  return ComponentWithRouterProp;
-}
 
 const ProfileContainer = ({
   uid,

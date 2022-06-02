@@ -1,12 +1,6 @@
 import { connect } from 'react-redux';
 import Users from './Users';
-import {
-  follow,
-  requestUsers,
-  setPage,
-  unfollow,
-  updateFollowQueue,
-} from '../../redux/users-page-reducer';
+import { follow, requestUsers, setPage, unfollow, updateFollowQueue } from '../../redux/users-page-reducer';
 import React, { useEffect } from 'react';
 import {
   getFollowQueue,
@@ -17,6 +11,7 @@ import {
   getTotalUsers,
   getUsers,
 } from '../../redux/users-page-selector';
+import { compose } from 'redux';
 
 const UsersContainer = ({
   users,
@@ -70,10 +65,11 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
+export default compose(
+  connect(mapStateToProps, {
   requestUsers,
   follow,
   unfollow,
   setPage,
   updateFollowQueue,
-})(UsersContainer);
+}))(UsersContainer);

@@ -4,10 +4,7 @@ import Messages from './Messages';
 import React from 'react';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
-import {
-  getDialogsPage,
-  getStoredText,
-} from '../../redux/dialogs-selector';
+import { getDialogsPage, getStoredText } from '../../redux/dialogs-selector';
 import { getProfileData } from '../../redux/user-selector';
 
 const MessagesContainer = (props) => {
