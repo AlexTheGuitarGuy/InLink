@@ -3,19 +3,20 @@ import s from './Paginator.module.css';
 import cn from 'classnames';
 
 const Paginator = ({
-  totalUsers,
+  totalElems,
   portionSize,
   pageSize,
   changePage,
   page,
 }) => {
-  const pagesNb = Math.ceil(totalUsers / pageSize);
+  const pagesNb = Math.ceil(totalElems / pageSize);
+  const halfwayPoint = page - Math.floor(portionSize / 2);
 
   const calcPagesBeginning = () => {
-    if (page - Math.floor(portionSize / 2) > 1) {
-      if (page - Math.floor(portionSize / 2) > pagesNb - portionSize)
+    if (halfwayPoint > 1) {
+      if (halfwayPoint > pagesNb - portionSize)
         return pagesNb - portionSize + 1;
-      return page - Math.floor(portionSize / 2);
+      return halfwayPoint;
     }
 
     return 1;
@@ -81,15 +82,13 @@ const Paginator = ({
   const moveRight = moveOnePage(page + 1, ' >');
 
   return (
-    <span className={s.pages}>
-      <div align="center">
+    <div className={s.pages}>
         {page !== 1 && firstPage}
         {page !== 1 && moveLeft}
         {currentPages}
         {page !== pagesNb && moveRight}
         {page !== pagesNb && lastPage}
-      </div>
-    </span>
+    </div>
   );
 };
 

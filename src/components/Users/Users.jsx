@@ -31,7 +31,7 @@ const Users = ({
       <Paginator
         pageSize={pageSize}
         portionSize={portionSize}
-        totalUsers={totalUsers}
+        totalElems={totalUsers}
         changePage={changePage}
         page={page}
       />
