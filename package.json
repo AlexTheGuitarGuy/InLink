@@ -1,6 +1,8 @@
 {
   "name": "suka",
   "version": "0.1.0",
+  "homepage": "https://AlexTheGuitarGuy.github.io/reactProject",
+
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -8,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.0",
     "classnames": "^2.3.1",
+    "gh-pages": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
@@ -25,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

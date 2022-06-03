@@ -1,7 +1,7 @@
 import './App.css';
 import React, { lazy, Suspense, useEffect } from 'react';
 import Nav from './components/Nav/Nav';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Preferences from './components/Preferences/Preferences';
@@ -79,14 +79,14 @@ const GachiFinderApp = () => {
   return (
     <React.StrictMode>
       <Suspense fallback={<span><Loading/></span>}>
-      <BrowserRouter>
+      <HashRouter>
         <Provider store={store}>
           <AppContainer
             state={store.getState()}
             dispatch={store.dispatch.bind(store)}
           />
         </Provider>
-      </BrowserRouter>
+      </HashRouter>
       </Suspense>
     </React.StrictMode>
   );
