@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
 
@@ -29,4 +29,4 @@ const Users = ({ users }) => {
   );
 };
 
-export default React.memo(Users);
+export default memo(Users);

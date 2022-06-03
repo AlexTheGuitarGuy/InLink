@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Header from './Header.jsx';
 import { connect } from 'react-redux';
 import { auth, setData } from '../../redux/auth-reducer';
@@ -21,5 +21,5 @@ export default compose(
     setData,
     auth,
   }),
-  React.memo,
+  memo,
 )(HeaderContainer);

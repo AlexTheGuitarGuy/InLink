@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Nav.module.css';
 import FriendItems from './FriendItems/FriendItems';
@@ -29,4 +29,4 @@ const Nav = ({ state, friends }) => {
   );
 };
 
-export default React.memo(Nav);
+export default memo(Nav);

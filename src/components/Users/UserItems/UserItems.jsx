@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './UserItems.module.css';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
@@ -44,4 +44,4 @@ const UserItems = ({ users, followQueue, follow, unfollow }) => {
   return <div>{mappedUsers}</div>;
 };
 
-export default React.memo(UserItems);
+export default memo(UserItems);

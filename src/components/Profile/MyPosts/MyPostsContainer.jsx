@@ -1,11 +1,8 @@
 import { connect } from 'react-redux';
 import { post } from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts.jsx';
-import React from 'react';
-import {
-  getPosts,
-  getStoredText,
-} from '../../../redux/profile-selector';
+import React, { memo } from 'react';
+import { getPosts, getStoredText } from '../../../redux/profile-selector';
 import { compose } from 'redux';
 
 const MyPostsContainer = (props) => {
@@ -23,5 +20,5 @@ export default compose(
   connect(mapStateToProps, {
     post,
   }),
-  React.memo,
+  memo,
 )(MyPostsContainer);
