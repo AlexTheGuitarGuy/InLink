@@ -52,6 +52,25 @@ export const profileAPI = {
 
     return response.data.resultCode;
   },
+
+  uploadPFP: async (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const response = await instance.put('profile/photo', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    return response.data;
+  },
+
+  uploadProfileInfo: async (payload) => {
+    const response = await instance.put('profile', payload);
+
+    return response.data;
+  },
 };
 
 export const authAPI = {

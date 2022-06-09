@@ -1,28 +1,58 @@
-import React from 'react';
-import ProfileInfo from './ProfileInfo/ProfileInfo';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
+import React, { lazy, useState } from 'react';
 import Loading from '../common/Loading/Loading';
+import MyPosts from './MyPosts/MyPosts';
+import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
+
+const ProfileInfoInput = lazy(() =>
+  import('./ProfileInfo/ProfileInfoInput/ProfileInfoInput').then(
+    ({ default: ProfileInfoInput }) => ({
+      default: ProfileInfoInput,
+    }),
+  ),
+);
 
 const Profile = ({
   isLoading,
   state: { profileData, profileStatus },
   updateStatus,
-  canEdit,
+  isOwner,
+  uploadPFP,
+  posts,
+  post,
+  uploadProfileInfo,
 }) => {
-  if(isLoading || !profileData) return <Loading />
+  const [isEditing, setEditing] = useState(false);
+
+  if (isLoading || !profileData) return <Loading />;
 
   return (
     <div>
-
-        <ProfileInfo
+      {isEditing ? (
+        <ProfileInfoInput
+          uploadPFP={uploadPFP}
+          isOwner={isOwner}
           pfp={profileData.photos.large}
           profileData={profileData}
           profileStatus={profileStatus}
           updateStatus={updateStatus}
-          canEdit={canEdit}
+          uploadProfileInfo={uploadProfileInfo}
+          isEditing={isEditing}
+          setEditing={setEditing}
         />
-
-      <MyPostsContainer />
+      ) : (
+        <ProfileInfoText
+          uploadPFP={uploadPFP}
+          isOwner={isOwner}
+          pfp={profileData.photos.large}
+          profileData={profileData}
+          profileStatus={profileStatus}
+          updateStatus={updateStatus}
+          uploadProfileInfo={uploadProfileInfo}
+          isEditing={isEditing}
+          setEditing={setEditing}
+        />
+      )}
+      <MyPosts posts={posts} post={post} />
     </div>
   );
 };

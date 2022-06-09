@@ -1,12 +1,13 @@
 import s from './Status.module.css';
 import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
 
-const Status = ({ canEdit, updateStatus, status }) => {
+const Status = ({ isOwner, updateStatus, status }) => {
   const [isEditing, setEditing] = useState(false);
   const [localStatus, setStatus] = useState(status);
 
   const activateEdit = () => {
-    if (canEdit) setEditing(true);
+    if (isOwner) setEditing(true);
   };
   const deactivateEdit = () => {
     setEditing(false);
@@ -23,20 +24,22 @@ const Status = ({ canEdit, updateStatus, status }) => {
 
   return (
     <div className={s.all}>
-      {(!isEditing && (
-        <span className={s.descriptionText} onClick={activateEdit}>
-          {status || 'No status'}
+      {!isEditing ? (
+        <span
+          className={cn(s.descriptionText, { [s.isOwner]: isOwner })}
+          onClick={activateEdit}
+        >
+          {status ? '"' + status + '"' : 'No status'}
         </span>
-      )) ||
-        (isEditing && (
-          <input
-            onChange={editLocalStatus}
-            className={s.descriptionEdit}
-            autoFocus={true}
-            onBlur={deactivateEdit}
-            defaultValue={localStatus}
-          />
-        ))}
+      ) : (
+        <input
+          onChange={editLocalStatus}
+          className={s.descriptionEdit}
+          autoFocus={true}
+          onBlur={deactivateEdit}
+          defaultValue={localStatus}
+        />
+      )}
     </div>
   );
 };

@@ -1,8 +1,4 @@
-import profileReducer, {
-  deletePost,
-  editPost,
-  post,
-} from './profile-reducer';
+import profileReducer, { deletePost, editPost, post } from './profile-reducer';
 
 let state = {
   posts: [
@@ -21,7 +17,6 @@ let state = {
   profileData: null,
   profileStatus: null,
   isLoading: false,
-  canEdit: null,
 };
 
 it('should increment posts array length', () => {

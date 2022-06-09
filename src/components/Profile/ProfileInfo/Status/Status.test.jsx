@@ -44,7 +44,7 @@ describe('Status component', () => {
 
   test('shows status as input', () => {
     const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} canEdit={true} />,
+      <Status status={testStatus} isOwner={true} />,
     );
 
     act(() => clickSpan(getDrawnComponent(renderer)));
@@ -54,7 +54,7 @@ describe('Status component', () => {
 
   test('input contains status', () => {
     const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} canEdit={true} />,
+      <Status status={testStatus} isOwner={true} />,
     );
 
     act(() => clickSpan(getDrawnComponent(renderer)));
@@ -62,9 +62,9 @@ describe('Status component', () => {
     expect(getCurrentStatus(renderer)).toBe(testStatus);
   });
 
-  test("doesn't convert status to input if canEdit is false", () => {
+  test("doesn't convert status to input if isOwner is false", () => {
     const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} canEdit={false} />,
+      <Status status={testStatus} isOwner={false} />,
     );
 
     act(() => clickSpan(getDrawnComponent(renderer)));
@@ -78,7 +78,7 @@ describe('Status component', () => {
     const renderer = ReactTestRenderer.create(
       <Status
         status={testStatus}
-        canEdit={true}
+        isOwner={true}
         updateStatus={updateStatus}
       />,
     );

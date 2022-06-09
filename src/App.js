@@ -14,30 +14,45 @@ import store from './redux/redux-store';
 import { compose } from 'redux';
 import withRouter from './HOC/withRouter';
 
-const UsersContainer = lazy(() => import('./components/Users/UsersContainer')
-  .then(({default:UsersContainer})=>({default:UsersContainer})));
-const ProfileContainer = lazy(()=>import ('./components/Profile/ProfileContainer')
-  .then(({default:ProfileContainer})=>({default:ProfileContainer})));
-const Login = lazy(()=>import ('./components/Login/Login')
-  .then(({default:Login})=>({default:Login})));
-const MessagesContainer = lazy(()=>import ('./components/Messages/MessagesContainer')
-  .then(({default:MessagesContainer})=>({default:MessagesContainer})));
+const UsersContainer = lazy(() =>
+  import('./components/Users/UsersContainer').then(
+    ({ default: UsersContainer }) => ({ default: UsersContainer }),
+  ),
+);
+const ProfileContainer = lazy(() =>
+  import('./components/Profile/ProfileContainer').then(
+    ({ default: ProfileContainer }) => ({
+      default: ProfileContainer,
+    }),
+  ),
+);
 
-const App = (props) => {
+const Login = lazy(() =>
+  import('./components/Login/Login').then(({ default: Login }) => ({
+    default: Login,
+  })),
+);
+
+const MessagesContainer = lazy(() =>
+  import('./components/Messages/MessagesContainer').then(
+    ({ default: MessagesContainer }) => ({
+      default: MessagesContainer,
+    }),
+  ),
+);
+
+const App = ({ state, isAppInitialized, initializeApp }) => {
   useEffect(() => {
-    props.initializeApp();
-  }, [props.isAppInitialized]);
+    initializeApp();
+  }, [initializeApp, isAppInitialized]);
 
-  if (!props.isAppInitialized) return <Loading class="mx-auto" />;
+  if (!isAppInitialized) return <Loading class="mx-auto" />;
 
   return (
     <div className="app-wrapper">
       <HeaderContainer />
 
-      <Nav
-        state={props.state.sidebar}
-        friends={props.state.dialogsPage.users}
-      />
+      <Nav state={state.sidebar} friends={state.dialogsPage.users} />
 
       <div className="app-wrapper-content">
         <div className="app-wrapper-content-formating">
@@ -55,7 +70,7 @@ const App = (props) => {
             />
 
             <Route path="/login" element={<Login />} />
-            <Route path="/users" element={<UsersContainer/>} />
+            <Route path="/users" element={<UsersContainer />} />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/preferences" element={<Preferences />} />
@@ -78,15 +93,21 @@ const AppContainer = compose(
 const GachiFinderApp = () => {
   return (
     <React.StrictMode>
-      <Suspense fallback={<span><Loading/></span>}>
-      <HashRouter>
-        <Provider store={store}>
-          <AppContainer
-            state={store.getState()}
-            dispatch={store.dispatch.bind(store)}
-          />
-        </Provider>
-      </HashRouter>
+      <Suspense
+        fallback={
+          <span>
+            <Loading />
+          </span>
+        }
+      >
+        <HashRouter>
+          <Provider store={store}>
+            <AppContainer
+              state={store.getState()}
+              dispatch={store.dispatch.bind(store)}
+            />
+          </Provider>
+        </HashRouter>
       </Suspense>
     </React.StrictMode>
   );

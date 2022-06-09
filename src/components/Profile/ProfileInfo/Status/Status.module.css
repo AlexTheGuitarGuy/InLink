@@ -17,6 +17,6 @@
     height: fit-content;
 }
 
-.descriptionText:hover {
+.isOwner:hover {
     background-color: rgba(21, 12, 94, 0.28);
 }

@@ -1,18 +1,28 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getProfile, getStatus, setCanEdit, updateStatus } from '../../redux/profile-reducer';
+import {
+  getProfile,
+  getStatus,
+  post,
+  updateStatus,
+  uploadPFP,
+  uploadProfileInfo,
+} from '../../redux/profile-reducer';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
-import { getCanEdit, getIsLoading, getProfilePage } from '../../redux/profile-selector';
+import {
+  getIsLoading,
+  getPosts,
+  getProfilePage,
+  getStoredText,
+} from '../../redux/profile-selector';
 import { getUID } from '../../redux/auth-selector';
 import withRouter from '../../HOC/withRouter';
-
 
 const ProfileContainer = ({
   uid,
   router,
-  setCanEdit,
   getProfile,
   getStatus,
   ...props
@@ -23,14 +33,11 @@ const ProfileContainer = ({
   useEffect(() => {
     let user = currentUserPage || loggedUser;
 
-    if (user === loggedUser) setCanEdit(true);
-    else setCanEdit(false);
-
     getProfile(user);
     getStatus(user);
-  }, [loggedUser, currentUserPage]);
+  }, [getProfile, getStatus, loggedUser, currentUserPage]);
 
-  return <Profile {...props} />;
+  return <Profile isOwner={!currentUserPage} {...props} />;
 };
 
 const mapStateToProps = (state) => {
@@ -38,7 +45,8 @@ const mapStateToProps = (state) => {
     state: getProfilePage(state),
     isLoading: getIsLoading(state),
     uid: getUID(state),
-    canEdit: getCanEdit(state),
+    memoryText: getStoredText(state),
+    posts: getPosts(state),
   };
 };
 
@@ -49,6 +57,8 @@ export default compose(
     getProfile,
     getStatus,
     updateStatus,
-    setCanEdit,
+    uploadPFP,
+    post,
+    uploadProfileInfo,
   }),
 )(ProfileContainer);

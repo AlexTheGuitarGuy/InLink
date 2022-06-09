@@ -138,6 +138,7 @@ export const toggleLoading = (payload) => ({
   type: TOGGLE_LOADING,
   payload,
 });
+
 export const updateFollowQueue = (id) => ({
   type: UPDATE_FOLLOW_QUEUE,
   id,
@@ -178,5 +179,7 @@ export const unfollow = (id) => {
     dispatch(followUnfollowFlow(id, userAPI.unfollow, false));
   };
 };
+
+
 
 export default usersPageReducer;

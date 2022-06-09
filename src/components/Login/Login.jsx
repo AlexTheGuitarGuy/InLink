@@ -1,20 +1,22 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { maxLen, required } from '../../utils/validators/validators';
-import { createField, Input } from '../common/FormControls/FormControls';
+import {
+  createField,
+  Input,
+} from '../common/FormControls/FormControls';
 import { connect } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
-import s from './Login.module.css';
 import e from '../common/FormControls/FormControls.module.css';
 import { Navigate } from 'react-router-dom';
 import { compose } from 'redux';
 
-const LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
+let LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
   return (
-    <form onSubmit={handleSubmit} className={s.form}>
+    <form onSubmit={handleSubmit} className={'mt-10'}>
       {error && <div className={e.summaryError}>{error}</div>}
 
-      <div className={s.email}>
+      <div className={'mb-2 text-black'}>
         {createField(
           'Email',
           'email',
@@ -23,7 +25,7 @@ const LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
           null,
         )}
       </div>
-      <div className={s.password}>
+      <div className={'mb-2 text-black'}>
         {createField(
           'Password',
           'password',
@@ -32,29 +34,29 @@ const LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
           'password',
         )}
       </div>
-      <div className={s.rememberMe}>
+      <div className={'mb-2'}>
         {createField(
           'RememberMe',
           'rememberMe',
           Input,
           null,
           'checkbox',
-        )}{' '}
-        <span className={s.loginText}>remember me</span>
+        )}
+        <span className={'mb-2'}>remember me</span>
       </div>
       <div>
-        <button className={s.loginButton}> Log in </button>
+        <button>Log in</button>
       </div>
       {captcha ? (
-        <div className={s.captcha}>
-          <img src={captcha} alt={'captcha'} />
+        <div className={'mt-2 text-black'}>
+          <img src={captcha} alt={'captcha'} className={'mb-1'} />
           {createField(
             'Captcha',
             'captcha',
             Input,
             [required, maxLen],
             null,
-          )}{' '}
+          )}
         </div>
       ) : (
         <></>
@@ -63,7 +65,7 @@ const LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
   );
 };
 
-const ReduxLogin = reduxForm({
+LoginForm = reduxForm({
   form: 'login',
 })(LoginForm);
 
@@ -72,24 +74,16 @@ const Login = ({ isLoggedIn, login, captcha }) => {
 
   const maxLen40 = maxLen(40);
 
-  const onSubmit = (payload) => {
-    login(
-      payload.email,
-      payload.password,
-      payload.rememberMe,
-      payload.captcha,
-    );
+  const onSubmit = ({ email, password, rememberMe, captcha }) => {
+    login(email, password, rememberMe, captcha);
   };
 
   return (
-    <div className={s.body}>
-      <h1 className={s.loginText}>Login</h1>
-      <ReduxLogin
-        maxLen={maxLen40}
-        onSubmit={onSubmit}
-        captcha={captcha}
-      />
-    </div>
+    <LoginForm
+      maxLen={maxLen40}
+      onSubmit={onSubmit}
+      captcha={captcha}
+    />
   );
 };
 
@@ -98,6 +92,4 @@ const mapStateToProps = (state) => ({
   captcha: state.auth.captchaURL,
 });
 
-export default compose(
-  connect(mapStateToProps, { login }))
-(Login);
+export default compose(connect(mapStateToProps, { login }))(Login);
