@@ -11,7 +11,7 @@ const appReducer = (state = defaultState, action) => {
     case APP_INITIALIZED:
       return {
         ...state,
-        isAppInitialized: true,
+        ...action.payload,
       };
     default:
       return state;
@@ -20,6 +20,7 @@ const appReducer = (state = defaultState, action) => {
 
 const initializeSuccess = () => ({
   type: APP_INITIALIZED,
+  payload: { isAppInitialized: true },
 });
 
 export const initializeApp = () => (dispatch) => {

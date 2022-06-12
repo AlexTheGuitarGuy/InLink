@@ -13,3 +13,7 @@ export const getStoredText = (state) => {
 export const getPosts = (state) => {
   return state.profilePage.posts;
 };
+
+export const getIsEditing = (state) => {
+  return state.profilePage.isEditing;
+};

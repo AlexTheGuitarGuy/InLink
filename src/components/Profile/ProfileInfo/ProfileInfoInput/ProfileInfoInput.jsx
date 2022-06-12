@@ -30,16 +30,10 @@ let ProfileInfoInputForm = ({
     if (e.target.files.length) uploadPFP(e.target.files[0]);
   };
 
-  const regExp = /\(([^)]+)\)/;
-  const errorLocation =
-    error && regExp.exec(error) && regExp.exec(error)[1];
-  const errorText = error && error.slice(0, error.indexOf('(') + 1);
-  if (errorLocation) console.log(errorLocation);
-
   return (
     <form onSubmit={handleSubmit}>
       <img src={banner} alt="banner" className={s.banner} />
-      {error && <div className={e.summaryError}>{errorText}</div>}
+      {error && <div className={e.summaryError}>{error}</div>}
 
       <div className={s.pfpAndDetails}>
         <div className={s.pfp}>
@@ -85,10 +79,7 @@ let ProfileInfoInputForm = ({
           </span>
 
           <span className={s.contacts}>
-            <Contacts
-              contacts={contacts}
-              errorLocation={errorLocation}
-            />
+            <Contacts contacts={contacts} />
           </span>
         </div>
       </div>
@@ -113,9 +104,7 @@ const ProfileInfoInput = (props) => {
   const maxLen1000 = maxLen(1000);
 
   const onSubmit = (payload) => {
-    props
-      .uploadProfileInfo(payload)
-      .then((e) => e === 0 && props.setEditing(false));
+    props.uploadProfileInfo(payload);
   };
 
   return (

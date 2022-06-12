@@ -10,6 +10,7 @@ const DELETE_POST = 'GACHI_FINDER/PROFILE_REDUCER/DELETE_POST';
 const EDIT_POST = 'GACHI_FINDER/PROFILE_REDUCER/EDIT_POST';
 const UPLOAD_PHOTO_SUCCESS =
   'GACHI_FINDER/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS';
+const SET_IS_EDITING = 'GACHI_FINDER/PROFILE_REDUCER/SET_IS_EDITING';
 
 let defaultState = {
   posts: [
@@ -28,19 +29,20 @@ let defaultState = {
   profileData: null,
   profileStatus: null,
   isLoading: false,
+  isEditing: false,
 };
 
 const profileReducer = (state = defaultState, action) => {
   switch (action.type) {
     case POST: {
-      if (action.data) {
+      if (action.payload) {
         return {
           ...state,
           posts: [
             ...state.posts,
             {
               id: state.posts.length + 1,
-              text: action.data,
+              text: action.payload,
               likes: 0,
             },
           ],
@@ -52,24 +54,19 @@ const profileReducer = (state = defaultState, action) => {
         storedText: '',
       };
     }
-
-    case SET_PROFILE: {
-      return {
-        ...state,
-        profileData: action.data,
-      };
-    }
-    case SET_STATUS: {
-      return {
-        ...state,
-        profileStatus: action.data,
-      };
-    }
-
+    case SET_STATUS:
     case TOGGLE_LOADING:
+    case SET_IS_EDITING:
+    case SET_PROFILE:
       return {
         ...state,
-        isLoading: action.payload,
+        ...action.payload,
+      };
+
+    case UPLOAD_PHOTO_SUCCESS:
+      return {
+        ...state,
+        profileData: { ...state.profileData, ...action.file },
       };
 
     case DELETE_POST:
@@ -82,36 +79,43 @@ const profileReducer = (state = defaultState, action) => {
       return {
         ...state,
         posts: updateObjInArr(state.posts, 'id', action.id, {
-          text: action.data,
+          text: action.payload,
         }),
       };
-    case UPLOAD_PHOTO_SUCCESS:
-      return {
-        ...state,
-        profileData: { ...state.profileData, ...action.file },
-      };
+
     default:
       return state;
   }
 };
 
-export const post = (data) => ({ type: POST, data });
+export const post = (payload) => ({ type: POST, payload });
 
 export const deletePost = (id) => ({ type: DELETE_POST, id });
 
-export const editPost = (id, data) => ({
+export const editPost = (id, payload) => ({
   type: EDIT_POST,
   id,
-  data,
+  payload,
 });
 
-export const setProfile = (data) => ({ type: SET_PROFILE, data });
+export const setEditing = (isEditing) => ({
+  type: SET_IS_EDITING,
+  payload: { isEditing },
+});
 
-export const setStatus = (data) => ({ type: SET_STATUS, data });
+export const setProfile = (profileData) => ({
+  type: SET_PROFILE,
+  payload: { profileData },
+});
 
-export const toggleLoading = (payload) => ({
+export const setStatus = (profileStatus) => ({
+  type: SET_STATUS,
+  payload: { profileStatus },
+});
+
+export const toggleLoading = (isLoading) => ({
   type: TOGGLE_LOADING,
-  payload,
+  payload: { isLoading },
 });
 
 const uploadSuccess = (file) => ({
@@ -161,16 +165,32 @@ export const uploadProfileInfo =
       ...profileInfo,
     });
 
-    if (data.resultCode === 0) dispatch(getProfile(userId));
-    else {
+    if (data.resultCode === 0) {
+      dispatch(getProfile(userId));
+      dispatch(setEditing(false));
+    } else {
       const message =
         data.messages.length > 0
           ? data.messages[0]
           : 'An error has occurred';
-      dispatch(stopSubmit('profileInfo', { _error: message }));
-    }
 
-    return data.resultCode;
+      const regExp = /\(([^)]+)\)/;
+      const errorLocation =
+        regExp.exec(message) && regExp.exec(message)[1];
+
+      if (errorLocation) {
+        const errorText = message.slice(0, message.indexOf('('));
+        const parsedLocation = errorLocation
+          .toLowerCase()
+          .split('->');
+        dispatch(
+          stopSubmit('profileInfo', {
+            [parsedLocation[0]]: { [parsedLocation[1]]: errorText },
+          }),
+        );
+      } else dispatch(stopSubmit('profileInfo', { _error: message }));
+      return Promise.reject(message);
+    }
   };
 
 export default profileReducer;

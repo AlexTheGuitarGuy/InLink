@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react';
+import React, { lazy } from 'react';
 import Loading from '../common/Loading/Loading';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
@@ -20,9 +20,10 @@ const Profile = ({
   posts,
   post,
   uploadProfileInfo,
+  submitStatus,
+  setEditing,
+  isEditing,
 }) => {
-  const [isEditing, setEditing] = useState(false);
-
   if (isLoading || !profileData) return <Loading />;
 
   return (
@@ -36,19 +37,16 @@ const Profile = ({
           profileStatus={profileStatus}
           updateStatus={updateStatus}
           uploadProfileInfo={uploadProfileInfo}
-          isEditing={isEditing}
           setEditing={setEditing}
+          submitStatus={submitStatus}
         />
       ) : (
         <ProfileInfoText
-          uploadPFP={uploadPFP}
           isOwner={isOwner}
           pfp={profileData.photos.large}
           profileData={profileData}
           profileStatus={profileStatus}
           updateStatus={updateStatus}
-          uploadProfileInfo={uploadProfileInfo}
-          isEditing={isEditing}
           setEditing={setEditing}
         />
       )}

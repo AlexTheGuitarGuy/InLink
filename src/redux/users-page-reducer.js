@@ -82,30 +82,18 @@ const usersPageReducer = (state = defaultState, action) => {
       return {
         ...state,
         users: updateObjInArr(state.users, 'id', action.id, {
-          followed: action.payload,
+          ...action.payload,
         }),
       };
     case SET_USERS:
-      return {
-        ...state,
-        users: [...action.users],
-      };
     case SET_PAGE:
-      return {
-        ...state,
-        page: action.page,
-      };
     case SET_USERS_NB:
-      return {
-        ...state,
-        totalUsers: action.totalUsers,
-      };
-
     case TOGGLE_LOADING:
       return {
         ...state,
-        isLoading: action.payload,
+        ...action.payload,
       };
+
     case UPDATE_FOLLOW_QUEUE:
       return {
         ...state,
@@ -120,23 +108,29 @@ const usersPageReducer = (state = defaultState, action) => {
   }
 };
 
-export const toggleFollowStatus = (id, payload) => ({
+export const toggleFollowStatus = (id, followed) => ({
   type: TOGGLE_FOLLOW_STATUS,
   id,
-  payload,
+  payload: { followed },
 });
-export const setUsers = (users) => ({ type: SET_USERS, users });
+export const setUsers = (users) => ({
+  type: SET_USERS,
+  payload: { users },
+});
 
-export const setPage = (page) => ({ type: SET_PAGE, page });
+export const setPage = (page) => ({
+  type: SET_PAGE,
+  payload: { page },
+});
 
-export const setTotalUsers = (totalUsers) => ({
+export const setUsersNb = (totalUsers) => ({
   type: SET_USERS_NB,
-  totalUsers,
+  payload: { totalUsers },
 });
 
-export const toggleLoading = (payload) => ({
+export const toggleLoading = (isLoading) => ({
   type: TOGGLE_LOADING,
-  payload,
+  payload: { isLoading },
 });
 
 export const updateFollowQueue = (id) => ({
@@ -151,7 +145,7 @@ export const requestUsers = (page, pageSize) => {
     const data = await userAPI.getUsers(page, pageSize);
 
     dispatch(setUsers(data.items));
-    dispatch(setTotalUsers(data.totalCount));
+    dispatch(setUsersNb(data.totalCount));
     dispatch(toggleLoading(false));
   };
 };
@@ -179,7 +173,5 @@ export const unfollow = (id) => {
     dispatch(followUnfollowFlow(id, userAPI.unfollow, false));
   };
 };
-
-
 
 export default usersPageReducer;

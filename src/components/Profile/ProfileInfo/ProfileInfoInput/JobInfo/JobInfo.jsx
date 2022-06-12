@@ -2,6 +2,7 @@ import React from 'react';
 import {
   createField,
   Input,
+  Textarea,
 } from '../../../../common/FormControls/FormControls';
 
 const JobInfo = ({ maxLen, lookingForAJob }) => {
@@ -33,7 +34,7 @@ const JobInfo = ({ maxLen, lookingForAJob }) => {
           {createField(
             'Please enter your skills...',
             'lookingForAJobDescription',
-            Input,
+            Textarea,
             [maxLen],
             null,
           )}

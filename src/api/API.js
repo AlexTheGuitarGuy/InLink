@@ -73,7 +73,7 @@ export const profileAPI = {
   },
 };
 
-export const authAPI = {
+export const securityAPI = {
   me: async () => {
     const response = await instance.get(
       'https://social-network.samuraijs.com/api/1.0/auth/me',

@@ -125,7 +125,6 @@ const dialogsReducer = (state = defaultState, action) => {
             return updateObjInArr(e, 'id', action.messageId, {
               text: action.data,
             });
-
           return e;
         }),
       };

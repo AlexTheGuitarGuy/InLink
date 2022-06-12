@@ -5,14 +5,11 @@ import {
 } from '../../../../common/FormControls/FormControls';
 import cn from 'classnames';
 
-const Contacts = ({ contacts, errorLocation }) => {
+const Contacts = ({ contacts }) => {
   const parsedContacts = Object.keys(contacts).map((key) => {
     return (
       <span key={key}>
-        <ContactField
-          contactName={key}
-          errorLocation={errorLocation}
-        />
+        <ContactField contactName={key} />
       </span>
     );
   });
@@ -25,20 +22,11 @@ const Contacts = ({ contacts, errorLocation }) => {
   );
 };
 
-const ContactField = ({ contactName, errorLocation }) => {
+const ContactField = ({ contactName }) => {
   return (
     <div className={'mt-1'}>
       {contactName}:
-      <span
-        className={cn('ml-1 text-black', {
-          'border-2 border-rose-600':
-            errorLocation ===
-            `Contacts->${
-              contactName.charAt(0).toUpperCase() +
-              contactName.slice(1)
-            }`,
-        })}
-      >
+      <span className={cn('ml-1 text-black')}>
         {createField(
           'insert ' + contactName,
           'contacts.' + contactName,

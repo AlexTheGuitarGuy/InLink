@@ -5,6 +5,7 @@ import {
   getProfile,
   getStatus,
   post,
+  setEditing,
   updateStatus,
   uploadPFP,
   uploadProfileInfo,
@@ -12,6 +13,7 @@ import {
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
 import {
+  getIsEditing,
   getIsLoading,
   getPosts,
   getProfilePage,
@@ -47,6 +49,7 @@ const mapStateToProps = (state) => {
     uid: getUID(state),
     memoryText: getStoredText(state),
     posts: getPosts(state),
+    isEditing: getIsEditing(state),
   };
 };
 
@@ -60,5 +63,6 @@ export default compose(
     uploadPFP,
     post,
     uploadProfileInfo,
+    setEditing,
   }),
 )(ProfileContainer);
