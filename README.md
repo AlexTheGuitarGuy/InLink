@@ -1,6 +1,6 @@
-# This site was made with the help of the https://social-network.samuraijs.com/ API
+# This project was made with the help of the https://social-network.samuraijs.com/ API
 To get access to the full app, you need to log in with these credentials:
-Email: free@samuraijs.com Password: free
+### Email: free@samuraijs.com Password: free
 
 # Getting Started with Create React App
 
