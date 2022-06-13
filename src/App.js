@@ -1,5 +1,5 @@
 import './App.css';
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Nav from './components/Nav/Nav';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
@@ -13,6 +13,8 @@ import Loading from './components/common/Loading/Loading';
 import store from './redux/redux-store';
 import { compose } from 'redux';
 import withRouter from './HOC/withRouter';
+import PageNotFound from './components/PageNotFound/PageNotFound';
+import Error from './components/Error/Error';
 
 const UsersContainer = lazy(() =>
   import('./components/Users/UsersContainer').then(
@@ -42,9 +44,30 @@ const MessagesContainer = lazy(() =>
 );
 
 const App = ({ state, isAppInitialized, initializeApp }) => {
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     initializeApp();
   }, [initializeApp, isAppInitialized]);
+
+  useEffect(() => {
+    const handleRejection = (event) => {
+      if (event.reason.substring(0, 18) === 'Invalid url format')
+        setError(`Couldn't upload profile data`);
+      else setError(event.reason);
+
+      event.preventDefault();
+    };
+
+    window.addEventListener('unhandledrejection', handleRejection);
+
+    return () => {
+      window.removeEventListener(
+        'unhandledrejection',
+        handleRejection,
+      );
+    };
+  });
 
   if (!isAppInitialized) return <Loading class="mx-auto" />;
 
@@ -55,6 +78,13 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
       <Nav state={state.sidebar} friends={state.dialogsPage.users} />
 
       <div className="app-wrapper-content">
+        {error && (
+          <Error
+            title={'An unexpected error has occurred'}
+            text={error}
+            setError={setError}
+          />
+        )}
         <div className="app-wrapper-content-formating">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -70,10 +100,15 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
             />
 
             <Route path="/login" element={<Login />} />
+            <Route
+              path="/login/facebook"
+              element={<div>facebook</div>}
+            />
             <Route path="/users" element={<UsersContainer />} />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/preferences" element={<Preferences />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
       </div>

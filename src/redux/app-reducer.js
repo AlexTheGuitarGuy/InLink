@@ -23,12 +23,12 @@ const initializeSuccess = () => ({
   payload: { isAppInitialized: true },
 });
 
-export const initializeApp = () => (dispatch) => {
-  let authPromise = dispatch(auth());
+export const initializeApp = () => async (dispatch) => {
+  const authPromise = dispatch(auth());
 
-  Promise.all([authPromise]).then(() => {
-    dispatch(initializeSuccess());
-  });
+  await Promise.all([authPromise]);
+
+  dispatch(initializeSuccess());
 };
 
 export default appReducer;
