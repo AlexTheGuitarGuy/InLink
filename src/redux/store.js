@@ -1,8 +1,3 @@
-import dialogsReducer from './dialogs-reducer';
-import profileReducer from './profile-reducer';
-import userReducer from './user-reducer';
-import sidebarReducer from './sidebar-reducer';
-
 /*let store = {
 
     _state: {
@@ -23,8 +18,8 @@ import sidebarReducer from './sidebar-reducer';
 
         dialogsPage: {
             users: [
-                { id: 1, name: ["Boy", " Nextdoor"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u1.jpg")} alt='User1 pfp' /> },
-                { id: 2, name: ["Fucking", " Slave"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u2.png")} alt='User2 pfp' /> },
+                { id: 1, name: ["Boy", " Nextdoor"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u1.png")} alt='User1 pfp' /> },
+                { id: 2, name: ["Fucking", " Slave"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u2.jpg")} alt='User2 pfp' /> },
                 { id: 3, name: ["Boss", " Of This Gym"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u3.jpg")} alt='User3 pfp' /> },
                 { id: 4, name: ["Dungeon", " Master"], pfp: <img src={require("C:/Users/andut/Desktop/code/react_projects/01/suka/src/redux/photos/UsersPfp/u4.jpg")} alt='User4 pfp' /> },
             ],
@@ -96,4 +91,4 @@ import sidebarReducer from './sidebar-reducer';
 }*/
 //window.store = store;
 
-export default store;
+//export default store;

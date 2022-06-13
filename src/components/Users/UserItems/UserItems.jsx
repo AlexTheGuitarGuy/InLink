@@ -4,10 +4,12 @@ import s from './UserItems.module.css';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 
 const UserItems = ({ users, followQueue, follow, unfollow }) => {
-  let mappedUsers = users.map((e) => {
-    let buttonText = e.followed ? 'Unfollow' : 'Follow';
-    let buttonAction = e.followed ? unfollow : follow;
-    let buttonClass = e.followed ? s.unfollowButton : s.followButton;
+  const mappedUsers = users.map((e) => {
+    const buttonText = e.followed ? 'Unfollow' : 'Follow';
+    const buttonAction = e.followed ? unfollow : follow;
+    const buttonClass = e.followed
+      ? s.unfollowButton
+      : s.followButton;
 
     return (
       <div className={s.user} key={e.id}>

@@ -1,4 +1,4 @@
-import banner from '../../../../assets/banner.jfif';
+import banner from '../../../../assets/banner.jpg';
 import s from './ProfileInfoText.module.css';
 import placeholder from '../../../../assets/pfps/placeholder.jpg';
 import JobInfo from './JobInfo/JobInfo';
@@ -23,7 +23,11 @@ const ProfileInfoText = ({
 }) => {
   return (
     <div>
-      <img src={banner} alt="banner" className={s.banner} />
+      <img
+        src={banner}
+        alt="banner"
+        className={s.banner + ' w-full'}
+      />
 
       <div className={s.pfpAndDetails}>
         <div className={s.pfp}>

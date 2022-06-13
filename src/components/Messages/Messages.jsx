@@ -4,12 +4,13 @@ import s from './Messages.module.css';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
 import SendText from './SendText/SendText';
+import placeholder from '../../assets/pfps/placeholder.jpg';
 
 const Messages = ({
   state: { userMessages, users },
-  profileData,
   memoryText,
   send,
+  myData,
 }) => {
   const userDialogElements = [];
   for (let i = 0; i < userMessages.length; i++) {
@@ -19,7 +20,7 @@ const Messages = ({
           <UserMessage
             message={e}
             theirPfp={users[i].pfp}
-            myPfp={profileData.pfp}
+            myPfp={myData.photos.small || placeholder}
           />
         </div>
       );

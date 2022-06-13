@@ -10,14 +10,14 @@ const state = {
       id: 1,
       name: ['Denis', 'Johnson'],
       pfp: (
-        <img src={require('../assets/pfps/u1.jpg')} alt="User1 pfp" />
+        <img src={require('../assets/pfps/u1.png')} alt="User1 pfp" />
       ),
     },
     {
       id: 2,
       name: ['John', 'Denison'],
       pfp: (
-        <img src={require('../assets/pfps/u2.png')} alt="User2 pfp" />
+        <img src={require('../assets/pfps/u2.jpg')} alt="User2 pfp" />
       ),
     },
     {

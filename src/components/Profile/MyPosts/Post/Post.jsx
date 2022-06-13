@@ -1,8 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
-import pfp from '../../../../assets/pfps/myPfp.jpg';
 
-const Post = ({ text, likeCount }) => {
+const Post = ({ text, likeCount, pfp }) => {
   return (
     <div className={s.item}>
       <img src={pfp} alt="poster_pfp" />

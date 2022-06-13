@@ -8,7 +8,7 @@ import {
 import s from '../ProfileInfoText/ProfileInfoText.module.css';
 import placeholder from '../../../../assets/pfps/placeholder.jpg';
 import Status from '../Status/Status';
-import banner from '../../../../assets/banner.jfif';
+import banner from '../../../../assets/banner.jpg';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
 import e from '../../../common/FormControls/FormControls.module.css';
@@ -32,7 +32,12 @@ let ProfileInfoInputForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <img src={banner} alt="banner" className={s.banner} />
+      <img
+        src={banner}
+        alt="banner"
+        className={s.banner + ' w-full'}
+      />
+
       {error && <div className={e.summaryError}>{error}</div>}
 
       <div className={s.pfpAndDetails}>

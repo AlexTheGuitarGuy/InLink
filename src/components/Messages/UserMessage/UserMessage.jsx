@@ -10,7 +10,9 @@ const UserMessage = ({
     if (from === 'me') {
       return (
         <div>
-          <div className={s.myPfp}>{myPfp}</div>
+          <div className={s.myPfp}>
+            <img src={myPfp} alt="me" />
+          </div>
           <div className={s.fromMe}>{text}</div>
         </div>
       );

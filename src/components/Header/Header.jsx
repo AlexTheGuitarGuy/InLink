@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './Header.module.css';
-import logo from '../../assets/logo.jpg';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
@@ -25,7 +24,9 @@ const Header = ({ logout, login, isLoggedIn }) => {
         )}
       </div>
       <NavLink to={'/'}>
-        <img src={logo} alt="logo" />
+        <span className="self-center ml-2 text-5xl font-semibold whitespace-nowrap text-white">
+          InLink
+        </span>
       </NavLink>
     </header>
   );

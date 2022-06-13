@@ -11,26 +11,26 @@ const defaultState = {
       id: 1,
       name: ['Denis', 'Johnson'],
       pfp: (
-        <img src={require('../assets/pfps/u1.jpg')} alt="User1 pfp" />
+        <img src={require('../assets/pfps/u1.png')} alt="User1 pfp" />
       ),
     },
     {
       id: 2,
-      name: ['John', 'Denison'],
+      name: ['Hannah', 'White'],
       pfp: (
-        <img src={require('../assets/pfps/u2.png')} alt="User2 pfp" />
+        <img src={require('../assets/pfps/u2.jpg')} alt="User2 pfp" />
       ),
     },
     {
       id: 3,
-      name: ['Chuck', 'Norris'],
+      name: ['Jane', 'Doe'],
       pfp: (
         <img src={require('../assets/pfps/u3.jpg')} alt="User3 pfp" />
       ),
     },
     {
       id: 4,
-      name: ['Walter', 'White'],
+      name: ['Walter', 'Laine'],
       pfp: (
         <img src={require('../assets/pfps/u4.jpg')} alt="User4 pfp" />
       ),
@@ -66,8 +66,8 @@ const defaultState = {
       { id: 1, text: 'Hi', from: 'them' },
       { id: 2, text: 'Hello', from: 'me' },
       { id: 3, text: 'Bye', from: 'them' },
-      { id: 4, text: 'Goodbye :)', from: 'me' },
-      { id: 5, text: ':)', from: 'me' },
+      { id: 4, text: 'Oh, well', from: 'me' },
+      { id: 5, text: 'see ya:)', from: 'me' },
     ],
     [
       {
@@ -81,7 +81,7 @@ const defaultState = {
         text: 'Cool',
         from: 'them',
       },
-      { id: 4, text: 'yeah', from: 'me' },
+      { id: 4, text: 'thanks', from: 'me' },
     ],
   ],
 };

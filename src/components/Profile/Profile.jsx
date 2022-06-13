@@ -50,7 +50,12 @@ const Profile = ({
           setEditing={setEditing}
         />
       )}
-      <MyPosts posts={posts} post={post} />
+      <MyPosts
+        isOwner={isOwner}
+        posts={posts}
+        post={post}
+        pfp={profileData.photos.small}
+      />
     </div>
   );
 };

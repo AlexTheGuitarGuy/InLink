@@ -1,12 +1,10 @@
 .banner {
-  width: 111%;
-  height: 250px;
   margin-bottom: 1%;
-  margin-left: -5.5%;
   margin-top: -1%;
 }
 
 .pfpAndDetails {
+  margin-top: -20%;
   display: grid;
   grid-template-areas:
     'p d'

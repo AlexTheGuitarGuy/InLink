@@ -5,3 +5,7 @@ export const getStoredText = (state) => {
 export const getDialogsPage = (state) => {
   return state.dialogsPage;
 };
+
+export const getMyPfp = (state) => {
+  return state.dialogsPage.myPfp;
+};

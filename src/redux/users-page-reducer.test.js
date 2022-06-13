@@ -13,7 +13,7 @@ let state = {
       followed: false,
       /*pfp: (
         <img
-          src={require('../../redux/photos/UsersPfp/u1.jpg')}
+          src={require('../../redux/photos/UsersPfp/u1.png')}
           alt="User1 pfp"
         />
       ),*/
@@ -26,7 +26,7 @@ let state = {
       followed: false,
       /*pfp: (
         <img
-          src={require('../../redux/photos/UsersPfp/u2.png')}
+          src={require('../../redux/photos/UsersPfp/u2.jpg')}
           alt="User2 pfp"
         />
       ),*/

@@ -15,17 +15,11 @@ import { compose } from 'redux';
 import withRouter from './HOC/withRouter';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Error from './components/Error/Error';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 const UsersContainer = lazy(() =>
   import('./components/Users/UsersContainer').then(
     ({ default: UsersContainer }) => ({ default: UsersContainer }),
-  ),
-);
-const ProfileContainer = lazy(() =>
-  import('./components/Profile/ProfileContainer').then(
-    ({ default: ProfileContainer }) => ({
-      default: ProfileContainer,
-    }),
   ),
 );
 
