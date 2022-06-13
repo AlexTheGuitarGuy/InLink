@@ -1,8 +1,8 @@
 import { securityAPI } from '../api/API';
 import { stopSubmit } from 'redux-form';
 
-const SET_DATA = 'GACHI_FINDER/AUTH_REDUCER/SET_DATA';
-const SET_CAPTCHA = 'GACHI_FINDER/AUTH_REDUCER/SET_CAPTCHA';
+const SET_DATA = 'IN_LINK/AUTH_REDUCER/SET_DATA';
+const SET_CAPTCHA = 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA';
 
 let defaultState = {
   id: null,

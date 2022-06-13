@@ -119,7 +119,7 @@ const AppContainer = compose(
   connect(mstp, { initializeApp }),
 )(App);
 
-const GachiFinderApp = () => {
+const InLinkApp = () => {
   return (
     <React.StrictMode>
       <Suspense
@@ -142,4 +142,4 @@ const GachiFinderApp = () => {
   );
 };
 
-export default GachiFinderApp;
+export default InLinkApp;

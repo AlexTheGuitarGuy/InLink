@@ -1,6 +1,6 @@
 import { auth } from './auth-reducer';
 
-const APP_INITIALIZED = 'GACHI_FINDER/APP_REDUCER/APP_INITIALIZED';
+const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED';
 
 let defaultState = {
   isAppInitialized: false,
