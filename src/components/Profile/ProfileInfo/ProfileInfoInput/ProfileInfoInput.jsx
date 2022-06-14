@@ -11,8 +11,8 @@ import Status from '../Status/Status';
 import banner from '../../../../assets/banner.jpg';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
-import e from '../../../common/FormControls/FormControls.module.css';
 import { connect } from 'react-redux';
+import Error from '../../../Error/Error';
 
 let ProfileInfoInputForm = ({
   profileStatus,
@@ -38,7 +38,7 @@ let ProfileInfoInputForm = ({
         className={s.banner + ' w-full'}
       />
 
-      {error && <div className={e.summaryError}>{error}</div>}
+      {error && <Error text={'error'} />}
 
       <div className={s.pfpAndDetails}>
         <div className={s.pfp}>

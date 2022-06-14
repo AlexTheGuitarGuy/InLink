@@ -18,7 +18,7 @@ const FriendItems = ({ friends }) => {
 
   return (
     <div className={s.friendList}>
-      <div className={s.friendsText}>Buddies:</div>
+      <div className={s.friendsText}>Friends:</div>
       <div className={s.friendElems}>
         {friendList}
         {friendList.length > 5 && 'and more...'}

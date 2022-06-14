@@ -72,14 +72,8 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
       <Nav state={state.sidebar} friends={state.dialogsPage.users} />
 
       <div className="app-wrapper-content">
-        {error && (
-          <Error
-            title={'An unexpected error has occurred'}
-            text={error}
-            setError={setError}
-          />
-        )}
-        <div className="app-wrapper-content-formating">
+        {error && <Error text={error} />}
+        <div className="app-wrapper-content-formatting">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
