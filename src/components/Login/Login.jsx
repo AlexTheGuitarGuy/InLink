@@ -47,7 +47,12 @@ let LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
       <div>
         <button>Log in</button>
       </div>
-      {captcha ? (
+      <div className="text-white mt-2">
+        Free account for visitors:{' '}
+        <div>Email: free@samuraijs.com Password: free</div>
+      </div>
+
+      {captcha && (
         <div className={'mt-2 text-black'}>
           <img src={captcha} alt={'captcha'} className={'mb-1'} />
           {createField(
@@ -58,8 +63,6 @@ let LoginForm = ({ handleSubmit, error, maxLen, captcha }) => {
             null,
           )}
         </div>
-      ) : (
-        <></>
       )}
     </form>
   );
