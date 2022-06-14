@@ -25,10 +25,11 @@ const Profile = ({
   isEditing,
 }) => {
   if (isLoading || !profileData) return <Loading />;
+  if (!isOwner && isEditing) setEditing(false);
 
   return (
     <div>
-      {isEditing ? (
+      {isEditing && isOwner ? (
         <ProfileInfoInput
           uploadPFP={uploadPFP}
           isOwner={isOwner}

@@ -29,11 +29,11 @@ const ProfileContainer = ({
   getStatus,
   ...props
 }) => {
-  let loggedUser = uid;
-  let currentUserPage = router.params.uid;
+  const loggedUser = uid;
+  const currentUserPage = router.params.uid;
 
   useEffect(() => {
-    let user = currentUserPage || loggedUser;
+    const user = currentUserPage || loggedUser;
 
     getProfile(user);
     getStatus(user);
