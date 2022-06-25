@@ -8,7 +8,6 @@ import {
 import s from '../ProfileInfoText/ProfileInfoText.module.css';
 import placeholder from '../../../../assets/pfps/placeholder.jpg';
 import Status from '../Status/Status';
-import banner from '../../../../assets/banner.jpg';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
 import { connect } from 'react-redux';
@@ -32,8 +31,6 @@ let ProfileInfoInputForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <img src={banner} alt="banner" className="w-full" />
-
       {error && <Error text={'error'} />}
 
       <div className={s.pfpAndDetails}>

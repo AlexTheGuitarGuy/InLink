@@ -8,10 +8,11 @@ import Nav from './Nav/Nav';
 const Header = ({ navItems, ...restProps }) => {
   return (
     <header
-      className={`p-2 bg-gray-400 text-gray-700
-        rounded-b
+      className={`px-4 bg-gray-200 text-gray-700
+        rounded-b border-b-2 border-gray-400
         flex justify-between items-center 
         whitespace-nowrap
+        h-16
         `}
     >
       <div className={'order-3'}>
@@ -23,7 +24,7 @@ const Header = ({ navItems, ...restProps }) => {
       </div>
 
       <div
-        className="order-1 text-5xl
+        className="order-1 text-4xl
       font-semibold hover:text-gray-600 active:text-gray-500 transition-colors"
       >
         <NavLink to={'/'}>InLink</NavLink>

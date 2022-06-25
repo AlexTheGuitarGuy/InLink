@@ -1,5 +1,4 @@
 .pfpAndDetails {
-  margin-top: -20%;
   display: grid;
   grid-template-areas:
     'p d'

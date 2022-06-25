@@ -5,9 +5,8 @@ const FriendItems = ({ friends }) => {
   let friendList = friends.map((e, i) => {
     if (i < 5) {
       return (
-        <NavLink to={`/messages/${e.id}`}>
+        <NavLink to={`/messages/${e.id}`} key={e.id}>
           <div
-            key={e.id}
             className="p-2 flex items-center mt-4
           transition-colors
           hover:bg-gray-400 hover:text-gray-600

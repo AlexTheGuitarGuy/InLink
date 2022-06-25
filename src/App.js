@@ -64,14 +64,15 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
 
   return (
     <div className="w-full h-screen relative">
-      <div className="fixed w-full -mt-16">
-        <HeaderContainer />
-        <div className="w-52">
-          <Sidebar friends={state.dialogsPage.users} />
-        </div>
+      <div className="fixed w-52">
+        <Sidebar friends={state.dialogsPage.users} />
       </div>
 
-      <div className="ml-52 mt-16">
+      <div className="fixed w-full -mt-14">
+        <HeaderContainer />
+      </div>
+
+      <div className="ml-52 mt-14 bg-gray-300 p-4 h-full">
         {error && <Error text={error} />}
         <Routes>
           <Route path="/" element={<Home />} />
