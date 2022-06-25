@@ -8,8 +8,8 @@ import Nav from './Nav/Nav';
 const Header = ({ navItems, ...restProps }) => {
   return (
     <header
-      className={`px-4 bg-gray-200 text-gray-700
-        rounded-b border-b-2 border-gray-400
+      className={`px-4 bg-gray-100 text-gray-700
+        rounded-b border-b border-gray-400
         flex justify-between items-center 
         whitespace-nowrap
         h-16
