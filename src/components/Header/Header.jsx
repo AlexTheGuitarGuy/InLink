@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import s from './Header.module.css';
 import cn from 'classnames';
 import LoginButton from './LoginButton/LoginButton';
+import Nav from './Nav/Nav';
 
-const Header = (props) => {
+const Header = ({ navItems, ...restProps }) => {
   return (
     <header
       className={cn(
@@ -17,8 +18,12 @@ const Header = (props) => {
         whitespace-nowrap`,
       )}
     >
+      <div className={'order-3'}>
+        <LoginButton {...restProps} />
+      </div>
+
       <div className={'order-2'}>
-        <LoginButton {...props} />
+        <Nav navItems={navItems} />
       </div>
 
       <div

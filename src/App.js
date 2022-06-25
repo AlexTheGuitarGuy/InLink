@@ -1,6 +1,6 @@
 import './App.css';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import Nav from './components/Nav/Nav';
+import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -66,7 +66,7 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
     <div className="app-wrapper">
       <HeaderContainer />
 
-      <Nav state={state.sidebar} friends={state.dialogsPage.users} />
+      <Sidebar friends={state.dialogsPage.users} />
 
       <div className="app-wrapper-content">
         {error && <Error text={error} />}
