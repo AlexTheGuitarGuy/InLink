@@ -1,33 +1,32 @@
 import React from 'react';
-import s from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
+import s from './Header.module.css';
+import cn from 'classnames';
+import LoginButton from './LoginButton/LoginButton';
 
-const Header = ({ logout, login, isLoggedIn }) => {
+const Header = (props) => {
   return (
-    <header className={s.header}>
-      <div className={s.login}>
-        {isLoggedIn ? (
-          <div>
-            <span className={s.username}>{login}</span>
-            <div>
-              <button onClick={logout} className={s.logout}>
-                Log out
-              </button>
-            </div>
-          </div>
-        ) : (
-          <NavLink to={'/login'}>
-            <button>Log in</button>
-          </NavLink>
-        )}
+    <header
+      className={cn(
+        s.header,
+        `p-2 bg-gray-300 text-gray-700
+        rounded-b
+        flex justify-between items-center 
+        whitespace-nowrap`,
+      )}
+    >
+      <div className={'order-2'}>
+        <LoginButton {...props} />
       </div>
-      <NavLink to={'/'}>
-        <span className="self-center ml-2 text-5xl font-semibold whitespace-nowrap text-white">
-          InLink
-        </span>
-      </NavLink>
+
+      <div
+        className="order-1 text-5xl
+      font-semibold hover:text-gray-600 active:text-gray-500 transition-colors"
+      >
+        <NavLink to={'/'}>InLink</NavLink>
+      </div>
     </header>
   );
 };

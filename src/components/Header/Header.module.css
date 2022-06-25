@@ -1,17 +1,3 @@
 .header {
   grid-area: h;
-  background-color: rgb(74, 78, 138);
-  margin-bottom: 0.5%;
-}
-
-.username{
-  color: white;
-}
-
-.login {
-  float: right;
-}
-
-.logout {
-  float:right;
 }

@@ -11,7 +11,7 @@ const FormControl = ({ meta: { touched, error }, children }) => {
         <span
           className={cn([
             `bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-            rounded absolute`,
+            rounded absolute whitespace-nowrap`,
           ])}
         >
           {error}

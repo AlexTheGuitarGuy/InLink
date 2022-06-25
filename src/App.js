@@ -2,9 +2,6 @@ import './App.css';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Nav from './components/Nav/Nav';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Preferences from './components/Preferences/Preferences';
 import Home from './components/Home/Home';
 import HeaderContainer from './components/Header/HeaderContainer';
 import { connect, Provider } from 'react-redux';
@@ -93,9 +90,6 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
               element={<div>facebook</div>}
             />
             <Route path="/users" element={<UsersContainer />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/music" element={<Music />} />
-            <Route path="/preferences" element={<Preferences />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
