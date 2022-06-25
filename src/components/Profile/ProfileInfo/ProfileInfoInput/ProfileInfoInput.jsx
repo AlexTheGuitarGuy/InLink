@@ -32,11 +32,7 @@ let ProfileInfoInputForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <img
-        src={banner}
-        alt="banner"
-        className={s.banner + ' w-full'}
-      />
+      <img src={banner} alt="banner" className="w-full" />
 
       {error && <Error text={'error'} />}
 

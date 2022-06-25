@@ -2,21 +2,17 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
-import s from './Header.module.css';
-import cn from 'classnames';
 import LoginButton from './LoginButton/LoginButton';
 import Nav from './Nav/Nav';
 
 const Header = ({ navItems, ...restProps }) => {
   return (
     <header
-      className={cn(
-        s.header,
-        `p-2 bg-gray-300 text-gray-700
+      className={`p-2 bg-gray-400 text-gray-700
         rounded-b
         flex justify-between items-center 
-        whitespace-nowrap`,
-      )}
+        whitespace-nowrap
+        `}
     >
       <div className={'order-3'}>
         <LoginButton {...restProps} />

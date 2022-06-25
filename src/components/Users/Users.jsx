@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './Users.module.css';
 import Loading from '../common/Loading/Loading';
 import UserItems from './UserItems/UserItems';
 import Paginator from '../common/Paginator/Paginator';
@@ -17,7 +16,7 @@ const Users = ({
   isLoading,
   portionSize,
 }) => {
-  if (isLoading) return <Loading class={s.loadImg} />;
+  if (isLoading) return <Loading />;
 
   return (
     <div>

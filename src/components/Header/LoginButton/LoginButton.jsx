@@ -9,7 +9,7 @@ const LoginButton = ({ logout, login, isLoggedIn }) => {
       )}
       <div
         className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-            text-gray-100 text-center
+            text-gray-200 text-center
             py-0.5 px-4 rounded
             transition-colors cursor-pointer"
       >

@@ -1,4 +1,3 @@
-import React from 'react';
 import { updateObjInArr } from '../utils/object-helpers';
 
 const SEND_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE';
@@ -9,31 +8,19 @@ const defaultState = {
   users: [
     {
       id: 1,
-      name: ['Denis', 'Johnson'],
-      pfp: (
-        <img src={require('../assets/pfps/u1.png')} alt="User1 pfp" />
-      ),
+      name: 'Denis Johnson',
     },
     {
       id: 2,
-      name: ['Hannah', 'White'],
-      pfp: (
-        <img src={require('../assets/pfps/u2.jpg')} alt="User2 pfp" />
-      ),
+      name: 'Hannah White',
     },
     {
       id: 3,
-      name: ['Jane', 'Doe'],
-      pfp: (
-        <img src={require('../assets/pfps/u3.jpg')} alt="User3 pfp" />
-      ),
+      name: 'Jane Doe',
     },
     {
       id: 4,
-      name: ['Walter', 'Laine'],
-      pfp: (
-        <img src={require('../assets/pfps/u4.jpg')} alt="User4 pfp" />
-      ),
+      name: 'Walter Laine',
     },
   ],
 

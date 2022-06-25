@@ -63,36 +63,34 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
   if (!isAppInitialized) return <Loading class="mx-auto" />;
 
   return (
-    <div className="app-wrapper">
-      <HeaderContainer />
-
-      <Sidebar friends={state.dialogsPage.users} />
-
-      <div className="app-wrapper-content">
-        {error && <Error text={error} />}
-        <div className="app-wrapper-content-formatting">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/profile/:uid"
-              element={<ProfileContainer />}
-            />
-            <Route path="/profile" element={<ProfileContainer />} />
-
-            <Route
-              path="/messages/*"
-              element={<MessagesContainer />}
-            />
-
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/login/facebook"
-              element={<div>facebook</div>}
-            />
-            <Route path="/users" element={<UsersContainer />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+    <div className="w-full h-screen relative">
+      <div className="fixed w-full -mt-16">
+        <HeaderContainer />
+        <div className="w-52">
+          <Sidebar friends={state.dialogsPage.users} />
         </div>
+      </div>
+
+      <div className="ml-52 mt-16">
+        {error && <Error text={error} />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/profile/:uid"
+            element={<ProfileContainer />}
+          />
+          <Route path="/profile" element={<ProfileContainer />} />
+
+          <Route path="/messages/*" element={<MessagesContainer />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login/facebook"
+            element={<div>facebook</div>}
+          />
+          <Route path="/users" element={<UsersContainer />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </div>
     </div>
   );

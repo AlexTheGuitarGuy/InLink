@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import s from './Sidebar.module.css';
 import FriendItems from './FriendItems/FriendItems';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -7,7 +6,7 @@ import { getIsLoggedIn } from '../../redux/auth-selector';
 
 const Sidebar = ({ friends, isLoggedIn }) => {
   return (
-    <div className={s.sidebar}>
+    <div className="p-6 bg-gray-300 h-screen border-r-2 border-gray-400">
       {isLoggedIn && <FriendItems friends={friends} />}
     </div>
   );
