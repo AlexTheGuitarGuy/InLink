@@ -9,10 +9,11 @@ import { initializeApp } from './redux/app-reducer';
 import Loading from './components/common/Loading/Loading';
 import store from './redux/redux-store';
 import { compose } from 'redux';
-import withRouter from './HOC/withRouter';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Error from './components/Error/Error';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import { getIsLoggedIn } from './redux/auth-selector';
+import cn from 'classnames';
 
 const UsersContainer = lazy(() =>
   import('./components/Users/UsersContainer').then(
@@ -34,7 +35,13 @@ const MessagesContainer = lazy(() =>
   ),
 );
 
-const App = ({ state, isAppInitialized, initializeApp }) => {
+const App = ({
+  state,
+  isAppInitialized,
+  initializeApp,
+  isLoggedIn,
+  isSidebarHidden,
+}) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -65,15 +72,21 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
 
   return (
     <div className="w-full h-screen">
-      <div className="fixed w-52 -mt-1.5">
-        <Sidebar friends={state.dialogsPage.users} />
-      </div>
+      {isLoggedIn && (
+        <div className="fixed w-60 -mt-1.5">
+          <Sidebar friends={state.dialogsPage.users} />
+        </div>
+      )}
 
       <div className="fixed w-full -mt-14">
         <HeaderContainer />
       </div>
 
-      <div className="ml-52 mt-14 p-4 h-full">
+      <div
+        className={cn('mt-14 p-4 h-full', {
+          'ml-60': isLoggedIn && !isSidebarHidden,
+        })}
+      >
         {error && <Error text={error} />}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -100,12 +113,11 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
 
 const mstp = (state) => ({
   isAppInitialized: state.app.isAppInitialized,
+  isLoggedIn: getIsLoggedIn(state),
+  isSidebarHidden: state.app.isSidebarHidden,
 });
 
-const AppContainer = compose(
-  withRouter,
-  connect(mstp, { initializeApp }),
-)(App);
+const AppContainer = compose(connect(mstp, { initializeApp }))(App);
 
 const InLinkApp = () => {
   return (

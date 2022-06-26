@@ -1,19 +1,24 @@
 import React, { memo } from 'react';
 import FriendItems from './FriendItems/FriendItems';
 import { compose } from 'redux';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getIsLoggedIn } from '../../redux/auth-selector';
+import { setIsSidebarHidden } from '../../redux/app-reducer';
 
-const Sidebar = ({ friends, isLoggedIn }) => {
+const Sidebar = ({ friends, setIsSidebarHidden }) => {
+  if (useLocation().pathname.match('/messages')) {
+    setIsSidebarHidden(true);
+    return null;
+  } else setIsSidebarHidden(false);
+
   return (
     <div className="p-6">
-      {isLoggedIn && <FriendItems friends={friends} />}
+      <FriendItems friends={friends} />
     </div>
   );
 };
 
-const mstp = (state) => ({
-  isLoggedIn: getIsLoggedIn(state),
-});
-
-export default compose(memo, connect(mstp, null))(Sidebar);
+export default compose(
+  memo,
+  connect(null, { setIsSidebarHidden }),
+)(Sidebar);

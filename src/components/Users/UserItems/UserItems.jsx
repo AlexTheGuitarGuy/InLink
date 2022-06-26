@@ -18,20 +18,36 @@ const UserItems = ({ users, followQueue, follow, unfollow }) => {
           { 'border-b border-gray-300': i !== arr.length - 1 },
         )}
       >
-        <div className="flex">
-          <NavLink to={'/profile/' + (e.uniqueUrlName || e.id)}>
-            <img
-              src={e.photos.small || placeholder}
-              alt="userPfp"
-              className="rounded-full w-20 h-20 p-0.5
+        <NavLink
+          to={'/profile/' + (e.uniqueUrlName || e.id)}
+          className="flex"
+        >
+          <img
+            src={e.photos.small || placeholder}
+            alt="userPfp"
+            className="rounded-full w-20 h-20 p-0.5
               transition-colors hover:bg-gray-700 active:bg-gray-800"
-            />
-          </NavLink>
+          />
+
           <div className="mt-3 ml-3 flex flex-col">
-            <div className="text-xl">{e.name}</div>
-            <div className="font-normal">{e.status}</div>
+            <div
+              className="text-xl
+            border-b border-transparent
+            hover:border-gray-600 active:border-gray-500
+            hover:text-gray-600 active:text-gray-500"
+            >
+              {e.name}
+            </div>
+            <div
+              className="font-normal
+                        border-b border-transparent
+            hover:border-gray-600 active:border-gray-500
+            hover:text-gray-600 active:text-gray-500"
+            >
+              {e.status}
+            </div>
           </div>
-        </div>
+        </NavLink>
 
         <button
           disabled={isDisabled}

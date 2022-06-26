@@ -23,7 +23,7 @@ const PublishForm = ({ handleSubmit }) => {
       <button
         className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
           text-gray-100 text-center font-semibold
-          py-1.5 px-4 rounded
+          py-1.5 px-4 rounded w-full
           transition-colors cursor-pointer"
       >
         Publish
