@@ -29,7 +29,7 @@ const ProfileInfoText = ({
           <img
             src={pfp || placeholder}
             alt={'pfp'}
-            className="rounded-full w-52 bg-gray-700 p-1"
+            className="rounded-full w-52 h-52 bg-gray-700 p-1"
           />
         </div>
 

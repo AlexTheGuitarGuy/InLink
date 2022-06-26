@@ -19,7 +19,11 @@ const Users = ({
   if (isLoading) return <Loading />;
 
   return (
-    <div>
+    <div
+      className="flex justify-between flex-col
+      bg-gray-100 rounded-lg p-8
+    text-gray-700 font-semibold"
+    >
       <UserItems
         followQueue={followQueue}
         updateFollowQueue={updateFollowQueue}

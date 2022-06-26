@@ -6,7 +6,7 @@ import { getIsLoggedIn } from '../../redux/auth-selector';
 
 const Sidebar = ({ friends, isLoggedIn }) => {
   return (
-    <div className="p-6 h-screen">
+    <div className="p-6">
       {isLoggedIn && <FriendItems friends={friends} />}
     </div>
   );
