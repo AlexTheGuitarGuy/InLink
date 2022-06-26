@@ -13,7 +13,7 @@ const Post = ({ text, likeCount, pfp, userName }) => {
         <img
           src={pfp}
           alt="poster_pfp"
-          className="rounded-full w-10 bg-gray-700 p-0.5 inline"
+          className="rounded-full w-10 h-10 bg-gray-700 p-0.5 inline"
         />
         <span className="ml-2">{userName}</span>
       </div>

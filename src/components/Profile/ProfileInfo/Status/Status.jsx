@@ -22,12 +22,12 @@ const Status = ({ isOwner, updateStatus, status }) => {
   }, [status]);
 
   return (
-    <div className="inline transition-colors break-words cursor-pointer">
+    <div className="inline transition-colors break-words ">
       {!isEditing ? (
         <div
           onClick={activateEdit}
           className={cn('p-1 rounded max-w-sm', {
-            'hover:bg-gray-200': isOwner,
+            'hover:bg-gray-200 cursor-pointer': isOwner,
           })}
         >
           {status ? '"' + status + '"' : 'No status'}

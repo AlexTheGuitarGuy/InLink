@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import s from './Paginator.module.css';
 import cn from 'classnames';
 
 const Paginator = ({
@@ -39,7 +38,15 @@ const Paginator = ({
       <span
         key={i}
         onClick={() => changeOnClick(i)}
-        className={cn({ [s.chosenPage]: i === page })}
+        className={cn(
+          `mx-1 cursor-pointer transition-colors 
+          hover:text-gray-600 active:text-gray-500
+          border-b-2`,
+          { 'border-gray-600': i === page },
+          {
+            'border-transparent hover:border-gray-600': !(i === page),
+          },
+        )}
       >
         {`${i} `}
       </span>
@@ -61,6 +68,9 @@ const Paginator = ({
         setCurrentPages(pagesBeginning);
         changePage(page);
       }}
+      className="mx-1 cursor-pointer transition-colors
+          hover:text-gray-600 active:text-gray-500
+          border-b-2 border-transparent hover:border-gray-600"
     >
       {symbol}
     </span>
@@ -74,7 +84,14 @@ const Paginator = ({
   );
 
   const moveOnePage = (i, symbol) => (
-    <span onClick={() => changeOnClick(i)}>{symbol}</span>
+    <span
+      onClick={() => changeOnClick(i)}
+      className="mx-1 cursor-pointer transition-colors
+          hover:text-gray-600 active:text-gray-500
+          border-b-2 border-transparent hover:border-gray-600"
+    >
+      {symbol}
+    </span>
   );
 
   const moveLeft = moveOnePage(page - 1, '< ');
@@ -82,12 +99,16 @@ const Paginator = ({
   const moveRight = moveOnePage(page + 1, ' >');
 
   return (
-    <div className={s.pages}>
-        {page !== 1 && firstPage}
-        {page !== 1 && moveLeft}
-        {currentPages}
-        {page !== pagesNb && moveRight}
-        {page !== pagesNb && lastPage}
+    <div
+      className="flex justify-center
+    font-semibold text-xl
+    mb-4"
+    >
+      {page !== 1 && firstPage}
+      {page !== 1 && moveLeft}
+      {currentPages}
+      {page !== pagesNb && moveRight}
+      {page !== pagesNb && lastPage}
     </div>
   );
 };

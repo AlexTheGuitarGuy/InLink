@@ -24,7 +24,7 @@ const Contacts = ({ contacts }) => {
 const ContactField = ({ contactName }) => {
   return (
     <div className="mt-1">
-      {contactName}:
+      <label htmlFor={contactName}>{contactName}:</label>
       <span className="ml-2 text-gray-700">
         {createField(
           'insert ' + contactName,
@@ -32,7 +32,7 @@ const ContactField = ({ contactName }) => {
           Input,
           null,
           null,
-          { className: 'p-1 rounded w-60' },
+          { className: 'p-1 rounded w-60', id: contactName },
         )}
       </span>
     </div>

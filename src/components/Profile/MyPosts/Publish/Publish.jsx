@@ -14,7 +14,10 @@ const PublishForm = ({ handleSubmit }) => {
         Textarea,
         null,
         'text',
-        { className: 'resize-none py-2 px-4 rounded w-full' },
+        {
+          className: 'resize-none py-2 px-4 rounded w-full',
+          id: 'postText',
+        },
       )}
 
       <div
@@ -41,7 +44,9 @@ const Publish = ({ post, ...props }) => {
 
   return (
     <div>
-      <div className="text-center mb-2">New post</div>
+      <label htmlFor="postText" className="text-lg">
+        New post
+      </label>
       <ReduxPublish {...props} onSubmit={handleSubmit} />
     </div>
   );

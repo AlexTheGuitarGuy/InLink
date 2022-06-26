@@ -63,7 +63,7 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
   if (!isAppInitialized) return <Loading class="mx-auto" />;
 
   return (
-    <div className="w-full h-screen relative">
+    <div className="w-full h-screen">
       <div className="fixed w-52 -mt-1.5">
         <Sidebar friends={state.dialogsPage.users} />
       </div>
