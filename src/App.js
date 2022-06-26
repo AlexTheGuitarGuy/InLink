@@ -64,7 +64,7 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
 
   return (
     <div className="w-full h-screen relative">
-      <div className="fixed w-52">
+      <div className="fixed w-52 -mt-1.5">
         <Sidebar friends={state.dialogsPage.users} />
       </div>
 
@@ -72,7 +72,7 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
         <HeaderContainer />
       </div>
 
-      <div className="ml-52 mt-14 bg-gray-300 p-4 h-full">
+      <div className="ml-52 mt-14 p-4 h-full">
         {error && <Error text={error} />}
         <Routes>
           <Route path="/" element={<Home />} />

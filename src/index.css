@@ -5,6 +5,8 @@
 @layer base {
   html {
     font-size: 15px;
+    --tw-bg-opacity: 1;
+    background-color: rgb(209 213 219 / var(--tw-bg-opacity));
   }
 
   body {

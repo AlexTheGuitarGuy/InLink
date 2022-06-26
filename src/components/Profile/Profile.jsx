@@ -56,6 +56,7 @@ const Profile = ({
         posts={posts}
         post={post}
         pfp={profileData.photos.small}
+        userName={profileData.fullName}
       />
     </div>
   );

@@ -25,19 +25,18 @@ const Contacts = ({ contacts }) => {
   });
 
   return (
-    <span className={'mt-1 text-white'}>
+    <div className="mt-2 text-gray-700">
       Contacts:
-      <div className={'ml-1'}>
-        {isEmpty ? 'None' : parsedContacts}
-      </div>
-    </span>
+      <div className="ml-1">{isEmpty ? 'None' : parsedContacts}</div>
+    </div>
   );
 };
 
 const TextContact = ({ contactName, contactAddress }) => {
   return (
-    <div>
-      {contactName}: {contactAddress}
+    <div className="mt-2">
+      {contactName}:{' '}
+      <span className="font-normal">{contactAddress}</span>
     </div>
   );
 };

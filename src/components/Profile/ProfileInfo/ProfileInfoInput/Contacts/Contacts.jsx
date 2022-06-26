@@ -3,7 +3,6 @@ import {
   createField,
   Input,
 } from '../../../../common/FormControls/FormControls';
-import cn from 'classnames';
 
 const Contacts = ({ contacts }) => {
   const parsedContacts = Object.keys(contacts).map((key) => {
@@ -15,23 +14,25 @@ const Contacts = ({ contacts }) => {
   });
 
   return (
-    <span className={'mt-1 text-white'}>
+    <div className="mt-2 text-gray-700">
       Contacts:
-      <div className={'ml-1'}>{parsedContacts}</div>
-    </span>
+      <div className="ml-1">{parsedContacts}</div>
+    </div>
   );
 };
 
 const ContactField = ({ contactName }) => {
   return (
-    <div className={'mt-1'}>
+    <div className="mt-1">
       {contactName}:
-      <span className={cn('ml-1 text-black')}>
+      <span className="ml-2 text-gray-700">
         {createField(
           'insert ' + contactName,
           'contacts.' + contactName,
           Input,
           null,
+          null,
+          { className: 'p-1 rounded w-60' },
         )}
       </span>
     </div>

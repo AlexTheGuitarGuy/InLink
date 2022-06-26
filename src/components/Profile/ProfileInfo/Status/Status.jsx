@@ -1,4 +1,3 @@
-import s from './Status.module.css';
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 
@@ -23,22 +22,27 @@ const Status = ({ isOwner, updateStatus, status }) => {
   }, [status]);
 
   return (
-    <div className={s.all}>
+    <div className="inline transition-colors break-words cursor-pointer">
       {!isEditing ? (
-        <span
-          className={cn(s.descriptionText, { [s.isOwner]: isOwner })}
+        <div
           onClick={activateEdit}
+          className={cn('p-1 rounded max-w-sm', {
+            'hover:bg-gray-200': isOwner,
+          })}
         >
           {status ? '"' + status + '"' : 'No status'}
-        </span>
+        </div>
       ) : (
-        <input
-          onChange={editLocalStatus}
-          className={s.descriptionEdit}
-          autoFocus={true}
-          onBlur={deactivateEdit}
-          defaultValue={localStatus}
-        />
+        <div>
+          <input
+            onChange={editLocalStatus}
+            className="p-1 pl-2.5
+            font-semibold text-gray-700"
+            autoFocus={true}
+            onBlur={deactivateEdit}
+            defaultValue={localStatus}
+          />
+        </div>
       )}
     </div>
   );

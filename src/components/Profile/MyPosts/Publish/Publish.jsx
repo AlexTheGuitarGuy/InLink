@@ -1,19 +1,29 @@
 import React from 'react';
-import s from './Publish.module.css';
-import { Field, reduxForm } from 'redux-form';
-import { Textarea } from '../../../common/FormControls/FormControls';
+import { reduxForm } from 'redux-form';
+import {
+  createField,
+  Textarea,
+} from '../../../common/FormControls/FormControls';
 
 const PublishForm = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <Field
-        className={s.textarea}
-        placeholder={'Type what you think...'}
-        component={Textarea}
-        name={'post'}
-      />
-      <div>
-        <button className={s.button}>Publish</button>
+      {createField(
+        'Type what you think...',
+        'post',
+        Textarea,
+        null,
+        'text',
+        { className: 'resize-none py-2 px-4 rounded w-full' },
+      )}
+
+      <div
+        className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
+          text-gray-100 text-center
+          py-1.5 px-4 rounded
+          transition-colors cursor-pointer"
+      >
+        <button className="font-semibold">Publish</button>
       </div>
     </form>
   );
@@ -30,8 +40,8 @@ const Publish = ({ post, ...props }) => {
   };
 
   return (
-    <div className={s.all}>
-      <div className={s.newPost}>New post</div>
+    <div>
+      <div className="text-center mb-2">New post</div>
       <ReduxPublish {...props} onSubmit={handleSubmit} />
     </div>
   );

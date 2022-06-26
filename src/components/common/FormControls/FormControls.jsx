@@ -9,10 +9,10 @@ const FormControl = ({ meta: { touched, error }, children }) => {
       {children}
       {hasError && (
         <span
-          className={cn([
+          className={cn(
             `bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
             rounded absolute whitespace-nowrap`,
-          ])}
+          )}
         >
           {error}
         </span>
@@ -45,6 +45,7 @@ export const createField = (
   component,
   validators,
   type,
+  props,
 ) => {
   return (
     <Field
@@ -53,6 +54,7 @@ export const createField = (
       component={component}
       validate={validators}
       type={type}
+      props={{ ...props }}
     />
   );
 };

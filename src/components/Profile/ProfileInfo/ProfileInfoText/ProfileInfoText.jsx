@@ -1,11 +1,9 @@
-import s from './ProfileInfoText.module.css';
 import placeholder from '../../../../assets/pfps/placeholder.jpg';
+import React, { memo } from 'react';
+import EditButton from './EditButton/EditButton';
+import Status from '../Status/Status';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
-import Status from '../Status/Status';
-import React, { memo } from 'react';
-import UserName from './UserName/UserName';
-import EditButton from './EditButton/EditButton';
 
 const ProfileInfoText = ({
   profileData: {
@@ -21,38 +19,46 @@ const ProfileInfoText = ({
   setEditing,
 }) => {
   return (
-    <div>
-      <div className={s.pfpAndDetails}>
-        <div className={s.pfp}>
-          <img src={pfp || placeholder} alt={'pfp'} />
+    <div
+      className="flex justify-between
+      bg-gray-100 rounded-lg p-8
+    text-gray-700 font-semibold"
+    >
+      <div className="flex ">
+        <div>
+          <img
+            src={pfp || placeholder}
+            alt={'pfp'}
+            className="rounded-full w-52 bg-gray-700 p-1"
+          />
         </div>
 
-        <span className={s.jobInfo}>
-          <EditButton isOwner={isOwner} setEditing={setEditing} />
+        <div className="mt-8 ml-4">
+          <div className="text-2xl">{fullName}</div>
 
-          <JobInfo
-            lookingForAJob={lookingForAJob}
-            lookingForAJobDescription={lookingForAJobDescription}
-          />
-        </span>
-
-        <div className={s.details}>
-          <span className={s.username}>
-            <UserName fullName={fullName} />
-          </span>
-
-          <span className={s.status}>
+          <div className="mt-2">
             <Status
               status={profileStatus}
               updateStatus={updateStatus}
               isOwner={isOwner}
             />
-          </span>
+          </div>
 
-          <span className={s.contacts}>
-            <Contacts contacts={contacts} />
-          </span>
+          {isOwner && (
+            <div className="mt-4">
+              <EditButton setEditing={setEditing} />
+            </div>
+          )}
         </div>
+      </div>
+
+      <div className="flex flex-col w-96">
+        <JobInfo
+          lookingForAJob={lookingForAJob}
+          lookingForAJobDescription={lookingForAJobDescription}
+        />
+
+        <Contacts contacts={contacts} />
       </div>
     </div>
   );

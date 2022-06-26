@@ -1,17 +1,16 @@
 import React, { memo } from 'react';
 import { formValueSelector, reduxForm } from 'redux-form';
 import { maxLen } from '../../../../utils/validators/validators';
-import {
-  createField,
-  Input,
-} from '../../../common/FormControls/FormControls';
-import s from '../ProfileInfoText/ProfileInfoText.module.css';
 import placeholder from '../../../../assets/pfps/placeholder.jpg';
 import Status from '../Status/Status';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
 import { connect } from 'react-redux';
 import Error from '../../../Error/Error';
+import {
+  createField,
+  Input,
+} from '../../../common/FormControls/FormControls';
 
 let ProfileInfoInputForm = ({
   profileStatus,
@@ -31,54 +30,73 @@ let ProfileInfoInputForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      {error && <Error text={'error'} />}
+      <div
+        className="flex justify-between
+      bg-gray-100 rounded-lg p-8
+    text-gray-700 font-semibold"
+      >
+        {error && <Error text={'error'} />}
 
-      <div className={s.pfpAndDetails}>
-        <div className={s.pfp}>
-          <img src={pfp || placeholder} alt={'pfp'} />
-        </div>
+        <div className="flex">
+          <div>
+            <img
+              src={pfp || placeholder}
+              alt={'pfp'}
+              className="rounded-full w-52 bg-gray-700 p-1"
+            />
+          </div>
 
-        <span className={s.jobInfo}>
-          <span className={'grid'}>
-            {isOwner ? <button>Save</button> : null}
-          </span>
-
-          <input type={'file'} onChange={updatePFP} />
-
-          <JobInfo
-            lookingForAJob={lookingForAJob}
-            maxLen={maxLen1000}
-          />
-        </span>
-
-        <div className={s.details}>
-          <span className={s.username}>
-            <span
-              className={
-                'flex flex-col justify-center items-center text-black'
-              }
-            >
+          <div className="mt-8 ml-4">
+            <div className="text-2xl">
               {createField(
                 'Please insert your name...',
                 'fullName',
                 Input,
                 null,
                 null,
+                { className: 'p-2 rounded' },
               )}
-            </span>
-          </span>
+            </div>
 
-          <span className={s.status}>
-            <Status
-              status={profileStatus}
-              updateStatus={updateStatus}
-              isOwner={isOwner}
-            />
-          </span>
+            <div className="mt-2">
+              <Status
+                status={profileStatus}
+                updateStatus={updateStatus}
+                isOwner={isOwner}
+              />
+            </div>
 
-          <span className={s.contacts}>
-            <Contacts contacts={contacts} />
-          </span>
+            <div className="mt-4">
+              <span
+                className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
+                          text-gray-100 text-center
+                          py-1.5 px-4 rounded
+                          transition-colors cursor-pointer"
+              >
+                <button className="font-semibold">Save</button>
+              </span>
+            </div>
+
+            <div className="mt-4">
+              <div>Upload profile picture:</div>
+
+              <input
+                type={'file'}
+                onChange={updatePFP}
+                className="text-gray-700 font-semibold
+                          transition-colors cursor-pointer"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col w-96">
+          <JobInfo
+            lookingForAJob={lookingForAJob}
+            maxLen={maxLen1000}
+          />
+
+          <Contacts contacts={contacts} />
         </div>
       </div>
     </form>

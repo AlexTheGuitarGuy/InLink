@@ -9,17 +9,18 @@ const FriendItems = ({ friends }) => {
           <div
             className="p-2 flex items-center mt-4
           transition-colors
-          hover:bg-gray-400 hover:text-gray-600
-          active:bg-gray-500 active:text-gray-700
-          border-b-2 border-transparent hover:border-gray-500
-          active:border-gray-600"
+          border-b-2 border-transparent
+          hover:bg-gray-200 active:bg-gray-300
+          hover:text-gray-600 active:text-gray-700
+          hover:border-gray-400 active:border-gray-500
+          "
           >
             <img
               src={require(`../../../assets/pfps/u${e.id}.jpg`)}
               alt={`user ${e.id}`}
               className="h-12 w-12 rounded-full"
             />
-            <span className="ml-2 text-lg">{e.name}</span>
+            <span className="ml-2 text-sm">{e.name}</span>
           </div>
         </NavLink>
       );
@@ -28,11 +29,15 @@ const FriendItems = ({ friends }) => {
   });
 
   return (
-    <div className="text-gray-500 font-semibold">
-      <div className="text-xl">Contacts:</div>
+    <div className="text-gray-500 bg-gray-100 p-2 -mr-4 rounded-lg font-semibold">
+      <div className="text-lg ml-2">Contacts:</div>
       <div>
         {friendList}
-        {friendList.length > 5 && 'and more...'}
+        {friendList.length > 5 && (
+          <span className="font-normal ml-4 text-sm">
+            and more...
+          </span>
+        )}
       </div>
     </div>
   );

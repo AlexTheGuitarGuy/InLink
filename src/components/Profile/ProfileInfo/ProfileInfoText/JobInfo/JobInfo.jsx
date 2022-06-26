@@ -2,30 +2,32 @@ import React from 'react';
 
 const JobInfo = ({ lookingForAJob, lookingForAJobDescription }) => {
   return (
-    <span>
+    <div className="w-full">
       {lookingForAJob && (
         <div
-          className={`border-2 border-slate-800 
-                         rounded bg-slate-600 
-                         p-2 mt-2 text-white`}
+          className="border rounded-lg border-gray-300
+                     bg-gray-200
+                     p-4
+                     text-gray-700
+                     flex items-center flex-col"
         >
-          <span className={'content flex justify-center mb-2 mr-5'}>
+          <div className="order-1">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png"
               alt="looking for job"
-              className={'w-5 h-5 mt-0.5 mr-1'}
+              className="w-5 h-5 inline"
             />
             is looking for a job
-          </span>
+          </div>
 
-          <div className={'text-center'}>
+          <div className="order-2">
             {lookingForAJobDescription
               ? '"' + lookingForAJobDescription + '"'
               : null}
           </div>
         </div>
       )}
-    </span>
+    </div>
   );
 };
 
