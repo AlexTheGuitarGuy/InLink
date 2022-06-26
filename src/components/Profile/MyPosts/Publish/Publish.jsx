@@ -20,14 +20,14 @@ const PublishForm = ({ handleSubmit }) => {
         },
       )}
 
-      <div
+      <button
         className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-          text-gray-100 text-center
+          text-gray-100 text-center font-semibold
           py-1.5 px-4 rounded
           transition-colors cursor-pointer"
       >
-        <button className="font-semibold">Publish</button>
-      </div>
+        Publish
+      </button>
     </form>
   );
 };

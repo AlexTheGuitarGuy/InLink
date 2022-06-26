@@ -20,7 +20,7 @@ const FriendItems = ({ friends }) => {
               alt={`user ${e.id}`}
               className="h-12 w-12 rounded-full"
             />
-            <span className="ml-2 text-sm">{e.name}</span>
+            <div className="ml-2 text-sm">{e.name}</div>
           </div>
         </NavLink>
       );

@@ -43,11 +43,12 @@ const App = ({ state, isAppInitialized, initializeApp }) => {
 
   useEffect(() => {
     const handleRejection = (event) => {
-      if (event.reason.substring(0, 18) === 'Invalid url format')
-        setError(`Couldn't upload profile data`);
-      else setError(event.reason);
-
-      event.preventDefault();
+      if (event && event.reason && event.reason.substring) {
+        if (event.reason.substring(0, 18) === 'Invalid url format')
+          setError(`Couldn't upload profile data`);
+        else setError(event.reason);
+        event.preventDefault();
+      }
     };
 
     window.addEventListener('unhandledrejection', handleRejection);

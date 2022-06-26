@@ -24,7 +24,7 @@ const ProfileInfoText = ({
       bg-gray-100 rounded-lg p-8
     text-gray-700 font-semibold"
     >
-      <div className="flex ">
+      <div className="flex">
         <div>
           <img
             src={pfp || placeholder}

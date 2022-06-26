@@ -31,13 +31,15 @@ const Users = ({
         follow={follow}
         unfollow={unfollow}
       />
-      <Paginator
-        pageSize={pageSize}
-        portionSize={portionSize}
-        totalElems={totalUsers}
-        changePage={changePage}
-        page={page}
-      />
+      <div className="mt-4">
+        <Paginator
+          pageSize={pageSize}
+          portionSize={portionSize}
+          totalElems={totalUsers}
+          changePage={changePage}
+          page={page}
+        />
+      </div>
     </div>
   );
 };

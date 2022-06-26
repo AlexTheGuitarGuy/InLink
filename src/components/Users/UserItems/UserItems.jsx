@@ -4,7 +4,7 @@ import placeholder from '../../../assets/pfps/placeholder.jpg';
 import cn from 'classnames';
 
 const UserItems = ({ users, followQueue, follow, unfollow }) => {
-  const mappedUsers = users.map((e) => {
+  const mappedUsers = users.map((e, i, arr) => {
     const buttonText = e.followed ? 'Unfollow' : 'Follow';
     const buttonAction = e.followed ? unfollow : follow;
     const isDisabled = followQueue.some((elem) => elem === e.id);
@@ -12,12 +12,11 @@ const UserItems = ({ users, followQueue, follow, unfollow }) => {
     return (
       <div
         key={e.id}
-        className="
-        flex justify-between items-center
-        my-2 p-4
-        border rounded-lg border-gray-300
-        bg-gray-200
-        "
+        className={cn(
+          `flex justify-between items-center
+                my-2 p-4`,
+          { 'border-b border-gray-300': i !== arr.length - 1 },
+        )}
       >
         <div className="flex">
           <NavLink to={'/profile/' + (e.uniqueUrlName || e.id)}>
@@ -60,7 +59,15 @@ const UserItems = ({ users, followQueue, follow, unfollow }) => {
     );
   });
 
-  return <div className="mx-60">{mappedUsers}</div>;
+  return (
+    <div
+      className="mx-60
+        border rounded-lg border-gray-300
+        bg-gray-200"
+    >
+      {mappedUsers}
+    </div>
+  );
 };
 
 export default memo(UserItems);

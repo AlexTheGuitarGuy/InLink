@@ -26,49 +26,104 @@ const defaultState = {
 
   userMessages: [
     [
-      { id: 1, text: 'Woah! Nice website :)', from: 'them' },
+      {
+        id: 1,
+        text: `Lorem Ipsum is simply dummy text `,
+        from: 'them',
+      },
       {
         id: 2,
-        text: 'Thanks!',
+        text: `Where does it come from?
+              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+              `,
         from: 'me',
       },
       {
         id: 3,
-        text: 'You will nail that interview!',
+        text: ` accompanied by English versions from the 1914 translation by H. Rackham.`,
         from: 'them',
       },
-    ],
-    [
-      { id: 1, text: 'Who are you?', from: 'them' },
-      {
-        id: 2,
-        text: "I'm an artist, i'm a performance artist",
-        from: 'me',
-      },
-      { id: 3, text: "I'm also a baker", from: 'me' },
-      { id: 4, text: "That's cool!", from: 'them' },
-      { id: 5, text: 'Thanks', from: 'me' },
-    ],
-    [
-      { id: 1, text: 'Hi', from: 'them' },
-      { id: 2, text: 'Hello', from: 'me' },
-      { id: 3, text: 'Bye', from: 'them' },
-      { id: 4, text: 'Oh, well', from: 'me' },
-      { id: 5, text: 'see ya:)', from: 'me' },
     ],
     [
       {
         id: 1,
-        text: 'Do you code in react?',
+        text: 'It is a long established fact that a reader will be distracted by the readable content',
         from: 'them',
       },
-      { id: 2, text: 'Yeah, i do', from: 'me' },
+      {
+        id: 2,
+        text: 'has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n',
+        from: 'me',
+      },
       {
         id: 3,
-        text: 'Cool',
+        text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below',
+        from: 'me',
+      },
+      {
+        id: 4,
+        text: 'Lorem Ipsum is simply dummy text',
         from: 'them',
       },
-      { id: 4, text: 'thanks', from: 'me' },
+      { id: 5, text: 'Lorem Ipsum is simply dummy text', from: 'me' },
+      {
+        id: 6,
+        text: 'It is a long established fact that a reader will be distracted by the readable content',
+        from: 'them',
+      },
+      {
+        id: 7,
+        text: ' with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+        from: 'me',
+      },
+      {
+        id: 8,
+        text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below',
+        from: 'me',
+      },
+      {
+        id: 9,
+        text: 'Lorem Ipsum is simply dummy text',
+        from: 'them',
+      },
+      {
+        id: 10,
+        text: 'Lorem Ipsum is simply dummy text',
+        from: 'me',
+      },
+    ],
+    [
+      { id: 1, text: 'Where does it come from?', from: 'them' },
+      {
+        id: 2,
+        text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
+        from: 'me',
+      },
+      { id: 3, text: 'Lorem Ipsum', from: 'them' },
+      { id: 4, text: 'Lorem Ipsum', from: 'me' },
+      {
+        id: 5,
+        text: 'Lorem Ipsum used since the 1500s is reproduced below',
+        from: 'me',
+      },
+    ],
+    [
+      {
+        id: 1,
+        text: 'Lorem Ipsum used since the 1500s is reproduced below',
+        from: 'them',
+      },
+      {
+        id: 2,
+        text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. ',
+        from: 'me',
+      },
+      {
+        id: 3,
+        text: 'Lorem Ipsum',
+        from: 'them',
+      },
+      { id: 4, text: 'Lorem Ipsum is simply dummy text', from: 'me' },
     ],
   ],
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import s from './Messages.module.css';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
 import SendText from './SendText/SendText';
 import placeholder from '../../assets/pfps/placeholder.jpg';
+import { Navigate } from 'react-router';
 
 const Messages = ({
   state: { userMessages, users },
@@ -19,8 +19,11 @@ const Messages = ({
         <div key={e.id}>
           <UserMessage
             message={e}
-            theirPfp={users[i].pfp}
-            myPfp={myData.photos.small || placeholder}
+            pfp={
+              e.from === 'me'
+                ? myData.photos.small || placeholder
+                : require(`../../assets/pfps/u${users[i].id}.jpg`)
+            }
           />
         </div>
       );
@@ -30,14 +33,19 @@ const Messages = ({
   const routes = userDialogElements.map((e, i) => {
     return (
       <Route
-        exact
-        strict
         path={'/' + (i + 1)}
         key={i}
         element={
-          <div className={s.dialog}>
-            {userDialogElements[i]}
-            <SendText memoryText={memoryText} send={send} id={i} />
+          <div className="flex flex-col w-full relative">
+            <div className="mx-16 mb-32 overflow-scroll h-full">
+              {userDialogElements[i]}
+            </div>
+            <div
+              className="absolute bottom-0 w-3/5 self-center
+              pb-4 rounded-t px-2 py-2 bg-gray-300"
+            >
+              <SendText memoryText={memoryText} send={send} id={i} />
+            </div>
           </div>
         }
       />
@@ -45,30 +53,18 @@ const Messages = ({
   });
 
   return (
-    <div className={s.repartition}>
-      <div className={s.dialogPeople}>
-        <Users users={users} />
-      </div>
-      <div className={s.dialogs}>
-        <Routes>
-          <Route
-            exact
-            strict
-            path="/"
-            element={
-              <div className={s.dialog}>
-                {userDialogElements[0]}
-                <SendText
-                  memoryText={memoryText}
-                  send={send}
-                  id={0}
-                />
-              </div>
-            }
-          />
-          {routes}
-        </Routes>
-      </div>
+    <div
+      className="flex
+         bg-gray-100 rounded-lg p-8
+         text-gray-700 font-semibold
+         h-full"
+    >
+      <Users users={users} />
+
+      <Routes>
+        <Route path="/" element={<Navigate to={'1'} />} />
+        {routes}
+      </Routes>
     </div>
   );
 };
