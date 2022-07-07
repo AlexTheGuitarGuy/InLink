@@ -81,6 +81,7 @@ export const login = (
           ? data.messages[0]
           : 'An error has occurred';
       dispatch(stopSubmit('login', { _error: message }));
+      return Promise.reject(message);
     }
   };
 };

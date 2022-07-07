@@ -23,7 +23,8 @@ const SendForm = ({ handleSubmit }) => {
             className=" bg-gray-400 hover:bg-gray-500 active:bg-gray-600
           text-gray-100 text-center
           rounded-full ml-4 px-2 py-2 mt-2
-          transition-colors cursor-pointer"
+          transition-colors cursor-pointer
+          focus:outline-none focus:ring-0"
           >
             <img
               src={require('../../../assets/send.png')}

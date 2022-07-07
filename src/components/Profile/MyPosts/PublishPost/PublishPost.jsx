@@ -15,7 +15,8 @@ const PublishForm = ({ handleSubmit }) => {
         null,
         'text',
         {
-          className: 'resize-none py-2 px-4 rounded w-full',
+          className:
+            'resize-none py-2 px-4 rounded w-full focus:outline-none',
           id: 'postText',
         },
       )}
@@ -24,7 +25,8 @@ const PublishForm = ({ handleSubmit }) => {
         className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
           text-gray-100 text-center font-semibold
           py-1.5 px-4 rounded w-full
-          transition-colors cursor-pointer"
+          transition-colors cursor-pointer
+          focus:outline-none focus:ring-0"
       >
         Publish
       </button>
@@ -36,7 +38,7 @@ const ReduxPublish = reduxForm({
   form: 'login',
 })(PublishForm);
 
-const Publish = ({ post, ...props }) => {
+const PublishPost = ({ post, ...props }) => {
   const handleSubmit = (e) => {
     post(e.post);
     e.post = '';
@@ -52,4 +54,4 @@ const Publish = ({ post, ...props }) => {
   );
 };
 
-export default Publish;
+export default PublishPost;

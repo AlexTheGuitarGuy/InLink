@@ -58,7 +58,7 @@ const UserItems = ({ users, followQueue, follow, unfollow }) => {
             `
           text-gray-100 text-center
           py-1 px-4 rounded
-          transition-colors cursor-pointer font-semibold`,
+          transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0`,
             {
               'bg-gray-500 hover:bg-gray-600 active:bg-gray-700':
                 !isDisabled,
