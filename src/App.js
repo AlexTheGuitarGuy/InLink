@@ -2,7 +2,6 @@ import './App.css';
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import Home from './components/Home/Home';
 import HeaderContainer from './components/Header/HeaderContainer';
 import { connect, Provider } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
@@ -14,6 +13,7 @@ import Error from './components/Error/Error';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { getIsLoggedIn } from './redux/auth-selector';
 import cn from 'classnames';
+import { Navigate } from 'react-router';
 
 const UsersContainer = lazy(() =>
   import('./components/Users/UsersContainer').then(
@@ -43,6 +43,7 @@ const App = ({
   isSidebarHidden,
 }) => {
   const [error, setError] = useState(null);
+  const [isErrorShown, setIsErrorShown] = useState(true);
 
   useEffect(() => {
     initializeApp();
@@ -54,6 +55,7 @@ const App = ({
         if (event.reason.substring(0, 18) === 'Invalid url format')
           setError(`Couldn't upload profile data`);
         else setError(event.reason);
+        setIsErrorShown(true);
         event.preventDefault();
       }
     };
@@ -73,23 +75,29 @@ const App = ({
   return (
     <div className="w-full h-screen">
       {isLoggedIn && (
-        <div className="fixed w-60 -mt-1.5">
+        <div className="fixed w-60 -mt-1.5 z-0">
           <Sidebar friends={state.dialogsPage.users} />
         </div>
       )}
 
-      <div className="fixed w-full -mt-14">
+      <div className="fixed -mt-14 w-full z-20">
         <HeaderContainer />
       </div>
 
       <div
-        className={cn('mt-14 p-4 h-full', {
+        className={cn('mt-14 p-4 h-full z-10', {
           'ml-60': isLoggedIn && !isSidebarHidden,
         })}
       >
-        {error && <Error text={error} />}
+        {error && (
+          <Error
+            text={error}
+            isShown={isErrorShown}
+            setIsShown={setIsErrorShown}
+          />
+        )}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Navigate to="/profile" />} />
           <Route
             path="/profile/:uid"
             element={<ProfileContainer />}

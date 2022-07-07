@@ -1,6 +1,6 @@
 import React from 'react';
-import PostElement from './Post/Post.jsx';
-import PublishPost from './Publish/Publish.jsx';
+import PostElement from './PostCard/PostCard.jsx';
+import PublishPost from './PublishPost/PublishPost.jsx';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 
 const MyPosts = ({ posts, pfp, isOwner, userName, ...props }) => {

@@ -6,7 +6,6 @@ import Status from '../Status/Status';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
 import { connect } from 'react-redux';
-import Error from '../../../Error/Error';
 import {
   createField,
   Input,
@@ -20,7 +19,6 @@ let ProfileInfoInputForm = ({
   uploadPFP,
   handleSubmit,
   profileData: { contacts },
-  error,
   lookingForAJob,
   maxLen1000,
 }) => {
@@ -32,11 +30,9 @@ let ProfileInfoInputForm = ({
     <form onSubmit={handleSubmit}>
       <div
         className="flex justify-between
-      bg-gray-100 rounded-lg p-8
-    text-gray-700 font-semibold"
+                   bg-gray-100 rounded-lg p-8
+                   text-gray-700 font-semibold"
       >
-        {error && <Error text={'error'} />}
-
         <div className="flex">
           <div>
             <img
@@ -67,14 +63,15 @@ let ProfileInfoInputForm = ({
             </div>
 
             <div className="mt-4">
-              <span
-                className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-                          text-gray-100 text-center
-                          py-1.5 px-4 rounded
-                          transition-colors cursor-pointer"
+              <button
+                className="font-semibold focus:outline-none focus:ring-0
+                            bg-gray-500 hover:bg-gray-600 active:bg-gray-700
+                            text-gray-100 text-center
+                            py-0.5 px-4 rounded
+                            transition-colors cursor-pointer"
               >
-                <button className="font-semibold">Save</button>
-              </span>
+                Save
+              </button>
             </div>
 
             <div className="mt-4">
