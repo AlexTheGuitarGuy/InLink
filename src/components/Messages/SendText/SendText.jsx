@@ -4,6 +4,8 @@ import {
   createField,
   Textarea,
 } from '../../common/FormControls/FormControls';
+import { sendMessage } from '../../../redux/dialogs-reducer';
+import { useDispatch } from 'react-redux';
 
 const SendForm = ({ handleSubmit }) => {
   return (
@@ -47,9 +49,11 @@ const ReduxSendText = reduxForm({
   form: 'login',
 })(SendForm);
 
-const SendText = ({ send, id }) => {
+const SendText = ({ id }) => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
-    send(id, e.send);
+    dispatch(sendMessage(id, e.send));
     e.send = '';
   };
 

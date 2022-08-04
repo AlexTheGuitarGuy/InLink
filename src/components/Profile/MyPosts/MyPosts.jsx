@@ -2,13 +2,17 @@ import React from 'react';
 import PostElement from './PostCard/PostCard.jsx';
 import PublishPost from './PublishPost/PublishPost.jsx';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
+import { useSelector } from 'react-redux';
+import { getPosts } from '../../../redux/profile-selector';
 
-const MyPosts = ({ posts, pfp, isOwner, userName, ...props }) => {
-  const postElements = posts.map((e) => (
+const MyPosts = ({ pfp, isOwner, userName }) => {
+  const posts = useSelector(getPosts);
+
+  const postElements = posts.map((post) => (
     <PostElement
-      key={e.id}
-      text={e.text}
-      likeCount={e.likes}
+      key={post.id}
+      text={post.text}
+      likeCount={post.likes}
       pfp={pfp || placeholder}
       userName={userName}
     />
@@ -21,7 +25,7 @@ const MyPosts = ({ posts, pfp, isOwner, userName, ...props }) => {
     text-gray-700 font-semibold"
     >
       <div className="mx-60">
-        {isOwner && <PublishPost {...props} />}
+        {isOwner && <PublishPost />}
         <div className="mt-4">{postElements.reverse()}</div>
       </div>
     </div>

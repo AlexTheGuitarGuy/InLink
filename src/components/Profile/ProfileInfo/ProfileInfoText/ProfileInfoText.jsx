@@ -16,7 +16,6 @@ const ProfileInfoText = ({
   pfp,
   updateStatus,
   isOwner,
-  setEditing,
 }) => {
   return (
     <div
@@ -46,7 +45,7 @@ const ProfileInfoText = ({
 
           {isOwner && (
             <div className="mt-4">
-              <EditButton setEditing={setEditing} />
+              <EditButton />
             </div>
           )}
         </div>

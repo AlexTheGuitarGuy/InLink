@@ -9,3 +9,7 @@ export const getDialogsPage = (state) => {
 export const getMyPfp = (state) => {
   return state.dialogsPage.myPfp;
 };
+
+export const getDialogUsers = (state) => {
+  return state.dialogsPage.users;
+};

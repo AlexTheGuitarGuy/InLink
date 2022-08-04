@@ -1,68 +1,29 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Profile from './Profile';
-import {
-  getProfile,
-  getStatus,
-  post,
-  setEditing,
-  updateStatus,
-  uploadPFP,
-  uploadProfileInfo,
-} from '../../redux/profile-reducer';
+import { getProfile, getStatus } from '../../redux/profile-reducer';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { compose } from 'redux';
-import {
-  getIsEditing,
-  getIsLoading,
-  getPosts,
-  getProfilePage,
-  getStoredText,
-} from '../../redux/profile-selector';
 import { getUID } from '../../redux/auth-selector';
 import withRouter from '../../HOC/withRouter';
 
-const ProfileContainer = ({
-  uid,
-  router,
-  getProfile,
-  getStatus,
-  ...props
-}) => {
-  const loggedUser = uid;
+const ProfileContainer = ({ router }) => {
   const currentUserPage = router.params.uid;
+  const loggedUser = useSelector(getUID);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const user = currentUserPage || loggedUser;
 
-    getProfile(user);
-    getStatus(user);
-  }, [getProfile, getStatus, loggedUser, currentUserPage]);
+    dispatch(getProfile(user));
+    dispatch(getStatus(user));
+  }, [dispatch, loggedUser, currentUserPage]);
 
-  return <Profile isOwner={!currentUserPage} {...props} />;
-};
-
-const mapStateToProps = (state) => {
-  return {
-    state: getProfilePage(state),
-    isLoading: getIsLoading(state),
-    uid: getUID(state),
-    memoryText: getStoredText(state),
-    posts: getPosts(state),
-    isEditing: getIsEditing(state),
-  };
+  return <Profile isOwner={!currentUserPage} />;
 };
 
 export default compose(
   withAuthRedirect,
   withRouter,
-  connect(mapStateToProps, {
-    getProfile,
-    getStatus,
-    updateStatus,
-    uploadPFP,
-    post,
-    uploadProfileInfo,
-    setEditing,
-  }),
 )(ProfileContainer);

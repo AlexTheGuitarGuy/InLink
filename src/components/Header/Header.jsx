@@ -1,11 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { logout } from '../../redux/auth-reducer';
-import { connect } from 'react-redux';
 import LoginButton from './LoginButton/LoginButton';
 import Nav from './Nav/Nav';
 
-const Header = ({ navItems, ...restProps }) => {
+const Header = () => {
   return (
     <header
       className={`px-4 bg-gray-100 text-gray-700
@@ -15,11 +13,11 @@ const Header = ({ navItems, ...restProps }) => {
         h-16`}
     >
       <div className={'order-3'}>
-        <LoginButton {...restProps} />
+        <LoginButton />
       </div>
 
       <div className={'order-2'}>
-        <Nav navItems={navItems} />
+        <Nav />
       </div>
 
       <div
@@ -32,4 +30,4 @@ const Header = ({ navItems, ...restProps }) => {
   );
 };
 
-export default connect(null, { logout })(Header);
+export default Header;

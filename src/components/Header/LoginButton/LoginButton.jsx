@@ -1,7 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import {
+  getIsLoggedIn,
+  getLogin,
+} from '../../../redux/auth-selector';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../redux/auth-reducer';
 
-const LoginButton = ({ logout, login, isLoggedIn }) => {
+const LoginButton = () => {
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const login = useSelector(getLogin);
+
   return (
     <div className="flex flex-col items-end">
       {isLoggedIn && (
@@ -10,7 +21,7 @@ const LoginButton = ({ logout, login, isLoggedIn }) => {
 
       {isLoggedIn ? (
         <button
-          onClick={logout}
+          onClick={() => dispatch(logout())}
           className="font-semibold
             bg-gray-500 hover:bg-gray-600 active:bg-gray-700
             py-0.5 px-4 text-gray-100 text-center

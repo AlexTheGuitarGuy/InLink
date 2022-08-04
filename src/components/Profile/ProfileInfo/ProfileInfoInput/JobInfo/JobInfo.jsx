@@ -4,8 +4,14 @@ import {
   Input,
   Textarea,
 } from '../../../../common/FormControls/FormControls';
+import { formValueSelector } from 'redux-form';
+import { useSelector } from 'react-redux';
 
-const JobInfo = ({ maxLen, lookingForAJob }) => {
+const JobInfo = ({ maxLen }) => {
+  const lookingForAJob = useSelector((state) =>
+    formValueSelector('profileInfo')(state, 'lookingForAJob'),
+  );
+
   return (
     <div
       className="border rounded-lg border-gray-300

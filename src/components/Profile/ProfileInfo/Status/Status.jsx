@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
+import { updateStatus } from '../../../../redux/profile-reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStatus } from '../../../../redux/profile-selector';
 
-const Status = ({ isOwner, updateStatus, status }) => {
+const Status = ({ isOwner }) => {
+  const status = useSelector(getStatus);
+
+  const dispatch = useDispatch();
+
   const [isEditing, setEditing] = useState(false);
   const [localStatus, setStatus] = useState(status);
 
   const activateEdit = () => {
     if (isOwner) setEditing(true);
   };
+
   const deactivateEdit = () => {
     setEditing(false);
-    updateStatus(localStatus);
+    dispatch(updateStatus(localStatus));
   };
 
   const editLocalStatus = (e) => {

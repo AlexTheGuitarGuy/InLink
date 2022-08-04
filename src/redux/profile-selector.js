@@ -2,7 +2,7 @@ export const getProfilePage = (state) => {
   return state.profilePage;
 };
 
-export const getProfileData = (state) => {
+export const getMyData = (state) => {
   return state.profilePage.profileData;
 };
 
@@ -20,4 +20,8 @@ export const getPosts = (state) => {
 
 export const getIsEditing = (state) => {
   return state.profilePage.isEditing;
+};
+
+export const getStatus = (state) => {
+  return state.profilePage.profileStatus;
 };

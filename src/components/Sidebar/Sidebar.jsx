@@ -2,23 +2,22 @@ import React, { memo } from 'react';
 import FriendItems from './FriendItems/FriendItems';
 import { compose } from 'redux';
 import { useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setIsSidebarHidden } from '../../redux/app-reducer';
 
-const Sidebar = ({ friends, setIsSidebarHidden }) => {
+const Sidebar = () => {
+  const dispatch = useDispatch();
+
   if (useLocation().pathname.match('/messages')) {
-    setIsSidebarHidden(true);
+    dispatch(setIsSidebarHidden(true));
     return null;
-  } else setIsSidebarHidden(false);
+  } else dispatch(setIsSidebarHidden(false));
 
   return (
     <div className="p-6">
-      <FriendItems friends={friends} />
+      <FriendItems />
     </div>
   );
 };
 
-export default compose(
-  memo,
-  connect(null, { setIsSidebarHidden }),
-)(Sidebar);
+export default compose(memo)(Sidebar);

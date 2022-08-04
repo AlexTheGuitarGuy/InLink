@@ -5,10 +5,13 @@ import {
   createField,
   Input,
 } from '../common/FormControls/FormControls';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Navigate } from 'react-router-dom';
-import { compose } from 'redux';
+import {
+  getCaptchaURL,
+  getIsLoggedIn,
+} from '../../redux/auth-selector';
 
 let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
   return (
@@ -158,13 +161,17 @@ LoginForm = reduxForm({
   form: 'login',
 })(LoginForm);
 
-const Login = ({ isLoggedIn, login, captcha }) => {
+const Login = () => {
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const captcha = useSelector(getCaptchaURL);
+  const dispatch = useDispatch();
+
   if (isLoggedIn) return <Navigate to={'/profile'} />;
 
   const maxLen40 = maxLen(40);
 
   const onSubmit = ({ email, password, rememberMe, captcha }) => {
-    login(email, password, rememberMe, captcha);
+    dispatch(login(email, password, rememberMe, captcha));
   };
 
   return (
@@ -176,9 +183,4 @@ const Login = ({ isLoggedIn, login, captcha }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.auth.isLoggedIn,
-  captcha: state.auth.captchaURL,
-});
-
-export default compose(connect(mapStateToProps, { login }))(Login);
+export default Login;

@@ -4,8 +4,10 @@ import {
   createField,
   Textarea,
 } from '../../../common/FormControls/FormControls';
+import { post } from '../../../../redux/profile-reducer';
+import { useDispatch } from 'react-redux';
 
-const PublishForm = ({ handleSubmit }) => {
+let PublishForm = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       {createField(
@@ -36,13 +38,15 @@ const PublishForm = ({ handleSubmit }) => {
   );
 };
 
-const ReduxPublish = reduxForm({
+PublishForm = reduxForm({
   form: 'login',
 })(PublishForm);
 
-const PublishPost = ({ post, ...props }) => {
+const PublishPost = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
-    post(e.post);
+    dispatch(post(e.post));
     e.post = '';
   };
 
@@ -51,7 +55,7 @@ const PublishPost = ({ post, ...props }) => {
       <label htmlFor="postText" className="text-lg">
         New post
       </label>
-      <ReduxPublish {...props} onSubmit={handleSubmit} />
+      <PublishForm onSubmit={handleSubmit} />
     </div>
   );
 };

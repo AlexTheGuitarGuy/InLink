@@ -1,8 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import cn from 'classnames';
+import { getNavItems } from '../../../redux/navbar-selector';
+import { useSelector } from 'react-redux';
 
-const Nav = ({ navItems }) => {
+const Nav = () => {
+  const navItems = useSelector(getNavItems);
+
   let navElements = navItems.map((e) => {
     return (
       <div key={e.id}>

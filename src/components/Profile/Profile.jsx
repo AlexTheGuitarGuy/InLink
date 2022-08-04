@@ -3,52 +3,46 @@ import Loading from '../common/Loading/Loading';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
 import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getIsEditing,
+  getIsLoading,
+  getProfilePage,
+} from '../../redux/profile-selector';
+import { setEditing } from '../../redux/profile-reducer';
 
-const Profile = ({
-  isLoading,
-  state: { profileData, profileStatus },
-  updateStatus,
-  isOwner,
-  uploadPFP,
-  posts,
-  post,
-  uploadProfileInfo,
-  submitStatus,
-  setEditing,
-  isEditing,
-}) => {
+const Profile = ({ isOwner }) => {
+  const isEditing = useSelector(getIsEditing);
+  const { profileData, profileStatus } = useSelector(getProfilePage);
+  const isLoading = useSelector(getIsLoading);
+
+  const dispatch = useDispatch();
+
   if (isLoading || !profileData) return <Loading />;
-  if (!isOwner && isEditing) setEditing(false);
+  if (!isOwner && isEditing) dispatch(setEditing(false));
+
+  const pfp = profileData.photos;
 
   return (
     <div>
       {isEditing && isOwner ? (
         <ProfileInfoInput
-          uploadPFP={uploadPFP}
           isOwner={isOwner}
-          pfp={profileData.photos.large}
+          pfp={pfp.large}
           profileData={profileData}
           profileStatus={profileStatus}
-          updateStatus={updateStatus}
-          uploadProfileInfo={uploadProfileInfo}
-          setEditing={setEditing}
-          submitStatus={submitStatus}
         />
       ) : (
         <ProfileInfoText
           isOwner={isOwner}
-          pfp={profileData.photos.large}
+          pfp={pfp.large}
           profileData={profileData}
           profileStatus={profileStatus}
-          updateStatus={updateStatus}
-          setEditing={setEditing}
         />
       )}
       <MyPosts
         isOwner={isOwner}
-        posts={posts}
-        post={post}
-        pfp={profileData.photos.small}
+        pfp={pfp.small}
         userName={profileData.fullName}
       />
     </div>

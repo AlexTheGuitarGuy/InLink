@@ -1,7 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getDialogUsers } from '../../../redux/dialogs-selector';
 
-const FriendItems = ({ friends }) => {
+const FriendItems = () => {
+  const friends = useSelector(getDialogUsers);
+
   let friendList = friends.map((e, i) => {
     if (i < 5) {
       return (

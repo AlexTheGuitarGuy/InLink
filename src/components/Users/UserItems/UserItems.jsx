@@ -2,11 +2,24 @@ import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 import cn from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getFollowQueue,
+  getUsers,
+} from '../../../redux/users-page-selector';
+import { follow, unfollow } from '../../../redux/users-page-reducer';
 
-const UserItems = ({ users, followQueue, follow, unfollow }) => {
+const UserItems = () => {
+  const users = useSelector(getUsers);
+  const followQueue = useSelector(getFollowQueue);
+
+  const dispatch = useDispatch();
+
   const mappedUsers = users.map((e, i, arr) => {
     const buttonText = e.followed ? 'Unfollow' : 'Follow';
-    const buttonAction = e.followed ? unfollow : follow;
+    const buttonAction = e.followed
+      ? (id) => dispatch(unfollow(id))
+      : (id) => dispatch(follow(id));
     const isDisabled = followQueue.some((elem) => elem === e.id);
 
     return (

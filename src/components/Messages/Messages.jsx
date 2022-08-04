@@ -5,13 +5,16 @@ import Users from './Users/Users';
 import SendText from './SendText/SendText';
 import placeholder from '../../assets/pfps/placeholder.jpg';
 import { Navigate } from 'react-router';
+import {
+  getDialogsPage,
+  getStoredText,
+} from '../../redux/dialogs-selector';
+import { useSelector } from 'react-redux';
 
-const Messages = ({
-  state: { userMessages, users },
-  memoryText,
-  send,
-  myData,
-}) => {
+const Messages = ({ myData }) => {
+  const memoryText = useSelector(getStoredText);
+  const { userMessages, users } = useSelector(getDialogsPage);
+
   const userDialogElements = [];
   for (let i = 0; i < userMessages.length; i++) {
     userDialogElements[i] = userMessages[i].map((e) => {
@@ -44,7 +47,7 @@ const Messages = ({
               className="absolute bottom-0 w-3/5 self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300"
             >
-              <SendText memoryText={memoryText} send={send} id={i} />
+              <SendText memoryText={memoryText} id={i} />
             </div>
           </div>
         }

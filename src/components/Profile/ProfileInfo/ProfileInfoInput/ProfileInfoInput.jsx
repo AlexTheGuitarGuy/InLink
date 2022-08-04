@@ -1,29 +1,32 @@
 import React, { memo } from 'react';
-import { formValueSelector, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { maxLen } from '../../../../utils/validators/validators';
 import placeholder from '../../../../assets/pfps/placeholder.jpg';
 import Status from '../Status/Status';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   createField,
   Input,
 } from '../../../common/FormControls/FormControls';
+import {
+  uploadPFP,
+  uploadProfileInfo,
+} from '../../../../redux/profile-reducer';
 
 let ProfileInfoInputForm = ({
-  profileStatus,
-  pfp,
-  updateStatus,
   isOwner,
-  uploadPFP,
-  handleSubmit,
+  pfp,
   profileData: { contacts },
-  lookingForAJob,
+  profileStatus,
   maxLen1000,
+  handleSubmit,
 }) => {
+  const dispatch = useDispatch();
+
   const updatePFP = (e) => {
-    if (e.target.files.length) uploadPFP(e.target.files[0]);
+    if (e.target.files.length) dispatch(uploadPFP(e.target.files[0]));
   };
 
   return (
@@ -60,11 +63,7 @@ let ProfileInfoInputForm = ({
             </div>
 
             <div className="mt-2">
-              <Status
-                status={profileStatus}
-                updateStatus={updateStatus}
-                isOwner={isOwner}
-              />
+              <Status status={profileStatus} isOwner={isOwner} />
             </div>
 
             <div className="mt-4">
@@ -93,10 +92,7 @@ let ProfileInfoInputForm = ({
         </div>
 
         <div className="flex flex-col w-96">
-          <JobInfo
-            lookingForAJob={lookingForAJob}
-            maxLen={maxLen1000}
-          />
+          <JobInfo maxLen={maxLen1000} />
 
           <Contacts contacts={contacts} />
         </div>
@@ -109,25 +105,14 @@ ProfileInfoInputForm = reduxForm({
   form: 'profileInfo',
 })(ProfileInfoInputForm);
 
-const selector = formValueSelector('profileInfo');
-ProfileInfoInputForm = connect((state) => {
-  const lookingForAJob = selector(state, 'lookingForAJob');
-  return {
-    lookingForAJob,
-  };
-})(ProfileInfoInputForm);
-
 const ProfileInfoInput = (props) => {
   const maxLen50 = maxLen(50);
   const maxLen1000 = maxLen(1000);
-
-  const onSubmit = (payload) => {
-    props.uploadProfileInfo(payload);
-  };
+  const dispatch = useDispatch();
 
   return (
     <ProfileInfoInputForm
-      onSubmit={onSubmit}
+      onSubmit={(payload) => dispatch(uploadProfileInfo(payload))}
       {...props}
       maxLen50={maxLen50}
       maxLen1000={maxLen1000}

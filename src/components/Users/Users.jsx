@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Loading from '../common/Loading/Loading';
 import UserItems from './UserItems/UserItems';
 import Paginator from '../common/Paginator/Paginator';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getIsLoading,
+  getPage,
+  getPageSize,
+  getPortionSize,
+  getTotalUsers,
+} from '../../redux/users-page-selector';
+import {
+  requestUsers,
+  setPage,
+} from '../../redux/users-page-reducer';
 
-const Users = ({
-  totalUsers,
-  pageSize,
-  changePage,
-  page,
-  followQueue,
-  updateFollowQueue,
-  users,
-  follow,
-  unfollow,
-  isLoading,
-  portionSize,
-}) => {
+const Users = () => {
+  const totalUsers = useSelector(getTotalUsers);
+  const isLoading = useSelector(getIsLoading);
+  const portionSize = useSelector(getPortionSize);
+  const page = useSelector(getPage);
+  const pageSize = useSelector(getPageSize);
+
+  const dispatch = useDispatch();
+
+  const changePage = (page) => {
+    dispatch(requestUsers(page, pageSize));
+    dispatch(setPage(page));
+  };
+
+  useEffect(() => {
+    dispatch(requestUsers(page, pageSize));
+  }, [dispatch, page, pageSize]);
+
   if (isLoading) return <Loading />;
 
   return (
@@ -24,13 +41,7 @@ const Users = ({
       bg-gray-100 rounded-lg p-8
     text-gray-700 font-semibold"
     >
-      <UserItems
-        followQueue={followQueue}
-        updateFollowQueue={updateFollowQueue}
-        users={users}
-        follow={follow}
-        unfollow={unfollow}
-      />
+      <UserItems />
       <div className="mt-4">
         <Paginator
           pageSize={pageSize}

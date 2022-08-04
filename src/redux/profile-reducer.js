@@ -54,10 +54,10 @@ const profileReducer = (state = defaultState, action) => {
         storedText: '',
       };
     }
+    case SET_PROFILE:
     case SET_STATUS:
     case TOGGLE_LOADING:
     case SET_IS_EDITING:
-    case SET_PROFILE:
       return {
         ...state,
         ...action.payload,

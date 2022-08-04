@@ -1,13 +1,12 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { StrictMode, useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import HeaderContainer from './components/Header/HeaderContainer';
-import { connect, Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Loading from './components/common/Loading/Loading';
 import store from './redux/redux-store';
-import { compose } from 'redux';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Error from './components/Error/Error';
 import { getIsLoggedIn } from './redux/auth-selector';
@@ -17,20 +16,24 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
 import UsersContainer from './components/Users/UsersContainer';
 import MessagesContainer from './components/Messages/MessagesContainer';
+import {
+  getIsAppInitialized,
+  getIsSidebarHidden,
+} from './redux/app-selector';
 
-const App = ({
-  state,
-  isAppInitialized,
-  initializeApp,
-  isLoggedIn,
-  isSidebarHidden,
-}) => {
+const App = () => {
+  const isAppInitialized = useSelector(getIsAppInitialized);
+  const isLoggedIn = useSelector(getIsLoggedIn);
+  const isSidebarHidden = useSelector(getIsSidebarHidden);
+
+  const dispatch = useDispatch();
+
   const [error, setError] = useState(null);
   const [isErrorShown, setIsErrorShown] = useState(true);
 
   useEffect(() => {
-    initializeApp();
-  }, [initializeApp, isAppInitialized]);
+    dispatch(initializeApp());
+  }, [dispatch, isAppInitialized]);
 
   useEffect(() => {
     const handleRejection = (event) => {
@@ -59,7 +62,7 @@ const App = ({
     <div className="w-full h-screen">
       {isLoggedIn && (
         <div className="fixed w-60 -mt-1.5 z-0">
-          <Sidebar friends={state.dialogsPage.users} />
+          <Sidebar />
         </div>
       )}
 
@@ -107,26 +110,15 @@ const App = ({
   );
 };
 
-const mstp = (state) => ({
-  isAppInitialized: state.app.isAppInitialized,
-  isLoggedIn: getIsLoggedIn(state),
-  isSidebarHidden: state.app.isSidebarHidden,
-});
-
-const AppContainer = compose(connect(mstp, { initializeApp }))(App);
-
 const InLinkApp = () => {
   return (
-    <React.StrictMode>
+    <StrictMode>
       <HashRouter>
         <Provider store={store}>
-          <AppContainer
-            state={store.getState()}
-            dispatch={store.dispatch.bind(store)}
-          />
+          <App />
         </Provider>
       </HashRouter>
-    </React.StrictMode>
+    </StrictMode>
   );
 };
 
