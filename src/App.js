@@ -1,5 +1,5 @@
 import './App.css';
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -10,30 +10,13 @@ import store from './redux/redux-store';
 import { compose } from 'redux';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Error from './components/Error/Error';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import { getIsLoggedIn } from './redux/auth-selector';
 import cn from 'classnames';
 import { Navigate } from 'react-router';
-
-const UsersContainer = lazy(() =>
-  import('./components/Users/UsersContainer').then(
-    ({ default: UsersContainer }) => ({ default: UsersContainer }),
-  ),
-);
-
-const Login = lazy(() =>
-  import('./components/Login/Login').then(({ default: Login }) => ({
-    default: Login,
-  })),
-);
-
-const MessagesContainer = lazy(() =>
-  import('./components/Messages/MessagesContainer').then(
-    ({ default: MessagesContainer }) => ({
-      default: MessagesContainer,
-    }),
-  ),
-);
+import ProfileContainer from './components/Profile/ProfileContainer';
+import Login from './components/Login/Login';
+import UsersContainer from './components/Users/UsersContainer';
+import MessagesContainer from './components/Messages/MessagesContainer';
 
 const App = ({
   state,
@@ -80,12 +63,17 @@ const App = ({
         </div>
       )}
 
-      <div className="fixed -mt-14 w-full z-20">
+      <div
+        className="fixed w-full z-20
+                      transition
+                      -mt-8 opacity-20
+                      hover:translate-y-8 hover:opacity-100"
+      >
         <HeaderContainer />
       </div>
 
       <div
-        className={cn('mt-14 p-4 h-full z-10', {
+        className={cn('p-4 h-full z-10', {
           'ml-60': isLoggedIn && !isSidebarHidden,
         })}
       >
@@ -130,22 +118,14 @@ const AppContainer = compose(connect(mstp, { initializeApp }))(App);
 const InLinkApp = () => {
   return (
     <React.StrictMode>
-      <Suspense
-        fallback={
-          <span>
-            <Loading />
-          </span>
-        }
-      >
-        <HashRouter>
-          <Provider store={store}>
-            <AppContainer
-              state={store.getState()}
-              dispatch={store.dispatch.bind(store)}
-            />
-          </Provider>
-        </HashRouter>
-      </Suspense>
+      <HashRouter>
+        <Provider store={store}>
+          <AppContainer
+            state={store.getState()}
+            dispatch={store.dispatch.bind(store)}
+          />
+        </Provider>
+      </HashRouter>
     </React.StrictMode>
   );
 };

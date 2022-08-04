@@ -12,8 +12,7 @@ const Header = ({ navItems, ...restProps }) => {
         rounded-b border-b border-gray-400
         flex justify-between items-center 
         whitespace-nowrap
-        h-16
-        `}
+        h-16`}
     >
       <div className={'order-3'}>
         <LoginButton {...restProps} />
