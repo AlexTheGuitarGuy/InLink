@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Loading from '../common/Loading/Loading';
+import LoadingPage from '../common/Loading/LoadingPage';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
 import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
@@ -22,12 +22,14 @@ import { useParams } from 'react-router-dom';
 const Profile = () => {
   const isEditing = useSelector(getIsEditing);
   const { profileData, profileStatus } = useSelector(getProfilePage);
-  const isLoading = useSelector(getIsLoading);
+
   const loggedUser = useSelector(getUID);
+  const isLoading = useSelector(getIsLoading);
 
   const dispatch = useDispatch();
 
   const currentUserPage = useParams().uid;
+
   useEffect(() => {
     const user = currentUserPage || loggedUser;
 
@@ -37,7 +39,7 @@ const Profile = () => {
 
   const isOwner = !currentUserPage;
 
-  if (isLoading || !profileData) return <Loading />;
+  if (isLoading || !profileData) return <LoadingPage />;
   if (!isOwner && isEditing) dispatch(setEditing(false));
 
   const pfp = profileData.photos;

@@ -21,7 +21,7 @@ const ProfileInfoText = ({
     <div
       className="flex justify-between
       bg-gray-100 rounded-lg p-8
-    text-gray-700 font-semibold"
+      text-gray-700 font-semibold"
     >
       <div className="flex">
         <div>

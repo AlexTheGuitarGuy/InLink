@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUID } from '../../redux/auth-selector';
 import { getMyData } from '../../redux/profile-selector';
 import { getProfile } from '../../redux/profile-reducer';
-import Loading from '../common/Loading/Loading';
+import LoadingPage from '../common/Loading/LoadingPage';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 
@@ -28,7 +28,7 @@ const Messages = () => {
     dispatch(getProfile(uid));
   });
 
-  if (!myData) return <Loading />;
+  if (!myData) return <LoadingPage />;
 
   const userDialogElements = [];
   for (let i = 0; i < userMessages.length; i++) {

@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
-import Loading from './components/common/Loading/Loading';
+import LoadingPage from './components/common/Loading/LoadingPage';
 import store from './redux/redux-store';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Error from './components/Error/Error';
@@ -56,7 +56,7 @@ const App = () => {
     };
   });
 
-  if (!isAppInitialized) return <Loading class="mx-auto" />;
+  if (!isAppInitialized) return <LoadingPage />;
 
   return (
     <div className="w-full h-screen">

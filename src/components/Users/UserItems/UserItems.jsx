@@ -8,6 +8,7 @@ import {
   getUsers,
 } from '../../../redux/users-page-selector';
 import { follow, unfollow } from '../../../redux/users-page-reducer';
+import LoadingButton from '../../common/Loading/LoadingButton';
 
 const UserItems = () => {
   const users = useSelector(getUsers);
@@ -82,7 +83,7 @@ const UserItems = () => {
             },
           )}
         >
-          {buttonText}
+          {(isDisabled && <LoadingButton />) || <>{buttonText}</>}
         </button>
       </div>
     );

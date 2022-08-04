@@ -68,11 +68,11 @@ let ProfileInfoInputForm = ({
 
             <div className="mt-4">
               <button
-                className="font-semibold focus:outline-none focus:ring-0
-                            bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-                            text-gray-100 text-center
-                            py-0.5 px-4 rounded
-                            transition-colors cursor-pointer"
+                className="
+                    font-semibold text-gray-100 text-center
+                    bg-gray-500 hover:bg-gray-600 active:bg-gray-700
+                    py-0.5 px-4 rounded
+                    transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0"
               >
                 Save
               </button>
@@ -110,9 +110,13 @@ const ProfileInfoInput = (props) => {
   const maxLen1000 = maxLen(1000);
   const dispatch = useDispatch();
 
+  const handleSubmit = (payload) => {
+    dispatch(uploadProfileInfo(payload));
+  };
+
   return (
     <ProfileInfoInputForm
-      onSubmit={(payload) => dispatch(uploadProfileInfo(payload))}
+      onSubmit={handleSubmit}
       {...props}
       maxLen50={maxLen50}
       maxLen1000={maxLen1000}

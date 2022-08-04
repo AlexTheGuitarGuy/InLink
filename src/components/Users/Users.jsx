@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Loading from '../common/Loading/Loading';
+import LoadingPage from '../common/Loading/LoadingPage';
 import UserItems from './UserItems/UserItems';
 import Paginator from '../common/Paginator/Paginator';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,7 +33,7 @@ const Users = () => {
     dispatch(requestUsers(page, pageSize));
   }, [dispatch, page, pageSize]);
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <LoadingPage />;
 
   return (
     <div
