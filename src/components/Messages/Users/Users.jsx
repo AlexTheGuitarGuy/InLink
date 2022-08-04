@@ -35,7 +35,7 @@ const Users = ({ users }) => {
   });
 
   return (
-    <div className="border-r border-gray-300">
+    <div className="border-r border-gray-300 w-1/5">
       <div className="text-xl">Messages:</div>
       <div>{userElements}</div>
     </div>
