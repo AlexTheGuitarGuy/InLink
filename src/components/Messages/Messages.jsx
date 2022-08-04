@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
@@ -9,11 +9,26 @@ import {
   getDialogsPage,
   getStoredText,
 } from '../../redux/dialogs-selector';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUID } from '../../redux/auth-selector';
+import { getMyData } from '../../redux/profile-selector';
+import { getProfile } from '../../redux/profile-reducer';
+import Loading from '../common/Loading/Loading';
+import { compose } from 'redux';
+import withAuthRedirect from '../../HOC/withAuthRedirect';
 
-const Messages = ({ myData }) => {
+const Messages = () => {
   const memoryText = useSelector(getStoredText);
   const { userMessages, users } = useSelector(getDialogsPage);
+  const uid = useSelector(getUID);
+  const myData = useSelector(getMyData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfile(uid));
+  });
+
+  if (!myData) return <Loading />;
 
   const userDialogElements = [];
   for (let i = 0; i < userMessages.length; i++) {
@@ -72,4 +87,4 @@ const Messages = ({ myData }) => {
   );
 };
 
-export default Messages;
+export default compose(withAuthRedirect)(Messages);

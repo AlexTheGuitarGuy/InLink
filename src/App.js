@@ -2,7 +2,6 @@ import './App.css';
 import React, { StrictMode, useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import HeaderContainer from './components/Header/HeaderContainer';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Loading from './components/common/Loading/Loading';
@@ -12,14 +11,15 @@ import Error from './components/Error/Error';
 import { getIsLoggedIn } from './redux/auth-selector';
 import cn from 'classnames';
 import { Navigate } from 'react-router';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
-import UsersContainer from './components/Users/UsersContainer';
-import MessagesContainer from './components/Messages/MessagesContainer';
 import {
   getIsAppInitialized,
   getIsSidebarHidden,
 } from './redux/app-selector';
+import Users from './components/Users/Users';
+import Messages from './components/Messages/Messages';
+import Profile from './components/Profile/Profile';
+import Header from './components/Header/Header';
 
 const App = () => {
   const isAppInitialized = useSelector(getIsAppInitialized);
@@ -72,7 +72,7 @@ const App = () => {
                       -mt-8 opacity-20
                       hover:translate-y-8 hover:opacity-100"
       >
-        <HeaderContainer />
+        <Header />
       </div>
 
       <div
@@ -89,20 +89,17 @@ const App = () => {
         )}
         <Routes>
           <Route path="/" element={<Navigate to="/profile" />} />
-          <Route
-            path="/profile/:uid"
-            element={<ProfileContainer />}
-          />
-          <Route path="/profile" element={<ProfileContainer />} />
+          <Route path="/profile/:uid" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
 
-          <Route path="/messages/*" element={<MessagesContainer />} />
+          <Route path="/messages/*" element={<Messages />} />
 
           <Route path="/login" element={<Login />} />
           <Route
             path="/login/facebook"
             element={<div>facebook</div>}
           />
-          <Route path="/users" element={<UsersContainer />} />
+          <Route path="/users" element={<Users />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

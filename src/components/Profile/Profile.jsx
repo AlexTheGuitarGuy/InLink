@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Loading from '../common/Loading/Loading';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
@@ -9,14 +9,33 @@ import {
   getIsLoading,
   getProfilePage,
 } from '../../redux/profile-selector';
-import { setEditing } from '../../redux/profile-reducer';
+import {
+  getProfile,
+  getStatus,
+  setEditing,
+} from '../../redux/profile-reducer';
+import { getUID } from '../../redux/auth-selector';
+import { compose } from 'redux';
+import withAuthRedirect from '../../HOC/withAuthRedirect';
+import withRouter from '../../HOC/withRouter';
 
-const Profile = ({ isOwner }) => {
+const Profile = ({ router }) => {
   const isEditing = useSelector(getIsEditing);
   const { profileData, profileStatus } = useSelector(getProfilePage);
   const isLoading = useSelector(getIsLoading);
+  const loggedUser = useSelector(getUID);
 
   const dispatch = useDispatch();
+
+  const currentUserPage = router.params.uid;
+  useEffect(() => {
+    const user = currentUserPage || loggedUser;
+
+    dispatch(getProfile(user));
+    dispatch(getStatus(user));
+  }, [dispatch, loggedUser, currentUserPage]);
+
+  const isOwner = !currentUserPage;
 
   if (isLoading || !profileData) return <Loading />;
   if (!isOwner && isEditing) dispatch(setEditing(false));
@@ -49,4 +68,4 @@ const Profile = ({ isOwner }) => {
   );
 };
 
-export default Profile;
+export default compose(withAuthRedirect, withRouter)(Profile);

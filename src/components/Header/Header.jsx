@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginButton from './LoginButton/LoginButton';
 import Nav from './Nav/Nav';
+import { compose } from 'redux';
 
 const Header = () => {
   return (
@@ -30,4 +31,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default compose(memo)(Header);
