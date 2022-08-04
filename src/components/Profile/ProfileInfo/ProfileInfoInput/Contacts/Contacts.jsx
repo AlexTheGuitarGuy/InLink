@@ -32,7 +32,13 @@ const ContactField = ({ contactName }) => {
           Input,
           null,
           null,
-          { className: 'p-1 rounded w-60', id: contactName },
+          {
+            className: `p-1 rounded w-60
+                border border-gray-300
+                focus:outline-none focus:border-gray-500
+                transition`,
+            id: contactName,
+          },
         )}
       </span>
     </div>

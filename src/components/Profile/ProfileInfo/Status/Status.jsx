@@ -26,7 +26,7 @@ const Status = ({ isOwner, updateStatus, status }) => {
       {!isEditing ? (
         <div
           onClick={activateEdit}
-          className={cn('p-1 rounded max-w-sm', {
+          className={cn(`p-1 rounded max-w-sm`, {
             'hover:bg-gray-200 cursor-pointer': isOwner,
           })}
         >
@@ -36,8 +36,11 @@ const Status = ({ isOwner, updateStatus, status }) => {
         <div>
           <input
             onChange={editLocalStatus}
-            className="p-1 pl-2.5
-            font-semibold text-gray-700"
+            className="p-1 pl-2.5 rounded
+            font-semibold text-gray-700
+            border border-gray-300
+            focus:outline-none focus:border-gray-500
+            transition"
             autoFocus={true}
             onBlur={deactivateEdit}
             defaultValue={localStatus}

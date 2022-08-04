@@ -1,15 +1,8 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import Loading from '../common/Loading/Loading';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
-
-const ProfileInfoInput = lazy(() =>
-  import('./ProfileInfo/ProfileInfoInput/ProfileInfoInput').then(
-    ({ default: ProfileInfoInput }) => ({
-      default: ProfileInfoInput,
-    }),
-  ),
-);
+import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
 
 const Profile = ({
   isLoading,

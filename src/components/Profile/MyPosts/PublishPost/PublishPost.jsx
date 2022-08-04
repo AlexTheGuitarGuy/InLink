@@ -15,8 +15,10 @@ const PublishForm = ({ handleSubmit }) => {
         null,
         'text',
         {
-          className:
-            'resize-none py-2 px-4 rounded w-full focus:outline-none',
+          className: `resize-none py-2 px-4 rounded w-full
+            border border-gray-300
+            focus:outline-none focus:border-gray-500
+            transition`,
           id: 'postText',
         },
       )}

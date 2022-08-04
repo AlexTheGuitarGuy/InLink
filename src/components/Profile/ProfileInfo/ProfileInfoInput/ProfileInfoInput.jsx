@@ -50,7 +50,12 @@ let ProfileInfoInputForm = ({
                 Input,
                 null,
                 null,
-                { className: 'p-2 rounded' },
+                {
+                  className: `p-2 rounded 
+                border border-gray-300
+                focus:outline-none focus:border-gray-500
+                transition`,
+                },
               )}
             </div>
 

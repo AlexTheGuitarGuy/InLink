@@ -35,7 +35,12 @@ const JobInfo = ({ maxLen, lookingForAJob }) => {
             Textarea,
             [maxLen],
             null,
-            { className: 'resize-none py-1 px-4 rounded' },
+            {
+              className: `resize-none py-1 px-4 rounded 
+                border border-gray-300
+                focus:outline-none focus:border-gray-500
+                transition`,
+            },
           )}
         </div>
       )}

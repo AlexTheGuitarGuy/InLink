@@ -15,12 +15,17 @@ const SendForm = ({ handleSubmit }) => {
           Textarea,
           null,
           null,
-          { className: 'resize-none w-full rounded-lg p-2' },
+          {
+            className: `resize-none w-full rounded-lg p-2 
+                border border-gray-300
+                focus:outline-none focus:border-gray-500
+                transition`,
+          },
         )}
 
         <div>
           <button
-            className=" bg-gray-400 hover:bg-gray-500 active:bg-gray-600
+            className="bg-gray-400 hover:bg-gray-500 active:bg-gray-600
           text-gray-100 text-center
           rounded-full ml-4 px-2 py-2 mt-2
           transition-colors cursor-pointer
