@@ -17,9 +17,9 @@ import {
 import { getUID } from '../../redux/auth-selector';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
-import withRouter from '../../HOC/withRouter';
+import { useParams } from 'react-router-dom';
 
-const Profile = ({ router }) => {
+const Profile = () => {
   const isEditing = useSelector(getIsEditing);
   const { profileData, profileStatus } = useSelector(getProfilePage);
   const isLoading = useSelector(getIsLoading);
@@ -27,7 +27,7 @@ const Profile = ({ router }) => {
 
   const dispatch = useDispatch();
 
-  const currentUserPage = router.params.uid;
+  const currentUserPage = useParams().uid;
   useEffect(() => {
     const user = currentUserPage || loggedUser;
 
@@ -68,4 +68,4 @@ const Profile = ({ router }) => {
   );
 };
 
-export default compose(withAuthRedirect, withRouter)(Profile);
+export default compose(withAuthRedirect)(Profile);
