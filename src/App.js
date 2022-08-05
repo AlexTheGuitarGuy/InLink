@@ -61,17 +61,12 @@ const App = () => {
   return (
     <div className="w-full h-screen">
       {isLoggedIn && (
-        <div className="fixed w-60 -mt-1.5 z-0">
+        <div className="fixed w-60 mt-12 z-0">
           <Sidebar />
         </div>
       )}
 
-      <div
-        className="fixed w-full z-20
-                      transition
-                      -mt-8 opacity-20
-                      hover:translate-y-8 hover:opacity-100"
-      >
+      <div className="fixed w-full z-20">
         <Header />
       </div>
 
@@ -87,21 +82,23 @@ const App = () => {
             setIsShown={setIsErrorShown}
           />
         )}
-        <Routes>
-          <Route path="/" element={<Navigate to="/profile" />} />
-          <Route path="/profile/:uid" element={<Profile />} />
-          <Route path="/profile" element={<Profile />} />
+        <div className="mt-14">
+          <Routes>
+            <Route path="/" element={<Navigate to="/profile" />} />
+            <Route path="/profile/:uid" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
 
-          <Route path="/messages/*" element={<Messages />} />
+            <Route path="/messages/*" element={<Messages />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/login/facebook"
-            element={<div>facebook</div>}
-          />
-          <Route path="/users" element={<Users />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login/facebook"
+              element={<div>facebook</div>}
+            />
+            <Route path="/users" element={<Users />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );
