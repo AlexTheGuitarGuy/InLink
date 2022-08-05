@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import LoadingPage from '../common/Loading/LoadingPage';
 import MyPosts from './MyPosts/MyPosts';
-import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
-import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getIsEditing,
@@ -18,6 +16,8 @@ import { getUID } from '../../redux/auth-selector';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { useParams } from 'react-router-dom';
+import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
+import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
 
 const Profile = () => {
   const isEditing = useSelector(getIsEditing);

@@ -30,7 +30,7 @@ const Status = ({ isOwner }) => {
   }, [status]);
 
   return (
-    <div className="inline transition-colors break-words ">
+    <div className="inline transition-colors break-words xl:text-xl">
       {!isEditing ? (
         <div
           onClick={activateEdit}
@@ -44,11 +44,11 @@ const Status = ({ isOwner }) => {
         <div>
           <input
             onChange={editLocalStatus}
-            className="p-1 pl-2.5 rounded
+            className="p-1 lg:pl-2.5 rounded
             font-semibold text-gray-700
             border border-gray-300
             focus:outline-none focus:border-gray-500
-            transition"
+            transition sm:text-center lg:text-left"
             autoFocus={true}
             onBlur={deactivateEdit}
             defaultValue={localStatus}

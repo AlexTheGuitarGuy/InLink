@@ -10,10 +10,15 @@ const EditButton = () => {
       onClick={() => dispatch(setEditing(true))}
       className="font-semibold
                     bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-                    text-gray-100 text-center
-                    py-0.5 px-4 rounded
+                    text-gray-100 text-center xl:text-xl
+                    rounded
                     transition-colors cursor-pointer
-                    focus:outline-none focus:ring-0"
+                    focus:outline-none focus:ring-0
+
+                    lg:py-0.5 px-4
+                    sm:py-2
+                    sm:mb-4 lg:mb-0
+                    sm:w-full lg:w-auto"
     >
       Edit mode
     </button>

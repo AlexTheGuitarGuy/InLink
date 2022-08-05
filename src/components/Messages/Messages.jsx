@@ -20,13 +20,13 @@ import withAuthRedirect from '../../HOC/withAuthRedirect';
 const Messages = () => {
   const memoryText = useSelector(getStoredText);
   const { userMessages, users } = useSelector(getDialogsPage);
-  const uid = useSelector(getUID);
   const myData = useSelector(getMyData);
+  const uid = useSelector(getUID);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProfile(uid));
-  });
+  }, [dispatch, uid]);
 
   if (!myData) return <LoadingPage />;
 

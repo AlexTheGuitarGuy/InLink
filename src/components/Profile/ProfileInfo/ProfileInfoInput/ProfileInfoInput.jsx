@@ -32,21 +32,26 @@ let ProfileInfoInputForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <div
-        className="flex justify-between
-                   bg-gray-100 rounded-lg p-8
-                   text-gray-700 font-semibold"
+        className="flex sm:flex-col lg:flex-row
+      sm:align-center lg:justify-between
+      bg-gray-100 rounded-lg p-8
+      text-gray-700 font-semibold
+      xl:text-xl"
       >
-        <div className="flex">
-          <div>
+        <div className="flex sm:flex-col lg:flex-row">
+          <div className="sm:w-full">
             <img
               src={pfp || placeholder}
               alt={'pfp'}
-              className="rounded-full w-52 bg-gray-700 p-1"
+              className="rounded-full bg-gray-700 p-1
+                       w-52 h-52
+                       xl:w-60 xl:h-60
+                       sm:mx-auto"
             />
           </div>
 
-          <div className="mt-8 ml-4">
-            <div className="text-2xl">
+          <div className="lg:mt-8 lg:ml-4 sm:flex sm:flex-col lg:flex-none">
+            <div className="text-2xl sm:mx-auto lg:mx-0 xl:text-3xl">
               {createField(
                 'Please insert your name...',
                 'fullName',
@@ -57,28 +62,35 @@ let ProfileInfoInputForm = ({
                   className: `p-2 rounded 
                 border border-gray-300
                 focus:outline-none focus:border-gray-500
-                transition`,
+                transition
+                sm:text-center lg:text-left`,
                 },
               )}
             </div>
 
-            <div className="mt-2">
+            <div className="mt-2 sm:mx-auto lg:mx-0">
               <Status status={profileStatus} isOwner={isOwner} />
             </div>
 
             <div className="mt-4">
               <button
-                className="
-                    font-semibold text-gray-100 text-center
+                className="font-semibold
                     bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-                    py-0.5 px-4 rounded
-                    transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0"
+                    text-gray-100 text-center xl:text-xl
+                    rounded
+                    transition-colors cursor-pointer
+                    focus:outline-none focus:ring-0
+
+                    lg:py-0.5 px-4
+                    sm:py-2
+                    sm:mb-4 lg:mb-0
+                    sm:w-full lg:w-auto"
               >
                 Save
               </button>
             </div>
 
-            <div className="mt-4">
+            <div className="my-4">
               <div>Upload profile picture:</div>
 
               <input
@@ -91,7 +103,7 @@ let ProfileInfoInputForm = ({
           </div>
         </div>
 
-        <div className="flex flex-col w-96">
+        <div className="flex flex-col lg:w-96 xl:w-1/2">
           <JobInfo maxLen={maxLen1000} />
 
           <Contacts contacts={contacts} />

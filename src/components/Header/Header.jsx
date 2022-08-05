@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import LoginButton from './LoginButton/LoginButton';
+import ProfileButton from './ProfileButton/ProfileButton';
 import Nav from './Nav/Nav';
 import { compose } from 'redux';
 
@@ -14,7 +14,7 @@ const Header = () => {
         h-16`}
     >
       <div className={'order-3'}>
-        <LoginButton />
+        <ProfileButton />
       </div>
 
       <div className={'order-2'}>

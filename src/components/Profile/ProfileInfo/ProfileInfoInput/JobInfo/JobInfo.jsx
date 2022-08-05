@@ -18,7 +18,8 @@ const JobInfo = ({ maxLen }) => {
                      bg-gray-200
                      p-4 
                      text-gray-700
-                     flex items-center flex-col"
+                     flex items-center flex-col
+                     w-full xl:text-xl"
     >
       <div className="order-1">
         <div className="mr-1 mt-1 inline">
@@ -34,7 +35,7 @@ const JobInfo = ({ maxLen }) => {
       </div>
 
       {lookingForAJob && (
-        <div className="order-2 mt-2">
+        <div className="order-2 mt-2 text-center w-full">
           {createField(
             'Please enter your skills...',
             'lookingForAJobDescription',
@@ -44,6 +45,7 @@ const JobInfo = ({ maxLen }) => {
             {
               className: `resize-none py-1 px-4 rounded 
                 border border-gray-300
+                w-full
                 focus:outline-none focus:border-gray-500
                 transition`,
             },

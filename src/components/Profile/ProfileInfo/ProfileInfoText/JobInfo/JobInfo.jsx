@@ -2,7 +2,7 @@ import React from 'react';
 
 const JobInfo = ({ lookingForAJob, lookingForAJobDescription }) => {
   return (
-    <div className="w-full">
+    <div className="w-full xl:text-xl">
       {lookingForAJob && (
         <div
           className="border rounded-lg border-gray-300

@@ -22,9 +22,13 @@ const FriendItems = () => {
             <img
               src={require(`../../../assets/pfps/u${e.id}.jpg`)}
               alt={`user ${e.id}`}
-              className="h-12 w-12 rounded-full"
+              className="h-12 w-12
+              xl:h-20 xl:w-20
+              rounded-full"
             />
-            <div className="ml-2 text-sm">{e.name}</div>
+            <div className="ml-2 text-sm xl:text-lg xl:ml-4">
+              {e.name}
+            </div>
           </div>
         </NavLink>
       );
@@ -34,7 +38,7 @@ const FriendItems = () => {
 
   return (
     <div className="text-gray-500 bg-gray-100 p-2 -mr-4 rounded-lg font-semibold">
-      <div className="text-lg ml-2">Contacts:</div>
+      <div className="text-lg xl:text-xl ml-2">Contacts:</div>
       <div>
         {friendList}
         {friendList.length > 5 && (
