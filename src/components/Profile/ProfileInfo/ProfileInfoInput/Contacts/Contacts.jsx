@@ -23,7 +23,7 @@ const Contacts = ({ contacts }) => {
 
 const ContactField = ({ contactName }) => {
   return (
-    <div className="mt-1">
+    <div className="mt-3">
       <label htmlFor={contactName}>{contactName}:</label>
       <span className="ml-2 text-gray-700">
         {createField(
@@ -33,7 +33,7 @@ const ContactField = ({ contactName }) => {
           null,
           null,
           {
-            className: `p-1 rounded w-60
+            className: `p-1 rounded w-full
                 border border-gray-300
                 focus:outline-none focus:border-gray-500
                 transition`,

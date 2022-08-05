@@ -6,16 +6,21 @@ const FormControl = ({ meta: { touched, error }, children }) => {
   const hasError = touched && error;
   return (
     <>
-      {children}
-      {hasError && (
-        <span
-          className={cn(
-            `bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
+      {hasError ? (
+        <>
+          <span className="text-red-700">{children}</span>
+
+          <span
+            className={cn(
+              `bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
             rounded absolute whitespace-nowrap`,
-          )}
-        >
-          {error}
-        </span>
+            )}
+          >
+            {error}
+          </span>
+        </>
+      ) : (
+        <>{children}</>
       )}
     </>
   );
