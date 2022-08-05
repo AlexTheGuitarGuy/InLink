@@ -22,7 +22,7 @@ const ProfileInfoText = ({
       className="flex
       sm:flex-col lg:flex-row
       sm:align-center lg:justify-between
-      bg-gray-100 rounded-lg p-8
+      bg-gray-100 lg:rounded-lg p-8
       text-gray-700 font-semibold
       xl:text-xl"
     >

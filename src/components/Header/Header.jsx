@@ -13,17 +13,19 @@ const Header = () => {
         whitespace-nowrap
         h-16`}
     >
-      <div className={'order-3'}>
+      <div className={'lg:order-3 sm:order-3'}>
         <ProfileButton />
       </div>
 
-      <div className={'order-2'}>
+      <div className={'lg:order-2 sm:order-1'}>
         <Nav />
       </div>
 
       <div
-        className="order-1 text-4xl
-      font-semibold hover:text-gray-600 active:text-gray-500 transition-colors"
+        className="lg:order-1 sm:order-2
+        text-4xl font-semibold
+        hover:text-gray-600 active:text-gray-500
+        transition-colors"
       >
         <NavLink to={'/'}>InLink</NavLink>
       </div>

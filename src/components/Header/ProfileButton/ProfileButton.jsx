@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   getIsLoggedIn,
@@ -11,8 +11,10 @@ import cn from 'classnames';
 import { getProfile } from '../../../redux/profile-reducer';
 import { getMyData } from '../../../redux/profile-selector';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
+import useTagBlur from '../../../hooks/useTagBlur';
 
 const ProfileButton = () => {
+
   const dispatch = useDispatch();
   const [showProfileData, setShowProfileData] = useState(false);
 
@@ -21,23 +23,10 @@ const ProfileButton = () => {
   const uid = useSelector(getUID);
   const myData = useSelector(getMyData);
 
-  const profileDataRef = useRef(null);
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        profileDataRef.current &&
-        !profileDataRef.current.contains(event.target) &&
-        showProfileData
-      ) {
-        setShowProfileData(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [profileDataRef, showProfileData, setShowProfileData]);
+  const profileDataRef = useTagBlur(
+    showProfileData,
+    setShowProfileData,
+  );
 
   useEffect(() => {
     dispatch(getProfile(uid));
@@ -80,19 +69,24 @@ const ProfileButton = () => {
             )}
             ref={profileDataRef}
           >
-            <div className="font-semibold text-gray-700">{login}</div>
-
-            <button
-              onClick={handleLogout}
-              className="font-semibold
+            {showProfileData && (
+              <>
+                <div className="font-semibold text-gray-700">
+                  {login}
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="font-semibold
             bg-rose-500 hover:bg-rose-600 active:bg-rose-700
             py-0.5 px-4 mt-2
             text-gray-100 text-center
             rounded
             transition-colors cursor-pointer"
-            >
-              Log out
-            </button>
+                >
+                  Log out
+                </button>
+              </>
+            )}
           </div>
         </>
       ) : (

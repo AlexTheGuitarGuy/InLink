@@ -18,6 +18,7 @@ let PublishForm = ({ handleSubmit }) => {
         'text',
         {
           className: `resize-none py-2 px-4 rounded w-full
+            xl:text-xl
             border border-gray-300
             focus:outline-none focus:border-gray-500
             transition`,
@@ -52,7 +53,7 @@ const PublishPost = () => {
 
   return (
     <div>
-      <label htmlFor="postText" className="text-lg">
+      <label htmlFor="postText" className="lg:text-lg xl:text-2xl">
         New post
       </label>
       <PublishForm onSubmit={handleSubmit} />
