@@ -1,4 +1,4 @@
-/*let store = {
+/* let store = {
 
     _state: {
         userData: {
@@ -88,7 +88,7 @@
         this._callSubscriber(this._state);
     },
 
-}*/
-//window.store = store;
+} */
+// window.store = store;
 
-//export default store;
+// export default store;

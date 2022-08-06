@@ -6,14 +6,8 @@ import Status from '../Status/Status';
 import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
 import { useDispatch } from 'react-redux';
-import {
-  createField,
-  Input,
-} from '../../../common/FormControls/FormControls';
-import {
-  uploadPFP,
-  uploadProfileInfo,
-} from '../../../../redux/profile-reducer';
+import { createField, Input } from '../../../common/FormControls/FormControls';
+import { uploadPFP, uploadProfileInfo } from '../../../../redux/profile-reducer';
 
 let ProfileInfoInputForm = ({
   isOwner,
@@ -35,8 +29,7 @@ let ProfileInfoInputForm = ({
         className="flex sm:flex-col lg:flex-row
       sm:align-center lg:justify-between
       bg-gray-100 rounded-lg p-8
-      text-gray-700 font-semibold
-      xl:text-xl"
+      text-gray-700 font-semibold"
       >
         <div className="flex sm:flex-col lg:flex-row">
           <div className="sm:w-full">
@@ -52,20 +45,13 @@ let ProfileInfoInputForm = ({
 
           <div className="lg:mt-8 lg:ml-4 sm:flex sm:flex-col lg:flex-none">
             <div className="text-2xl sm:mx-auto lg:mx-0 xl:text-3xl">
-              {createField(
-                'Please insert your name...',
-                'fullName',
-                Input,
-                null,
-                null,
-                {
-                  className: `p-2 rounded 
+              {createField('Please insert your name...', 'fullName', Input, null, null, {
+                className: `p-2 rounded 
                 border border-gray-300
                 focus:outline-none focus:border-gray-500
                 transition
                 sm:text-center lg:text-left`,
-                },
-              )}
+              })}
             </div>
 
             <div className="mt-2 sm:mx-auto lg:mx-0">
@@ -76,7 +62,7 @@ let ProfileInfoInputForm = ({
               <button
                 className="font-semibold
                     bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-                    text-gray-100 text-center xl:text-xl
+                    text-gray-100 text-center
                     rounded
                     transition-colors cursor-pointer
                     focus:outline-none focus:ring-0

@@ -4,7 +4,6 @@ export const required = (message) => {
 };
 
 export const maxLen = (len) => (message) => {
-  if (message && message.length > len)
-    return `maximum length is ${len}`;
+  if (message && message.length > len) return `maximum length is ${len}`;
   return undefined;
 };

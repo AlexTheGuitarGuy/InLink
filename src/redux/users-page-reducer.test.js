@@ -1,9 +1,6 @@
-import usersPageReducer, {
-  toggleFollowStatus,
-  updateFollowQueue,
-} from './users-page-reducer';
+import usersPageReducer, { toggleFollowStatus, updateFollowQueue } from './users-page-reducer';
 
-let state = {
+const state = {
   users: [
     {
       id: 1,
@@ -11,12 +8,12 @@ let state = {
       bio: "Get up you lazy cow. Where's my breakfast?",
       location: { country: 'Belarus', city: 'Minsk' },
       followed: false,
-      /*pfp: (
+      /* pfp: (
         <img
           src={require('../../redux/photos/UsersPfp/u1.png')}
           alt="User1 pfp"
         />
-      ),*/
+      ), */
     },
     {
       id: 2,
@@ -24,12 +21,12 @@ let state = {
       bio: 'LIKE EMBARRASSING ME, HUH?',
       location: { country: 'Ukraine', city: 'Kivy' },
       followed: false,
-      /*pfp: (
+      /* pfp: (
         <img
           src={require('../../redux/photos/UsersPfp/u2.jpg')}
           alt="User2 pfp"
         />
-      ),*/
+      ), */
     },
     {
       id: 3,
@@ -37,12 +34,12 @@ let state = {
       bio: "Ok maggots i wanna see six hot loads on your di's hat, now",
       location: { country: 'Japan', city: 'Tokyo' },
       followed: false,
-      /*pfp: (
+      /* pfp: (
         <img
           src={require('../../redux/photos/UsersPfp/u3.jpg')}
           alt="User3 pfp"
         />
-      ),*/
+      ), */
     },
     {
       id: 4,
@@ -50,12 +47,12 @@ let state = {
       bio: "I'm an artist. I'm a performance artist.",
       location: { country: 'United states', city: 'Los Angeles' },
       followed: false,
-      /*pfp: (
+      /* pfp: (
         <img
           src={require('../../redux/photos/UsersPfp/u4.jpg')}
           alt="User4 pfp"
         />
-      ),*/
+      ), */
     },
   ],
   pageSize: 5,
@@ -67,23 +64,23 @@ let state = {
 };
 
 it(`should turn follow status of user with id 2 from false to true`, () => {
-  let action = toggleFollowStatus(2, true);
+  const action = toggleFollowStatus(2, true);
 
-  let newState = usersPageReducer(state, action);
+  const newState = usersPageReducer(state, action);
 
   expect(newState.users.find((e) => e.id === 2).followed).toBe(true);
 });
 
 it(`should add user with id 2 to follow queue`, () => {
-  let action = updateFollowQueue(2);
+  const action = updateFollowQueue(2);
 
-  let newState = usersPageReducer(state, action);
+  const newState = usersPageReducer(state, action);
 
   expect(newState.followQueue.some((e) => e === 2)).toBe(true);
 });
 
 it(`should remove user with id 2 from follow queue`, () => {
-  let action = updateFollowQueue(2);
+  const action = updateFollowQueue(2);
 
   let newState = usersPageReducer(state, action);
   newState = usersPageReducer(newState, action);

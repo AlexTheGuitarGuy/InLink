@@ -1,17 +1,11 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { maxLen, required } from '../../utils/validators/validators';
-import {
-  createField,
-  Input,
-} from '../common/FormControls/FormControls';
+import { createField, Input } from '../common/FormControls/FormControls';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Navigate } from 'react-router-dom';
-import {
-  getCaptchaURL,
-  getIsLoggedIn,
-} from '../../redux/auth-selector';
+import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-selector';
 
 let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
   return (
@@ -26,19 +20,11 @@ let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
             />
           </div>
           <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
-            <div className="text-gray-700 font-bold text-center mb-6">
-              Log into InLink
-            </div>
+            <div className="text-gray-700 font-bold text-center mb-6">Log into InLink</div>
             <form onSubmit={handleSubmit} className="text-xl">
               <div className="mb-6">
-                {createField(
-                  'Email address',
-                  'email',
-                  Input,
-                  [required, maxLen],
-                  null,
-                  {
-                    className: `form-control block w-full
+                {createField('Email address', 'email', Input, [required, maxLen], null, {
+                  className: `form-control block w-full
                     px-4 py-2 m-0
                     font-normal text-gray-700
                     bg-white bg-clip-padding
@@ -47,19 +33,12 @@ let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
                     focus:text-gray-800
                     focus:bg-white focus:border-gray-600
                     focus:outline-none`,
-                  },
-                )}
+                })}
               </div>
 
               <div className="mb-6">
-                {createField(
-                  'Password',
-                  'password',
-                  Input,
-                  [required, maxLen],
-                  'password',
-                  {
-                    className: `form-control block w-full
+                {createField('Password', 'password', Input, [required, maxLen], 'password', {
+                  className: `form-control block w-full
                     px-4 py-2  m-0
                     font-normal text-gray-700
                     bg-white bg-clip-padding
@@ -67,26 +46,18 @@ let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
                     transition ease-in-out
                     focus:text-gray-800 focus:bg-white focus:border-gray-600
                     focus:outline-none`,
-                  },
-                )}
+                })}
               </div>
 
               <div className="flex justify-between items-center mb-6">
                 <div className="form-group form-check">
-                  {createField(
-                    'RememberMe',
-                    'rememberMe',
-                    Input,
-                    null,
-                    'checkbox',
-                    {
-                      className: `h-4 w-4 mr-2
+                  {createField('RememberMe', 'rememberMe', Input, null, 'checkbox', {
+                    className: `h-4 w-4 mr-2
                       border border-gray-300
                       rounded-sm
                       focus:outline-none cursor-pointer`,
-                      id: `exampleCheck`,
-                    },
-                  )}
+                    id: `exampleCheck`,
+                  })}
                   <label
                     className="form-check-label inline-block text-gray-800 cursor-pointer"
                     htmlFor="exampleCheck"
@@ -116,26 +87,15 @@ let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
 
               <div className="text-gray-700 mt-6">
                 Free account for visitors:
-                <div>Email: free@samuraijs.com</div>{' '}
-                <div>Password: free</div>
+                <div>Email: free@samuraijs.com</div> <div>Password: free</div>
               </div>
 
               {captcha && (
                 <div className="flex justify-center">
                   <div className="mt-6 text-gray-700">
-                    <img
-                      src={captcha}
-                      alt="captcha"
-                      className="mb-4 w-full"
-                    />
-                    {createField(
-                      'Captcha',
-                      'captcha',
-                      Input,
-                      [required, maxLen],
-                      null,
-                      {
-                        className: `form-control block w-full
+                    <img src={captcha} alt="captcha" className="mb-4 w-full" />
+                    {createField('Captcha', 'captcha', Input, [required, maxLen], null, {
+                      className: `form-control block w-full
                     px-4 py-2 m-0
                     font-normal text-gray-700
                     bg-white bg-clip-padding
@@ -144,8 +104,7 @@ let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
                     focus:text-gray-800
                     focus:bg-white focus:border-gray-600
                     focus:outline-none`,
-                      },
-                    )}
+                    })}
                   </div>
                 </div>
               )}
@@ -174,13 +133,7 @@ const Login = () => {
     dispatch(login(email, password, rememberMe, captcha));
   };
 
-  return (
-    <LoginForm
-      maxLen={maxLen40}
-      onSubmit={onSubmit}
-      captcha={captcha}
-    />
-  );
+  return <LoginForm maxLen={maxLen40} onSubmit={onSubmit} captcha={captcha} />;
 };
 
 export default Login;

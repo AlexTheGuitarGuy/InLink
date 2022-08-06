@@ -5,10 +5,7 @@ import Users from './Users/Users';
 import SendText from './SendText/SendText';
 import placeholder from '../../assets/pfps/placeholder.jpg';
 import { Navigate } from 'react-router';
-import {
-  getDialogsPage,
-  getStoredText,
-} from '../../redux/dialogs-selector';
+import { getDialogsPage, getStoredText } from '../../redux/dialogs-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUID } from '../../redux/auth-selector';
 import { getMyData } from '../../redux/profile-selector';
@@ -55,9 +52,7 @@ const Messages = () => {
         key={i}
         element={
           <div className="flex flex-col w-full relative">
-            <div className="mx-16 mb-32 overflow-scroll h-full">
-              {userDialogElements[i]}
-            </div>
+            <div className="mx-16 mb-32 overflow-scroll h-full">{userDialogElements[i]}</div>
             <div
               className="absolute bottom-0 w-3/5 self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300"

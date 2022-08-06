@@ -1,9 +1,6 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import {
-  createField,
-  Textarea,
-} from '../../common/FormControls/FormControls';
+import { createField, Textarea } from '../../common/FormControls/FormControls';
 import { sendMessage } from '../../../redux/dialogs-reducer';
 import { useDispatch } from 'react-redux';
 
@@ -11,19 +8,12 @@ const SendForm = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-row justify-center">
-        {createField(
-          'Enter your message',
-          'send',
-          Textarea,
-          null,
-          null,
-          {
-            className: `resize-none w-full rounded-lg p-2 
+        {createField('Enter your message', 'send', Textarea, null, null, {
+          className: `resize-none w-full rounded-lg p-2 
                 border border-gray-300
                 focus:outline-none focus:border-gray-500
                 transition`,
-          },
-        )}
+        })}
 
         <div>
           <button
@@ -33,11 +23,7 @@ const SendForm = ({ handleSubmit }) => {
           transition-colors cursor-pointer
           focus:outline-none focus:ring-0"
           >
-            <img
-              src={require('../../../assets/send.png')}
-              alt="Send"
-              className="w-8 h-8 mr-3"
-            />
+            <img src={require('../../../assets/send.png')} alt="Send" className="w-8 h-8 mr-3" />
           </button>
         </div>
       </div>

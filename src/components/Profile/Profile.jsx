@@ -2,16 +2,8 @@ import React, { useEffect } from 'react';
 import LoadingPage from '../common/Loading/LoadingPage';
 import MyPosts from './MyPosts/MyPosts';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getIsEditing,
-  getIsLoading,
-  getProfilePage,
-} from '../../redux/profile-selector';
-import {
-  getProfile,
-  getStatus,
-  setEditing,
-} from '../../redux/profile-reducer';
+import { getIsEditing, getIsLoading, getProfilePage } from '../../redux/profile-selector';
+import { getProfile, getStatus, setEditing } from '../../redux/profile-reducer';
 import { getUID } from '../../redux/auth-selector';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
@@ -61,11 +53,7 @@ const Profile = () => {
           profileStatus={profileStatus}
         />
       )}
-      <MyPosts
-        isOwner={isOwner}
-        pfp={pfp.small}
-        userName={profileData.fullName}
-      />
+      <MyPosts isOwner={isOwner} pfp={pfp.small} userName={profileData.fullName} />
     </div>
   );
 };

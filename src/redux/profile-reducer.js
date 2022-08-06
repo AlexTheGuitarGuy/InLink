@@ -1,6 +1,6 @@
+import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/API';
 import { updateObjInArr } from '../utils/object-helpers';
-import { stopSubmit } from 'redux-form';
 
 const POST = 'IN_LINK/PROFILE_REDUCER/POST';
 const SET_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_PROFILE';
@@ -8,11 +8,10 @@ const SET_STATUS = 'IN_LINK/PROFILE_REDUCER/SET_STATUS';
 const TOGGLE_LOADING = 'IN_LINK/PROFILE_REDUCER/TOGGLE_LOADING';
 const DELETE_POST = 'IN_LINK/PROFILE_REDUCER/DELETE_POST';
 const EDIT_POST = 'IN_LINK/PROFILE_REDUCER/EDIT_POST';
-const UPLOAD_PHOTO_SUCCESS =
-  'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS';
+const UPLOAD_PHOTO_SUCCESS = 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS';
 const SET_IS_EDITING = 'IN_LINK/PROFILE_REDUCER/SET_IS_EDITING';
 
-let defaultState = {
+const defaultState = {
   posts: [
     {
       id: 1,
@@ -156,41 +155,34 @@ export const uploadPFP = (file) => {
   };
 };
 
-export const uploadProfileInfo =
-  (profileInfo) => async (dispatch, getState) => {
-    const userId = getState().profilePage.profileData.userId;
+export const uploadProfileInfo = (profileInfo) => async (dispatch, getState) => {
+  const { userId } = getState().profilePage.profileData;
 
-    const data = await profileAPI.uploadProfileInfo({
-      userId,
-      ...profileInfo,
-    });
+  const data = await profileAPI.uploadProfileInfo({
+    userId,
+    ...profileInfo,
+  });
 
-    if (data.resultCode === 0) {
-      dispatch(getProfile(userId));
-      dispatch(setEditing(false));
-    } else {
-      const message =
-        data.messages.length > 0
-          ? data.messages[0]
-          : 'An error has occurred';
+  if (data.resultCode === 0) {
+    dispatch(getProfile(userId));
+    dispatch(setEditing(false));
+  } else {
+    const message = data.messages.length > 0 ? data.messages[0] : 'An error has occurred';
 
-      const regExp = /\(([^)]+)\)/;
-      const errorLocation =
-        regExp.exec(message) && regExp.exec(message)[1];
+    const regExp = /\(([^)]+)\)/;
+    const errorLocation = regExp.exec(message) && regExp.exec(message)[1];
 
-      if (errorLocation) {
-        const errorText = message.slice(0, message.indexOf('('));
-        const parsedLocation = errorLocation
-          .toLowerCase()
-          .split('->');
-        dispatch(
-          stopSubmit('profileInfo', {
-            [parsedLocation[0]]: { [parsedLocation[1]]: errorText },
-          }),
-        );
-      } else dispatch(stopSubmit('profileInfo', { _error: message }));
-      return Promise.reject(message);
-    }
-  };
+    if (errorLocation) {
+      const errorText = message.slice(0, message.indexOf('('));
+      const parsedLocation = errorLocation.toLowerCase().split('->');
+      dispatch(
+        stopSubmit('profileInfo', {
+          [parsedLocation[0]]: { [parsedLocation[1]]: errorText },
+        }),
+      );
+    } else dispatch(stopSubmit('profileInfo', { _error: message }));
+    return Promise.reject(message);
+  }
+};
 
 export default profileReducer;

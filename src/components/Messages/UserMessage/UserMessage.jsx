@@ -29,12 +29,10 @@ const UserMessage = ({ message: { from, text }, pfp }) => {
           className={cn(
             'mt-2 p-2 rounded-b-lg',
             {
-              'ml-4 order-2 bg-gray-400 text-white rounded-r-lg':
-                !isFromMe,
+              'ml-4 order-2 bg-gray-400 text-white rounded-r-lg': !isFromMe,
             },
             {
-              'mr-4 order-1 bg-blue-400 text-white rounded-l-lg':
-                isFromMe,
+              'mr-4 order-1 bg-blue-400 text-white rounded-l-lg': isFromMe,
             },
           )}
         >

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import InLinkApp from './App';
 import { unmountComponentAtNode } from 'react-dom';
+import InLinkApp from './App';
 
 test('renders app', () => {
   const div = document.createElement('div');

@@ -9,13 +9,7 @@ const MyPosts = ({ pfp, isOwner, userName }) => {
   const posts = useSelector(getPosts);
 
   const postElements = posts.map(({ id, text, likes }) => (
-    <PostCard
-      key={id}
-      text={text}
-      likeCount={likes}
-      pfp={pfp || placeholder}
-      userName={userName}
-    />
+    <PostCard key={id} text={text} likeCount={likes} pfp={pfp || placeholder} userName={userName} />
   ));
 
   return (

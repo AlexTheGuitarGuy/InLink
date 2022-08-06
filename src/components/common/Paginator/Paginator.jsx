@@ -1,29 +1,20 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 
-const Paginator = ({
-  totalElems,
-  portionSize,
-  pageSize,
-  changePage,
-  page,
-}) => {
+const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
   const pagesNb = Math.ceil(totalElems / pageSize);
   const halfwayPoint = page - Math.floor(portionSize / 2);
 
   const calcPagesBeginning = () => {
     if (halfwayPoint > 1) {
-      if (halfwayPoint > pagesNb - portionSize)
-        return pagesNb - portionSize + 1;
+      if (halfwayPoint > pagesNb - portionSize) return pagesNb - portionSize + 1;
       return halfwayPoint;
     }
 
     return 1;
   };
 
-  const [currentPagesBeginning, setCurrentPages] = useState(
-    calcPagesBeginning(),
-  );
+  const [currentPagesBeginning, setCurrentPages] = useState(calcPagesBeginning());
 
   const changeOnClick = (i) => {
     const portionBeginning = i - Math.floor(portionSize / 2);
@@ -54,11 +45,7 @@ const Paginator = ({
   }
 
   let currentPages = [];
-  for (
-    let i = currentPagesBeginning, lim = i + portionSize;
-    i < lim;
-    i++
-  ) {
+  for (let i = currentPagesBeginning, lim = i + portionSize; i < lim; i++) {
     currentPages[i] = mappedPages[i];
   }
 
@@ -77,11 +64,7 @@ const Paginator = ({
   );
 
   const firstPage = moveToExtreme(1, 1, '<< ');
-  const lastPage = moveToExtreme(
-    pagesNb - portionSize + 1,
-    pagesNb,
-    ' >>',
-  );
+  const lastPage = moveToExtreme(pagesNb - portionSize + 1, pagesNb, ' >>');
 
   const moveOnePage = (i, symbol) => (
     <span

@@ -3,7 +3,7 @@ import { auth } from './auth-reducer';
 const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED';
 const SET_SIDEBAR_HIDDEN = 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN';
 
-let defaultState = {
+const defaultState = {
   isAppInitialized: false,
   isSidebarHidden: false,
 };

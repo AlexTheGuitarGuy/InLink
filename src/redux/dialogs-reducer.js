@@ -153,8 +153,7 @@ const dialogsReducer = (state = defaultState, action) => {
       return {
         ...state,
         userMessages: state.userMessages.map((e, i) => {
-          if (i === action.userId)
-            return e.filter((m) => m.id !== action.messageId);
+          if (i === action.userId) return e.filter((m) => m.id !== action.messageId);
           return e;
         }),
       };

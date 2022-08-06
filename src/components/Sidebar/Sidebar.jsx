@@ -8,10 +8,7 @@ import { setIsSidebarHidden } from '../../redux/app-reducer';
 const Sidebar = () => {
   const dispatch = useDispatch();
 
-  if (
-    useLocation().pathname.match('/messages') ||
-    window.innerWidth <= 720
-  ) {
+  if (useLocation().pathname.match('/messages') || window.innerWidth <= 720) {
     dispatch(setIsSidebarHidden(true));
     return null;
   } else dispatch(setIsSidebarHidden(false));

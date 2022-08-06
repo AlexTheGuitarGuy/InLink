@@ -19,33 +19,26 @@ describe('Status component', () => {
     }
   };
 
-  const getDrawnComponent = (renderer) =>
-    renderer.root.children[0].children[0];
+  const getDrawnComponent = (renderer) => renderer.root.children[0].children[0];
 
   const clickSpan = (span) => span.props.onClick();
 
   const blurInput = (input) => input.props.onBlur();
 
   test('shows expected status', () => {
-    const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} />,
-    );
+    const renderer = ReactTestRenderer.create(<Status status={testStatus} />);
 
     expect(getCurrentStatus(renderer)).toBe(testStatus);
   });
 
   test('shows status as span', () => {
-    const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} />,
-    );
+    const renderer = ReactTestRenderer.create(<Status status={testStatus} />);
 
     expect(() => getDrawnComponent(renderer)).not.toThrow();
   });
 
   test('shows status as input', () => {
-    const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} isOwner={true} />,
-    );
+    const renderer = ReactTestRenderer.create(<Status status={testStatus} isOwner={true} />);
 
     act(() => clickSpan(getDrawnComponent(renderer)));
 
@@ -53,9 +46,7 @@ describe('Status component', () => {
   });
 
   test('input contains status', () => {
-    const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} isOwner={true} />,
-    );
+    const renderer = ReactTestRenderer.create(<Status status={testStatus} isOwner={true} />);
 
     act(() => clickSpan(getDrawnComponent(renderer)));
 
@@ -63,9 +54,7 @@ describe('Status component', () => {
   });
 
   test("doesn't convert status to input if isOwner is false", () => {
-    const renderer = ReactTestRenderer.create(
-      <Status status={testStatus} isOwner={false} />,
-    );
+    const renderer = ReactTestRenderer.create(<Status status={testStatus} isOwner={false} />);
 
     act(() => clickSpan(getDrawnComponent(renderer)));
 
@@ -76,11 +65,7 @@ describe('Status component', () => {
     const updateStatus = jest.fn();
 
     const renderer = ReactTestRenderer.create(
-      <Status
-        status={testStatus}
-        isOwner={true}
-        updateStatus={updateStatus}
-      />,
+      <Status status={testStatus} isOwner={true} updateStatus={updateStatus} />,
     );
 
     act(() => clickSpan(getDrawnComponent(renderer)));

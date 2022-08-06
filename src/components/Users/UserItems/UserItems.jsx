@@ -3,10 +3,7 @@ import { NavLink } from 'react-router-dom';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getFollowQueue,
-  getUsers,
-} from '../../../redux/users-page-selector';
+import { getFollowQueue, getUsers } from '../../../redux/users-page-selector';
 import { follow, unfollow } from '../../../redux/users-page-reducer';
 import LoadingButton from '../../common/Loading/LoadingButton';
 
@@ -18,9 +15,7 @@ const UserItems = () => {
 
   const mappedUsers = users.map((e, i, arr) => {
     const buttonText = e.followed ? 'Unfollow' : 'Follow';
-    const buttonAction = e.followed
-      ? (id) => dispatch(unfollow(id))
-      : (id) => dispatch(follow(id));
+    const buttonAction = e.followed ? (id) => dispatch(unfollow(id)) : (id) => dispatch(follow(id));
     const isDisabled = followQueue.some((elem) => elem === e.id);
 
     return (
@@ -32,10 +27,7 @@ const UserItems = () => {
           { 'border-b border-gray-300': i !== arr.length - 1 },
         )}
       >
-        <NavLink
-          to={'/profile/' + (e.uniqueUrlName || e.id)}
-          className="flex"
-        >
+        <NavLink to={'/profile/' + (e.uniqueUrlName || e.id)} className="flex">
           <img
             src={e.photos.small || placeholder}
             alt="userPfp"
@@ -74,12 +66,10 @@ const UserItems = () => {
           py-1 px-4 rounded
           transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0`,
             {
-              'bg-gray-500 hover:bg-gray-600 active:bg-gray-700':
-                !isDisabled,
+              'bg-gray-500 hover:bg-gray-600 active:bg-gray-700': !isDisabled,
             },
             {
-              'bg-gray-300 text-gray-500 cursor-not-allowed':
-                isDisabled,
+              'bg-gray-300 text-gray-500 cursor-not-allowed': isDisabled,
             },
           )}
         >

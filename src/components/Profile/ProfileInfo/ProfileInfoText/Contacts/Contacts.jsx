@@ -14,12 +14,7 @@ const Contacts = ({ contacts }) => {
   const parsedContacts = Object.keys(contacts).map((key) => {
     return (
       <span key={key}>
-        {contacts[key] && (
-          <TextContact
-            contactName={key}
-            contactAddress={contacts[key]}
-          />
-        )}
+        {contacts[key] && <TextContact contactName={key} contactAddress={contacts[key]} />}
       </span>
     );
   });
@@ -35,8 +30,7 @@ const Contacts = ({ contacts }) => {
 const TextContact = ({ contactName, contactAddress }) => {
   return (
     <div className="mt-2">
-      {contactName}:{' '}
-      <span className="font-normal">{contactAddress}</span>
+      {contactName}: <span className="font-normal">{contactAddress}</span>
     </div>
   );
 };

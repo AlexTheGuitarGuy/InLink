@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  createField,
-  Input,
-  Textarea,
-} from '../../../../common/FormControls/FormControls';
+import { createField, Input, Textarea } from '../../../../common/FormControls/FormControls';
 import { formValueSelector } from 'redux-form';
 import { useSelector } from 'react-redux';
 
@@ -19,17 +15,11 @@ const JobInfo = ({ maxLen }) => {
                      p-4 
                      text-gray-700
                      flex items-center flex-col
-                     w-full xl:text-xl"
+                     w-full"
     >
       <div className="order-1">
         <div className="mr-1 mt-1 inline">
-          {createField(
-            'isLookingForJob',
-            'lookingForAJob',
-            Input,
-            null,
-            'checkbox',
-          )}
+          {createField('isLookingForJob', 'lookingForAJob', Input, null, 'checkbox')}
         </div>
         is looking for a job
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const JobInfo = ({ lookingForAJob, lookingForAJobDescription }) => {
   return (
-    <div className="w-full xl:text-xl">
+    <div className="w-full">
       {lookingForAJob && (
         <div
           className="border rounded-lg border-gray-300
@@ -21,9 +21,7 @@ const JobInfo = ({ lookingForAJob, lookingForAJobDescription }) => {
           </div>
 
           <div className="order-2 text-center">
-            {lookingForAJobDescription
-              ? '"' + lookingForAJobDescription + '"'
-              : null}
+            {lookingForAJobDescription ? '"' + lookingForAJobDescription + '"' : null}
           </div>
         </div>
       )}

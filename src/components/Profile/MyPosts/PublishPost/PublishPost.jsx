@@ -1,30 +1,20 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import {
-  createField,
-  Textarea,
-} from '../../../common/FormControls/FormControls';
+import { createField, Textarea } from '../../../common/FormControls/FormControls';
 import { post } from '../../../../redux/profile-reducer';
 import { useDispatch } from 'react-redux';
 
 let PublishForm = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
-      {createField(
-        'Type what you think...',
-        'post',
-        Textarea,
-        null,
-        'text',
-        {
-          className: `resize-none py-2 px-4 rounded w-full
+      {createField('Type what you think...', 'post', Textarea, null, 'text', {
+        className: `resize-none py-2 px-4 rounded w-full
             xl:text-xl
             border border-gray-300
             focus:outline-none focus:border-gray-500
             transition`,
-          id: 'postText',
-        },
-      )}
+        id: 'postText',
+      })}
 
       <button
         className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700

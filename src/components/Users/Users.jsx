@@ -10,10 +10,7 @@ import {
   getPortionSize,
   getTotalUsers,
 } from '../../redux/users-page-selector';
-import {
-  requestUsers,
-  setPage,
-} from '../../redux/users-page-reducer';
+import { requestUsers, setPage } from '../../redux/users-page-reducer';
 
 const Users = () => {
   const totalUsers = useSelector(getTotalUsers);

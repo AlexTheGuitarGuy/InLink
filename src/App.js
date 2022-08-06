@@ -12,10 +12,7 @@ import { getIsLoggedIn } from './redux/auth-selector';
 import cn from 'classnames';
 import { Navigate } from 'react-router';
 import Login from './components/Login/Login';
-import {
-  getIsAppInitialized,
-  getIsSidebarHidden,
-} from './redux/app-selector';
+import { getIsAppInitialized, getIsSidebarHidden } from './redux/app-selector';
 import Users from './components/Users/Users';
 import Messages from './components/Messages/Messages';
 import Profile from './components/Profile/Profile';
@@ -49,10 +46,7 @@ const App = () => {
     window.addEventListener('unhandledrejection', handleRejection);
 
     return () => {
-      window.removeEventListener(
-        'unhandledrejection',
-        handleRejection,
-      );
+      window.removeEventListener('unhandledrejection', handleRejection);
     };
   });
 
@@ -75,13 +69,7 @@ const App = () => {
           'ml-60 xl:ml-80': isLoggedIn && !isSidebarHidden,
         })}
       >
-        {error && (
-          <Error
-            text={error}
-            isShown={isErrorShown}
-            setIsShown={setIsErrorShown}
-          />
-        )}
+        {error && <Error text={error} isShown={isErrorShown} setIsShown={setIsErrorShown} />}
         <div className="mt-14">
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />
@@ -91,10 +79,7 @@ const App = () => {
             <Route path="/messages/*" element={<Messages />} />
 
             <Route path="/login" element={<Login />} />
-            <Route
-              path="/login/facebook"
-              element={<div>facebook</div>}
-            />
+            <Route path="/login/facebook" element={<div>facebook</div>} />
             <Route path="/users" element={<Users />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

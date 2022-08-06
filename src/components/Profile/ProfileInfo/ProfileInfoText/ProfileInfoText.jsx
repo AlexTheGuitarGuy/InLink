@@ -6,12 +6,7 @@ import JobInfo from './JobInfo/JobInfo';
 import Contacts from './Contacts/Contacts';
 
 const ProfileInfoText = ({
-  profileData: {
-    lookingForAJob,
-    lookingForAJobDescription,
-    fullName,
-    contacts,
-  },
+  profileData: { lookingForAJob, lookingForAJobDescription, fullName, contacts },
   profileStatus,
   pfp,
   updateStatus,
@@ -23,8 +18,7 @@ const ProfileInfoText = ({
       sm:flex-col lg:flex-row
       sm:align-center lg:justify-between
       bg-gray-100 lg:rounded-lg p-8
-      text-gray-700 font-semibold
-      xl:text-xl"
+      text-gray-700 font-semibold"
     >
       <div className="flex sm:flex-col lg:flex-row">
         <div className="sm:w-full">
@@ -39,16 +33,10 @@ const ProfileInfoText = ({
         </div>
 
         <div className="lg:mt-8 lg:ml-4 sm:flex sm:flex-col lg:flex-none">
-          <div className="text-2xl sm:mx-auto lg:mx-0 xl:text-3xl">
-            {fullName}
-          </div>
+          <div className="text-2xl sm:mx-auto lg:mx-0 xl:text-3xl">{fullName}</div>
 
           <div className="mt-2 sm:mx-auto lg:mx-0">
-            <Status
-              status={profileStatus}
-              updateStatus={updateStatus}
-              isOwner={isOwner}
-            />
+            <Status status={profileStatus} updateStatus={updateStatus} isOwner={isOwner} />
           </div>
 
           {isOwner && (

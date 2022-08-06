@@ -1,10 +1,6 @@
-import profileReducer, {
-  deletePost,
-  editPost,
-  post,
-} from './profile-reducer';
+import profileReducer, { deletePost, editPost, post } from './profile-reducer';
 
-let state = {
+const state = {
   posts: [
     {
       id: 1,
@@ -24,35 +20,33 @@ let state = {
 };
 
 it('should increment posts array length', () => {
-  let action = post('testing is good');
+  const action = post('testing is good');
 
-  let newState = profileReducer(state, action);
+  const newState = profileReducer(state, action);
 
   expect(newState.posts.length).toBe(4);
 });
 
 it(`should add a post that contains text "testing is good"`, () => {
-  let action = post('testing is good');
+  const action = post('testing is good');
 
-  let newState = profileReducer(state, action);
+  const newState = profileReducer(state, action);
 
   expect(newState.posts[3]).toBe('testing is good');
 });
 
 it(`should delete post with id 3`, () => {
-  let action = deletePost(3);
+  const action = deletePost(3);
 
-  let newState = profileReducer(state, action);
+  const newState = profileReducer(state, action);
 
   expect(newState.posts.find((p) => p.id === 3)).toBe(undefined);
 });
 
 it(`should edit post with id 3 to be "I also like Jest!"`, () => {
-  let action = editPost(3, 'I also like Jest');
+  const action = editPost(3, 'I also like Jest');
 
-  let newState = profileReducer(state, action);
+  const newState = profileReducer(state, action);
 
-  expect(newState.posts.find((p) => p.id === 3).text).toBe(
-    'I also like Jest',
-  );
+  expect(newState.posts.find((p) => p.id === 3).text).toBe('I also like Jest');
 });

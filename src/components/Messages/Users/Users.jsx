@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 const Users = ({ users }) => {
-  let userElements = users.map((e) => {
+  const userElements = users.map((e) => {
     return (
       <div key={e.id}>
         <NavLink

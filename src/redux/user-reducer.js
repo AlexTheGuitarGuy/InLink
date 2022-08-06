@@ -1,4 +1,4 @@
-let defaultState = {
+const defaultState = {
   profileData: {
     id: 0,
     name: 'Me',

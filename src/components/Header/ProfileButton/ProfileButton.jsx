@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import {
-  getIsLoggedIn,
-  getLogin,
-  getUID,
-} from '../../../redux/auth-selector';
+import { getIsLoggedIn, getLogin, getUID } from '../../../redux/auth-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../redux/auth-reducer';
 import cn from 'classnames';
@@ -14,7 +10,6 @@ import placeholder from '../../../assets/pfps/placeholder.jpg';
 import useTagBlur from '../../../hooks/useTagBlur';
 
 const ProfileButton = () => {
-
   const dispatch = useDispatch();
   const [showProfileData, setShowProfileData] = useState(false);
 
@@ -23,10 +18,7 @@ const ProfileButton = () => {
   const uid = useSelector(getUID);
   const myData = useSelector(getMyData);
 
-  const profileDataRef = useTagBlur(
-    showProfileData,
-    setShowProfileData,
-  );
+  const profileDataRef = useTagBlur(showProfileData, setShowProfileData);
 
   useEffect(() => {
     dispatch(getProfile(uid));
@@ -43,10 +35,7 @@ const ProfileButton = () => {
     <div className="flex flex-col">
       {isLoggedIn ? (
         <>
-          <button
-            onClick={() => setShowProfileData(!showProfileData)}
-            className="rounded-full"
-          >
+          <button onClick={() => setShowProfileData(!showProfileData)} className="rounded-full">
             <img
               src={myData.photos.small || placeholder}
               alt="pfp"
@@ -71,9 +60,7 @@ const ProfileButton = () => {
           >
             {showProfileData && (
               <>
-                <div className="font-semibold text-gray-700">
-                  {login}
-                </div>
+                <div className="font-semibold text-gray-700">{login}</div>
                 <button
                   onClick={handleLogout}
                   className="font-semibold

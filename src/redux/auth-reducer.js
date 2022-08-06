@@ -1,10 +1,10 @@
-import { securityAPI } from '../api/API';
 import { stopSubmit } from 'redux-form';
+import { securityAPI } from '../api/API';
 
 const SET_DATA = 'IN_LINK/AUTH_REDUCER/SET_DATA';
 const SET_CAPTCHA = 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA';
 
-let defaultState = {
+const defaultState = {
   id: null,
   login: null,
   email: null,
@@ -43,7 +43,7 @@ export const auth = () => {
   return async (dispatch) => {
     const data = await securityAPI.me();
     if (data.resultCode === 0) {
-      let { email, id, login } = data.data;
+      const { email, id, login } = data.data;
       dispatch(setData(id, login, email, true, null));
     }
   };
@@ -57,29 +57,16 @@ const getCaptchaURL = () => {
   };
 };
 
-export const login = (
-  email,
-  password,
-  rememberMe = false,
-  captcha,
-) => {
+export const login = (email, password, rememberMe = false, captcha) => {
   return async (dispatch) => {
-    const data = await securityAPI.login(
-      email,
-      password,
-      rememberMe,
-      captcha,
-    );
+    const data = await securityAPI.login(email, password, rememberMe, captcha);
 
     if (data.resultCode === 0) {
       dispatch(auth());
     } else {
       if (data.resultCode === 10) dispatch(getCaptchaURL());
 
-      let message =
-        data.messages[0].length > 0
-          ? data.messages[0]
-          : 'An error has occurred';
+      const message = data.messages[0].length > 0 ? data.messages[0] : 'An error has occurred';
       dispatch(stopSubmit('login', { _error: message }));
       return Promise.reject(message);
     }

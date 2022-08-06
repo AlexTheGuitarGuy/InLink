@@ -4,11 +4,7 @@ const useTagBlur = (flag, setFlag) => {
   const ref = useRef(null);
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        ref.current &&
-        !ref.current.contains(event.target) &&
-        flag
-      ) {
+      if (ref.current && !ref.current.contains(event.target) && flag) {
         setFlag(false);
       }
     }

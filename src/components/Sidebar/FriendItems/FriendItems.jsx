@@ -26,9 +26,7 @@ const FriendItems = () => {
               xl:h-20 xl:w-20
               rounded-full"
             />
-            <div className="ml-2 text-sm xl:text-lg xl:ml-4">
-              {e.name}
-            </div>
+            <div className="ml-2 text-sm xl:text-lg xl:ml-4">{e.name}</div>
           </div>
         </NavLink>
       );
@@ -41,11 +39,7 @@ const FriendItems = () => {
       <div className="text-lg xl:text-xl ml-2">Contacts:</div>
       <div>
         {friendList}
-        {friendList.length > 5 && (
-          <span className="font-normal ml-4 text-sm">
-            and more...
-          </span>
-        )}
+        {friendList.length > 5 && <span className="font-normal ml-4 text-sm">and more...</span>}
       </div>
     </div>
   );

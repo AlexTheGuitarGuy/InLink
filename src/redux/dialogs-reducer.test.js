@@ -1,38 +1,26 @@
-import dialogsReducer, {
-  deleteMessage,
-  editMessage,
-  sendMessage,
-} from './dialogs-reducer';
+import dialogsReducer, { deleteMessage, editMessage, sendMessage } from './dialogs-reducer';
 
 const state = {
   users: [
     {
       id: 1,
       name: ['Denis', 'Johnson'],
-      pfp: (
-        <img src={require('../assets/pfps/u1.png')} alt="User1 pfp" />
-      ),
+      pfp: <img src={require('../assets/pfps/u1.png')} alt="User1 pfp" />,
     },
     {
       id: 2,
       name: ['John', 'Denison'],
-      pfp: (
-        <img src={require('../assets/pfps/u2.jpg')} alt="User2 pfp" />
-      ),
+      pfp: <img src={require('../assets/pfps/u2.jpg')} alt="User2 pfp" />,
     },
     {
       id: 3,
       name: ['Chuck', 'Norris'],
-      pfp: (
-        <img src={require('../assets/pfps/u3.jpg')} alt="User3 pfp" />
-      ),
+      pfp: <img src={require('../assets/pfps/u3.jpg')} alt="User3 pfp" />,
     },
     {
       id: 4,
       name: ['Walter', 'White'],
-      pfp: (
-        <img src={require('../assets/pfps/u4.jpg')} alt="User4 pfp" />
-      ),
+      pfp: <img src={require('../assets/pfps/u4.jpg')} alt="User4 pfp" />,
     },
   ],
   userMessages: [
@@ -85,45 +73,33 @@ const state = {
 };
 
 it('should increment userMessages[0] array length', () => {
-  let action = sendMessage(
-    0,
-    'Hello fellow human being, I am Mark Zuckerberg',
-  );
+  const action = sendMessage(0, 'Hello fellow human being, I am Mark Zuckerberg');
 
-  let newState = dialogsReducer(state, action);
+  const newState = dialogsReducer(state, action);
 
   expect(newState.userMessages[0].length).toBe(4);
 });
 
 it('should add message "Hello fellow human being, I am Mark Zuckerberg" to userMessages[0] array', () => {
-  let action = sendMessage(
-    0,
-    'Hello fellow human being, I am Mark Zuckerberg',
-  );
+  const action = sendMessage(0, 'Hello fellow human being, I am Mark Zuckerberg');
 
-  let newState = dialogsReducer(state, action);
+  const newState = dialogsReducer(state, action);
 
-  expect(newState.userMessages[0][3].text).toBe(
-    'Hello fellow human being, I am Mark Zuckerberg',
-  );
+  expect(newState.userMessages[0][3].text).toBe('Hello fellow human being, I am Mark Zuckerberg');
 });
 
 it('should delete element with id 2 from userMessages[0] array', () => {
-  let action = deleteMessage(0, 2);
+  const action = deleteMessage(0, 2);
 
-  let newState = dialogsReducer(state, action);
+  const newState = dialogsReducer(state, action);
 
-  expect(newState.userMessages[0].find((e) => e.id === 2)).toBe(
-    undefined,
-  );
+  expect(newState.userMessages[0].find((e) => e.id === 2)).toBe(undefined);
 });
 
 it('should edit element with id 2 from userMessages[0] array to be "Arigatou gozaimasu"', () => {
-  let action = editMessage(0, 2, 'Arigatou gozaimasu');
+  const action = editMessage(0, 2, 'Arigatou gozaimasu');
 
-  let newState = dialogsReducer(state, action);
+  const newState = dialogsReducer(state, action);
 
-  expect(newState.userMessages[0].find((e) => e.id === 2).text).toBe(
-    'Arigatou gozaimasu',
-  );
+  expect(newState.userMessages[0].find((e) => e.id === 2).text).toBe('Arigatou gozaimasu');
 });

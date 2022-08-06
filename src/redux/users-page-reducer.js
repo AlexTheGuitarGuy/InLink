@@ -1,16 +1,14 @@
 import { userAPI } from '../api/API';
 import { updateObjInArr } from '../utils/object-helpers';
 
-const TOGGLE_FOLLOW_STATUS =
-  'IN_LINK/USERS_PAGE_REDUCER/CHANGE_FOLLOW_STATUS';
+const TOGGLE_FOLLOW_STATUS = 'IN_LINK/USERS_PAGE_REDUCER/CHANGE_FOLLOW_STATUS';
 const SET_USERS = 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS';
 const SET_PAGE = 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE';
 const SET_USERS_NB = 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS_NB';
 const TOGGLE_LOADING = 'IN_LINK/USERS_PAGE_REDUCER/TOGGLE_LOADING';
-const UPDATE_FOLLOW_QUEUE =
-  'IN_LINK/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE';
+const UPDATE_FOLLOW_QUEUE = 'IN_LINK/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE';
 
-let defaultState = {
+const defaultState = {
   users: [
     /*
     {
@@ -96,9 +94,7 @@ const usersPageReducer = (state = defaultState, action) => {
     case UPDATE_FOLLOW_QUEUE:
       return {
         ...state,
-        followQueue: state.followQueue.some(
-          (elem) => elem === action.id,
-        )
+        followQueue: state.followQueue.some((elem) => elem === action.id)
           ? state.followQueue.filter((value) => value !== action.id)
           : [...state.followQueue, action.id],
       };

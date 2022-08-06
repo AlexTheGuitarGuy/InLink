@@ -39,12 +39,10 @@ const Nav = () => {
             
             `,
             {
-              'lg:border-gray-500 lg:bg-transparent sm:bg-gray-300':
-                isActive,
+              'lg:border-gray-500 lg:bg-transparent sm:bg-gray-300': isActive,
             },
             {
-              'lg:border-transparent lg:hover:border-gray-400':
-                !isActive,
+              'lg:border-transparent lg:hover:border-gray-400': !isActive,
             },
           )}
         >

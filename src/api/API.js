@@ -10,9 +10,7 @@ const instance = axios.create({
 
 export const userAPI = {
   getUsers: async (page = 1, pageSize = 10) => {
-    const response = await instance.get(
-      `users?page=${page}&count=${pageSize}`,
-    );
+    const response = await instance.get(`users?page=${page}&count=${pageSize}`);
 
     return response.data;
   },
@@ -75,9 +73,7 @@ export const profileAPI = {
 
 export const securityAPI = {
   me: async () => {
-    const response = await instance.get(
-      'https://social-network.samuraijs.com/api/1.0/auth/me',
-    );
+    const response = await instance.get('https://social-network.samuraijs.com/api/1.0/auth/me');
 
     return response.data;
   },
