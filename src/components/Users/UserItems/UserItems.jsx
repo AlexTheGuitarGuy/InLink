@@ -63,8 +63,11 @@ const UserItems = () => {
           className={cn(
             `
           text-gray-100 text-center
-          py-1 px-4 rounded
-          transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0`,
+          lg:py-1 lg:px-4 
+          sm:py-2 sm:px-6 
+          rounded
+          transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0
+          `,
             {
               'bg-gray-500 hover:bg-gray-600 active:bg-gray-700': !isDisabled,
             },
@@ -81,7 +84,7 @@ const UserItems = () => {
 
   return (
     <div
-      className="mx-60
+      className="lg:mx-60
         border rounded-lg border-gray-300
         bg-gray-200"
     >

@@ -15,11 +15,12 @@ import { requestUsers, setPage } from '../../redux/users-page-reducer';
 const Users = () => {
   const totalUsers = useSelector(getTotalUsers);
   const isLoading = useSelector(getIsLoading);
-  const portionSize = useSelector(getPortionSize);
   const page = useSelector(getPage);
-  const pageSize = useSelector(getPageSize);
 
   const dispatch = useDispatch();
+
+  const pageSize = 8;
+  const portionSize = window.innerWidth <= 720 ? 5 : 10;
 
   const changePage = (page) => {
     dispatch(requestUsers(page, pageSize));
@@ -35,8 +36,10 @@ const Users = () => {
   return (
     <div
       className="flex justify-between flex-col
-      bg-gray-100 rounded-lg p-8
-    text-gray-700 font-semibold"
+      bg-gray-100 lg:rounded-lg p-8
+    text-gray-700 font-semibold
+    sm:h-screen lg:h-auto
+    "
     >
       <UserItems />
       <div className="mt-4">

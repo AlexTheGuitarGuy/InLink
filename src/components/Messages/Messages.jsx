@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
@@ -19,7 +19,10 @@ const Messages = () => {
   const { userMessages, users } = useSelector(getDialogsPage);
   const myData = useSelector(getMyData);
   const uid = useSelector(getUID);
+
   const dispatch = useDispatch();
+
+  const [shouldShowDialog, setShouldShowDialog] = useState(false);
 
   useEffect(() => {
     dispatch(getProfile(uid));
@@ -52,9 +55,9 @@ const Messages = () => {
         key={i}
         element={
           <div className="flex flex-col w-full relative">
-            <div className="mx-16 mb-32 overflow-scroll h-full">{userDialogElements[i]}</div>
+            <div className="lg:mx-16 mb-32 overflow-scroll h-full">{userDialogElements[i]}</div>
             <div
-              className="absolute bottom-0 w-3/5 self-center
+              className="absolute bottom-0 lg:w-3/5 sm:w-full self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300"
             >
               <SendText memoryText={memoryText} id={i} />
@@ -68,13 +71,14 @@ const Messages = () => {
   return (
     <div
       className="flex
-         bg-gray-100 rounded-lg p-8
+         bg-gray-100 lg:rounded-lg lg:p-8
          text-gray-700 font-semibold
-         h-full"
+         h-screen w-full"
     >
-      <Users users={users} />
+      {window.innerWidth > 720 && <Users users={users} />}
 
-      <Routes>
+      <Routes className="w-full">
+        {window.innerWidth <= 720 && <Route path="/all" element={<Users users={users} />} />}
         <Route path="/" element={<Navigate to={'1'} />} />
         {routes}
       </Routes>

@@ -60,15 +60,17 @@ const ProfileButton = () => {
           >
             {showProfileData && (
               <>
-                <div className="font-semibold text-gray-700">{login}</div>
+                <div className="font-semibold text-gray-700 sm:text-lg lg:text-base">{login}</div>
                 <button
                   onClick={handleLogout}
                   className="font-semibold
-            bg-rose-500 hover:bg-rose-600 active:bg-rose-700
-            py-0.5 px-4 mt-2
-            text-gray-100 text-center
-            rounded
-            transition-colors cursor-pointer"
+                              bg-rose-500 hover:bg-rose-600 active:bg-rose-700
+                              lg:py-0.5 lg:px-4 
+                              sm:py-2 sm:px-6
+                              lg:mt-2 sm:mt-4
+                              text-gray-100 text-center
+                              rounded
+                              transition-colors cursor-pointer"
                 >
                   Log out
                 </button>
