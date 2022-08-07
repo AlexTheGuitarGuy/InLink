@@ -15,8 +15,7 @@ const EditButton = () => {
                     transition-colors cursor-pointer
                     focus:outline-none focus:ring-0
 
-                    lg:py-0.5 px-4
-                    sm:py-2
+                    py-0.5 px-4
                     sm:mb-4 lg:mb-0
                     sm:w-full lg:w-auto"
     >

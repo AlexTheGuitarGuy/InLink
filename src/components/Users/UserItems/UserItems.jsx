@@ -31,22 +31,25 @@ const UserItems = () => {
           <img
             src={e.photos.small || placeholder}
             alt="userPfp"
-            className="rounded-full w-20 h-20 p-0.5
+            className="rounded-full 
+            lg:w-20 lg:h-20
+            sm:w-10 sm:h-10 
+            p-0.5
               transition-colors hover:bg-gray-700 active:bg-gray-800"
           />
 
           <div className="mt-3 ml-3 flex flex-col">
             <div
-              className="text-xl
-            border-b border-transparent
+              className="lg:text-xl sm:text-sm 
+            border-b border-transparent 
             hover:border-gray-600 active:border-gray-500
             hover:text-gray-600 active:text-gray-500"
             >
               {e.name}
             </div>
             <div
-              className="font-normal
-                        border-b border-transparent
+              className="font-normal sm:text-sm lg:text-md
+                        border-b border-transparent 
             hover:border-gray-600 active:border-gray-500
             hover:text-gray-600 active:text-gray-500"
             >
@@ -62,9 +65,10 @@ const UserItems = () => {
           }}
           className={cn(
             `
+          sm:text-xs lg:text-md
           text-gray-100 text-center
-          lg:py-1 lg:px-4 
-          sm:py-2 sm:px-6 
+          lg:py-1 lg:px-4
+          sm:py-0.5 sm:px-2 
           rounded
           transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0
           `,
@@ -85,8 +89,8 @@ const UserItems = () => {
   return (
     <div
       className="lg:mx-60
-        border rounded-lg border-gray-300
-        bg-gray-200"
+        lg:border lg:rounded-lg lg:border-gray-300
+        lg:bg-gray-200"
     >
       {mappedUsers}
     </div>

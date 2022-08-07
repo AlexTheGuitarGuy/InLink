@@ -20,7 +20,7 @@ const JobInfo = ({ lookingForAJob, lookingForAJobDescription }) => {
             is looking for a job
           </div>
 
-          <div className="order-2 text-center">
+          <div className="order-2 text-center font-normal">
             {lookingForAJobDescription ? '"' + lookingForAJobDescription + '"' : null}
           </div>
         </div>

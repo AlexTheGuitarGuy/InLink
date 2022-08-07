@@ -26,13 +26,12 @@ const Users = ({ users }) => {
           <img
             src={require(`../../../assets/pfps/u${e.id}.jpg`)}
             alt={`user ${e.id}`}
-            className="lg:h-16 lg:w-16 
-                        sm:h-24 sm:w-24
+            className="h-16 w-16 
                         rounded-full"
           />
           <div
             className="sm:ml-8 lg:ml-4 
-                      sm:text-xl lg:text-sm"
+                      sm:text-md lg:text-sm"
           >
             {e.name}
           </div>
@@ -44,7 +43,7 @@ const Users = ({ users }) => {
   return (
     <div className="lg:border-r lg:border-gray-300 lg:w-1/5 sm:w-full">
       <div
-        className="sm:text-3xl lg:text-xl
+        className="text-xl
                   sm:text-center lg:text-left
                   sm:m-4 lg:m-0"
       >

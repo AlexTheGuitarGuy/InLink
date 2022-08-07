@@ -17,8 +17,12 @@ let PublishForm = ({ handleSubmit }) => {
 
       <button
         className="bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-          text-gray-100 text-center font-semibold
-          py-1.5 px-4 rounded w-full
+          text-gray-100 text-center font-semibold text-sm
+
+          lg:py-1.5
+          sm:py-0.5 px-4 
+
+          rounded w-full
           transition-colors cursor-pointer
           focus:outline-none focus:ring-0"
       >
@@ -41,7 +45,7 @@ const PublishPost = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <label htmlFor="postText" className="lg:text-lg xl:text-2xl xl:mb-2">
         New post
       </label>

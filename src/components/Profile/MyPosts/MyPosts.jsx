@@ -15,8 +15,12 @@ const MyPosts = ({ pfp, isOwner, userName }) => {
   return (
     <div
       className="flex flex-col justify-between
-      bg-gray-100 lg:rounded-lg p-8 lg:mt-4
-    text-gray-700 font-semibold
+      lg:bg-gray-100 lg:rounded-lg lg:p-8 
+      sm:pt-4 lg:mt-4
+      sm:mx-4 lg:mx-0
+      text-gray-700 font-semibold 
+
+    lg:border-none
 
     sm:border-t-2 sm:border-gray-300
     "

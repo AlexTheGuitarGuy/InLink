@@ -3,11 +3,11 @@ import LikeIcon from '../../../../assets/like.jpg';
 
 const PostCard = ({ text, likeCount, pfp, userName }) => {
   return (
-    <div className="mt-4 flex flex-col lg:text-l">
+    <div className="mt-4 flex flex-col lg:text-l sm:text-sm">
       <div
         className="order-1 p-4
       border-x border-t border-gray-300
-      rounded-tl-lg rounded-tr-lg
+      rounded-tl rounded-tr
       bg-gray-100 text-gray-700 "
       >
         <img
@@ -25,11 +25,11 @@ const PostCard = ({ text, likeCount, pfp, userName }) => {
       <div
         className="order-2 p-4
         border border-gray-300
-        rounded-bl-lg rounded-br-lg
+        rounded-bl rounded-br
                     bg-gray-200
                     text-gray-700"
       >
-        <div className="text-center mt-2 break-words">{text}</div>
+        <div className="text-center font-normal mt-2 break-words">{text}</div>
         <div className="mt-2">
           <img
             src={LikeIcon}

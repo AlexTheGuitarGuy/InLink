@@ -34,22 +34,22 @@ const Header = () => {
       >
         <div className="order-1 flex">
           <NavLink to={'messages/all'}>
-            <img src={require('../../assets/go-back.png')} alt="go back" className="w-10 h-10" />
+            <img src={require('../../assets/go-back.png')} alt="go back" className="mt-2 w-8 h-8" />
           </NavLink>
 
           <img
             src={require(`../../assets/pfps/u${currentDialogUser.id}.jpg`)}
             alt={`user ${currentDialogUser.id}`}
-            className="h-12 w-12
+            className="h-8 w-8 mt-2
                         ml-4
                         rounded-full"
           />
 
-          <div className="text-xl mt-2 ml-2">{currentDialogUser.name}</div>
+          <div className="text-md mt-2 ml-2">{currentDialogUser.name}</div>
         </div>
         <div
           className="order-3
-        text-4xl font-semibold
+        lg:text-4xl sm:text-2xl font-semibold
         hover:text-gray-600 active:text-gray-500
         transition-colors"
         >
@@ -77,7 +77,7 @@ const Header = () => {
 
       <div
         className="lg:order-1 sm:order-2
-        text-4xl font-semibold
+        lg:text-4xl sm:text-2xl font-semibold
         hover:text-gray-600 active:text-gray-500
         transition-colors"
       >

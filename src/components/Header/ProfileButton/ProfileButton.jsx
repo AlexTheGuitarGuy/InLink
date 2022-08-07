@@ -24,7 +24,7 @@ const ProfileButton = () => {
     dispatch(getProfile(uid));
   }, [dispatch, uid]);
 
-  if (!myData) return null;
+  if (!myData && isLoggedIn) return null;
 
   const handleLogout = () => {
     setShowProfileData(false);
