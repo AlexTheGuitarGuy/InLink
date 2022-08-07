@@ -72,7 +72,7 @@ const Messages = () => {
   return (
     <div
       className="flex
-         bg-gray-100 lg:rounded-lg lg:p-8
+         lg:bg-gray-100 lg:rounded-lg lg:p-8
          text-gray-700 lg:font-semibold
          h-screen w-full"
     >

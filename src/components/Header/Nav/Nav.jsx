@@ -20,7 +20,14 @@ const Nav = () => {
     let isActive = false;
     if (location.pathname.match(e.to)) isActive = true;
     return (
-      <NavLink key={e.id} to={e.to} className="sm:mb-3 lg:mb-0">
+      <NavLink
+        key={e.id}
+        to={e.to}
+        className="sm:mb-3 lg:mb-0"
+        onClick={() => {
+          setShouldShowMenu(false);
+        }}
+      >
         <div
           className={cn(
             `
@@ -66,7 +73,7 @@ const Nav = () => {
           <img
             src={require('../../../assets/burger-menu.png')}
             alt="burger menu"
-            className="w-10 h-10"
+            className="w-8 h-8"
           />
         </button>
 

@@ -32,7 +32,7 @@ const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
         className={cn(
           `mx-1 cursor-pointer transition-colors 
           hover:text-gray-600 active:text-gray-500
-          p-1.5
+          p-0.5
           border-b-2`,
           {
             'bg-gray-200 rounded': i === page,
@@ -60,7 +60,7 @@ const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
       }}
       className="mx-1 cursor-pointer transition-colors
           hover:text-gray-600 active:text-gray-500
-          border-b-2 border-transparent hover:border-gray-600 p-1.5"
+          border-b-2 border-transparent hover:border-gray-600 p-0.5"
     >
       {symbol}
     </span>
@@ -74,7 +74,7 @@ const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
       onClick={() => changeOnClick(i)}
       className="mx-1 cursor-pointer transition-colors
           hover:text-gray-600 active:text-gray-500
-          border-b-2 border-transparent hover:border-gray-600 p-1.5"
+          border-b-2 border-transparent hover:border-gray-600 p-0.5"
     >
       {symbol}
     </span>
@@ -87,7 +87,7 @@ const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
   return (
     <div
       className="flex justify-center
-    font-semibold sm:text-xl lg:text-l
+    font-semibold sm:text-sm lg:text-xl
     mb-4"
     >
       {page !== 1 && firstPage}

@@ -17,7 +17,7 @@ const ProfileInfoText = ({
       className="flex
       sm:flex-col lg:flex-row
       sm:align-center lg:justify-between
-      bg-gray-100 lg:rounded-lg p-8
+      lg:bg-gray-100 lg:rounded-lg p-8
       text-gray-700 font-semibold"
     >
       <div className="flex sm:flex-col lg:flex-row">
