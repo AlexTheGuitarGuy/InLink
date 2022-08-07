@@ -6,17 +6,19 @@ import { useLocation } from 'react-router-dom';
 import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import { getDialogsPage } from '../../redux/dialogs-selector';
+import useScreenSize from '../../hooks/useScreenSize';
 
 const Header = () => {
   const location = useLocation();
   const { users } = useSelector(getDialogsPage);
+  const screenSize = useScreenSize();
 
   if (!users) return null;
 
   if (
     location.pathname.match('/messages') &&
     !location.pathname.match('/messages/all') &&
-    window.innerWidth <= 720
+    screenSize.dynamicWidth <= 720
   ) {
     const currentDialogUser = users[location.pathname[location.pathname.length - 1] - 1];
 
