@@ -76,10 +76,10 @@ const Messages = () => {
          text-gray-700 lg:font-semibold
          h-screen w-full"
     >
-      {screenSize.dynamicWidth > 720 && <Users users={users} />}
+      {screenSize.dynamicWidth >= 1366 && <Users users={users} />}
 
       <Routes className="w-full">
-        {screenSize.dynamicWidth <= 720 && <Route path="/all" element={<Users users={users} />} />}
+        {screenSize.dynamicWidth < 1366 && <Route path="/all" element={<Users users={users} />} />}
         <Route path="/" element={<Navigate to={'1'} />} />
         {routes}
       </Routes>

@@ -54,7 +54,7 @@ const Nav = () => {
     );
   });
 
-  if (screenSize.dynamicWidth <= 720) {
+  if (screenSize.dynamicWidth < 1366) {
     return (
       <div>
         <button

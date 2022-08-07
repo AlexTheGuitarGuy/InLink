@@ -17,7 +17,7 @@ const Users = () => {
   const screenSize = useScreenSize();
 
   const pageSize = 8;
-  const portionSize = screenSize.dynamicWidth <= 720 ? 5 : 10;
+  const portionSize = screenSize.dynamicWidth < 1366 ? 5 : 10;
 
   const changePage = (page) => {
     dispatch(requestUsers(page, pageSize));

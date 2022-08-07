@@ -18,7 +18,7 @@ const Header = () => {
   if (
     location.pathname.match('/messages') &&
     !location.pathname.match('/messages/all') &&
-    screenSize.dynamicWidth <= 720
+    screenSize.dynamicWidth < 1366
   ) {
     const currentDialogUser = users[location.pathname[location.pathname.length - 1] - 1];
 

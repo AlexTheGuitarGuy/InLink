@@ -10,16 +10,16 @@ import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-selector';
 let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
   return (
     <section className="h-screen relative">
-      <div className="container px-6 py-12 h-full">
+      <div className="px-6 py-12 h-full">
         <div className="flex justify-center items-center flex-wrap h-full text-gray-700">
-          <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
+          <div className="sm:w-8/12 lg:w-6/12 mb-12 sm:mb-0">
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
               className="w-full"
               alt="Phone"
             />
           </div>
-          <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
+          <div className="sm:w-8/12 lg:w-5/12 lg:ml-20">
             <div className="text-gray-700 font-bold text-center mb-6">Log into InLink</div>
             <form onSubmit={handleSubmit} className="text-xl">
               <div className="mb-6">

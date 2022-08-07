@@ -10,7 +10,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const screenSize = useScreenSize();
 
-  if (useLocation().pathname.match('/messages') || screenSize.dynamicWidth <= 720) {
+  if (useLocation().pathname.match('/messages') || screenSize.dynamicWidth < 1366) {
     dispatch(setIsSidebarHidden(true));
     return null;
   } else dispatch(setIsSidebarHidden(false));
