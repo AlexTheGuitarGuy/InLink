@@ -3,14 +3,9 @@ import LoadingPage from '../common/Loading/LoadingPage';
 import UserItems from './UserItems/UserItems';
 import Paginator from '../common/Paginator/Paginator';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getIsLoading,
-  getPage,
-  getPageSize,
-  getPortionSize,
-  getTotalUsers,
-} from '../../redux/users-page-selector';
+import { getIsLoading, getPage, getTotalUsers } from '../../redux/users-page-selector';
 import { requestUsers, setPage } from '../../redux/users-page-reducer';
+import useScreenSize from '../../hooks/useScreenSize';
 
 const Users = () => {
   const totalUsers = useSelector(getTotalUsers);
@@ -19,8 +14,10 @@ const Users = () => {
 
   const dispatch = useDispatch();
 
+  const screenSize = useScreenSize();
+
   const pageSize = 8;
-  const portionSize = window.innerWidth <= 720 ? 5 : 10;
+  const portionSize = screenSize.dynamicWidth <= 720 ? 5 : 10;
 
   const changePage = (page) => {
     dispatch(requestUsers(page, pageSize));

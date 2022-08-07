@@ -5,12 +5,14 @@ import { getNavItems } from '../../../redux/navbar-selector';
 import { useSelector } from 'react-redux';
 import useTagBlur from '../../../hooks/useTagBlur';
 import { useLocation } from 'react-router';
+import useScreenSize from '../../../hooks/useScreenSize';
 
 const Nav = () => {
   const navItems = useSelector(getNavItems);
   const [shouldShowMenu, setShouldShowMenu] = useState(false);
 
   const menuRef = useTagBlur(shouldShowMenu, setShouldShowMenu);
+  const screenSize = useScreenSize();
 
   const location = useLocation();
 
@@ -52,7 +54,7 @@ const Nav = () => {
     );
   });
 
-  if (window.innerWidth <= 720) {
+  if (screenSize.dynamicWidth <= 720) {
     return (
       <div>
         <button

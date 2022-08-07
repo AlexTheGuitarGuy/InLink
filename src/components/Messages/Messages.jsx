@@ -13,6 +13,7 @@ import { getProfile } from '../../redux/profile-reducer';
 import LoadingPage from '../common/Loading/LoadingPage';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
+import useScreenSize from '../../hooks/useScreenSize';
 
 const Messages = () => {
   const memoryText = useSelector(getStoredText);
@@ -21,6 +22,8 @@ const Messages = () => {
   const uid = useSelector(getUID);
 
   const dispatch = useDispatch();
+
+  const screenSize = useScreenSize();
 
   useEffect(() => {
     dispatch(getProfile(uid));
@@ -73,10 +76,10 @@ const Messages = () => {
          text-gray-700 lg:font-semibold
          h-screen w-full"
     >
-      {window.innerWidth > 720 && <Users users={users} />}
+      {screenSize.dynamicWidth > 720 && <Users users={users} />}
 
       <Routes className="w-full">
-        {window.innerWidth <= 720 && <Route path="/all" element={<Users users={users} />} />}
+        {screenSize.dynamicWidth <= 720 && <Route path="/all" element={<Users users={users} />} />}
         <Route path="/" element={<Navigate to={'1'} />} />
         {routes}
       </Routes>
