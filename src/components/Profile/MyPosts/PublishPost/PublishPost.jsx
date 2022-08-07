@@ -9,7 +9,6 @@ let PublishForm = ({ handleSubmit }) => {
     <form onSubmit={handleSubmit}>
       {createField('Type what you think...', 'post', Textarea, null, 'text', {
         className: `resize-none py-2 px-4 rounded w-full
-            xl:text-xl
             border border-gray-300
             focus:outline-none focus:border-gray-500
             transition`,
@@ -43,7 +42,7 @@ const PublishPost = () => {
 
   return (
     <div>
-      <label htmlFor="postText" className="lg:text-lg xl:text-2xl">
+      <label htmlFor="postText" className="lg:text-lg xl:text-2xl xl:mb-2">
         New post
       </label>
       <PublishForm onSubmit={handleSubmit} />

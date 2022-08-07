@@ -3,7 +3,7 @@ import LikeIcon from '../../../../assets/like.jpg';
 
 const PostCard = ({ text, likeCount, pfp, userName }) => {
   return (
-    <div className="mt-4 flex flex-col lg:text-l xl:text-xl">
+    <div className="mt-4 flex flex-col lg:text-l">
       <div
         className="order-1 p-4
       border-x border-t border-gray-300

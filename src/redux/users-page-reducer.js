@@ -65,8 +65,6 @@ const defaultState = {
     },
   */
   ],
-  pageSize: 5,
-  portionSize: 10,
   page: 1,
   totalUsers: 0,
   isLoading: false,

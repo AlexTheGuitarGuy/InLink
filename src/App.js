@@ -55,18 +55,18 @@ const App = () => {
   return (
     <div className="w-full h-screen">
       {isLoggedIn && (
-        <div className="fixed w-60 xl:w-80 mt-12 z-0">
+        <div className="fixed w-60 mt-12 z-0">
           <Sidebar />
         </div>
       )}
 
-      <div className="fixed w-full z-20">
+      <div className="fixed w-full z-20 sm:-mt-14 lg:mt-auto">
         <Header />
       </div>
 
       <div
-        className={cn('p-4 h-full z-10', {
-          'ml-60 xl:ml-80': isLoggedIn && !isSidebarHidden,
+        className={cn('lg:p-4 h-full z-10', {
+          'ml-60': isLoggedIn && !isSidebarHidden,
         })}
       >
         {error && <Error text={error} isShown={isErrorShown} setIsShown={setIsErrorShown} />}
