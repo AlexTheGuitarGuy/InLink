@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { useParams } from 'react-router-dom';
 import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
-import ProfileInfoText from './ProfileInfo/ProfileInfoText/ProfileInfoText';
+import CommonProfile from './ProfileInfo/CommonProfile/CommonProfile';
 
 const Profile = () => {
   const isEditing = useSelector(getIsEditing);
@@ -41,13 +41,15 @@ const Profile = () => {
       {isEditing && isOwner ? (
         <ProfileInfoInput
           isOwner={isOwner}
+          isEditing={isEditing}
           pfp={pfp.large}
           profileData={profileData}
           profileStatus={profileStatus}
         />
       ) : (
-        <ProfileInfoText
+        <CommonProfile
           isOwner={isOwner}
+          isEditing={isEditing}
           pfp={pfp.large}
           profileData={profileData}
           profileStatus={profileStatus}

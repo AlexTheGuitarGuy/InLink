@@ -2,12 +2,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setEditing } from '../../../../../redux/profile-reducer';
 
-const EditButton = () => {
+const EditButton = ({ isEditing }) => {
   const dispatch = useDispatch();
 
   return (
     <button
-      onClick={() => dispatch(setEditing(true))}
+      onClick={() => !isEditing && dispatch(setEditing(true))}
       className="font-semibold
                     bg-gray-500 hover:bg-gray-600 active:bg-gray-700
                     text-gray-100 text-center
@@ -19,7 +19,7 @@ const EditButton = () => {
                     sm:mb-4 lg:mb-0
                     sm:w-full lg:w-auto"
     >
-      Edit mode
+      {isEditing ? 'Save' : 'Edit mode'}
     </button>
   );
 };
