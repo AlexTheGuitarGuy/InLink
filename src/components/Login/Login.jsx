@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth-reducer';
 import { Navigate } from 'react-router-dom';
 import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-selector';
+import { setAlert } from '../../redux/app-reducer';
 
 let LoginForm = ({ handleSubmit, maxLen, captcha }) => {
   return (
@@ -130,7 +131,9 @@ const Login = () => {
   const maxLen40 = maxLen(40);
 
   const onSubmit = ({ email, password, rememberMe, captcha }) => {
-    dispatch(login(email, password, rememberMe, captcha));
+    dispatch(login(email, password, rememberMe, captcha)).then((message) => {
+      dispatch(setAlert({ message, type: 'success' }));
+    });
   };
 
   return <LoginForm maxLen={maxLen40} onSubmit={onSubmit} captcha={captcha} />;
