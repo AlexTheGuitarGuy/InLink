@@ -17,16 +17,23 @@ import Users from './components/Users/Users';
 import Messages from './components/Messages/Messages';
 import Profile from './components/Profile/Profile';
 import Header from './components/Header/Header';
+import { getUID } from './redux/auth-selector';
+import { getMyProfile } from './redux/profile-reducer';
 
 const App = () => {
   const isAppInitialized = useSelector(getIsAppInitialized);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isSidebarHidden = useSelector(getIsSidebarHidden);
+  const uid = useSelector(getUID);
 
   const dispatch = useDispatch();
 
   const [error, setError] = useState(null);
   const [isErrorShown, setIsErrorShown] = useState(true);
+
+  useEffect(() => {
+    dispatch(getMyProfile(uid));
+  }, [dispatch, uid]);
 
   useEffect(() => {
     dispatch(initializeApp());

@@ -15,14 +15,9 @@ const ProfileButton = () => {
 
   const isLoggedIn = useSelector(getIsLoggedIn);
   const login = useSelector(getLogin);
-  const uid = useSelector(getUID);
   const myData = useSelector(getMyData);
 
   const profileDataRef = useTagBlur(showProfileData, setShowProfileData);
-
-  useEffect(() => {
-    dispatch(getProfile(uid));
-  }, [dispatch, uid]);
 
   if (!myData && isLoggedIn) return null;
 
@@ -61,6 +56,19 @@ const ProfileButton = () => {
             {showProfileData && (
               <>
                 <div className="font-semibold text-gray-700 sm:text-lg lg:text-base">{login}</div>
+                <NavLink
+                  to="/profile"
+                  className="font-semibold
+                              bg-gray-500 hover:bg-gray-600 active:bg-gray-700
+                              lg:py-0.5 lg:px-4 
+                              sm:py-2 sm:px-6
+                              lg:mt-2 sm:mt-4
+                              text-gray-100 text-center
+                              rounded
+                              transition-colors cursor-pointer"
+                >
+                  Go to profile
+                </NavLink>
                 <button
                   onClick={handleLogout}
                   className="font-semibold

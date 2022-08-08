@@ -2,8 +2,12 @@ export const getProfilePage = (state) => {
   return state.profilePage;
 };
 
-export const getMyData = (state) => {
+export const getCurrentUserData = (state) => {
   return state.profilePage.profileData;
+};
+
+export const getMyData = (state) => {
+  return state.profilePage.myData;
 };
 
 export const getIsLoading = (state) => {

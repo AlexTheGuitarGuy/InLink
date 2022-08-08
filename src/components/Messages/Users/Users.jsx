@@ -49,7 +49,7 @@ const Users = ({ users }) => {
       >
         Messages
       </div>
-      <div className="sm:ml-8 sm:mt-10 lg:m-0">{userElements}</div>
+      <div className="sm:mx-8 sm:mt-4 lg:m-0">{userElements}</div>
     </div>
   );
 };

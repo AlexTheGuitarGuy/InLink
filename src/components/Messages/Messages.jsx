@@ -7,9 +7,7 @@ import placeholder from '../../assets/pfps/placeholder.jpg';
 import { Navigate } from 'react-router';
 import { getDialogsPage, getStoredText } from '../../redux/dialogs-selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUID } from '../../redux/auth-selector';
 import { getMyData } from '../../redux/profile-selector';
-import { getProfile } from '../../redux/profile-reducer';
 import LoadingPage from '../common/Loading/LoadingPage';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
@@ -19,15 +17,8 @@ const Messages = () => {
   const memoryText = useSelector(getStoredText);
   const { userMessages, users } = useSelector(getDialogsPage);
   const myData = useSelector(getMyData);
-  const uid = useSelector(getUID);
-
-  const dispatch = useDispatch();
 
   const screenSize = useScreenSize();
-
-  useEffect(() => {
-    dispatch(getProfile(uid));
-  }, [dispatch, uid]);
 
   if (!myData) return <LoadingPage />;
 
@@ -56,9 +47,11 @@ const Messages = () => {
         key={i}
         element={
           <div className="flex flex-col w-full relative">
-            <div className="lg:mx-16 mb-32 overflow-scroll h-full">{userDialogElements[i]}</div>
+            <div className="lg:mx-16 mb-32 overflow-scroll sm:mx-3 h-screen">
+              {userDialogElements[i]}
+            </div>
             <div
-              className="absolute bottom-0 lg:w-3/5 sm:w-full self-center
+              className="fixed bottom-0 lg:w-3/5 sm:w-full self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300"
             >
               <SendText memoryText={memoryText} id={i} />

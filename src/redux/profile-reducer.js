@@ -4,6 +4,7 @@ import { updateObjInArr } from '../utils/object-helpers';
 
 const POST = 'IN_LINK/PROFILE_REDUCER/POST';
 const SET_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_PROFILE';
+const SET_MY_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_MY_PROFILE';
 const SET_STATUS = 'IN_LINK/PROFILE_REDUCER/SET_STATUS';
 const TOGGLE_LOADING = 'IN_LINK/PROFILE_REDUCER/TOGGLE_LOADING';
 const DELETE_POST = 'IN_LINK/PROFILE_REDUCER/DELETE_POST';
@@ -26,6 +27,7 @@ const defaultState = {
     },
   ],
   profileData: null,
+  myData: null,
   profileStatus: null,
   isLoading: false,
   isEditing: false,
@@ -57,6 +59,7 @@ const profileReducer = (state = defaultState, action) => {
     case SET_STATUS:
     case TOGGLE_LOADING:
     case SET_IS_EDITING:
+    case SET_MY_PROFILE:
       return {
         ...state,
         ...action.payload,
@@ -107,6 +110,11 @@ export const setProfile = (profileData) => ({
   payload: { profileData },
 });
 
+export const setMyProfile = (myData) => ({
+  type: SET_MY_PROFILE,
+  payload: { myData },
+});
+
 export const setStatus = (profileStatus) => ({
   type: SET_STATUS,
   payload: { profileStatus },
@@ -122,12 +130,24 @@ const uploadSuccess = (file) => ({
   file,
 });
 
-export const getProfile = (uid) => {
+const getData = (uid, action) => {
   return async (dispatch) => {
     dispatch(toggleLoading(true));
     const data = await profileAPI.getProfile(uid);
-    dispatch(setProfile(data));
+    dispatch(action(data));
     dispatch(toggleLoading(false));
+  };
+};
+
+export const getProfile = (uid) => {
+  return async (dispatch) => {
+    dispatch(getData(uid, setProfile));
+  };
+};
+
+export const getMyProfile = (uid) => {
+  return async (dispatch) => {
+    dispatch(getData(uid, setMyProfile));
   };
 };
 
