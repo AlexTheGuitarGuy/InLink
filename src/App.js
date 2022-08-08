@@ -1,13 +1,13 @@
 import './App.css';
-import React, { StrictMode, useEffect, useState } from 'react';
+import React, { StrictMode, useEffect } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { initializeApp } from './redux/app-reducer';
+import { initializeApp, setAlert } from './redux/app-reducer';
 import LoadingPage from './components/common/Loading/LoadingPage';
 import store from './redux/redux-store';
 import PageNotFound from './components/PageNotFound/PageNotFound';
-import Error from './components/Error/Error';
+import Alert from './components/Alert/Alert';
 import { getIsLoggedIn } from './redux/auth-selector';
 import cn from 'classnames';
 import { Navigate } from 'react-router';
@@ -28,9 +28,6 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const [error, setError] = useState(null);
-  const [isErrorShown, setIsErrorShown] = useState(true);
-
   useEffect(() => {
     dispatch(getMyProfile(uid));
   }, [dispatch, uid]);
@@ -43,9 +40,8 @@ const App = () => {
     const handleRejection = (event) => {
       if (event && event.reason && event.reason.substring) {
         if (event.reason.substring(0, 18) === 'Invalid url format')
-          setError(`Couldn't upload profile data`);
-        else setError(event.reason);
-        setIsErrorShown(true);
+          dispatch(setAlert({ message: `Couldn't upload profile data`, type: 'error' }));
+        else dispatch(setAlert({ message: event.reason, type: 'error' }));
         event.preventDefault();
       }
     };
@@ -76,7 +72,7 @@ const App = () => {
           'ml-60': isLoggedIn && !isSidebarHidden,
         })}
       >
-        {error && <Error text={error} isShown={isErrorShown} setIsShown={setIsErrorShown} />}
+        <Alert />
         <div className="mt-14">
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />

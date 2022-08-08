@@ -186,6 +186,7 @@ export const uploadProfileInfo = (profileInfo) => async (dispatch, getState) => 
   if (data.resultCode === 0) {
     dispatch(getProfile(userId));
     dispatch(setEditing(false));
+    return Promise.resolve('profile editing successful');
   } else {
     const message = data.messages.length > 0 ? data.messages[0] : 'An error has occurred';
 

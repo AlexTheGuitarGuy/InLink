@@ -63,6 +63,7 @@ export const login = (email, password, rememberMe = false, captcha) => {
 
     if (data.resultCode === 0) {
       dispatch(auth());
+      return Promise.resolve('login successful');
     } else {
       if (data.resultCode === 10) dispatch(getCaptchaURL());
 
@@ -80,6 +81,9 @@ export const logout = () => {
     if (data.resultCode === 0) {
       dispatch(setData(null, null, null, false));
       dispatch(setCaptcha(null));
+      return Promise.resolve('logged out');
+    } else {
+      return Promise.reject("couldn't log out");
     }
   };
 };

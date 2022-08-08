@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { getIsLoggedIn, getLogin, getUID } from '../../../redux/auth-selector';
+import { getIsLoggedIn, getLogin } from '../../../redux/auth-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../redux/auth-reducer';
 import cn from 'classnames';
-import { getProfile } from '../../../redux/profile-reducer';
 import { getMyData } from '../../../redux/profile-selector';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 import useTagBlur from '../../../hooks/useTagBlur';
+import { setAlert } from '../../../redux/app-reducer';
 
 const ProfileButton = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,9 @@ const ProfileButton = () => {
 
   const handleLogout = () => {
     setShowProfileData(false);
-    dispatch(logout());
+    dispatch(logout()).then((message) => {
+      dispatch(setAlert({ message }));
+    });
   };
 
   return (
