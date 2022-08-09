@@ -4,7 +4,42 @@ const SEND_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE';
 const DELETE_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE';
 const EDIT_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE';
 
-const defaultState = {
+type userType = {
+  id: number;
+  name: string;
+};
+
+type userMessageType = {
+  id: number;
+  text: string;
+  from: string;
+};
+
+type sendMessageActionType = {
+  type: typeof SEND_MESSAGE;
+  to: number;
+  text: string;
+};
+
+type deleteMessageActionType = {
+  type: typeof DELETE_MESSAGE;
+  userId: number;
+  messageId: number;
+};
+
+type editMessageActionTpe = {
+  type: typeof EDIT_MESSAGE;
+  userId: number;
+  messageId: number;
+  text: string;
+};
+
+type initialStateType = {
+  users: userType[];
+  userMessages: userMessageType[][];
+};
+
+const initialState = {
   users: [
     {
       id: 1,
@@ -128,17 +163,20 @@ const defaultState = {
   ],
 };
 
-const dialogsReducer = (state = defaultState, action) => {
+const dialogsReducer = (
+  state: initialStateType = initialState,
+  action: sendMessageActionType | deleteMessageActionType | editMessageActionTpe,
+) => {
   switch (action.type) {
     case SEND_MESSAGE:
-      if (action.data) {
+      if (action.text) {
         return {
           ...state,
           userMessages: state.userMessages.map((e, i) => {
             if (i === action.to)
               e.push({
                 id: state.userMessages[action.to].length + 1,
-                text: action.data,
+                text: action.text,
                 from: 'me',
               });
             return e;
@@ -164,7 +202,7 @@ const dialogsReducer = (state = defaultState, action) => {
         userMessages: state.userMessages.map((e, i) => {
           if (i === action.userId)
             return updateObjInArr(e, 'id', action.messageId, {
-              text: action.data,
+              text: action.text,
             });
           return e;
         }),
@@ -174,23 +212,23 @@ const dialogsReducer = (state = defaultState, action) => {
   }
 };
 
-export const sendMessage = (id, data) => ({
+export const sendMessage = (id: number, text: string) => ({
   type: SEND_MESSAGE,
   to: id,
-  data,
+  text,
 });
 
-export const deleteMessage = (userId, messageId) => ({
+export const deleteMessage = (userId: number, messageId: number) => ({
   type: DELETE_MESSAGE,
   userId,
   messageId,
 });
 
-export const editMessage = (userId, messageId, data) => ({
+export const editMessage = (userId: number, messageId: number, text: string) => ({
   type: EDIT_MESSAGE,
   userId,
   messageId,
-  data,
+  text,
 });
 
 export default dialogsReducer;

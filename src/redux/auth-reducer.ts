@@ -4,7 +4,32 @@ import { securityAPI } from '../api/API';
 const SET_DATA = 'IN_LINK/AUTH_REDUCER/SET_DATA';
 const SET_CAPTCHA = 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA';
 
-const defaultState = {
+type setDataPayloadType = {
+  id: number | null;
+  login: string | null;
+  email: string | null;
+  isLoggedIn: boolean;
+};
+
+type setDataActionType = {
+  type: typeof SET_DATA;
+  payload: setDataPayloadType;
+};
+
+type setCaptchaActionType = {
+  type: typeof SET_CAPTCHA;
+  payload: { captchaURL: string | null };
+};
+
+type initialStateType = {
+  id: number | null;
+  login: string | null;
+  email: string | null;
+  isLoggedIn: boolean;
+  captchaURL: string | null;
+};
+
+const intialState = {
   id: null,
   login: null,
   email: null,
@@ -12,7 +37,10 @@ const defaultState = {
   captchaURL: null,
 };
 
-const authReducer = (state = defaultState, action) => {
+const authReducer = (
+  state: initialStateType = intialState,
+  action: setDataActionType | setCaptchaActionType,
+) => {
   switch (action.type) {
     case SET_DATA:
     case SET_CAPTCHA:
@@ -25,14 +53,14 @@ const authReducer = (state = defaultState, action) => {
   }
 };
 
-export const setData = (id, login, email, isLoggedIn) => {
+export const setData = ({ id, login, email, isLoggedIn }: setDataPayloadType) => {
   return {
     type: SET_DATA,
     payload: { id, login, email, isLoggedIn },
   };
 };
 
-export const setCaptcha = (captchaURL) => {
+export const setCaptcha = (captchaURL: string | null) => {
   return {
     type: SET_CAPTCHA,
     payload: { captchaURL },
@@ -40,26 +68,33 @@ export const setCaptcha = (captchaURL) => {
 };
 
 export const auth = () => {
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     const data = await securityAPI.me();
     if (data.resultCode === 0) {
       const { email, id, login } = data.data;
-      dispatch(setData(id, login, email, true, null));
+      dispatch(setData({ id, login, email, isLoggedIn: true }));
     }
   };
 };
 
 const getCaptchaURL = () => {
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     const data = await securityAPI.getCaptchaURL();
     console.log(data);
     dispatch(setCaptcha(data.url));
   };
 };
 
-export const login = (email, password, rememberMe = false, captcha) => {
-  return async (dispatch) => {
-    const data = await securityAPI.login(email, password, rememberMe, captcha);
+export type loginThunkPayloadType = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+  captcha: string;
+};
+
+export const login = ({ email, password, rememberMe = false, captcha }: loginThunkPayloadType) => {
+  return async (dispatch: any) => {
+    const data = await securityAPI.login({ email, password, rememberMe, captcha });
 
     if (data.resultCode === 0) {
       dispatch(auth());
@@ -75,11 +110,11 @@ export const login = (email, password, rememberMe = false, captcha) => {
 };
 
 export const logout = () => {
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     const data = await securityAPI.logout();
 
     if (data.resultCode === 0) {
-      dispatch(setData(null, null, null, false));
+      dispatch(setData({ id: null, login: null, email: null, isLoggedIn: false }));
       dispatch(setCaptcha(null));
       return Promise.resolve('logged out');
     } else {
