@@ -3,7 +3,6 @@ import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 import dialogsReducer from './dialogs-reducer';
 import profileReducer from './profile-reducer';
-import userReducer from './user-reducer';
 import navbarReducer from './navbar-reducer';
 import usersPageReducer from './users-page-reducer';
 import authReducer from './auth-reducer';
@@ -13,7 +12,6 @@ const reducers = combineReducers({
   profilePage: profileReducer,
   dialogsPage: dialogsReducer,
   navbar: navbarReducer,
-  userData: userReducer,
   usersPage: usersPageReducer,
   auth: authReducer,
   form: formReducer,

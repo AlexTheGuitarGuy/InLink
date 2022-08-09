@@ -130,8 +130,8 @@ const Login = () => {
 
   const maxLen40 = maxLen(40);
 
-  const onSubmit = ({ email, password, rememberMe, captcha }) => {
-    dispatch(login(email, password, rememberMe, captcha)).then((message) => {
+  const onSubmit = (payload) => {
+    dispatch(login(payload)).then((message) => {
       dispatch(setAlert({ message, type: 'success' }));
     });
   };

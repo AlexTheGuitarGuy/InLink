@@ -6,12 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFollowQueue, getUsers } from '../../../redux/users-page-selector';
 import { follow, unfollow } from '../../../redux/users-page-reducer';
 import LoadingButton from '../../common/Loading/LoadingButton';
+import LoadingPage from '../../common/Loading/LoadingPage';
 
 const UserItems = () => {
   const users = useSelector(getUsers);
   const followQueue = useSelector(getFollowQueue);
 
   const dispatch = useDispatch();
+
+  if (!users) return <LoadingPage />;
 
   const mappedUsers = users.map((e, i, arr) => {
     const buttonText = e.followed ? 'Unfollow' : 'Follow';

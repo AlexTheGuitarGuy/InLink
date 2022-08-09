@@ -78,7 +78,7 @@ export const securityAPI = {
     return response.data;
   },
 
-  login: async (email, password, rememberMe, captcha) => {
+  login: async ({ email, password, rememberMe, captcha }) => {
     const response = await instance.post(`auth/login`, {
       email,
       password,
