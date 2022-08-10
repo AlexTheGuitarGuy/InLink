@@ -1,6 +1,7 @@
 import * as axios from 'axios';
+import { PhotoType, ProfileDataType, LoginPayloadType } from '../types/types';
 
-const instance = axios.create({
+const instance = axios.default.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
   withCredentials: true,
   headers: {
@@ -15,7 +16,7 @@ export const userAPI = {
     return response.data;
   },
 
-  unfollow: async (id) => {
+  unfollow: async (id: number) => {
     const response = await instance.delete(
       `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
     );
@@ -23,7 +24,7 @@ export const userAPI = {
     return response.data;
   },
 
-  follow: async (id) => {
+  follow: async (id: number) => {
     const response = await instance.post(
       `https://social-network.samuraijs.com/api/1.0/follow/${id}`,
     );
@@ -33,25 +34,25 @@ export const userAPI = {
 };
 
 export const profileAPI = {
-  getProfile: async (uid) => {
+  getProfile: async (uid: number) => {
     const response = await instance.get(`profile/${uid}`);
 
     return response.data;
   },
 
-  getStatus: async (uid) => {
+  getStatus: async (uid: number) => {
     const response = await instance.get(`profile/status/${uid}`);
 
     return response.data;
   },
 
-  updateStatus: async (status) => {
+  updateStatus: async (status: string) => {
     const response = await instance.put(`profile/status`, { status });
 
     return response.data.resultCode;
   },
 
-  uploadPFP: async (file) => {
+  uploadPFP: async (file: File) => {
     const formData = new FormData();
     formData.append('image', file);
 
@@ -64,7 +65,7 @@ export const profileAPI = {
     return response.data;
   },
 
-  uploadProfileInfo: async (payload) => {
+  uploadProfileInfo: async (payload: ProfileDataType) => {
     const response = await instance.put('profile', payload);
 
     return response.data;
@@ -78,7 +79,7 @@ export const securityAPI = {
     return response.data;
   },
 
-  login: async ({ email, password, rememberMe, captcha }) => {
+  login: async ({ email, password, rememberMe, captcha }: LoginPayloadType) => {
     const response = await instance.post(`auth/login`, {
       email,
       password,

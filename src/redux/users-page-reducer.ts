@@ -31,9 +31,11 @@ const usersPageReducer = (state = initialState, action: ActionType): UsersPageRe
     case SET_FOLLOW_STATUS:
       return {
         ...state,
-        users: updateObjInArr(state.users, 'id', action.id, {
-          followed: action.followed,
-        }),
+        users:
+          state.users &&
+          updateObjInArr(state.users, 'id', action.id, {
+            followed: action.followed,
+          }),
       };
     case SET_USERS:
     case SET_PAGE:

@@ -1,5 +1,6 @@
 import { stopSubmit } from 'redux-form';
 import { securityAPI } from '../api/API';
+import { LoginPayloadType } from '../types/types';
 
 const SET_DATA = 'IN_LINK/AUTH_REDUCER/SET_DATA';
 const SET_CAPTCHA = 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA';
@@ -81,14 +82,7 @@ const getCaptchaURL = () => {
   };
 };
 
-export type LoginThunkPayloadType = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-  captcha: string;
-};
-
-export const login = ({ email, password, rememberMe = false, captcha }: LoginThunkPayloadType) => {
+export const login = ({ email, password, rememberMe = false, captcha }: LoginPayloadType) => {
   return async (dispatch: any) => {
     const data = await securityAPI.login({ email, password, rememberMe, captcha });
 

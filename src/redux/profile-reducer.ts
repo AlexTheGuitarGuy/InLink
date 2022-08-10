@@ -1,6 +1,7 @@
 import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/API';
 import { updateObjInArr } from '../utils/object-helpers';
+import { PhotoType, ProfileDataType } from '../types/types';
 
 const POST = 'IN_LINK/PROFILE_REDUCER/POST';
 const SET_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_PROFILE';
@@ -83,6 +84,7 @@ const profileReducer = (state = initialState, action: ActionType): ProfileReduce
     case UPLOAD_PHOTO_SUCCESS:
       return {
         ...state,
+        myData: { ...state.myData, photos: { ...action.file } } as ProfileDataType,
         profileData: { ...state.profileData, photos: { ...action.file } } as ProfileDataType,
       };
 
@@ -109,16 +111,6 @@ type PostType = {
   id: number;
   text: string;
   likes: number;
-};
-
-type ProfileDataType = {
-  aboutMe: string;
-  contacts: string[];
-  fullName: string;
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  photos: PhotoType;
-  userId: number;
 };
 
 type PostActionType = { type: typeof POST; payload: string };
@@ -164,7 +156,6 @@ export const setLoading = (isLoading: boolean): SetLoadingActionType => ({
   payload: { isLoading },
 });
 
-type PhotoType = { small: string; large: string };
 type UploadSuccessActionType = { type: typeof UPLOAD_PHOTO_SUCCESS; file: PhotoType };
 const uploadSuccess = (file: PhotoType): UploadSuccessActionType => ({
   type: UPLOAD_PHOTO_SUCCESS,
@@ -212,7 +203,9 @@ export const uploadPFP = (file: File) => {
   return async (dispatch: any) => {
     const { data, resultCode } = await profileAPI.uploadPFP(file);
 
-    if (resultCode === 0) dispatch(uploadSuccess(data));
+    if (resultCode === 0) {
+      dispatch(uploadSuccess(data.photos));
+    }
   };
 };
 
@@ -225,7 +218,7 @@ export const uploadProfileInfo =
     });
 
     if (data.resultCode === 0) {
-      dispatch(getProfile(userId));
+      dispatch(getMyProfile(userId));
       dispatch(setEditing(false));
       return Promise.resolve('profile edited');
     } else {

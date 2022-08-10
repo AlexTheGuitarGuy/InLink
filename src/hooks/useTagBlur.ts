@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Ref } from 'react';
 
-const useTagBlur = (flag, setFlag) => {
-  const ref = useRef(null);
+const useTagBlur = (flag: boolean, setFlag: any) => {
+  const ref = useRef<HTMLElement>(null);
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: any) {
       if (ref.current && !ref.current.contains(event.target) && flag) {
         setFlag(false);
       }
