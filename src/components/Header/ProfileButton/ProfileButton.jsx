@@ -50,17 +50,16 @@ const ProfileButton = () => {
                 rounded-b-lg
                 font-semibold 
                 transition-opacity`,
-              { 'opacity-0': !showProfileData },
-              { 'opacity-100': showProfileData },
+              { 'opacity-0 pointer-events-none': !showProfileData },
+              { 'opacity-100 ': showProfileData },
             )}
             ref={profileDataRef}
           >
-            {showProfileData && (
-              <>
-                <div className="font-semibold text-gray-700 sm:text-lg lg:text-base">{login}</div>
-                <NavLink
-                  to="/profile"
-                  className="font-semibold
+            <>
+              <div className="font-semibold text-gray-700 sm:text-lg lg:text-base">{login}</div>
+              <NavLink
+                to="/profile"
+                className="font-semibold
                               bg-gray-500 hover:bg-gray-600 active:bg-gray-700
                               lg:py-0.5 lg:px-4 
                               sm:py-2 sm:px-6
@@ -68,12 +67,12 @@ const ProfileButton = () => {
                               text-gray-100 text-center
                               rounded
                               transition-colors cursor-pointer"
-                >
-                  Go to profile
-                </NavLink>
-                <button
-                  onClick={handleLogout}
-                  className="font-semibold
+              >
+                Go to profile
+              </NavLink>
+              <button
+                onClick={handleLogout}
+                className="font-semibold
                               bg-rose-500 hover:bg-rose-600 active:bg-rose-700
                               lg:py-0.5 lg:px-4 
                               sm:py-2 sm:px-6
@@ -81,11 +80,10 @@ const ProfileButton = () => {
                               text-gray-100 text-center
                               rounded
                               transition-colors cursor-pointer"
-                >
-                  Log out
-                </button>
-              </>
-            )}
+              >
+                Log out
+              </button>
+            </>
           </div>
         </>
       ) : (
