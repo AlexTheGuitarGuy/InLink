@@ -12,12 +12,12 @@ const initialState = {
   captchaURL: null as string | null,
 };
 
-type InitialStateType = typeof initialState;
+export type AuthReducerStateType = typeof initialState;
 
 const authReducer = (
   state = initialState,
   action: SetDataActionType | SetCaptchaActionType,
-): InitialStateType => {
+): AuthReducerStateType => {
   switch (action.type) {
     case SET_DATA:
     case SET_CAPTCHA:

@@ -16,7 +16,7 @@ const initialState = {
   followQueue: [] as number[],
 };
 
-type InitialStateType = typeof initialState;
+export type UsersPageReducerStateType = typeof initialState;
 
 type ActionType =
   | SetFollowStatusActionType
@@ -26,7 +26,7 @@ type ActionType =
   | SetLoadingActionType
   | UpdateFollowQueueActionType;
 
-const usersPageReducer = (state = initialState, action: ActionType): InitialStateType => {
+const usersPageReducer = (state = initialState, action: ActionType): UsersPageReducerStateType => {
   switch (action.type) {
     case SET_FOLLOW_STATUS:
       return {

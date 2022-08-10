@@ -11,9 +11,9 @@ const initialState = {
   ] as NavItemType[],
 };
 
-type InitialStateType = typeof initialState;
+export type NavbarReducerStateType = typeof initialState;
 
-const navbarReducer = (state = initialState, action: any): InitialStateType => {
+const navbarReducer = (state = initialState, action: any): NavbarReducerStateType => {
   switch (action.type) {
     default:
       return state;

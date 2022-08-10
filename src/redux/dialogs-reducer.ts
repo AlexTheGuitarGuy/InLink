@@ -138,12 +138,12 @@ const initialState = {
   ] as UserMessageType[][],
 };
 
-type InitialStateType = typeof initialState;
+export type DialogsReducerStateType = typeof initialState;
 
 const dialogsReducer = (
   state = initialState,
   action: SendMessageActionType | DeleteMessageActionType | EditMessageActionType,
-): InitialStateType => {
+): DialogsReducerStateType => {
   switch (action.type) {
     case SEND_MESSAGE:
       if (action.text) {

@@ -11,12 +11,12 @@ const initialState = {
   alert: { text: '', type: 'alert' } as AlertType,
 };
 
-type InitialStateType = typeof initialState;
+export type AppReducerStateType = typeof initialState;
 
 const appReducer = (
   state = initialState,
   action: InitializeSuccessActionType | SetAlertActionType | SetIsSidebarHiddenActionType,
-): InitialStateType => {
+): AppReducerStateType => {
   switch (action.type) {
     case APP_INITIALIZED:
     case SET_SIDEBAR_HIDDEN:

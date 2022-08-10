@@ -34,7 +34,7 @@ const initialState = {
   isEditing: false,
 };
 
-type InitialStateType = typeof initialState;
+export type ProfileReducerStateType = typeof initialState;
 
 type ActionType =
   | PostActionType
@@ -47,7 +47,7 @@ type ActionType =
   | SetProfileActionType
   | SetMyProfileActionType;
 
-const profileReducer = (state = initialState, action: ActionType): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionType): ProfileReducerStateType => {
   switch (action.type) {
     case POST: {
       if (action.payload) {
