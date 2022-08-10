@@ -29,7 +29,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMyProfile(uid));
+    if (uid) dispatch(getMyProfile(uid));
   }, [dispatch, uid]);
 
   useEffect(() => {
