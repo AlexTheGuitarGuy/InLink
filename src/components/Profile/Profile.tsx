@@ -17,7 +17,7 @@ export type ProfileInfoProps = {
   isEditing: boolean;
   pfp: string;
   profileData: ProfileData;
-  profileStatus: string;
+  profileStatus: string | null;
   maxLen?: (message: string) => string | undefined;
 };
 
@@ -33,10 +33,11 @@ const Profile = () => {
   const currentUserPage = useParams().uid;
 
   useEffect(() => {
-    const user = currentUserPage || loggedUser;
-
-    dispatch(getProfile(user));
-    dispatch(getStatus(user));
+    const user = (currentUserPage && +currentUserPage) || (loggedUser && +loggedUser);
+    if (user) {
+      dispatch(getProfile(user));
+      dispatch(getStatus(user));
+    }
   }, [dispatch, loggedUser, currentUserPage]);
 
   const isOwner = !currentUserPage;

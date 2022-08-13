@@ -127,6 +127,7 @@ const initialState = {
       { id: 4, text: 'Lorem Ipsum is simply dummy text', from: 'me' },
     ],
   ] as UserMessage[][],
+  storedText: '',
 };
 
 export type DialogsReducerState = typeof initialState;

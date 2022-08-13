@@ -10,11 +10,14 @@ const SET_LOADING = 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING';
 const UPDATE_FOLLOW_QUEUE = 'IN_LINK/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE';
 
 const initialState = {
-  users: null as User[] | null,
+  users: [] as User[],
   page: 1,
   totalUsers: 0,
   isLoading: false,
   followQueue: [] as number[],
+  portionSize: 0,
+  pageSize: 0,
+  currentPagesBeginning: 0,
 };
 
 export type UsersPageReducerState = typeof initialState;

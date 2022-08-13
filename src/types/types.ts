@@ -44,3 +44,15 @@ export type UserMessage = {
   text: string;
   from: 'me' | 'them';
 };
+
+export type NavItem = {
+  id: number;
+  to: string;
+  name: string;
+};
+
+export type Post = {
+  id: number;
+  text: string;
+  likes: number;
+};

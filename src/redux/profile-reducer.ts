@@ -1,7 +1,7 @@
 import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/API';
 import { updateObjInArr } from '../utils/object-helpers';
-import { Photo, ProfileData } from '../types/types';
+import { Photo, ProfileData, Post } from '../types/types';
 import { Middleware } from 'redux';
 
 const POST = 'IN_LINK/PROFILE_REDUCER/POST';
@@ -30,7 +30,7 @@ const initialState = {
   ] as Post[],
   profileData: null as ProfileData | null,
   myData: null as ProfileData | null,
-  profileStatus: null as string | null,
+  profileStatus: '',
   storedText: '',
   isLoading: false,
   isEditing: false,
@@ -106,12 +106,6 @@ const profileReducer = (state = initialState, action: Action): ProfileReducerSta
     default:
       return state;
   }
-};
-
-type Post = {
-  id: number;
-  text: string;
-  likes: number;
 };
 
 type PostAction = { type: typeof POST; payload: string };

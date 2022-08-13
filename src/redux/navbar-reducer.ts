@@ -1,8 +1,5 @@
-type NavItem = {
-  id: number;
-  to: string;
-  name: string;
-};
+import { NavItem } from '../types/types';
+
 const initialState = {
   navItems: [
     { id: 1, to: '/profile', name: 'Profile' },

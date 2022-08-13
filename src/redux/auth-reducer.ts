@@ -6,11 +6,11 @@ const SET_DATA = 'IN_LINK/AUTH_REDUCER/SET_DATA';
 const SET_CAPTCHA = 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA';
 
 const initialState = {
-  id: null as number | null,
-  login: null as string | null,
-  email: null as string | null,
+  id: 0,
+  login: '',
+  email: '',
   isLoggedIn: false,
-  captchaURL: null as string | null,
+  captchaURL: '',
 };
 
 export type AuthReducerState = typeof initialState;
@@ -32,9 +32,9 @@ const authReducer = (
 };
 
 type SetDataPayload = {
-  id: number | null;
-  login: string | null;
-  email: string | null;
+  id: number;
+  login: string;
+  email: string;
   isLoggedIn: boolean;
 };
 type SetDataAction = {
@@ -50,9 +50,9 @@ export const setData = ({ id, login, email, isLoggedIn }: SetDataPayload): SetDa
 
 type SetCaptchaAction = {
   type: typeof SET_CAPTCHA;
-  payload: { captchaURL: string | null };
+  payload: { captchaURL: string };
 };
-export const setCaptcha = (captchaURL: string | null): SetCaptchaAction => {
+export const setCaptcha = (captchaURL: string): SetCaptchaAction => {
   return {
     type: SET_CAPTCHA,
     payload: { captchaURL },
@@ -99,8 +99,8 @@ export const logout = () => {
     const data = await securityAPI.logout();
 
     if (data.resultCode === 0) {
-      dispatch(setData({ id: null, login: null, email: null, isLoggedIn: false }));
-      dispatch(setCaptcha(null));
+      dispatch(setData({ id: 0, login: '', email: '', isLoggedIn: false }));
+      dispatch(setCaptcha(''));
       return Promise.resolve('logged out');
     } else {
       return Promise.reject("couldn't log out");
