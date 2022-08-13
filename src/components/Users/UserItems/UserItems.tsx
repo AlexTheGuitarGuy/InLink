@@ -5,8 +5,8 @@ import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFollowQueue, getUsers } from '../../../redux/users-page-selector';
 import { follow, unfollow } from '../../../redux/users-page-reducer';
-import LoadingButton from '../../common/Loading/LoadingButton';
-import LoadingPage from '../../common/Loading/LoadingPage';
+import Loading from '../../common/Loading/Loading';
+import { User } from '../../../types/types';
 
 const UserItems = () => {
   const users = useSelector(getUsers);
@@ -14,12 +14,14 @@ const UserItems = () => {
 
   const dispatch = useDispatch();
 
-  if (!users) return <LoadingPage />;
+  if (!users) return <Loading />;
 
-  const mappedUsers = users.map((e, i, arr) => {
+  const mappedUsers = users.map((e: User, i: number, arr: User[]) => {
     const buttonText = e.followed ? 'Unfollow' : 'Follow';
-    const buttonAction = e.followed ? (id) => dispatch(unfollow(id)) : (id) => dispatch(follow(id));
-    const isDisabled = followQueue.some((elem) => elem === e.id);
+    const buttonAction = e.followed
+      ? (id: number) => dispatch(unfollow(id))
+      : (id: number) => dispatch(follow(id));
+    const isDisabled = followQueue.some((elem: number) => elem === e.id);
 
     return (
       <div
@@ -83,7 +85,7 @@ const UserItems = () => {
             },
           )}
         >
-          {(isDisabled && <LoadingButton />) || <>{buttonText}</>}
+          {(isDisabled && <Loading dimensions={5} />) || <>{buttonText}</>}
         </button>
       </div>
     );

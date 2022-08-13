@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent, FC } from 'react';
 import cn from 'classnames';
 import { updateStatus } from '../../../../redux/profile-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStatus } from '../../../../redux/profile-selector';
 
-const Status = ({ isOwner }) => {
+type StatusProps = {
+  isOwner: boolean;
+};
+const Status: FC<StatusProps> = ({ isOwner }) => {
   const status = useSelector(getStatus);
 
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ const Status = ({ isOwner }) => {
     dispatch(updateStatus(localStatus));
   };
 
-  const editLocalStatus = (e) => {
+  const editLocalStatus = (e: ChangeEvent<HTMLInputElement>) => {
     setStatus(e.currentTarget.value);
   };
 

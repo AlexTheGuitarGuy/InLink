@@ -1,6 +1,6 @@
 import { stopSubmit } from 'redux-form';
 import { securityAPI } from '../api/API';
-import { LoginPayloadType } from '../types/types';
+import { LoginPayload } from '../types/types';
 
 const SET_DATA = 'IN_LINK/AUTH_REDUCER/SET_DATA';
 const SET_CAPTCHA = 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA';
@@ -13,12 +13,12 @@ const initialState = {
   captchaURL: null as string | null,
 };
 
-export type AuthReducerStateType = typeof initialState;
+export type AuthReducerState = typeof initialState;
 
 const authReducer = (
   state = initialState,
-  action: SetDataActionType | SetCaptchaActionType,
-): AuthReducerStateType => {
+  action: SetDataAction | SetCaptchaAction,
+): AuthReducerState => {
   switch (action.type) {
     case SET_DATA:
     case SET_CAPTCHA:
@@ -31,33 +31,28 @@ const authReducer = (
   }
 };
 
-type SetDataPayloadType = {
+type SetDataPayload = {
   id: number | null;
   login: string | null;
   email: string | null;
   isLoggedIn: boolean;
 };
-type SetDataActionType = {
+type SetDataAction = {
   type: typeof SET_DATA;
-  payload: SetDataPayloadType;
+  payload: SetDataPayload;
 };
-export const setData = ({
-  id,
-  login,
-  email,
-  isLoggedIn,
-}: SetDataPayloadType): SetDataActionType => {
+export const setData = ({ id, login, email, isLoggedIn }: SetDataPayload): SetDataAction => {
   return {
     type: SET_DATA,
     payload: { id, login, email, isLoggedIn },
   };
 };
 
-type SetCaptchaActionType = {
+type SetCaptchaAction = {
   type: typeof SET_CAPTCHA;
   payload: { captchaURL: string | null };
 };
-export const setCaptcha = (captchaURL: string | null): SetCaptchaActionType => {
+export const setCaptcha = (captchaURL: string | null): SetCaptchaAction => {
   return {
     type: SET_CAPTCHA,
     payload: { captchaURL },
@@ -82,7 +77,7 @@ const getCaptchaURL = () => {
   };
 };
 
-export const login = ({ email, password, rememberMe = false, captcha }: LoginPayloadType) => {
+export const login = ({ email, password, rememberMe = false, captcha }: LoginPayload) => {
   return async (dispatch: any) => {
     const data = await securityAPI.login({ email, password, rememberMe, captcha });
 

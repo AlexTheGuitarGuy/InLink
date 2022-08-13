@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import LoadingPage from '../common/Loading/LoadingPage';
+import Loading from '../common/Loading/Loading';
 import MyPosts from './MyPosts/MyPosts';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsEditing, getIsLoading, getProfilePage } from '../../redux/profile-selector';
@@ -10,6 +10,16 @@ import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { useParams } from 'react-router-dom';
 import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
 import CommonProfile from './ProfileInfo/CommonProfile/CommonProfile';
+import { ProfileData } from '../../types/types';
+
+export type ProfileInfoProps = {
+  isOwner: boolean;
+  isEditing: boolean;
+  pfp: string;
+  profileData: ProfileData;
+  profileStatus: string;
+  maxLen?: (message: string) => string | undefined;
+};
 
 const Profile = () => {
   const isEditing = useSelector(getIsEditing);
@@ -31,7 +41,7 @@ const Profile = () => {
 
   const isOwner = !currentUserPage;
 
-  if (isLoading || !profileData) return <LoadingPage />;
+  if (isLoading || !profileData) return <Loading />;
   if (!isOwner && isEditing) dispatch(setEditing(false));
 
   const pfp = profileData.photos;

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import LoadingPage from '../common/Loading/LoadingPage';
+import Loading from '../common/Loading/Loading';
 import UserItems from './UserItems/UserItems';
 import Paginator from '../common/Paginator/Paginator';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ const Users = () => {
   const pageSize = screenSize.dynamicWidth < 1366 ? 11 : 8;
   const portionSize = screenSize.dynamicWidth < 1366 ? 5 : 10;
 
-  const changePage = (page) => {
+  const changePage = (page: number) => {
     dispatch(requestUsers(page, pageSize));
     dispatch(setPage(page));
   };
@@ -28,7 +28,7 @@ const Users = () => {
     dispatch(requestUsers(page, pageSize));
   }, [dispatch, page, pageSize]);
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading) return <Loading />;
 
   return (
     <div

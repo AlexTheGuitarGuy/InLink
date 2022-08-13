@@ -8,7 +8,7 @@ import { Navigate } from 'react-router';
 import { getDialogsPage, getStoredText } from '../../redux/dialogs-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyData } from '../../redux/profile-selector';
-import LoadingPage from '../common/Loading/LoadingPage';
+import Loading from '../common/Loading/Loading';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import useScreenSize from '../../hooks/useScreenSize';
@@ -20,7 +20,7 @@ const Messages = () => {
 
   const screenSize = useScreenSize();
 
-  if (!myData) return <LoadingPage />;
+  if (!myData) return <Loading />;
 
   const userDialogElements = [];
   for (let i = 0; i < userMessages.length; i++) {

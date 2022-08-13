@@ -1,18 +1,9 @@
 import { updateObjInArr } from '../utils/object-helpers';
+import { DialogsUser, UserMessage } from '../types/types';
 
 const SEND_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE';
 const DELETE_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE';
 const EDIT_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE';
-
-type UserType = {
-  id: number;
-  name: string;
-};
-type UserMessageType = {
-  id: number;
-  text: string;
-  from: string;
-};
 
 const initialState = {
   users: [
@@ -32,7 +23,7 @@ const initialState = {
       id: 4,
       name: 'Walter Laine',
     },
-  ] as UserType[],
+  ] as DialogsUser[],
 
   userMessages: [
     [
@@ -135,15 +126,15 @@ const initialState = {
       },
       { id: 4, text: 'Lorem Ipsum is simply dummy text', from: 'me' },
     ],
-  ] as UserMessageType[][],
+  ] as UserMessage[][],
 };
 
-export type DialogsReducerStateType = typeof initialState;
+export type DialogsReducerState = typeof initialState;
 
 const dialogsReducer = (
   state = initialState,
-  action: SendMessageActionType | DeleteMessageActionType | EditMessageActionType,
-): DialogsReducerStateType => {
+  action: SendMessageAction | DeleteMessageAction | EditMessageAction,
+): DialogsReducerState => {
   switch (action.type) {
     case SEND_MESSAGE:
       if (action.text) {
@@ -189,29 +180,29 @@ const dialogsReducer = (
   }
 };
 
-type SendMessageActionType = {
+type SendMessageAction = {
   type: typeof SEND_MESSAGE;
   to: number;
   text: string;
 };
-export const sendMessage = (id: number, text: string): SendMessageActionType => ({
+export const sendMessage = (id: number, text: string): SendMessageAction => ({
   type: SEND_MESSAGE,
   to: id,
   text,
 });
 
-type DeleteMessageActionType = {
+type DeleteMessageAction = {
   type: typeof DELETE_MESSAGE;
   userId: number;
   messageId: number;
 };
-export const deleteMessage = (userId: number, messageId: number): DeleteMessageActionType => ({
+export const deleteMessage = (userId: number, messageId: number): DeleteMessageAction => ({
   type: DELETE_MESSAGE,
   userId,
   messageId,
 });
 
-type EditMessageActionType = {
+type EditMessageAction = {
   type: typeof EDIT_MESSAGE;
   userId: number;
   messageId: number;
@@ -221,7 +212,7 @@ export const editMessage = (
   userId: number,
   messageId: number,
   text: string,
-): EditMessageActionType => ({
+): EditMessageAction => ({
   type: EDIT_MESSAGE,
   userId,
   messageId,

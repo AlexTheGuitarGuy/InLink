@@ -1,5 +1,5 @@
 import { auth } from './auth-reducer';
-import { AlertType } from '../types/types';
+import { Alert } from '../types/types';
 
 const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED';
 const SET_ALERT = 'IN_LINK/APP_REDUCER/SET_ALERT';
@@ -8,15 +8,15 @@ const SET_SIDEBAR_HIDDEN = 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN';
 const initialState = {
   isAppInitialized: false,
   isSidebarHidden: false,
-  alert: { text: '', type: 'alert' } as AlertType,
+  alert: { message: '', type: 'alert' } as Alert,
 };
 
-export type AppReducerStateType = typeof initialState;
+export type AppReducerState = typeof initialState;
 
 const appReducer = (
   state = initialState,
-  action: InitializeSuccessActionType | SetAlertActionType | SetIsSidebarHiddenActionType,
-): AppReducerStateType => {
+  action: InitializeSuccessAction | SetAlertAction | SetIsSidebarHiddenAction,
+): AppReducerState => {
   switch (action.type) {
     case APP_INITIALIZED:
     case SET_SIDEBAR_HIDDEN:
@@ -30,29 +30,29 @@ const appReducer = (
   }
 };
 
-type InitializeSuccessActionType = {
+type InitializeSuccessAction = {
   type: typeof APP_INITIALIZED;
   payload: { isAppInitialized: true };
 };
-const initializeSuccess = (): InitializeSuccessActionType => ({
+const initializeSuccess = (): InitializeSuccessAction => ({
   type: APP_INITIALIZED,
   payload: { isAppInitialized: true },
 });
 
-type SetAlertActionType = {
+type SetAlertAction = {
   type: typeof SET_ALERT;
-  payload: { alert: AlertType };
+  payload: { alert: Alert };
 };
-export const setAlert = (alert: AlertType): SetAlertActionType => ({
+export const setAlert = (alert: Alert): SetAlertAction => ({
   type: SET_ALERT,
   payload: { alert },
 });
 
-type SetIsSidebarHiddenActionType = {
+type SetIsSidebarHiddenAction = {
   type: typeof SET_SIDEBAR_HIDDEN;
   payload: { isSidebarHidden: boolean };
 };
-export const setIsSidebarHidden = (isSidebarHidden: boolean): SetIsSidebarHiddenActionType => ({
+export const setIsSidebarHidden = (isSidebarHidden: boolean): SetIsSidebarHiddenAction => ({
   type: SET_SIDEBAR_HIDDEN,
   payload: { isSidebarHidden },
 });

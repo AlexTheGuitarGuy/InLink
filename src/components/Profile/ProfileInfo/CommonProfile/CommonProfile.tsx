@@ -1,5 +1,5 @@
 import placeholder from '../../../../assets/pfps/placeholder.jpg';
-import React from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import EditButton from './EditButton/EditButton';
 import Status from '../Status/Status';
 import JobInfo from './JobInfo/JobInfo';
@@ -7,20 +7,22 @@ import Contacts from './Contacts/Contacts';
 import { useDispatch } from 'react-redux';
 import { createField, Input } from '../../../common/FormControls/FormControls';
 import { uploadPFP } from '../../../../redux/profile-reducer';
+import { ProfileInfoProps } from '../../Profile';
 
-const CommonProfile = ({
-  profileData: { lookingForAJob, lookingForAJobDescription, fullName, contacts },
-  profileStatus,
-  pfp,
-  updateStatus,
+const CommonProfile: FC<ProfileInfoProps> = ({
   isOwner,
   isEditing,
-  maxLen1000,
+  pfp,
+  profileData: { lookingForAJob, lookingForAJobDescription, fullName, contacts },
+  profileStatus,
+  maxLen,
 }) => {
   const dispatch = useDispatch();
 
-  const updatePFP = (e) => {
-    if (e.target.files.length) dispatch(uploadPFP(e.target.files[0]));
+  const updatePFP = (event: ChangeEvent<HTMLInputElement>) => {
+    const element = event.currentTarget as HTMLInputElement;
+    const fileList: FileList | null = element.files;
+    if (fileList) dispatch(uploadPFP(fileList[0]));
   };
 
   return (
@@ -65,7 +67,7 @@ const CommonProfile = ({
           </div>
 
           <div className="mt-2 sm:mx-auto lg:mx-0">
-            <Status status={profileStatus} updateStatus={updateStatus} isOwner={isOwner} />
+            <Status isOwner={isOwner} />
           </div>
 
           {isOwner && (
@@ -91,7 +93,7 @@ const CommonProfile = ({
 
       <div className="flex flex-col lg:w-96 xl:w-1/2">
         <JobInfo
-          maxLen={maxLen1000}
+          maxLen={maxLen}
           reduxLookingForAJob={lookingForAJob}
           isEditing={isEditing}
           lookingForAJobDescription={lookingForAJobDescription}

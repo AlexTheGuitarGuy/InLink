@@ -1,11 +1,12 @@
 import React from 'react';
+import cn from 'classnames';
 
-const LoadingPage = () => {
+const Loading = ({ dimensions = 60 }) => {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className={cn('flex justify-center items-center', { 'h-screen': dimensions >= 60 })}>
       <svg
         aria-hidden="true"
-        className=" mr-2 text-gray-200 w-60 h-60 animate-spin dark:text-gray-600 fill-blue-600"
+        className={`text-gray-200 w-${dimensions} h-${dimensions} animate-spin dark:text-gray-600 fill-blue-600`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,4 +24,4 @@ const LoadingPage = () => {
   );
 };
 
-export default LoadingPage;
+export default Loading;

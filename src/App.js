@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { initializeApp, setAlert } from './redux/app-reducer';
-import LoadingPage from './components/common/Loading/LoadingPage';
+import Loading from './components/common/Loading/Loading';
 import store from './redux/redux-store';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Alert from './components/Alert/Alert';
@@ -53,7 +53,7 @@ const App = () => {
     };
   });
 
-  if (!isAppInitialized) return <LoadingPage />;
+  if (!isAppInitialized) return <Loading />;
 
   return (
     <div className="w-full h-screen">

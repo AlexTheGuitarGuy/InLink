@@ -1,4 +1,4 @@
-type NavItemType = {
+type NavItem = {
   id: number;
   to: string;
   name: string;
@@ -8,12 +8,12 @@ const initialState = {
     { id: 1, to: '/profile', name: 'Profile' },
     { id: 2, to: '/messages', name: 'Messages' },
     { id: 3, to: '/users', name: 'Users' },
-  ] as NavItemType[],
+  ] as NavItem[],
 };
 
-export type NavbarReducerStateType = typeof initialState;
+export type NavbarReducerState = typeof initialState;
 
-const navbarReducer = (state = initialState, action: any): NavbarReducerStateType => {
+const navbarReducer = (state = initialState, action: any): NavbarReducerState => {
   switch (action.type) {
     default:
       return state;

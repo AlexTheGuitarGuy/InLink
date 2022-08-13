@@ -1,7 +1,8 @@
 import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/API';
 import { updateObjInArr } from '../utils/object-helpers';
-import { PhotoType, ProfileDataType } from '../types/types';
+import { Photo, ProfileData } from '../types/types';
+import { Middleware } from 'redux';
 
 const POST = 'IN_LINK/PROFILE_REDUCER/POST';
 const SET_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_PROFILE';
@@ -26,29 +27,29 @@ const initialState = {
       text: 'I code everyday',
       likes: 111,
     },
-  ] as PostType[],
-  profileData: null as ProfileDataType | null,
-  myData: null as ProfileDataType | null,
+  ] as Post[],
+  profileData: null as ProfileData | null,
+  myData: null as ProfileData | null,
   profileStatus: null as string | null,
   storedText: '',
   isLoading: false,
   isEditing: false,
 };
 
-export type ProfileReducerStateType = typeof initialState;
+export type ProfileReducerState = typeof initialState;
 
-type ActionType =
-  | PostActionType
-  | DeletePostActionType
-  | EditPostActionType
-  | SetEditingActionType
-  | SetStatusActionType
-  | SetLoadingActionType
-  | UploadSuccessActionType
-  | SetProfileActionType
-  | SetMyProfileActionType;
+type Action =
+  | PostAction
+  | DeletePostAction
+  | EditPostAction
+  | SetEditingAction
+  | SetStatusAction
+  | SetLoadingAction
+  | UploadSuccessAction
+  | SetProfileAction
+  | SetMyProfileAction;
 
-const profileReducer = (state = initialState, action: ActionType): ProfileReducerStateType => {
+const profileReducer = (state = initialState, action: Action): ProfileReducerState => {
   switch (action.type) {
     case POST: {
       if (action.payload) {
@@ -84,8 +85,8 @@ const profileReducer = (state = initialState, action: ActionType): ProfileReduce
     case UPLOAD_PHOTO_SUCCESS:
       return {
         ...state,
-        myData: { ...state.myData, photos: { ...action.file } } as ProfileDataType,
-        profileData: { ...state.profileData, photos: { ...action.file } } as ProfileDataType,
+        myData: { ...state.myData, photos: { ...action.file } } as ProfileData,
+        profileData: { ...state.profileData, photos: { ...action.file } } as ProfileData,
       };
 
     case DELETE_POST:
@@ -107,57 +108,57 @@ const profileReducer = (state = initialState, action: ActionType): ProfileReduce
   }
 };
 
-type PostType = {
+type Post = {
   id: number;
   text: string;
   likes: number;
 };
 
-type PostActionType = { type: typeof POST; payload: string };
-export const post = (payload: string): PostActionType => ({ type: POST, payload });
+type PostAction = { type: typeof POST; payload: string };
+export const post = (payload: string): PostAction => ({ type: POST, payload });
 
-type DeletePostActionType = { type: typeof DELETE_POST; id: number };
-export const deletePost = (id: number): DeletePostActionType => ({ type: DELETE_POST, id });
+type DeletePostAction = { type: typeof DELETE_POST; id: number };
+export const deletePost = (id: number): DeletePostAction => ({ type: DELETE_POST, id });
 
-type EditPostActionType = { type: typeof EDIT_POST; id: number; payload: string };
-export const editPost = (id: number, payload: string): EditPostActionType => ({
+type EditPostAction = { type: typeof EDIT_POST; id: number; payload: string };
+export const editPost = (id: number, payload: string): EditPostAction => ({
   type: EDIT_POST,
   id,
   payload,
 });
 
-type SetEditingActionType = { type: typeof SET_IS_EDITING; payload: { isEditing: boolean } };
-export const setEditing = (isEditing: boolean): SetEditingActionType => ({
+type SetEditingAction = { type: typeof SET_IS_EDITING; payload: { isEditing: boolean } };
+export const setEditing = (isEditing: boolean): SetEditingAction => ({
   type: SET_IS_EDITING,
   payload: { isEditing },
 });
 
-type SetProfileActionType = { type: typeof SET_PROFILE; payload: { profileData: ProfileDataType } };
-export const setProfile = (profileData: ProfileDataType): SetProfileActionType => ({
+type SetProfileAction = { type: typeof SET_PROFILE; payload: { profileData: ProfileData } };
+export const setProfile = (profileData: ProfileData): SetProfileAction => ({
   type: SET_PROFILE,
   payload: { profileData },
 });
 
-type SetMyProfileActionType = { type: typeof SET_MY_PROFILE; payload: { myData: ProfileDataType } };
-export const setMyProfile = (myData: ProfileDataType): SetMyProfileActionType => ({
+type SetMyProfileAction = { type: typeof SET_MY_PROFILE; payload: { myData: ProfileData } };
+export const setMyProfile = (myData: ProfileData): SetMyProfileAction => ({
   type: SET_MY_PROFILE,
   payload: { myData },
 });
 
-type SetStatusActionType = { type: typeof SET_STATUS; payload: { profileStatus: string } };
-export const setStatus = (profileStatus: string): SetStatusActionType => ({
+type SetStatusAction = { type: typeof SET_STATUS; payload: { profileStatus: string } };
+export const setStatus = (profileStatus: string): SetStatusAction => ({
   type: SET_STATUS,
   payload: { profileStatus },
 });
 
-type SetLoadingActionType = { type: typeof SET_LOADING; payload: { isLoading: boolean } };
-export const setLoading = (isLoading: boolean): SetLoadingActionType => ({
+type SetLoadingAction = { type: typeof SET_LOADING; payload: { isLoading: boolean } };
+export const setLoading = (isLoading: boolean): SetLoadingAction => ({
   type: SET_LOADING,
   payload: { isLoading },
 });
 
-type UploadSuccessActionType = { type: typeof UPLOAD_PHOTO_SUCCESS; file: PhotoType };
-const uploadSuccess = (file: PhotoType): UploadSuccessActionType => ({
+type UploadSuccessAction = { type: typeof UPLOAD_PHOTO_SUCCESS; file: Photo };
+const uploadSuccess = (file: Photo): UploadSuccessAction => ({
   type: UPLOAD_PHOTO_SUCCESS,
   file,
 });
@@ -210,7 +211,7 @@ export const uploadPFP = (file: File) => {
 };
 
 export const uploadProfileInfo =
-  (profileInfo: ProfileDataType) => async (dispatch: any, getState: any) => {
+  (profileInfo: ProfileData) => async (dispatch: any, getState: any) => {
     const { userId } = getState().profilePage.profileData;
 
     const data = await profileAPI.uploadProfileInfo({

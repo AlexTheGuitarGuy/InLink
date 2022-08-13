@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 import dialogsReducer from './dialogs-reducer';
@@ -20,8 +21,11 @@ const reducers = combineReducers({
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 window.__store__ = store;
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

@@ -1,5 +1,6 @@
 import { userAPI } from '../api/API';
 import { updateObjInArr } from '../utils/object-helpers';
+import { User } from '../types/types';
 
 const SET_FOLLOW_STATUS = 'IN_LINK/USERS_PAGE_REDUCER/SET_FOLLOW_STATUS';
 const SET_USERS = 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS';
@@ -9,24 +10,24 @@ const SET_LOADING = 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING';
 const UPDATE_FOLLOW_QUEUE = 'IN_LINK/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE';
 
 const initialState = {
-  users: null as UserType[] | null,
+  users: null as User[] | null,
   page: 1,
   totalUsers: 0,
   isLoading: false,
   followQueue: [] as number[],
 };
 
-export type UsersPageReducerStateType = typeof initialState;
+export type UsersPageReducerState = typeof initialState;
 
-type ActionType =
-  | SetFollowStatusActionType
-  | SetUsersActionType
-  | SetPageActionType
-  | SetUsersNbActionType
-  | SetLoadingActionType
-  | UpdateFollowQueueActionType;
+type Action =
+  | SetFollowStatusAction
+  | SetUsersAction
+  | SetPageAction
+  | SetUsersNbAction
+  | SetLoadingAction
+  | UpdateFollowQueueAction;
 
-const usersPageReducer = (state = initialState, action: ActionType): UsersPageReducerStateType => {
+const usersPageReducer = (state = initialState, action: Action): UsersPageReducerState => {
   switch (action.type) {
     case SET_FOLLOW_STATUS:
       return {
@@ -57,50 +58,39 @@ const usersPageReducer = (state = initialState, action: ActionType): UsersPageRe
   }
 };
 
-type SetFollowStatusActionType = { type: typeof SET_FOLLOW_STATUS; id: number; followed: boolean };
-export const setFollowStatus = (id: number, followed: boolean): SetFollowStatusActionType => ({
+type SetFollowStatusAction = { type: typeof SET_FOLLOW_STATUS; id: number; followed: boolean };
+export const setFollowStatus = (id: number, followed: boolean): SetFollowStatusAction => ({
   type: SET_FOLLOW_STATUS,
   id,
   followed,
 });
 
-type UserType = {
-  name: string;
-  id: number;
-  uniqueUrlName: null;
-  photos: {
-    small: string | null;
-    large: string | null;
-  };
-  status: string | null;
-  followed: boolean;
-};
-type SetPageActionType = { type: typeof SET_PAGE; payload: { page: number } };
-export const setPage = (page: number): SetPageActionType => ({
+type SetPageAction = { type: typeof SET_PAGE; payload: { page: number } };
+export const setPage = (page: number): SetPageAction => ({
   type: SET_PAGE,
   payload: { page },
 });
 
-type SetUsersNbActionType = { type: typeof SET_USERS_NB; payload: { totalUsers: number } };
-export const setUsersNb = (totalUsers: number): SetUsersNbActionType => ({
+type SetUsersNbAction = { type: typeof SET_USERS_NB; payload: { totalUsers: number } };
+export const setUsersNb = (totalUsers: number): SetUsersNbAction => ({
   type: SET_USERS_NB,
   payload: { totalUsers },
 });
 
-type SetUsersActionType = { type: typeof SET_USERS; payload: { users: UserType[] } };
-export const setUsers = (users: UserType[]): SetUsersActionType => ({
+type SetUsersAction = { type: typeof SET_USERS; payload: { users: User[] } };
+export const setUsers = (users: User[]): SetUsersAction => ({
   type: SET_USERS,
   payload: { users },
 });
 
-type SetLoadingActionType = { type: typeof SET_LOADING; payload: { isLoading: boolean } };
-export const setLoading = (isLoading: boolean): SetLoadingActionType => ({
+type SetLoadingAction = { type: typeof SET_LOADING; payload: { isLoading: boolean } };
+export const setLoading = (isLoading: boolean): SetLoadingAction => ({
   type: SET_LOADING,
   payload: { isLoading },
 });
 
-type UpdateFollowQueueActionType = { type: typeof UPDATE_FOLLOW_QUEUE; id: number };
-export const updateFollowQueue = (id: number): UpdateFollowQueueActionType => ({
+type UpdateFollowQueueAction = { type: typeof UPDATE_FOLLOW_QUEUE; id: number };
+export const updateFollowQueue = (id: number): UpdateFollowQueueAction => ({
   type: UPDATE_FOLLOW_QUEUE,
   id,
 });
