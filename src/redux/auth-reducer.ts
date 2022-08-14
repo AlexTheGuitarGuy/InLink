@@ -72,7 +72,6 @@ export const auth = () => {
 const getCaptchaURL = () => {
   return async (dispatch: any) => {
     const data = await securityAPI.getCaptchaURL();
-    console.log(data);
     dispatch(setCaptcha(data.url));
   };
 };

@@ -1,8 +1,23 @@
 import './index.css';
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-import InLinkApp from './App';
+import store from './redux/redux-store';
+import App from './App';
+
+const InLinkApp = () => {
+	return (
+		<StrictMode>
+			<HashRouter>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</HashRouter>
+		</StrictMode>
+	);
+};
 
 //  store.storeText, store.addPost, store.sendMessage
 ReactDOM.render(<InLinkApp />, document.getElementById('root'));

@@ -1,11 +1,10 @@
 import './App.css';
-import React, { StrictMode, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { initializeApp, setAlert } from './redux/app-reducer';
 import Loading from './components/common/Loading/Loading';
-import store from './redux/redux-store';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Alert from './components/Alert/Alert';
 import { getIsLoggedIn } from './redux/auth-selector';
@@ -37,8 +36,8 @@ const App = () => {
   }, [dispatch, isAppInitialized]);
 
   useEffect(() => {
-    const handleRejection = (event) => {
-      if (event && event.reason && event.reason.substring) {
+    const handleRejection = (event: PromiseRejectionEvent) => {
+      if (event?.reason?.substring) {
         if (event.reason.substring(0, 18) === 'Invalid url format')
           dispatch(setAlert({ message: `Couldn't upload profile data`, type: 'error' }));
         else dispatch(setAlert({ message: event.reason, type: 'error' }));
@@ -92,16 +91,4 @@ const App = () => {
   );
 };
 
-const InLinkApp = () => {
-  return (
-    <StrictMode>
-      <HashRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </HashRouter>
-    </StrictMode>
-  );
-};
-
-export default InLinkApp;
+export default App;
