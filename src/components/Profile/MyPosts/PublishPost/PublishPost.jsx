@@ -4,7 +4,7 @@ import { createField, Textarea } from '../../../common/FormControls/FormControls
 import { post } from '../../../../redux/profile-reducer';
 import { useDispatch } from 'react-redux';
 
-let PublishForm = ({ handleSubmit }) => {
+const PublishForm = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       {createField('Type what you think...', 'post', Textarea, null, 'text', {
@@ -32,7 +32,7 @@ let PublishForm = ({ handleSubmit }) => {
   );
 };
 
-PublishForm = reduxForm({
+const PublishFormRedux = reduxForm({
   form: 'login',
 })(PublishForm);
 
@@ -49,7 +49,7 @@ const PublishPost = () => {
       <label htmlFor="postText" className="lg:text-lg xl:text-2xl xl:mb-2">
         New post
       </label>
-      <PublishForm onSubmit={handleSubmit} />
+      <PublishFormRedux onSubmit={handleSubmit} />
     </div>
   );
 };

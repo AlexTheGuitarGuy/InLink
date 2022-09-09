@@ -9,15 +9,7 @@ import { ProfileData } from '../../../../types/types';
 import { ProfileInfoProps } from '../../Profile';
 import { useAppDispatch } from '../../../../hooks/reduxHooks';
 
-interface Props
-  extends Partial<InjectedFormProps>,
-    Partial<WrappedFieldArrayProps>,
-    ProfileInfoProps {}
-
-const ProfileInfoInputForm: FC<InjectedFormProps<ProfileData, Props> & Props> = ({
-  handleSubmit,
-  ...props
-}) => {
+const ProfileInfoInputForm = ({ handleSubmit, ...props }) => {
   return (
     <form onSubmit={handleSubmit}>
       <CommonProfile {...props} />
@@ -25,23 +17,23 @@ const ProfileInfoInputForm: FC<InjectedFormProps<ProfileData, Props> & Props> = 
   );
 };
 
-const ReduxProfileInfoInputForm = reduxForm<ProfileData, Props>({
+const ReduxProfileInfoInputForm = reduxForm({
   form: 'profileInfo',
 })(ProfileInfoInputForm);
 
-const ProfileInfoInput: FC<any> = (props) => {
+const ProfileInfoInput = (props) => {
   const maxLen50 = maxLen(50);
   const maxLen1000 = maxLen(1000);
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (payload: ProfileData) => {
-    (dispatch(uploadProfileInfo(payload)) as unknown as Promise<string>).then((message: string) => {
+  const handleSubmit = (payload) => {
+    dispatch(uploadProfileInfo(payload)).then((message) => {
       dispatch(setAlert({ message, type: 'success' }));
     });
   };
 
   return (
-    <ProfileInfoInputForm
+    <ReduxProfileInfoInputForm
       onSubmit={handleSubmit}
       {...props}
       maxLen={maxLen1000}

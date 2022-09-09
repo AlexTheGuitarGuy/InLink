@@ -2,9 +2,9 @@ import { NavItem } from '../types/types';
 
 const initialState = {
   navItems: [
-    { id: 1, to: '/profile', name: 'Profile' },
-    { id: 2, to: '/messages', name: 'Messages' },
-    { id: 3, to: '/users', name: 'Users' },
+    { to: '/profile', name: 'Profile' },
+    { to: '/messages', name: 'Messages' },
+    { to: '/users', name: 'Users' },
   ] as NavItem[],
 };
 

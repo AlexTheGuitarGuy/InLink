@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { LegacyRef, useState } from 'react';
 import cn from 'classnames';
 import { getNavItems } from '../../../redux/navbar-selector';
 import { useSelector } from 'react-redux';
 import useTagBlur from '../../../hooks/useTagBlur';
 import { useLocation } from 'react-router';
 import useScreenSize from '../../../hooks/useScreenSize';
+import { NavItem } from '../../../types/types';
 
 const Nav = () => {
   const navItems = useSelector(getNavItems);
@@ -16,13 +17,13 @@ const Nav = () => {
 
   const location = useLocation();
 
-  let navElements = navItems.map((e) => {
+  let navElements = navItems.map((navItem: NavItem) => {
     let isActive = false;
-    if (location.pathname.match(e.to)) isActive = true;
+    if (location.pathname.match(navItem.to)) isActive = true;
     return (
       <NavLink
-        key={e.id}
-        to={e.to}
+        key={navItem.name}
+        to={navItem.to}
         className="sm:mb-3 lg:mb-0"
         onClick={() => {
           setShouldShowMenu(false);
@@ -55,7 +56,7 @@ const Nav = () => {
             },
           )}
         >
-          {e.name}
+          {navItem.name}
         </div>
       </NavLink>
     );
@@ -91,7 +92,7 @@ const Nav = () => {
               { 'opacity-0': !shouldShowMenu },
               { 'opacity-100': shouldShowMenu },
             )}
-            ref={menuRef}
+            ref={menuRef as LegacyRef<HTMLDivElement>}
           >
             {shouldShowMenu && navElements}
           </div>

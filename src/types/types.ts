@@ -5,9 +5,20 @@ export type Alert = {
 
 export type Photo = { small: string; large: string };
 
+export type ContactsObj = {
+  facebook: string;
+  github: string;
+  instagram: string;
+  mainLink: string;
+  twitter: string;
+  vk: string;
+  website: string;
+  youtube: string;
+};
+
 export type ProfileData = {
   aboutMe: string;
-  contacts: string[];
+  contacts: ContactsObj;
   fullName: string;
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
@@ -35,14 +46,15 @@ export type User = {
 };
 
 export type DialogsUser = {
-  id: number;
+  avatar: string;
   name: string;
 };
 
 export type UserMessage = {
-  id: number;
+  name?: string;
+  type: 'sent' | 'received';
   text: string;
-  from: 'me' | 'them';
+  avatar?: string;
 };
 
 export type NavItem = {

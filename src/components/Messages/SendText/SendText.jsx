@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { reduxForm } from 'redux-form';
 import { createField, Textarea } from '../../common/FormControls/FormControls';
 import { sendMessage } from '../../../redux/dialogs-reducer';

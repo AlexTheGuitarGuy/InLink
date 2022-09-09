@@ -1,5 +1,9 @@
 import { updateObjInArr } from '../utils/object-helpers';
 import { DialogsUser, UserMessage } from '../types/types';
+import User1Image from '../assets/pfps/u1.jpg';
+import User2Image from '../assets/pfps/u2.jpg';
+import User3Image from '../assets/pfps/u3.jpg';
+import User4Image from '../assets/pfps/u4.jpg';
 
 const SEND_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE';
 const DELETE_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE';
@@ -8,123 +12,121 @@ const EDIT_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE';
 const initialState = {
   users: [
     {
-      id: 1,
+      avatar: User1Image,
       name: 'Denis Johnson',
     },
     {
-      id: 2,
+      avatar: User2Image,
       name: 'Hannah White',
     },
     {
-      id: 3,
+      avatar: User3Image,
       name: 'Jane Doe',
     },
     {
-      id: 4,
+      avatar: User4Image,
       name: 'Walter Laine',
     },
   ] as DialogsUser[],
-
   userMessages: [
     [
       {
-        id: 1,
-        text: `Lorem Ipsum is simply dummy text `,
-        from: 'them',
+        name: 'Denis Johnson',
+        text: `Lorem Ipsum is simply dummy text`,
+        type: 'received',
+        avatar: User1Image,
       },
       {
-        id: 2,
         text: `Where does it come from?
               Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
               `,
-        from: 'me',
+        type: 'sent',
       },
       {
-        id: 3,
-        text: ` accompanied by English versions from the 1914 translation by H. Rackham.`,
-        from: 'them',
+        name: 'Denis Johnson',
+        text: `accompanied by English versions from the 1914 translation by H. Rackham.`,
+        type: 'received',
+        avatar: User1Image,
       },
     ],
     [
       {
-        id: 1,
+        name: 'Hannah White',
         text: 'It is a long established fact that a reader will be distracted by the readable content',
-        from: 'them',
+        type: 'received',
+        avatar: User2Image,
       },
       {
-        id: 2,
         text: 'has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n',
-        from: 'me',
+        type: 'sent',
       },
       {
-        id: 3,
         text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below',
-        from: 'me',
+        type: 'sent',
       },
       {
-        id: 4,
+        name: 'Hannah White',
         text: 'Lorem Ipsum is simply dummy text',
-        from: 'them',
+        type: 'received',
+        avatar: User2Image,
       },
-      { id: 5, text: 'Lorem Ipsum is simply dummy text', from: 'me' },
+      { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
       {
-        id: 6,
+        name: 'Hannah White',
         text: 'It is a long established fact that a reader will be distracted by the readable content',
-        from: 'them',
+        type: 'received',
+        avatar: User2Image,
       },
       {
-        id: 7,
         text: ' with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-        from: 'me',
+        type: 'sent',
       },
       {
-        id: 8,
         text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below',
-        from: 'me',
+        type: 'sent',
       },
       {
-        id: 9,
+        name: 'Hannah White',
         text: 'Lorem Ipsum is simply dummy text',
-        from: 'them',
+        type: 'received',
+        avatar: User2Image,
       },
       {
-        id: 10,
         text: 'Lorem Ipsum is simply dummy text',
-        from: 'me',
+        type: 'sent',
       },
     ],
     [
-      { id: 1, text: 'Where does it come from?', from: 'them' },
+      { name: 'Jane Doe', text: 'Where does it come from?', type: 'received', avatar: User3Image },
       {
-        id: 2,
         text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
-        from: 'me',
+        type: 'sent',
       },
-      { id: 3, text: 'Lorem Ipsum', from: 'them' },
-      { id: 4, text: 'Lorem Ipsum', from: 'me' },
+      { name: 'Jane Doe', text: 'Lorem Ipsum', type: 'received', avatar: User3Image },
+      { text: 'Lorem Ipsum', type: 'sent' },
       {
-        id: 5,
         text: 'Lorem Ipsum used since the 1500s is reproduced below',
-        from: 'me',
+        type: 'sent',
       },
     ],
     [
       {
-        id: 1,
+        name: 'Jane Doe',
         text: 'Lorem Ipsum used since the 1500s is reproduced below',
-        from: 'them',
+        type: 'received',
+        avatar: User4Image,
       },
       {
-        id: 2,
         text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. ',
-        from: 'me',
+        type: 'sent',
       },
       {
-        id: 3,
+        name: 'Jane Doe',
         text: 'Lorem Ipsum',
-        from: 'them',
+        type: 'received',
+        avatar: User4Image,
       },
-      { id: 4, text: 'Lorem Ipsum is simply dummy text', from: 'me' },
+      { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
     ],
   ] as UserMessage[][],
   storedText: '',
@@ -144,9 +146,8 @@ const dialogsReducer = (
           userMessages: state.userMessages.map((e, i) => {
             if (i === action.to)
               e.push({
-                id: state.userMessages[action.to].length + 1,
                 text: action.text,
-                from: 'me',
+                type: 'sent',
               });
             return e;
           }),
@@ -156,7 +157,7 @@ const dialogsReducer = (
         ...state,
       };
 
-    case DELETE_MESSAGE:
+    /*    case DELETE_MESSAGE:
       return {
         ...state,
         userMessages: state.userMessages.map((e, i) => {
@@ -175,7 +176,7 @@ const dialogsReducer = (
             });
           return e;
         }),
-      };
+      };*/
     default:
       return state;
   }

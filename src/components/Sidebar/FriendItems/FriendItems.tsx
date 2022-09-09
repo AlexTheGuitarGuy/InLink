@@ -7,10 +7,10 @@ import { DialogsUser } from '../../../types/types';
 const FriendItems = () => {
   const friends = useSelector(getDialogUsers);
 
-  let friendList = friends.map((e: DialogsUser, i: number) => {
-    if (i < 5) {
+  let friendList = friends.map(({ name, avatar }: DialogsUser, index: number) => {
+    if (index < 5) {
       return (
-        <NavLink to={`/messages/${e.id}`} key={e.id}>
+        <NavLink to={`/messages/${index}`} key={name}>
           <div
             className="p-2 flex items-center mt-4
                         transition-colors
@@ -21,13 +21,13 @@ const FriendItems = () => {
           "
           >
             <img
-              src={require(`../../../assets/pfps/u${e.id}.jpg`)}
-              alt={`user ${e.id}`}
+              src={avatar}
+              alt={name}
               className="h-12 w-12
               xl:h-16 xl:w-16
               rounded-full"
             />
-            <div className="ml-2 text-sm font-normal xl:ml-4">{e.name}</div>
+            <div className="ml-2 text-sm font-normal xl:ml-4">{name}</div>
           </div>
         </NavLink>
       );

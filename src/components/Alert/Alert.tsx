@@ -13,11 +13,10 @@ const Alert = () => {
     message && setIsShown(true);
   }, [alert]);
 
-  const timeoutRef = useRef();
   useEffect(() => {
-    timeoutRef.current = setTimeout(() => setIsShown(false), 3000);
+    const timeOut = setTimeout(() => setIsShown(false), 3000);
     return () => {
-      clearInterval(timeoutRef.current);
+      clearTimeout(timeOut);
     };
   }, [alert]);
 

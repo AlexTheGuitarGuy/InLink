@@ -1,8 +1,9 @@
 import { Field } from 'redux-form';
-import React from 'react';
+import React, { FC, ReactNode } from 'react';
 import cn from 'classnames';
 
-const FormControl = ({ meta: { touched, error }, children }) => {
+const FormControl = ({ meta, children }) => {
+  const { touched, error } = meta;
   const hasError = touched && error;
   return (
     <>

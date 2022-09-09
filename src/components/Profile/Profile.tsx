@@ -18,7 +18,7 @@ export type ProfileInfoProps = {
   pfp: string;
   profileData: ProfileData;
   profileStatus: string | null;
-  maxLen?: (message: string) => string | undefined;
+  maxLen?: (message: string) => string;
 };
 
 const Profile = () => {

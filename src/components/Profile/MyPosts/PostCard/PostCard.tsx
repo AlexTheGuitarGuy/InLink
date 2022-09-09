@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import LikeIcon from '../../../../assets/like.jpg';
 
-const PostCard = ({ text, likeCount, pfp, userName }) => {
+type PostCardProps = {
+  text: string;
+  likes: number;
+  pfp: string;
+  userName: string;
+};
+
+const PostCard: FC<PostCardProps> = ({ text, likes, pfp, userName }) => {
   return (
     <div className="mt-4 flex flex-col lg:text-l sm:text-sm">
       <div
@@ -40,7 +47,7 @@ const PostCard = ({ text, likeCount, pfp, userName }) => {
              xl:mb-3
              inline"
           />
-          {likeCount}
+          {likes}
         </div>
       </div>
     </div>

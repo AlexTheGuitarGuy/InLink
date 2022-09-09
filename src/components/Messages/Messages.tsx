@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
@@ -12,6 +12,7 @@ import Loading from '../common/Loading/Loading';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import useScreenSize from '../../hooks/useScreenSize';
+import { UserMessage as UserMessageType } from '../../types/types';
 
 const Messages = () => {
   const memoryText = useSelector(getStoredText);
@@ -20,41 +21,36 @@ const Messages = () => {
 
   const screenSize = useScreenSize();
 
-  if (!myData) return <Loading />;
+  const conversationComponents: any = [];
+  userMessages.map((conversation: UserMessageType[], conversationIndex: number) => {
+    conversationComponents[conversationIndex] = [];
 
-  const userDialogElements = [];
-  for (let i = 0; i < userMessages.length; i++) {
-    userDialogElements[i] = userMessages[i].map((e) => {
-      return (
-        <div key={e.id}>
-          <UserMessage
-            message={e}
-            pfp={
-              e.from === 'me'
-                ? myData.photos.small || placeholder
-                : require(`../../assets/pfps/u${users[i].id}.jpg`)
-            }
-          />
+    conversation.map((message: UserMessageType, messageIndex: number) => {
+      conversationComponents[conversationIndex][messageIndex] = (
+        <div key={messageIndex}>
+          <UserMessage message={message} />
         </div>
       );
     });
-  }
+  });
 
-  const routes = userDialogElements.map((e, i) => {
+  if (!myData) return <Loading />;
+
+  const routes = conversationComponents.map((conversationComponent: ReactNode[], index: number) => {
     return (
       <Route
-        path={'/' + (i + 1)}
-        key={i}
+        path={`/${index}`}
+        key={index}
         element={
           <div className="flex flex-col w-full relative">
             <div className="lg:mx-16 mb-32 overflow-scroll sm:mx-3 h-screen">
-              {userDialogElements[i]}
+              {conversationComponents[index]}
             </div>
             <div
               className="fixed bottom-0 lg:w-3/5 sm:w-full self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300"
             >
-              <SendText memoryText={memoryText} id={i} />
+              <SendText id={index} />
             </div>
           </div>
         }
@@ -71,7 +67,7 @@ const Messages = () => {
     >
       {screenSize.dynamicWidth >= 1366 && <Users users={users} />}
 
-      <Routes className="w-full">
+      <Routes>
         {screenSize.dynamicWidth < 1366 && <Route path="/all" element={<Users users={users} />} />}
         <Route path="/" element={<Navigate to={'1'} />} />
         {routes}

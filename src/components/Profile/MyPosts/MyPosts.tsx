@@ -1,15 +1,22 @@
-import React from 'react';
-import PostCard from './PostCard/PostCard.jsx';
-import PublishPost from './PublishPost/PublishPost.jsx';
+import React, { FC } from 'react';
+import PostCard from './PostCard/PostCard';
+import PublishPost from './PublishPost/PublishPost';
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 import { useSelector } from 'react-redux';
 import { getPosts } from '../../../redux/profile-selector';
+import { Post } from '../../../types/types';
 
-const MyPosts = ({ pfp, isOwner, userName }) => {
+type MyPostsProps = {
+  pfp: string;
+  isOwner: boolean;
+  userName: string;
+};
+
+const MyPosts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
   const posts = useSelector(getPosts);
 
-  const postElements = posts.map(({ id, text, likes }) => (
-    <PostCard key={id} text={text} likeCount={likes} pfp={pfp || placeholder} userName={userName} />
+  const postElements = posts.map(({ id, text, likes }: Post) => (
+    <PostCard key={id} text={text} likes={likes} pfp={pfp || placeholder} userName={userName} />
   ));
 
   return (

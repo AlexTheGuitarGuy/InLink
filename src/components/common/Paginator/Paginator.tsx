@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import cn from 'classnames';
 
-const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
+type PaginatorProps = {
+  totalElems: number;
+  portionSize: number;
+  pageSize: number;
+  changePage: (page: number) => void;
+  page: number;
+};
+
+const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, changePage, page }) => {
   const pagesNb = Math.ceil(totalElems / pageSize);
   const halfwayPoint = page - Math.floor(portionSize / 2);
 
@@ -16,11 +24,11 @@ const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
 
   const [currentPagesBeginning, setCurrentPages] = useState(calcPagesBeginning());
 
-  const changeOnClick = (i) => {
-    const portionBeginning = i - Math.floor(portionSize / 2);
+  const changeOnClick = (page: number) => {
+    const portionBeginning = page - Math.floor(portionSize / 2);
     const portion = portionBeginning > 1 ? portionBeginning : 1;
     setCurrentPages(portion);
-    changePage(i);
+    changePage(page);
   };
 
   let mappedPages = [];
@@ -52,7 +60,7 @@ const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
     currentPages[i] = mappedPages[i];
   }
 
-  const moveToExtreme = (pagesBeginning, page, symbol) => (
+  const moveToExtreme = (pagesBeginning: number, page: number, symbol: string) => (
     <span
       onClick={() => {
         setCurrentPages(pagesBeginning);
@@ -69,9 +77,9 @@ const Paginator = ({ totalElems, portionSize, pageSize, changePage, page }) => {
   const firstPage = moveToExtreme(1, 1, '<< ');
   const lastPage = moveToExtreme(pagesNb - portionSize + 1, pagesNb, ' >>');
 
-  const moveOnePage = (i, symbol) => (
+  const moveOnePage = (page: number, symbol: string) => (
     <span
-      onClick={() => changeOnClick(i)}
+      onClick={() => changeOnClick(page)}
       className="mx-1 cursor-pointer transition-colors
           hover:text-gray-600 active:text-gray-500
           border-b-2 border-transparent hover:border-gray-600 p-0.5"

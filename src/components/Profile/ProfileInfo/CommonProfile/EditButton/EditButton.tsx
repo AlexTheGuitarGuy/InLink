@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { setEditing } from '../../../../../redux/profile-reducer';
 
-const EditButton = ({ isEditing }) => {
+type EditButtonProps = {
+  isEditing: boolean;
+};
+
+const EditButton: FC<EditButtonProps> = ({ isEditing }) => {
   const dispatch = useDispatch();
 
   return (

@@ -1,6 +1,8 @@
 import { createField, Input } from '../../../../../common/FormControls/FormControls';
+import { FC } from 'react';
+import { ContactProps } from '../Contacts';
 
-const InputContact = ({ contactName }) => {
+const InputContact: FC<ContactProps> = ({ contactName }) => {
   return (
     <div className="mt-3">
       <label htmlFor={contactName}>{contactName}:</label>

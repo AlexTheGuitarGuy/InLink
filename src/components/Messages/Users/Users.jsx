@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 const Users = ({ users }) => {
-  const userElements = users.map((e) => {
+  const userElements = users.map(({ name, avatar }, index) => {
     return (
-      <div key={e.id} className="sm:border-b sm:border-gray-200 lg:border-none">
+      <div key={name} className="sm:border-b sm:border-gray-200 lg:border-none">
         <NavLink
-          to={'/messages/' + e.id}
+          to={`/messages/${index}`}
           className={({ isActive }) =>
             cn(
               `p-2 flex items-center mt-4
@@ -24,8 +24,8 @@ const Users = ({ users }) => {
           }
         >
           <img
-            src={require(`../../../assets/pfps/u${e.id}.jpg`)}
-            alt={`user ${e.id}`}
+            src={avatar}
+            alt={name}
             className="h-16 w-16 
                         rounded-full"
           />
@@ -33,7 +33,7 @@ const Users = ({ users }) => {
             className="sm:ml-8 lg:ml-4 
                       sm:text-md lg:text-sm"
           >
-            {e.name}
+            {name}
           </div>
         </NavLink>
       </div>

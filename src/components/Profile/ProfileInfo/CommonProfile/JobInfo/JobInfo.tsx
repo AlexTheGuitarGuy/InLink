@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { createField, Input, Textarea } from '../../../../common/FormControls/FormControls';
 import { formValueSelector } from 'redux-form';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
+import { RootState } from '../../../../../redux/redux-store';
 
-const JobInfo = ({ maxLen, lookingForAJobDescription, isEditing, reduxLookingForAJob }) => {
-  const lookingForAJob = useSelector((state) =>
+type JobInfoProps = {
+  maxLen?: (message: string) => string;
+  lookingForAJobDescription: string;
+  isEditing: boolean;
+  reduxLookingForAJob: boolean;
+};
+
+const JobInfo: FC<JobInfoProps> = ({
+  maxLen,
+  reduxLookingForAJob,
+  lookingForAJobDescription,
+  isEditing,
+}) => {
+  const lookingForAJob = useSelector((state: RootState) =>
     formValueSelector('profileInfo')(state, 'lookingForAJob'),
   );
 
@@ -47,10 +60,10 @@ const JobInfo = ({ maxLen, lookingForAJobDescription, isEditing, reduxLookingFor
                   null,
                   {
                     className: `resize-none py-1 px-4 rounded 
-                border border-gray-300
-                w-full
-                focus:outline-none focus:border-gray-500
-                transition`,
+                      border border-gray-300
+                      w-full
+                      focus:outline-none focus:border-gray-500
+                      transition`,
                   },
                 )
               : lookingForAJobDescription && !isEditing

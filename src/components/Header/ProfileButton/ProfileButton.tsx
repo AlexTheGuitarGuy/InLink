@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { LegacyRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getIsLoggedIn, getLogin } from '../../../redux/auth-selector';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,7 +23,8 @@ const ProfileButton = () => {
 
   const handleLogout = () => {
     setShowProfileData(false);
-    dispatch(logout()).then((message) => {
+
+    (dispatch(logout()) as unknown as Promise<string>).then((message) => {
       dispatch(setAlert({ message, type: 'alert' }));
     });
   };
@@ -34,7 +35,7 @@ const ProfileButton = () => {
         <>
           <button onClick={() => setShowProfileData(!showProfileData)} className="rounded-full">
             <img
-              src={myData.photos.small || placeholder}
+              src={myData?.photos?.small || placeholder}
               alt="pfp"
               className="rounded-full w-12 h-12 p-0.5
               transition-colors hover:bg-gray-700 active:bg-gray-800"
@@ -53,7 +54,7 @@ const ProfileButton = () => {
               { 'opacity-0 pointer-events-none': !showProfileData },
               { 'opacity-100 ': showProfileData },
             )}
-            ref={profileDataRef}
+            ref={profileDataRef as LegacyRef<HTMLDivElement>}
           >
             <>
               <div className="font-semibold text-gray-700 sm:text-lg lg:text-base">{login}</div>
