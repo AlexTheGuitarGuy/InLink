@@ -1,17 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setEditing } from '../../../../../redux/profile-reducer';
+import { setEditing } from '../../../../redux/profile-reducer';
+import { useFormikContext } from 'formik';
 
 type EditButtonProps = {
   isEditing: boolean;
+  isSubmitting: boolean;
+  isValid: boolean;
 };
 
-const EditButton: FC<EditButtonProps> = ({ isEditing }) => {
+const EditButton: FC<EditButtonProps> = ({ isEditing, isSubmitting, isValid }) => {
   const dispatch = useDispatch();
+  const { submitForm } = useFormikContext();
 
   return (
     <button
-      onClick={() => !isEditing && dispatch(setEditing(true))}
+      type="button"
       className="font-semibold
                     bg-gray-500 hover:bg-gray-600 active:bg-gray-700
                     text-gray-100 text-center
@@ -22,6 +26,8 @@ const EditButton: FC<EditButtonProps> = ({ isEditing }) => {
                     py-0.5 px-4
                     sm:mb-4 lg:mb-0
                     sm:w-full lg:w-auto"
+      onClick={() => (isEditing ? submitForm() : dispatch(setEditing(true)))}
+      disabled={isSubmitting || !isValid}
     >
       {isEditing ? 'Save' : 'Edit mode'}
     </button>

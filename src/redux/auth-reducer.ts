@@ -1,4 +1,3 @@
-import { stopSubmit } from 'redux-form';
 import { securityAPI } from '../api/API';
 import { LoginPayload } from '../types/types';
 
@@ -76,7 +75,10 @@ const getCaptchaURL = () => {
   };
 };
 
-export const login = ({ email, password, rememberMe = false, captcha }: LoginPayload) => {
+export const login = (
+  { email, password, rememberMe = false, captcha }: LoginPayload,
+  setStatus: any,
+) => {
   return async (dispatch: any) => {
     const data = await securityAPI.login({ email, password, rememberMe, captcha });
 
@@ -87,7 +89,6 @@ export const login = ({ email, password, rememberMe = false, captcha }: LoginPay
       if (data.resultCode === 10) dispatch(getCaptchaURL());
 
       const message = data.messages[0].length > 0 ? data.messages[0] : 'An error has occurred';
-      dispatch(stopSubmit('login', { _error: message }));
       return Promise.reject(message);
     }
   };

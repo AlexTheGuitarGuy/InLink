@@ -1,7 +1,6 @@
-import { stopSubmit } from 'redux-form';
 import { profileAPI } from '../api/API';
 import { updateObjInArr } from '../utils/object-helpers';
-import { Photo, ProfileData, Post } from '../types/types';
+import { Photo, ProfileData, Post, InputProfileData } from '../types/types';
 import { Middleware } from 'redux';
 
 const POST = 'IN_LINK/PROFILE_REDUCER/POST';
@@ -205,11 +204,12 @@ export const uploadPFP = (file: File) => {
 };
 
 export const uploadProfileInfo =
-  (profileInfo: ProfileData) => async (dispatch: any, getState: any) => {
-    const { userId } = getState().profilePage.profileData;
+  (profileInfo: InputProfileData, setStatus: any) => async (dispatch: any, getState: any) => {
+    const { userId }: { userId: number } = getState().profilePage.profileData;
 
     const data = await profileAPI.uploadProfileInfo({
       ...profileInfo,
+      userId,
     });
 
     if (data.resultCode === 0) {
@@ -223,14 +223,14 @@ export const uploadProfileInfo =
       const errorLocation = regExp?.exec(message)?.[1];
 
       if (errorLocation) {
-        const errorText = message.slice(0, message.indexOf('('));
-        const parsedLocation = errorLocation.toLowerCase().split('->');
-        dispatch(
-          stopSubmit('profileInfo', {
-            [parsedLocation[0]]: { [parsedLocation[1]]: errorText },
-          }),
-        );
-      } else dispatch(stopSubmit('profileInfo', { _error: message }));
+        const errorText = message.slice(0, message.indexOf('(')).trim();
+        const parsedLocation = errorLocation.toLowerCase().split('->').join('.');
+
+        setStatus({
+          error: { [parsedLocation]: errorText },
+        });
+      }
+
       return Promise.reject(message);
     }
   };

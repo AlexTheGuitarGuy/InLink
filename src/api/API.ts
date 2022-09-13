@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import { Photo, ProfileData, LoginPayload } from '../types/types';
+import { Photo, InputProfileData, LoginPayload } from '../types/types';
 
 const instance = axios.default.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -65,7 +65,7 @@ export const profileAPI = {
     return response.data;
   },
 
-  uploadProfileInfo: async (payload: ProfileData) => {
+  uploadProfileInfo: async (payload: InputProfileData & { userId: number }) => {
     const response = await instance.put('profile', payload);
 
     return response.data;

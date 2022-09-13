@@ -16,12 +16,15 @@ export type ContactsObj = {
   youtube: string;
 };
 
-export type ProfileData = {
+export type InputProfileData = {
   aboutMe: string;
   contacts: ContactsObj;
   fullName: string;
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
+};
+
+export type ProfileData = InputProfileData & {
   photos: Photo;
   userId: number;
 };

@@ -2,28 +2,24 @@ import React, { useEffect } from 'react';
 import Loading from '../common/Loading/Loading';
 import MyPosts from './MyPosts/MyPosts';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsEditing, getIsLoading, getProfilePage } from '../../redux/profile-selector';
+import {
+  getCurrentUserData,
+  getIsEditing,
+  getIsLoading,
+  getMyData,
+  getProfilePage,
+} from '../../redux/profile-selector';
 import { getProfile, getStatus, setEditing } from '../../redux/profile-reducer';
 import { getUID } from '../../redux/auth-selector';
 import { compose } from 'redux';
 import withAuthRedirect from '../../HOC/withAuthRedirect';
 import { useParams } from 'react-router-dom';
-import ProfileInfoInput from './ProfileInfo/ProfileInfoInput/ProfileInfoInput';
-import CommonProfile from './ProfileInfo/CommonProfile/CommonProfile';
-import { ProfileData } from '../../types/types';
-
-export type ProfileInfoProps = {
-  isOwner: boolean;
-  isEditing: boolean;
-  pfp: string;
-  profileData: ProfileData;
-  profileStatus: string | null;
-  maxLen?: (message: string) => string;
-};
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import { InputProfileData } from '../../types/types';
 
 const Profile = () => {
   const isEditing = useSelector(getIsEditing);
-  const { profileData, profileStatus } = useSelector(getProfilePage);
+  const { profileData, myData } = useSelector(getProfilePage);
 
   const loggedUser = useSelector(getUID);
   const isLoading = useSelector(getIsLoading);
@@ -42,30 +38,19 @@ const Profile = () => {
 
   const isOwner = !currentUserPage;
 
-  if (isLoading || !profileData) return <Loading />;
+  if (isLoading || !profileData || !myData) return <Loading />;
   if (!isOwner && isEditing) dispatch(setEditing(false));
 
   const pfp = profileData.photos;
 
   return (
     <div>
-      {isEditing && isOwner ? (
-        <ProfileInfoInput
-          isOwner={isOwner}
-          isEditing={isEditing}
-          pfp={pfp.large}
-          profileData={profileData}
-          profileStatus={profileStatus}
-        />
-      ) : (
-        <CommonProfile
-          isOwner={isOwner}
-          isEditing={isEditing}
-          pfp={pfp.large}
-          profileData={profileData}
-          profileStatus={profileStatus}
-        />
-      )}
+      <ProfileInfo
+        isOwner={isOwner}
+        isEditing={isEditing}
+        pfp={pfp.large}
+        profileData={isOwner ? myData : profileData}
+      />
       <MyPosts isOwner={isOwner} pfp={pfp.small} userName={profileData.fullName} />
     </div>
   );
