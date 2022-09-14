@@ -1,9 +1,14 @@
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
+import { DialogsUser } from '../../../types/types';
 
-const Users = ({ users }) => {
-  const userElements = users.map(({ name, avatar }, index) => {
+type UsersProps = {
+  users: DialogsUser[];
+};
+
+const Users: FC<UsersProps> = ({ users }) => {
+  const userElements = users.map(({ name, avatar }: DialogsUser, index: number) => {
     return (
       <div key={name} className="sm:border-b sm:border-gray-200 lg:border-none">
         <NavLink

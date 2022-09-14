@@ -1,23 +1,35 @@
 import React from 'react';
 import { post } from '../../../../redux/profile-reducer';
 import { useDispatch } from 'react-redux';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  Formik,
+  FormikErrors,
+  FormikHelpers,
+  FormikProps,
+} from 'formik';
+
+type PostFormValues = {
+  postText: string;
+};
 
 const PublishPost = () => {
   const dispatch = useDispatch();
 
-  const initialValues = {
+  const initialValues: PostFormValues = {
     postText: '',
   };
 
-  const validate = ({ postText }) => {
-    const errors = {};
+  const validate = ({ postText }: PostFormValues) => {
+    const errors: FormikErrors<PostFormValues> = {};
     if (postText.length > 512) errors.postText = 'Post is too long';
 
     return errors;
   };
 
-  const onSubmit = ({ postText }, { resetForm }) => {
+  const onSubmit = ({ postText }: PostFormValues, { resetForm }: FormikHelpers<PostFormValues>) => {
     if (postText.trim()) {
       dispatch(post(postText));
       resetForm();
@@ -26,7 +38,7 @@ const PublishPost = () => {
 
   return (
     <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting, isValid }: FormikProps<PostFormValues>) => (
         <Form>
           <label htmlFor="postText" className="lg:text-lg xl:text-2xl xl:mb-2">
             New post

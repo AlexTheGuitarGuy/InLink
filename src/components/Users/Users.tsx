@@ -16,7 +16,7 @@ const Users = () => {
 
   const screenSize = useScreenSize();
 
-  const pageSize = screenSize.dynamicWidth < 1366 ? 11 : 8;
+  const pageSize = screenSize.dynamicWidth < 1366 ? 11 : 6;
   const portionSize = screenSize.dynamicWidth < 1366 ? 5 : 10;
 
   const changePage = (page: number) => {
@@ -33,9 +33,9 @@ const Users = () => {
   return (
     <div
       className="flex justify-between flex-col
-      lg:bg-gray-100 lg:rounded-lg lg:p-8
-    text-gray-700 font-semibold
-    sm:h-screen lg:h-auto
+                  lg:bg-gray-100 lg:rounded-lg lg:p-8
+                  text-gray-700 font-semibold
+                  sm:h-screen lg:h-auto
     "
     >
       <UserItems />

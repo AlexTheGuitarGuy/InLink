@@ -75,10 +75,7 @@ const getCaptchaURL = () => {
   };
 };
 
-export const login = (
-  { email, password, rememberMe = false, captcha }: LoginPayload,
-  setStatus: any,
-) => {
+export const login = ({ email, password, rememberMe = false, captcha }: LoginPayload) => {
   return async (dispatch: any) => {
     const data = await securityAPI.login({ email, password, rememberMe, captcha });
 

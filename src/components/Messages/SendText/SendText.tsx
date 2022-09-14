@@ -1,32 +1,52 @@
 import React, { FC } from 'react';
 import { sendMessage } from '../../../redux/dialogs-reducer';
 import { useDispatch } from 'react-redux';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  Formik,
+  FormikErrors,
+  FormikHelpers,
+  FormikProps,
+} from 'formik';
 
-const SendText = ({ id }) => {
+type MessageFormValues = {
+  messageText: string;
+};
+
+type SendTextProps = {
+  id: number;
+};
+
+const SendText: FC<SendTextProps> = ({ id }) => {
   const dispatch = useDispatch();
 
   const initialValues = {
     messageText: '',
   };
 
-  const validate = ({ messageText }) => {
-    const errors = {};
+  const validate = ({ messageText }: MessageFormValues) => {
+    const errors: FormikErrors<MessageFormValues> = {};
     if (messageText.length > 256) errors.messageText = 'Message is too long';
 
     return errors;
   };
 
-  const onSubmit = ({ messageText }, { resetForm }) => {
+  const onSubmit = (
+    { messageText }: MessageFormValues,
+    { resetForm, setSubmitting }: FormikHelpers<MessageFormValues>,
+  ) => {
     if (messageText.trim()) {
       dispatch(sendMessage(id, messageText));
       resetForm();
     }
+    setSubmitting(false);
   };
 
   return (
     <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting, isValid }: FormikProps<MessageFormValues>) => (
         <Form>
           <div className="flex flex-row justify-center">
             <Field

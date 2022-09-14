@@ -5,7 +5,7 @@ import Users from './Users/Users';
 import SendText from './SendText/SendText';
 import placeholder from '../../assets/pfps/placeholder.jpg';
 import { Navigate } from 'react-router';
-import { getDialogsPage, getStoredText } from '../../redux/dialogs-selector';
+import { getUserMessages, getDialogsUsers, getStoredText } from '../../redux/dialogs-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyData } from '../../redux/profile-selector';
 import Loading from '../common/Loading/Loading';
@@ -16,7 +16,8 @@ import { UserMessage as UserMessageType } from '../../types/types';
 
 const Messages = () => {
   const memoryText = useSelector(getStoredText);
-  const { userMessages, users } = useSelector(getDialogsPage);
+  const userMessages = useSelector(getUserMessages);
+  const users = useSelector(getDialogsUsers);
   const myData = useSelector(getMyData);
 
   const screenSize = useScreenSize();
@@ -63,7 +64,7 @@ const Messages = () => {
       className="flex
          lg:bg-gray-100 lg:rounded-lg lg:p-8
          text-gray-700 lg:font-semibold
-         h-screen w-full"
+         lg:h-[92vh] h-screen w-full"
     >
       {screenSize.dynamicWidth >= 1366 && <Users users={users} />}
 

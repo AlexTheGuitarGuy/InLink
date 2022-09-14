@@ -71,7 +71,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
 
   return (
     <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
-      {({ values, isSubmitting, isValid, status }) => (
+      {({ values, isSubmitting, isValid, status }: FormikProps<InputProfileData>) => (
         <Form
           className="flex
                   sm:flex-col lg:flex-row
