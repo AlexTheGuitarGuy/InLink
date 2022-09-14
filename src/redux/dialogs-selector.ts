@@ -2,10 +2,6 @@ import { RootState } from './redux-store';
 import { DialogsUser, UserMessage } from '../types/types';
 import { DialogsReducerState } from './dialogs-reducer';
 
-export const getStoredText = (state: RootState): string => {
-  return state.dialogsPage.storedText;
-};
-
 export const getDialogsPage = (state: RootState): DialogsReducerState => {
   return state.dialogsPage;
 };

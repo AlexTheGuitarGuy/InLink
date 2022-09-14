@@ -1,11 +1,11 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
 import SendText from './SendText/SendText';
 import placeholder from '../../assets/pfps/placeholder.jpg';
 import { Navigate } from 'react-router';
-import { getUserMessages, getDialogsUsers, getStoredText } from '../../redux/dialogs-selector';
+import { getUserMessages, getDialogsUsers } from '../../redux/dialogs-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyData } from '../../redux/profile-selector';
 import Loading from '../common/Loading/Loading';
@@ -15,7 +15,6 @@ import useScreenSize from '../../hooks/useScreenSize';
 import { UserMessage as UserMessageType } from '../../types/types';
 
 const Messages = () => {
-  const memoryText = useSelector(getStoredText);
   const userMessages = useSelector(getUserMessages);
   const users = useSelector(getDialogsUsers);
   const myData = useSelector(getMyData);
@@ -43,8 +42,8 @@ const Messages = () => {
         path={`/${index}`}
         key={index}
         element={
-          <div className="flex flex-col w-full relative">
-            <div className="lg:mx-16 mb-32 overflow-scroll sm:mx-3 h-screen">
+          <div className="flex flex-col h-full w-full relative">
+            <div className="lg:mx-16 mx-3 mb-14 overflow-scroll  h-screen">
               {conversationComponents[index]}
             </div>
             <div
@@ -64,13 +63,13 @@ const Messages = () => {
       className="flex
          lg:bg-gray-100 lg:rounded-lg lg:p-8
          text-gray-700 lg:font-semibold
-         lg:h-[92vh] h-screen w-full"
+         xl:h-[92vh] lg:h-[88vh] h-screen w-full"
     >
       {screenSize.dynamicWidth >= 1366 && <Users users={users} />}
 
       <Routes>
         {screenSize.dynamicWidth < 1366 && <Route path="/all" element={<Users users={users} />} />}
-        <Route path="/" element={<Navigate to={'1'} />} />
+        <Route path="/" element={<Navigate to={'0'} />} />
         {routes}
       </Routes>
     </div>
