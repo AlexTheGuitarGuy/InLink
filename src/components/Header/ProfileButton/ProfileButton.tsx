@@ -1,13 +1,15 @@
 import React, { LegacyRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { getIsLoggedIn, getLogin } from '../../../redux/auth-selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../../redux/auth-reducer';
 import cn from 'classnames';
-import { getMyData } from '../../../redux/profile-selector';
+
+import { setAlert } from '../../../redux/app-reducer/app-reducer';
+import { getMyData } from '../../../redux/profile-reducer/profile-selector';
+import { getIsLoggedIn, getLogin } from '../../../redux/auth-reducer/auth-selector';
+import { logout } from '../../../redux/auth-reducer/auth-reducer';
+
 import placeholder from '../../../assets/pfps/placeholder.jpg';
 import useTagBlur from '../../../hooks/useTagBlur';
-import { setAlert } from '../../../redux/app-reducer';
 
 const ProfileButton = () => {
   const dispatch = useDispatch();

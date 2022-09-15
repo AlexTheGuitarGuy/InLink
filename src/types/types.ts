@@ -1,3 +1,5 @@
+import { FormikErrors } from 'formik';
+
 export type Alert = {
   message: string;
   type: 'success' | 'error' | 'alert';
@@ -24,10 +26,10 @@ export type InputProfileData = {
   lookingForAJobDescription: string;
 };
 
-export type ProfileData = InputProfileData & {
+export type ProfileData = {
   photos: Photo;
   userId: number;
-};
+} & InputProfileData;
 
 export type LoginPayload = {
   email: string;
@@ -71,3 +73,32 @@ export type Post = {
   text: string;
   likes: number;
 };
+
+export type FormikStatus = {
+  error: FormikErrors<InputProfileData>;
+};
+
+export type GetUsersResponse = {
+  items: User[];
+  totalCount: number;
+  error?: string;
+};
+
+export type GetCaptchaURLResponse = {
+  url: string;
+};
+
+export type CommonResponse<D> = {
+  resultCode: ResultCodes | ResultCodesWithCaptcha;
+  messages: string[];
+  data: D;
+};
+
+export enum ResultCodes {
+  Success = 0,
+  Error = 1,
+}
+
+export enum ResultCodesWithCaptcha {
+  CaptchaRequired = 10,
+}

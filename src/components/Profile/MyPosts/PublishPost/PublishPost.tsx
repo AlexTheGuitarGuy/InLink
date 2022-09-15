@@ -1,5 +1,4 @@
 import React from 'react';
-import { post } from '../../../../redux/profile-reducer';
 import { useDispatch } from 'react-redux';
 import {
   ErrorMessage,
@@ -10,6 +9,9 @@ import {
   FormikHelpers,
   FormikProps,
 } from 'formik';
+import * as Yup from 'yup';
+
+import { post } from '../../../../redux/profile-reducer/profile-reducer';
 
 type PostFormValues = {
   postText: string;
@@ -22,12 +24,12 @@ const PublishPost = () => {
     postText: '',
   };
 
-  const validate = ({ postText }: PostFormValues) => {
-    const errors: FormikErrors<PostFormValues> = {};
-    if (postText.length > 512) errors.postText = 'Post is too long';
-
-    return errors;
-  };
+  const validationSchema = Yup.object({
+    postText: Yup.string()
+      .trim()
+      .required('Cannot publish empty post')
+      .max(512, 'Post too long. Maximum is 512 characters.'),
+  });
 
   const onSubmit = ({ postText }: PostFormValues, { resetForm }: FormikHelpers<PostFormValues>) => {
     if (postText.trim()) {
@@ -37,7 +39,7 @@ const PublishPost = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {({ isSubmitting, isValid }: FormikProps<PostFormValues>) => (
         <Form>
           <label htmlFor="postText" className="lg:text-lg xl:text-2xl xl:mb-2">

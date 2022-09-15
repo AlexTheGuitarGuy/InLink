@@ -1,20 +1,34 @@
-import placeholder from '../../../assets/pfps/placeholder.jpg';
 import React, { FC, ChangeEvent, useState } from 'react';
-import EditButton from './EditButton/EditButton';
-import Status from './Status/Status';
-import JobInfo from './JobInfo/JobInfo';
-import Contacts from './Contacts/Contacts';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  Formik,
+  FormikBag,
+  FormikErrors,
+  FormikHelpers,
+  FormikProps,
+} from 'formik';
+import * as Yup from 'yup';
+
 import {
   getMyProfile,
   setEditing,
   uploadPFP,
   uploadProfileInfo,
-} from '../../../redux/profile-reducer';
-import { ErrorMessage, Field, Form, Formik, FormikBag, FormikErrors, FormikProps } from 'formik';
+} from '../../../redux/profile-reducer/profile-reducer';
+import { setAlert } from '../../../redux/app-reducer/app-reducer';
+import { getUID } from '../../../redux/auth-reducer/auth-selector';
+
+import placeholder from '../../../assets/pfps/placeholder.jpg';
+
 import { InputProfileData } from '../../../types/types';
-import { setAlert } from '../../../redux/app-reducer';
-import { getUID } from '../../../redux/auth-selector';
+
+import EditButton from './EditButton/EditButton';
+import Status from './Status/Status';
+import JobInfo from './JobInfo/JobInfo';
+import Contacts from './Contacts/Contacts';
 
 export type ProfileInfoProps = {
   isOwner: boolean;
@@ -45,24 +59,24 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     lookingForAJobDescription,
   };
 
-  const validate = ({
-    aboutMe,
-    contacts: { facebook, github, instagram, mainLink, twitter, vk, website, youtube },
-    fullName,
-    lookingForAJob,
-    lookingForAJobDescription,
-  }: InputProfileData) => {
-    const errors: FormikErrors<InputProfileData> = {};
+  const validationSchema = Yup.object({
+    fullName: Yup.string()
+      .trim()
+      .required('Name is required')
+      .max(20, 'Name should be at most 20 characters long.'),
+    lookingForAJobDescription: Yup.string()
+      .trim()
+      .max(256, 'Too much text. Maximum is 256 characters')
+      .when('lookingForAJob', {
+        is: true,
+        then: Yup.string().required('This field is required'),
+      }),
+  });
 
-    if (!fullName.trim()) errors.fullName = 'Required field';
-    else if (lookingForAJobDescription.length > 256)
-      errors.lookingForAJobDescription = 'Too many characters';
-    else if (fullName.length > 20) errors.fullName = 'Too many characters';
-
-    return errors;
-  };
-
-  const onSubmit = async (values: InputProfileData, { setStatus, setSubmitting }: any) => {
+  const onSubmit = async (
+    values: InputProfileData,
+    { setStatus, setSubmitting }: FormikHelpers<InputProfileData>,
+  ) => {
     dispatch(uploadProfileInfo(values, setStatus) as unknown as Promise<string>).then((message) => {
       dispatch(setAlert({ message, type: 'success' }));
     });
@@ -70,7 +84,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
   };
 
   return (
-    <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {({ values, isSubmitting, isValid, status }: FormikProps<InputProfileData>) => (
         <Form
           className="flex

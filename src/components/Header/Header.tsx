@@ -5,7 +5,7 @@ import Nav from './Nav/Nav';
 import { useLocation } from 'react-router-dom';
 import { compose } from 'redux';
 import { useSelector } from 'react-redux';
-import { getDialogUsers, getDialogsPage } from '../../redux/dialogs-selector';
+import { getDialogUsers, getDialogsPage } from '../../redux/dialogs-reducer/dialogs-selector';
 import useScreenSize from '../../hooks/useScreenSize';
 import GoBack from '../../assets/go-back.png';
 

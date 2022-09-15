@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getAlert } from '../../redux/app-selector';
+import { getAlert } from '../../redux/app-reducer/app-selector';
 import cn from 'classnames';
 
 const Alert = () => {

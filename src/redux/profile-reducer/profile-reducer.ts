@@ -1,7 +1,17 @@
-import { profileAPI } from '../api/API';
-import { updateObjInArr } from '../utils/object-helpers';
-import { Photo, ProfileData, Post, InputProfileData } from '../types/types';
 import { Middleware } from 'redux';
+
+import { profileAPI } from '../../api/API';
+import { updateObjInArr } from '../../utils/object-helpers';
+import {
+  Photo,
+  ProfileData,
+  Post,
+  InputProfileData,
+  FormikStatus,
+  ResultCodes,
+} from '../../types/types';
+import { ThunkAction } from '@reduxjs/toolkit';
+import { RootState } from '../redux-store';
 
 const POST = 'IN_LINK/PROFILE_REDUCER/POST';
 const SET_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_PROFILE';
@@ -37,7 +47,7 @@ const initialState = {
 
 export type ProfileReducerState = typeof initialState;
 
-type Action =
+type ProfileAction =
   | PostAction
   | DeletePostAction
   | EditPostAction
@@ -48,7 +58,7 @@ type Action =
   | SetProfileAction
   | SetMyProfileAction;
 
-const profileReducer = (state = initialState, action: Action): ProfileReducerState => {
+const profileReducer = (state = initialState, action: ProfileAction): ProfileReducerState => {
   switch (action.type) {
     case POST: {
       if (action.payload) {
@@ -156,8 +166,10 @@ const uploadSuccess = (file: Photo): UploadSuccessAction => ({
   file,
 });
 
-const getData = (uid: number, action: typeof setProfile | typeof setMyProfile) => {
-  return async (dispatch: any) => {
+type ProfileThunk = ThunkAction<Promise<void | string>, RootState, unknown, ProfileAction>;
+
+const getData = (uid: number, action: typeof setProfile | typeof setMyProfile): ProfileThunk => {
+  return async (dispatch) => {
     dispatch(setLoading(true));
     const data = await profileAPI.getProfile(uid);
     dispatch(action(data));
@@ -165,20 +177,20 @@ const getData = (uid: number, action: typeof setProfile | typeof setMyProfile) =
   };
 };
 
-export const getProfile = (uid: number) => {
-  return async (dispatch: any) => {
+export const getProfile = (uid: number): ProfileThunk => {
+  return async (dispatch) => {
     dispatch(getData(uid, setProfile));
   };
 };
 
-export const getMyProfile = (uid: number) => {
-  return async (dispatch: any) => {
+export const getMyProfile = (uid: number): ProfileThunk => {
+  return async (dispatch) => {
     dispatch(getData(uid, setMyProfile));
   };
 };
 
-export const getStatus = (uid: number) => {
-  return async (dispatch: any) => {
+export const getStatus = (uid: number): ProfileThunk => {
+  return async (dispatch) => {
     dispatch(setLoading(true));
     const data = await profileAPI.getStatus(uid);
     dispatch(setStatus(data));
@@ -186,33 +198,34 @@ export const getStatus = (uid: number) => {
   };
 };
 
-export const updateStatus = (payload: string) => {
-  return async (dispatch: any) => {
+export const updateStatus = (payload: string): ProfileThunk => {
+  return async (dispatch) => {
     const result = await profileAPI.updateStatus(payload);
-    if (result === 0) dispatch(setStatus(payload));
+    if (result === ResultCodes.Success) dispatch(setStatus(payload));
   };
 };
 
-export const uploadPFP = (file: File) => {
-  return async (dispatch: any) => {
+export const uploadPFP = (file: File): ProfileThunk => {
+  return async (dispatch) => {
     const { data, resultCode } = await profileAPI.uploadPFP(file);
 
-    if (resultCode === 0) {
+    if (resultCode === ResultCodes.Success) {
       dispatch(uploadSuccess(data.photos));
     }
   };
 };
 
 export const uploadProfileInfo =
-  (profileInfo: InputProfileData, setStatus: any) => async (dispatch: any, getState: any) => {
-    const { userId }: { userId: number } = getState().profilePage.profileData;
+  (profileInfo: InputProfileData, setStatus: (status: FormikStatus) => void): ProfileThunk =>
+  async (dispatch, getState) => {
+    const userId = getState().profilePage.profileData!.userId;
 
     const data = await profileAPI.uploadProfileInfo({
       ...profileInfo,
       userId,
     });
 
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodes.Success) {
       dispatch(getMyProfile(userId));
       dispatch(setEditing(false));
       return Promise.resolve('profile edited');

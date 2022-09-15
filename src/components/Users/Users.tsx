@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getIsLoading, getPage, getTotalUsers } from '../../redux/users-reducer/users-selector';
+import { requestUsers, setPage } from '../../redux/users-reducer/users-reducer';
+
+import useScreenSize from '../../hooks/useScreenSize';
+
 import Loading from '../common/Loading/Loading';
 import UserItems from './UserItems/UserItems';
 import Paginator from '../common/Paginator/Paginator';
-import { useDispatch, useSelector } from 'react-redux';
-import { getIsLoading, getPage, getTotalUsers } from '../../redux/users-page-selector';
-import { requestUsers, setPage } from '../../redux/users-page-reducer';
-import useScreenSize from '../../hooks/useScreenSize';
 
 const Users = () => {
   const totalUsers = useSelector(getTotalUsers);

@@ -1,9 +1,9 @@
-import { updateObjInArr } from '../utils/object-helpers';
-import { DialogsUser, UserMessage } from '../types/types';
-import User1Image from '../assets/pfps/u1.jpg';
-import User2Image from '../assets/pfps/u2.jpg';
-import User3Image from '../assets/pfps/u3.jpg';
-import User4Image from '../assets/pfps/u4.jpg';
+import { updateObjInArr } from '../../utils/object-helpers';
+import { DialogsUser, UserMessage } from '../../types/types';
+import User1Image from '../../assets/pfps/u1.jpg';
+import User2Image from '../../assets/pfps/u2.jpg';
+import User3Image from '../../assets/pfps/u3.jpg';
+import User4Image from '../../assets/pfps/u4.jpg';
 
 const SEND_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE';
 const DELETE_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE';
@@ -133,10 +133,9 @@ const initialState = {
 
 export type DialogsReducerState = typeof initialState;
 
-const dialogsReducer = (
-  state = initialState,
-  action: SendMessageAction | DeleteMessageAction | EditMessageAction,
-): DialogsReducerState => {
+type DialogAction = SendMessageAction | DeleteMessageAction | EditMessageAction;
+
+const dialogsReducer = (state = initialState, action: DialogAction): DialogsReducerState => {
   switch (action.type) {
     case SEND_MESSAGE:
       if (action.text) {

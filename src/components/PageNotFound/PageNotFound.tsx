@@ -1,4 +1,4 @@
-import { getIsSidebarHidden } from '../../redux/app-selector';
+import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
 

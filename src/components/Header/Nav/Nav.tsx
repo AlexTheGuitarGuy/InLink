@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React, { LegacyRef, useState } from 'react';
 import cn from 'classnames';
-import { getNavItems } from '../../../redux/navbar-selector';
+import { getNavItems } from '../../../redux/navbar-reducer/navbar-selector';
 import { useSelector } from 'react-redux';
 import useTagBlur from '../../../hooks/useTagBlur';
 import { useLocation } from 'react-router';

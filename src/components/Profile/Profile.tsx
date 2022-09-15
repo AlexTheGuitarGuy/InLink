@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react';
-import Loading from '../common/Loading/Loading';
-import MyPosts from './MyPosts/MyPosts';
+import { compose } from 'redux';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   getCurrentUserData,
   getIsEditing,
   getIsLoading,
   getMyData,
   getProfilePage,
-} from '../../redux/profile-selector';
-import { getProfile, getStatus, setEditing } from '../../redux/profile-reducer';
-import { getUID } from '../../redux/auth-selector';
-import { compose } from 'redux';
-import withAuthRedirect from '../../HOC/withAuthRedirect';
-import { useParams } from 'react-router-dom';
-import ProfileInfo from './ProfileInfo/ProfileInfo';
+} from '../../redux/profile-reducer/profile-selector';
+import { getUID } from '../../redux/auth-reducer/auth-selector';
+import { getProfile, getStatus, setEditing } from '../../redux/profile-reducer/profile-reducer';
+
 import { InputProfileData } from '../../types/types';
+
+import withAuthRedirect from '../../HOC/withAuthRedirect';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import Loading from '../common/Loading/Loading';
+import MyPosts from './MyPosts/MyPosts';
 
 const Profile = () => {
   const isEditing = useSelector(getIsEditing);

@@ -1,4 +1,4 @@
-import { RootState } from './redux-store';
+import { RootState } from '../redux-store';
 
 export const getIsLoggedIn = (state: RootState): boolean => {
   return state.auth.isLoggedIn;

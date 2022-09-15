@@ -1,5 +1,5 @@
-import { RootState } from './redux-store';
-import { Alert } from '../types/types';
+import { RootState } from '../redux-store';
+import { Alert } from '../../types/types';
 
 export const getIsAppInitialized = (state: RootState): boolean => {
   return state.app.isAppInitialized;

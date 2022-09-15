@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+
+import placeholder from '../../../assets/pfps/placeholder.jpg';
+import { getPosts } from '../../../redux/profile-reducer/profile-selector';
+import { Post } from '../../../types/types';
+
 import PostCard from './PostCard/PostCard';
 import PublishPost from './PublishPost/PublishPost';
-import placeholder from '../../../assets/pfps/placeholder.jpg';
-import { useSelector } from 'react-redux';
-import { getPosts } from '../../../redux/profile-selector';
-import { Post } from '../../../types/types';
 
 type MyPostsProps = {
   pfp: string;

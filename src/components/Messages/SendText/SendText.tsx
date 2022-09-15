@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import { sendMessage } from '../../../redux/dialogs-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ErrorMessage,
@@ -10,6 +9,9 @@ import {
   FormikHelpers,
   FormikProps,
 } from 'formik';
+import * as Yup from 'yup';
+
+import { sendMessage } from '../../../redux/dialogs-reducer/dialogs-reducer';
 
 type MessageFormValues = {
   messageText: string;
@@ -26,12 +28,12 @@ const SendText: FC<SendTextProps> = ({ id }) => {
     messageText: '',
   };
 
-  const validate = ({ messageText }: MessageFormValues) => {
-    const errors: FormikErrors<MessageFormValues> = {};
-    if (messageText.length > 256) errors.messageText = 'Message is too long';
-
-    return errors;
-  };
+  const validationSchema = Yup.object({
+    messageText: Yup.string()
+      .trim()
+      .required('Cannot send empty message')
+      .max(256, 'Message too long. Maximum is 256 characters.'),
+  });
 
   const onSubmit = (
     { messageText }: MessageFormValues,
@@ -45,7 +47,7 @@ const SendText: FC<SendTextProps> = ({ id }) => {
   };
 
   return (
-    <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {({ isSubmitting, isValid }: FormikProps<MessageFormValues>) => (
         <Form>
           <div className="flex flex-row justify-center">

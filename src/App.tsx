@@ -1,23 +1,24 @@
 import './App.css';
 import React, { useEffect } from 'react';
-import Sidebar from './components/Sidebar/Sidebar';
+import { Navigate } from 'react-router';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { initializeApp, setAlert } from './redux/app-reducer';
+import cn from 'classnames';
+
+import { getMyProfile } from './redux/profile-reducer/profile-reducer';
+import { initializeApp, setAlert } from './redux/app-reducer/app-reducer';
+import { getIsAppInitialized, getIsSidebarHidden } from './redux/app-reducer/app-selector';
+import { getIsLoggedIn, getUID } from './redux/auth-reducer/auth-selector';
+
+import Sidebar from './components/Sidebar/Sidebar';
 import Loading from './components/common/Loading/Loading';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Alert from './components/Alert/Alert';
-import { getIsLoggedIn } from './redux/auth-selector';
-import cn from 'classnames';
-import { Navigate } from 'react-router';
 import Login from './components/Login/Login';
-import { getIsAppInitialized, getIsSidebarHidden } from './redux/app-selector';
 import Users from './components/Users/Users';
 import Messages from './components/Messages/Messages';
 import Profile from './components/Profile/Profile';
 import Header from './components/Header/Header';
-import { getUID } from './redux/auth-selector';
-import { getMyProfile } from './redux/profile-reducer';
 
 const App = () => {
   const isAppInitialized = useSelector(getIsAppInitialized);

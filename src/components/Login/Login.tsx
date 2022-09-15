@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../redux/auth-reducer';
 import { Navigate } from 'react-router-dom';
-import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-selector';
-import { setAlert } from '../../redux/app-reducer';
 import {
   ErrorMessage,
   Field,
@@ -13,6 +10,12 @@ import {
   FormikHelpers,
   FormikProps,
 } from 'formik';
+import * as Yup from 'yup';
+
+import { login } from '../../redux/auth-reducer/auth-reducer';
+import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-reducer/auth-selector';
+import { setAlert } from '../../redux/app-reducer/app-reducer';
+
 import { LoginPayload } from '../../types/types';
 
 const Login: FC<{}> = () => {
@@ -24,16 +27,15 @@ const Login: FC<{}> = () => {
 
   const initialValues: LoginPayload = { email: '', password: '', rememberMe: false, captcha: '' };
 
-  const validate = ({ email, password, rememberMe, captcha }: LoginPayload) => {
-    const errors: FormikErrors<LoginPayload> = {};
-
-    if (!email.trim()) errors.email = 'Required field';
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email))
-      errors.email = 'Invalid email address';
-    else if (!password.trim()) errors.password = 'Required field';
-    else if (!captcha && captchaURL) errors.captcha = 'Required field';
-    return errors;
-  };
+  const validationSchema = Yup.object({
+    email: Yup.string().email('invalid email').required(),
+    password: Yup.string().required().min(6, 'Password is too short - should be 6 chars minimum'),
+    rememberMe: Yup.boolean().default(false),
+    captcha: Yup.string().when('!captcha && captchaURL', {
+      is: true,
+      then: Yup.string().required('captcha is required'),
+    }),
+  });
 
   const onSubmit = (values: LoginPayload, { setSubmitting }: FormikHelpers<LoginPayload>) => {
     dispatch(login(values) as unknown as Promise<string>).then((message: string) => {
@@ -55,8 +57,13 @@ const Login: FC<{}> = () => {
           </div>
           <div className="sm:w-8/12 lg:w-5/12 lg:ml-20">
             <div className="text-gray-700 font-bold text-center mb-6">Log into InLink</div>
-            <Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
-              {({ isSubmitting }: FormikProps<LoginPayload>) => (
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+              enableReinitialize
+            >
+              {({ isSubmitting, values: { rememberMe } }: FormikProps<LoginPayload>) => (
                 <Form className="text-xl">
                   <>
                     {status && console.log(status)}

@@ -1,5 +1,5 @@
-import { RootState } from './redux-store';
-import { User } from '../types/types';
+import { RootState } from '../redux-store';
+import { User } from '../../types/types';
 
 export const getUsers = (state: RootState): User[] | null => {
   return state.usersPage.users;

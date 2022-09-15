@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getIsLoggedIn } from '../redux/auth-selector';
+import { getIsLoggedIn } from '../redux/auth-reducer/auth-selector';
 
 let withAuthRedirect = (Component: FunctionComponent) => (props: any) => {
   const isLoggedIn = useSelector(getIsLoggedIn);

@@ -1,4 +1,4 @@
-import { NavItem } from '../types/types';
+import { NavItem } from '../../types/types';
 
 const initialState = {
   navItems: [
@@ -10,11 +10,8 @@ const initialState = {
 
 export type NavbarReducerState = typeof initialState;
 
-const navbarReducer = (state = initialState, action: any): NavbarReducerState => {
-  switch (action.type) {
-    default:
-      return state;
-  }
+const navbarReducer = (state = initialState): NavbarReducerState => {
+  return state;
 };
 
 export default navbarReducer;

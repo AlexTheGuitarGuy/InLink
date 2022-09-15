@@ -1,6 +1,8 @@
-import { userAPI } from '../api/API';
-import { updateObjInArr } from '../utils/object-helpers';
-import { User } from '../types/types';
+import { userAPI } from '../../api/API';
+import { updateObjInArr } from '../../utils/object-helpers';
+import { User, ResultCodes } from '../../types/types';
+import { ThunkAction } from '@reduxjs/toolkit';
+import { RootState } from '../redux-store';
 
 const SET_FOLLOW_STATUS = 'IN_LINK/USERS_PAGE_REDUCER/SET_FOLLOW_STATUS';
 const SET_USERS = 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS';
@@ -22,7 +24,7 @@ const initialState = {
 
 export type UsersPageReducerState = typeof initialState;
 
-type Action =
+type UsersAction =
   | SetFollowStatusAction
   | SetUsersAction
   | SetPageAction
@@ -30,7 +32,7 @@ type Action =
   | SetLoadingAction
   | UpdateFollowQueueAction;
 
-const usersPageReducer = (state = initialState, action: Action): UsersPageReducerState => {
+const usersPageReducer = (state = initialState, action: UsersAction): UsersPageReducerState => {
   switch (action.type) {
     case SET_FOLLOW_STATUS:
       return {
@@ -98,8 +100,10 @@ export const updateFollowQueue = (id: number): UpdateFollowQueueAction => ({
   id,
 });
 
-export const requestUsers = (page: number, pageSize: number) => {
-  return async (dispatch: any) => {
+type UsersThunk = ThunkAction<Promise<void>, RootState, unknown, UsersAction>;
+
+export const requestUsers = (page: number, pageSize: number): UsersThunk => {
+  return async (dispatch) => {
     dispatch(setLoading(true));
 
     const data = await userAPI.getUsers(page, pageSize);
@@ -110,26 +114,30 @@ export const requestUsers = (page: number, pageSize: number) => {
   };
 };
 
-export const followUnfollowFlow = (id: number, request: any, followStatus: boolean) => {
-  return async (dispatch: any) => {
+export const followUnfollowFlow = (
+  id: number,
+  request: typeof userAPI.follow | typeof userAPI.unfollow,
+  followStatus: boolean,
+): UsersThunk => {
+  return async (dispatch) => {
     dispatch(updateFollowQueue(id));
     const data = await request(id);
 
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodes.Success) {
       dispatch(setFollowStatus(id, followStatus));
     }
     dispatch(updateFollowQueue(id));
   };
 };
 
-export const follow = (id: number) => {
-  return async (dispatch: any) => {
+export const follow = (id: number): UsersThunk => {
+  return async (dispatch) => {
     dispatch(followUnfollowFlow(id, userAPI.follow, true));
   };
 };
 
-export const unfollow = (id: number) => {
-  return async (dispatch: any) => {
+export const unfollow = (id: number): UsersThunk => {
+  return async (dispatch) => {
     dispatch(followUnfollowFlow(id, userAPI.unfollow, false));
   };
 };

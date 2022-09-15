@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getDialogUsers } from '../../../redux/dialogs-selector';
+
+import { getDialogUsers } from '../../../redux/dialogs-reducer/dialogs-selector';
 import { DialogsUser } from '../../../types/types';
 
 const FriendItems = () => {

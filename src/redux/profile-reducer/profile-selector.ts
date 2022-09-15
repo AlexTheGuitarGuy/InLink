@@ -1,6 +1,6 @@
-import { RootState } from './redux-store';
+import { RootState } from '../redux-store';
 import { ProfileReducerState } from './profile-reducer';
-import { Photo, ProfileData, Post } from '../types/types';
+import { Photo, ProfileData, Post } from '../../types/types';
 
 export const getProfilePage = (state: RootState): ProfileReducerState => {
   return state.profilePage;

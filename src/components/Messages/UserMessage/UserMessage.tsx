@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import cn from 'classnames';
-import { getMyData } from '../../../redux/profile-selector';
+import { getMyData } from '../../../redux/profile-reducer/profile-selector';
 import { useSelector } from 'react-redux';
 import { UserMessage as UserMessageType } from '../../../types/types';
 import Placeholder from '../../../assets/pfps/placeholder.jpg';

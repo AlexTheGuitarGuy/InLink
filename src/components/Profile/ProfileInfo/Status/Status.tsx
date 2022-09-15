@@ -1,8 +1,9 @@
 import React, { useEffect, useState, ChangeEvent, FC } from 'react';
 import cn from 'classnames';
-import { updateStatus } from '../../../../redux/profile-reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { getStatus } from '../../../../redux/profile-selector';
+
+import { updateStatus } from '../../../../redux/profile-reducer/profile-reducer';
+import { getStatus } from '../../../../redux/profile-reducer/profile-selector';
 
 type StatusProps = {
   isOwner: boolean;

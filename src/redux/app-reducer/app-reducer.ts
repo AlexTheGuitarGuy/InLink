@@ -1,5 +1,7 @@
-import { auth } from './auth-reducer';
-import { Alert } from '../types/types';
+import { auth } from '../auth-reducer/auth-reducer';
+import { Alert } from '../../types/types';
+import { ThunkAction } from '@reduxjs/toolkit';
+import { RootState } from '../redux-store';
 
 const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED';
 const SET_ALERT = 'IN_LINK/APP_REDUCER/SET_ALERT';
@@ -13,10 +15,9 @@ const initialState = {
 
 export type AppReducerState = typeof initialState;
 
-const appReducer = (
-  state = initialState,
-  action: InitializeSuccessAction | SetAlertAction | SetIsSidebarHiddenAction,
-): AppReducerState => {
+type AppAction = InitializeSuccessAction | SetAlertAction | SetIsSidebarHiddenAction;
+
+const appReducer = (state = initialState, action: AppAction): AppReducerState => {
   switch (action.type) {
     case APP_INITIALIZED:
     case SET_SIDEBAR_HIDDEN:
@@ -57,7 +58,9 @@ export const setIsSidebarHidden = (isSidebarHidden: boolean): SetIsSidebarHidden
   payload: { isSidebarHidden },
 });
 
-export const initializeApp = () => async (dispatch: any) => {
+type AppThunk = ThunkAction<Promise<void>, RootState, unknown, AppAction>;
+
+export const initializeApp = (): AppThunk => async (dispatch) => {
   const authPromise = dispatch(auth());
 
   await Promise.all([authPromise]);

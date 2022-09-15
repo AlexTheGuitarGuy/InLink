@@ -1,18 +1,23 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router';
+import { compose } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getUserMessages, getDialogsUsers } from '../../redux/dialogs-reducer/dialogs-selector';
+import { getMyData } from '../../redux/profile-reducer/profile-selector';
+
+import withAuthRedirect from '../../HOC/withAuthRedirect';
+import useScreenSize from '../../hooks/useScreenSize';
+
+import { UserMessage as UserMessageType } from '../../types/types';
+
+import placeholder from '../../assets/pfps/placeholder.jpg';
+
 import UserMessage from './UserMessage/UserMessage';
 import Users from './Users/Users';
 import SendText from './SendText/SendText';
-import placeholder from '../../assets/pfps/placeholder.jpg';
-import { Navigate } from 'react-router';
-import { getUserMessages, getDialogsUsers } from '../../redux/dialogs-selector';
-import { useDispatch, useSelector } from 'react-redux';
-import { getMyData } from '../../redux/profile-selector';
 import Loading from '../common/Loading/Loading';
-import { compose } from 'redux';
-import withAuthRedirect from '../../HOC/withAuthRedirect';
-import useScreenSize from '../../hooks/useScreenSize';
-import { UserMessage as UserMessageType } from '../../types/types';
 
 const Messages = () => {
   const userMessages = useSelector(getUserMessages);
@@ -21,7 +26,7 @@ const Messages = () => {
 
   const screenSize = useScreenSize();
 
-  const conversationComponents: any = [];
+  const conversationComponents: ReactNode[][] = [];
   userMessages.map((conversation: UserMessageType[], conversationIndex: number) => {
     conversationComponents[conversationIndex] = [];
 

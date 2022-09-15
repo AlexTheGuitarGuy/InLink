@@ -1,5 +1,5 @@
-import { RootState } from './redux-store';
-import { DialogsUser, UserMessage } from '../types/types';
+import { RootState } from '../redux-store';
+import { DialogsUser, UserMessage } from '../../types/types';
 import { DialogsReducerState } from './dialogs-reducer';
 
 export const getDialogsPage = (state: RootState): DialogsReducerState => {

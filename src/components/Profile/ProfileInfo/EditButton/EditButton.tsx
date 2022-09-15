@@ -1,7 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setEditing } from '../../../../redux/profile-reducer';
 import { useFormikContext } from 'formik';
+
+import { setEditing } from '../../../../redux/profile-reducer/profile-reducer';
 
 type EditButtonProps = {
   isEditing: boolean;

@@ -1,11 +1,14 @@
 import React, { memo, useEffect } from 'react';
-import FriendItems from './FriendItems/FriendItems';
 import { compose } from 'redux';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsSidebarHidden } from '../../redux/app-reducer';
-import { getIsSidebarHidden } from '../../redux/app-selector';
+
+import { setIsSidebarHidden } from '../../redux/app-reducer/app-reducer';
+import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector';
+
 import useScreenSize from '../../hooks/useScreenSize';
+
+import FriendItems from './FriendItems/FriendItems';
 
 const Sidebar = () => {
   const dispatch = useDispatch();

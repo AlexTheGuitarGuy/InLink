@@ -1,12 +1,16 @@
 import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import placeholder from '../../../assets/pfps/placeholder.jpg';
 import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFollowQueue, getUsers } from '../../../redux/users-page-selector';
-import { follow, unfollow } from '../../../redux/users-page-reducer';
-import Loading from '../../common/Loading/Loading';
+
+import { getFollowQueue, getUsers } from '../../../redux/users-reducer/users-selector';
+import { follow, unfollow } from '../../../redux/users-reducer/users-reducer';
+
 import { User } from '../../../types/types';
+
+import placeholder from '../../../assets/pfps/placeholder.jpg';
+
+import Loading from '../../common/Loading/Loading';
 
 const UserItems = () => {
   const users = useSelector(getUsers);
