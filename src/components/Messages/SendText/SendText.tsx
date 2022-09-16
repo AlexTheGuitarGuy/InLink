@@ -11,7 +11,7 @@ import {
 } from 'formik';
 import * as Yup from 'yup';
 
-import { sendMessage } from '../../../redux/dialogs-reducer/dialogs-reducer';
+import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer';
 
 type MessageFormValues = {
   messageText: string;
@@ -40,7 +40,7 @@ const SendText: FC<SendTextProps> = ({ id }) => {
     { resetForm, setSubmitting }: FormikHelpers<MessageFormValues>,
   ) => {
     if (messageText.trim()) {
-      dispatch(sendMessage(id, messageText));
+      dispatch(dialogsActions.sendMessage(id, messageText));
       resetForm();
     }
     setSubmitting(false);

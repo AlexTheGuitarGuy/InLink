@@ -6,7 +6,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import { getMyProfile } from './redux/profile-reducer/profile-reducer';
-import { initializeApp, setAlert } from './redux/app-reducer/app-reducer';
+import { initializeApp, appActions } from './redux/app-reducer/app-reducer';
 import { getIsAppInitialized, getIsSidebarHidden } from './redux/app-reducer/app-selector';
 import { getIsLoggedIn, getUID } from './redux/auth-reducer/auth-selector';
 
@@ -40,8 +40,8 @@ const App = () => {
     const handleRejection = (event: PromiseRejectionEvent) => {
       if (event?.reason?.substring) {
         if (event.reason.substring(0, 18) === 'Invalid url format')
-          dispatch(setAlert({ message: `Couldn't upload profile data`, type: 'error' }));
-        else dispatch(setAlert({ message: event.reason, type: 'error' }));
+          dispatch(appActions.setAlert({ message: `Couldn't upload profile data`, type: 'error' }));
+        else dispatch(appActions.setAlert({ message: event.reason, type: 'error' }));
         event.preventDefault();
       }
     };

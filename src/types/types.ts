@@ -102,3 +102,5 @@ export enum ResultCodes {
 export enum ResultCodesWithCaptcha {
   CaptchaRequired = 10,
 }
+
+export type Nullable<T> = T | null;

@@ -27,4 +27,8 @@ window.__store__ = store;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
+export type InferAction<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<
+  T extends { [key: string]: infer U } ? U : never
+>;
+
 export default store;

@@ -11,17 +11,7 @@ import {
   ResultCodes,
 } from '../../types/types';
 import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState } from '../redux-store';
-
-const POST = 'IN_LINK/PROFILE_REDUCER/POST';
-const SET_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_PROFILE';
-const SET_MY_PROFILE = 'IN_LINK/PROFILE_REDUCER/SET_MY_PROFILE';
-const SET_STATUS = 'IN_LINK/PROFILE_REDUCER/SET_STATUS';
-const SET_LOADING = 'IN_LINK/PROFILE_REDUCER/SET_LOADING';
-const DELETE_POST = 'IN_LINK/PROFILE_REDUCER/DELETE_POST';
-const EDIT_POST = 'IN_LINK/PROFILE_REDUCER/EDIT_POST';
-const UPLOAD_PHOTO_SUCCESS = 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS';
-const SET_IS_EDITING = 'IN_LINK/PROFILE_REDUCER/SET_IS_EDITING';
+import { RootState, InferAction } from '../redux-store';
 
 const initialState = {
   posts: [
@@ -47,20 +37,11 @@ const initialState = {
 
 export type ProfileReducerState = typeof initialState;
 
-type ProfileAction =
-  | PostAction
-  | DeletePostAction
-  | EditPostAction
-  | SetEditingAction
-  | SetStatusAction
-  | SetLoadingAction
-  | UploadSuccessAction
-  | SetProfileAction
-  | SetMyProfileAction;
+type ProfileAction = InferAction<typeof profileActions>;
 
 const profileReducer = (state = initialState, action: ProfileAction): ProfileReducerState => {
   switch (action.type) {
-    case POST: {
+    case 'IN_LINK/PROFILE_REDUCER/POST': {
       if (action.payload) {
         return {
           ...state,
@@ -81,30 +62,30 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
       };
     }
 
-    case SET_PROFILE:
-    case SET_MY_PROFILE:
-    case SET_STATUS:
-    case SET_LOADING:
-    case SET_IS_EDITING:
+    case 'IN_LINK/PROFILE_REDUCER/SET_PROFILE':
+    case 'IN_LINK/PROFILE_REDUCER/SET_MY_PROFILE':
+    case 'IN_LINK/PROFILE_REDUCER/SET_STATUS':
+    case 'IN_LINK/PROFILE_REDUCER/SET_LOADING':
+    case 'IN_LINK/PROFILE_REDUCER/SET_IS_EDITING':
       return {
         ...state,
         ...action.payload,
       };
 
-    case UPLOAD_PHOTO_SUCCESS:
+    case 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS':
       return {
         ...state,
         myData: { ...state.myData, photos: { ...action.file } } as ProfileData,
         profileData: { ...state.profileData, photos: { ...action.file } } as ProfileData,
       };
 
-    case DELETE_POST:
+    case 'IN_LINK/PROFILE_REDUCER/DELETE_POST':
       return {
         ...state,
         posts: state.posts.filter((p) => p.id !== action.id),
       };
 
-    case EDIT_POST:
+    case 'IN_LINK/PROFILE_REDUCER/EDIT_POST':
       return {
         ...state,
         posts: updateObjInArr(state.posts, 'id', action.id, {
@@ -117,91 +98,94 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
   }
 };
 
-type PostAction = { type: typeof POST; payload: string };
-export const post = (payload: string): PostAction => ({ type: POST, payload });
+export const profileActions = {
+  post: (payload: string) => ({ type: 'IN_LINK/PROFILE_REDUCER/POST', payload } as const),
 
-type DeletePostAction = { type: typeof DELETE_POST; id: number };
-export const deletePost = (id: number): DeletePostAction => ({ type: DELETE_POST, id });
+  deletePost: (id: number) => ({ type: 'IN_LINK/PROFILE_REDUCER/DELETE_POST', id } as const),
 
-type EditPostAction = { type: typeof EDIT_POST; id: number; payload: string };
-export const editPost = (id: number, payload: string): EditPostAction => ({
-  type: EDIT_POST,
-  id,
-  payload,
-});
+  editPost: (id: number, payload: string) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/EDIT_POST',
+      id,
+      payload,
+    } as const),
 
-type SetEditingAction = { type: typeof SET_IS_EDITING; payload: { isEditing: boolean } };
-export const setEditing = (isEditing: boolean): SetEditingAction => ({
-  type: SET_IS_EDITING,
-  payload: { isEditing },
-});
+  setEditing: (isEditing: boolean) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_IS_EDITING',
+      payload: { isEditing },
+    } as const),
 
-type SetProfileAction = { type: typeof SET_PROFILE; payload: { profileData: ProfileData } };
-export const setProfile = (profileData: ProfileData): SetProfileAction => ({
-  type: SET_PROFILE,
-  payload: { profileData },
-});
+  setProfile: (profileData: ProfileData) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_PROFILE',
+      payload: { profileData },
+    } as const),
 
-type SetMyProfileAction = { type: typeof SET_MY_PROFILE; payload: { myData: ProfileData } };
-export const setMyProfile = (myData: ProfileData): SetMyProfileAction => ({
-  type: SET_MY_PROFILE,
-  payload: { myData },
-});
+  setMyProfile: (myData: ProfileData) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_MY_PROFILE',
+      payload: { myData },
+    } as const),
 
-type SetStatusAction = { type: typeof SET_STATUS; payload: { profileStatus: string } };
-export const setStatus = (profileStatus: string): SetStatusAction => ({
-  type: SET_STATUS,
-  payload: { profileStatus },
-});
+  setStatus: (profileStatus: string) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_STATUS',
+      payload: { profileStatus },
+    } as const),
 
-type SetLoadingAction = { type: typeof SET_LOADING; payload: { isLoading: boolean } };
-export const setLoading = (isLoading: boolean): SetLoadingAction => ({
-  type: SET_LOADING,
-  payload: { isLoading },
-});
+  setLoading: (isLoading: boolean) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_LOADING',
+      payload: { isLoading },
+    } as const),
 
-type UploadSuccessAction = { type: typeof UPLOAD_PHOTO_SUCCESS; file: Photo };
-const uploadSuccess = (file: Photo): UploadSuccessAction => ({
-  type: UPLOAD_PHOTO_SUCCESS,
-  file,
-});
+  uploadSuccess: (file: Photo) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS',
+      file,
+    } as const),
+};
 
 type ProfileThunk = ThunkAction<Promise<void | string>, RootState, unknown, ProfileAction>;
 
-const getData = (uid: number, action: typeof setProfile | typeof setMyProfile): ProfileThunk => {
+const getData = (
+  uid: number,
+  action: typeof profileActions.setProfile | typeof profileActions.setMyProfile,
+): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
+    dispatch(profileActions.setLoading(true));
     const data = await profileAPI.getProfile(uid);
     dispatch(action(data));
-    dispatch(setLoading(false));
+    dispatch(profileActions.setLoading(false));
   };
 };
 
 export const getProfile = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(getData(uid, setProfile));
+    dispatch(getData(uid, profileActions.setProfile));
   };
 };
 
 export const getMyProfile = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(getData(uid, setMyProfile));
+    dispatch(getData(uid, profileActions.setMyProfile));
   };
 };
 
 export const getStatus = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
+    dispatch(profileActions.setLoading(true));
     const data = await profileAPI.getStatus(uid);
-    dispatch(setStatus(data));
-    dispatch(setLoading(false));
+    dispatch(profileActions.setStatus(data));
+    dispatch(profileActions.setLoading(false));
   };
 };
 
 export const updateStatus = (payload: string): ProfileThunk => {
   return async (dispatch) => {
     const result = await profileAPI.updateStatus(payload);
-    if (result === ResultCodes.Success) dispatch(setStatus(payload));
+    if (result === ResultCodes.Success) dispatch(profileActions.setStatus(payload));
   };
 };
 
@@ -210,7 +194,7 @@ export const uploadPFP = (file: File): ProfileThunk => {
     const { data, resultCode } = await profileAPI.uploadPFP(file);
 
     if (resultCode === ResultCodes.Success) {
-      dispatch(uploadSuccess(data.photos));
+      dispatch(profileActions.uploadSuccess(data.photos));
     }
   };
 };
@@ -227,7 +211,7 @@ export const uploadProfileInfo =
 
     if (data.resultCode === ResultCodes.Success) {
       dispatch(getMyProfile(userId));
-      dispatch(setEditing(false));
+      dispatch(profileActions.setEditing(false));
       return Promise.resolve('profile edited');
     } else {
       const message = data.messages.length > 0 ? data.messages[0] : 'An error has occurred';

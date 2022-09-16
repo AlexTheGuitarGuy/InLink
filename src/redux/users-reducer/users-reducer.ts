@@ -2,14 +2,7 @@ import { userAPI } from '../../api/API';
 import { updateObjInArr } from '../../utils/object-helpers';
 import { User, ResultCodes } from '../../types/types';
 import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState } from '../redux-store';
-
-const SET_FOLLOW_STATUS = 'IN_LINK/USERS_PAGE_REDUCER/SET_FOLLOW_STATUS';
-const SET_USERS = 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS';
-const SET_PAGE = 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE';
-const SET_USERS_NB = 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS_NB';
-const SET_LOADING = 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING';
-const UPDATE_FOLLOW_QUEUE = 'IN_LINK/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE';
+import { InferAction, RootState } from '../redux-store';
 
 const initialState = {
   users: [] as User[],
@@ -24,17 +17,11 @@ const initialState = {
 
 export type UsersPageReducerState = typeof initialState;
 
-type UsersAction =
-  | SetFollowStatusAction
-  | SetUsersAction
-  | SetPageAction
-  | SetUsersNbAction
-  | SetLoadingAction
-  | UpdateFollowQueueAction;
+type UsersAction = InferAction<typeof usersActions>;
 
 const usersPageReducer = (state = initialState, action: UsersAction): UsersPageReducerState => {
   switch (action.type) {
-    case SET_FOLLOW_STATUS:
+    case 'IN_LINK/USERS_PAGE_REDUCER/SET_FOLLOW_STATUS':
       return {
         ...state,
         users:
@@ -43,15 +30,15 @@ const usersPageReducer = (state = initialState, action: UsersAction): UsersPageR
             followed: action.followed,
           }),
       };
-    case SET_USERS:
-    case SET_PAGE:
-    case SET_USERS_NB:
-    case SET_LOADING:
+    case 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS':
+    case 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE':
+    case 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS_NB':
+    case 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING':
       return {
         ...state,
         ...action.payload,
       };
-    case UPDATE_FOLLOW_QUEUE:
+    case 'IN_LINK/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE':
       return {
         ...state,
         followQueue: state.followQueue.some((elem) => elem === action.id)
@@ -63,54 +50,56 @@ const usersPageReducer = (state = initialState, action: UsersAction): UsersPageR
   }
 };
 
-type SetFollowStatusAction = { type: typeof SET_FOLLOW_STATUS; id: number; followed: boolean };
-export const setFollowStatus = (id: number, followed: boolean): SetFollowStatusAction => ({
-  type: SET_FOLLOW_STATUS,
-  id,
-  followed,
-});
+export const usersActions = {
+  setFollowStatus: (id: number, followed: boolean) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_FOLLOW_STATUS',
+      id,
+      followed,
+    } as const),
 
-type SetPageAction = { type: typeof SET_PAGE; payload: { page: number } };
-export const setPage = (page: number): SetPageAction => ({
-  type: SET_PAGE,
-  payload: { page },
-});
+  setPage: (page: number) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE',
+      payload: { page },
+    } as const),
 
-type SetUsersNbAction = { type: typeof SET_USERS_NB; payload: { totalUsers: number } };
-export const setUsersNb = (totalUsers: number): SetUsersNbAction => ({
-  type: SET_USERS_NB,
-  payload: { totalUsers },
-});
+  setUsersNb: (totalUsers: number) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS_NB',
+      payload: { totalUsers },
+    } as const),
 
-type SetUsersAction = { type: typeof SET_USERS; payload: { users: User[] } };
-export const setUsers = (users: User[]): SetUsersAction => ({
-  type: SET_USERS,
-  payload: { users },
-});
+  setUsers: (users: User[]) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS',
+      payload: { users },
+    } as const),
 
-type SetLoadingAction = { type: typeof SET_LOADING; payload: { isLoading: boolean } };
-export const setLoading = (isLoading: boolean): SetLoadingAction => ({
-  type: SET_LOADING,
-  payload: { isLoading },
-});
+  setLoading: (isLoading: boolean) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING',
+      payload: { isLoading },
+    } as const),
 
-type UpdateFollowQueueAction = { type: typeof UPDATE_FOLLOW_QUEUE; id: number };
-export const updateFollowQueue = (id: number): UpdateFollowQueueAction => ({
-  type: UPDATE_FOLLOW_QUEUE,
-  id,
-});
+  updateFollowQueue: (id: number) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/UPDATE_FOLLOW_QUEUE',
+      id,
+    } as const),
+};
 
 type UsersThunk = ThunkAction<Promise<void>, RootState, unknown, UsersAction>;
 
 export const requestUsers = (page: number, pageSize: number): UsersThunk => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
+    dispatch(usersActions.setLoading(true));
 
     const data = await userAPI.getUsers(page, pageSize);
 
-    dispatch(setUsers(data.items));
-    dispatch(setUsersNb(data.totalCount));
-    dispatch(setLoading(false));
+    dispatch(usersActions.setUsers(data.items));
+    dispatch(usersActions.setUsersNb(data.totalCount));
+    dispatch(usersActions.setLoading(false));
   };
 };
 
@@ -120,13 +109,13 @@ export const followUnfollowFlow = (
   followStatus: boolean,
 ): UsersThunk => {
   return async (dispatch) => {
-    dispatch(updateFollowQueue(id));
+    dispatch(usersActions.updateFollowQueue(id));
     const data = await request(id);
 
     if (data.resultCode === ResultCodes.Success) {
-      dispatch(setFollowStatus(id, followStatus));
+      dispatch(usersActions.setFollowStatus(id, followStatus));
     }
-    dispatch(updateFollowQueue(id));
+    dispatch(usersActions.updateFollowQueue(id));
   };
 };
 

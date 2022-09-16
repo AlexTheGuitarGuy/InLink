@@ -14,11 +14,10 @@ import * as Yup from 'yup';
 
 import {
   getMyProfile,
-  setEditing,
   uploadPFP,
   uploadProfileInfo,
 } from '../../../redux/profile-reducer/profile-reducer';
-import { setAlert } from '../../../redux/app-reducer/app-reducer';
+import { appActions } from '../../../redux/app-reducer/app-reducer';
 import { getUID } from '../../../redux/auth-reducer/auth-selector';
 
 import placeholder from '../../../assets/pfps/placeholder.jpg';
@@ -78,7 +77,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     { setStatus, setSubmitting }: FormikHelpers<InputProfileData>,
   ) => {
     dispatch(uploadProfileInfo(values, setStatus) as unknown as Promise<string>).then((message) => {
-      dispatch(setAlert({ message, type: 'success' }));
+      dispatch(appActions.setAlert({ message, type: 'success' }));
     });
     setSubmitting(false);
   };

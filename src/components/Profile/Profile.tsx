@@ -11,7 +11,7 @@ import {
   getProfilePage,
 } from '../../redux/profile-reducer/profile-selector';
 import { getUID } from '../../redux/auth-reducer/auth-selector';
-import { getProfile, getStatus, setEditing } from '../../redux/profile-reducer/profile-reducer';
+import { getProfile, getStatus, profileActions } from '../../redux/profile-reducer/profile-reducer';
 
 import { InputProfileData } from '../../types/types';
 
@@ -42,7 +42,7 @@ const Profile = () => {
   const isOwner = !currentUserPage;
 
   if (isLoading || !profileData || !myData) return <Loading />;
-  if (!isOwner && isEditing) dispatch(setEditing(false));
+  if (!isOwner && isEditing) dispatch(profileActions.setEditing(false));
 
   const pfp = profileData.photos;
 

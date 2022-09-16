@@ -1,10 +1,7 @@
 import { securityAPI } from '../../api/API';
 import { LoginPayload, ResultCodes, ResultCodesWithCaptcha } from '../../types/types';
 import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState } from '../redux-store';
-
-const SET_DATA = 'IN_LINK/AUTH_REDUCER/SET_DATA';
-const SET_CAPTCHA = 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA';
+import { RootState, InferAction } from '../redux-store';
 
 const initialState = {
   id: 0,
@@ -16,12 +13,12 @@ const initialState = {
 
 export type AuthReducerState = typeof initialState;
 
-type AuthAction = SetDataAction | SetCaptchaAction;
+type AuthAction = InferAction<typeof authActions>;
 
 const authReducer = (state = initialState, action: AuthAction): AuthReducerState => {
   switch (action.type) {
-    case SET_DATA:
-    case SET_CAPTCHA:
+    case 'IN_LINK/AUTH_REDUCER/SET_DATA':
+    case 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA':
       return {
         ...state,
         ...action.payload,
@@ -31,31 +28,25 @@ const authReducer = (state = initialState, action: AuthAction): AuthReducerState
   }
 };
 
-type SetDataAction = {
-  type: typeof SET_DATA;
-  payload: {
-    id: number;
-    login: string;
-    email: string;
-    isLoggedIn: boolean;
-  };
-};
-export const setData = ({ id, login, email, isLoggedIn }: SetDataPayload): SetDataAction => {
-  return {
-    type: SET_DATA,
-    payload: { id, login, email, isLoggedIn },
-  };
+type SetDataPayload = {
+  id: number;
+  login: string;
+  email: string;
+  isLoggedIn: boolean;
 };
 
-type SetCaptchaAction = {
-  type: typeof SET_CAPTCHA;
-  payload: { captchaURL: string };
-};
-export const setCaptcha = (captchaURL: string): SetCaptchaAction => {
-  return {
-    type: SET_CAPTCHA,
-    payload: { captchaURL },
-  };
+const authActions = {
+  setData: ({ id, login, email, isLoggedIn }: SetDataPayload) =>
+    ({
+      type: 'IN_LINK/AUTH_REDUCER/SET_DATA',
+      payload: { id, login, email, isLoggedIn },
+    } as const),
+
+  setCaptcha: (captchaURL: string) =>
+    ({
+      type: 'IN_LINK/AUTH_REDUCER/SET_CAPTCHA',
+      payload: { captchaURL },
+    } as const),
 };
 
 type AuthThunk = ThunkAction<Promise<void | string>, RootState, unknown, AuthAction>;
@@ -65,7 +56,7 @@ export const auth = (): AuthThunk => {
     const data = await securityAPI.me();
     if (data.resultCode === ResultCodes.Success) {
       const { email, id, login } = data.data;
-      dispatch(setData({ id, login, email, isLoggedIn: true }));
+      dispatch(authActions.setData({ id, login, email, isLoggedIn: true }));
     }
   };
 };
@@ -73,7 +64,7 @@ export const auth = (): AuthThunk => {
 const getCaptchaURL = (): AuthThunk => {
   return async (dispatch) => {
     const data = await securityAPI.getCaptchaURL();
-    dispatch(setCaptcha(data.url));
+    dispatch(authActions.setCaptcha(data.url));
   };
 };
 
@@ -103,8 +94,8 @@ export const logout = (): AuthThunk => {
     const data = await securityAPI.logout();
 
     if (data.resultCode === ResultCodes.Success) {
-      dispatch(setData({ id: 0, login: '', email: '', isLoggedIn: false }));
-      dispatch(setCaptcha(''));
+      dispatch(authActions.setData({ id: 0, login: '', email: '', isLoggedIn: false }));
+      dispatch(authActions.setCaptcha(''));
       return Promise.resolve('logged out');
     } else {
       return Promise.reject("couldn't log out");

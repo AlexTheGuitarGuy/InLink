@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getIsLoading, getPage, getTotalUsers } from '../../redux/users-reducer/users-selector';
-import { requestUsers, setPage } from '../../redux/users-reducer/users-reducer';
+import { requestUsers, usersActions } from '../../redux/users-reducer/users-reducer';
 
 import useScreenSize from '../../hooks/useScreenSize';
 
@@ -24,7 +24,7 @@ const Users = () => {
 
   const changePage = (page: number) => {
     dispatch(requestUsers(page, pageSize));
-    dispatch(setPage(page));
+    dispatch(usersActions.setPage(page));
   };
 
   useEffect(() => {

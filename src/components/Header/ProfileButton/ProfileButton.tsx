@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { setAlert } from '../../../redux/app-reducer/app-reducer';
+import { appActions } from '../../../redux/app-reducer/app-reducer';
 import { getMyData } from '../../../redux/profile-reducer/profile-selector';
 import { getIsLoggedIn, getLogin } from '../../../redux/auth-reducer/auth-selector';
 import { logout } from '../../../redux/auth-reducer/auth-reducer';
@@ -27,7 +27,7 @@ const ProfileButton = () => {
     setShowProfileData(false);
 
     (dispatch(logout()) as unknown as Promise<string>).then((message) => {
-      dispatch(setAlert({ message, type: 'alert' }));
+      dispatch(appActions.setAlert({ message, type: 'alert' }));
     });
   };
 

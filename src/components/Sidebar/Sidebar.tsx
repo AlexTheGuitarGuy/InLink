@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setIsSidebarHidden } from '../../redux/app-reducer/app-reducer';
+import { appActions } from '../../redux/app-reducer/app-reducer';
 import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector';
 
 import useScreenSize from '../../hooks/useScreenSize';
@@ -19,8 +19,8 @@ const Sidebar = () => {
 
   useEffect(() => {
     if (location.pathname.match('/messages') || screenSize.dynamicWidth < 1366) {
-      dispatch(setIsSidebarHidden(true));
-    } else dispatch(setIsSidebarHidden(false));
+      dispatch(appActions.setIsSidebarHidden(true));
+    } else dispatch(appActions.setIsSidebarHidden(false));
   }, [dispatch, location.pathname]);
 
   if (isSidebarHidden) return null;

@@ -4,10 +4,7 @@ import User1Image from '../../assets/pfps/u1.jpg';
 import User2Image from '../../assets/pfps/u2.jpg';
 import User3Image from '../../assets/pfps/u3.jpg';
 import User4Image from '../../assets/pfps/u4.jpg';
-
-const SEND_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE';
-const DELETE_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE';
-const EDIT_MESSAGE = 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE';
+import { InferAction } from '../redux-store';
 
 const initialState = {
   users: [
@@ -133,11 +130,11 @@ const initialState = {
 
 export type DialogsReducerState = typeof initialState;
 
-type DialogAction = SendMessageAction | DeleteMessageAction | EditMessageAction;
+type DialogAction = InferAction<typeof dialogsActions>;
 
 const dialogsReducer = (state = initialState, action: DialogAction): DialogsReducerState => {
   switch (action.type) {
-    case SEND_MESSAGE:
+    case 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE':
       if (action.text) {
         return {
           ...state,
@@ -155,7 +152,7 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
         ...state,
       };
 
-    /*    case DELETE_MESSAGE:
+    /*    case 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE':
       return {
         ...state,
         userMessages: state.userMessages.map((e, i) => {
@@ -164,7 +161,7 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
         }),
       };
 
-    case EDIT_MESSAGE:
+    case 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE':
       return {
         ...state,
         userMessages: state.userMessages.map((e, i) => {
@@ -180,43 +177,28 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
   }
 };
 
-type SendMessageAction = {
-  type: typeof SEND_MESSAGE;
-  to: number;
-  text: string;
-};
-export const sendMessage = (id: number, text: string): SendMessageAction => ({
-  type: SEND_MESSAGE,
-  to: id,
-  text,
-});
+export const dialogsActions = {
+  sendMessage: (id: number, text: string) =>
+    ({
+      type: 'IN_LINK/DIALOGS_REDUCER/SEND_MESSAGE',
+      to: id,
+      text,
+    } as const),
 
-type DeleteMessageAction = {
-  type: typeof DELETE_MESSAGE;
-  userId: number;
-  messageId: number;
-};
-export const deleteMessage = (userId: number, messageId: number): DeleteMessageAction => ({
-  type: DELETE_MESSAGE,
-  userId,
-  messageId,
-});
+  deleteMessage: (userId: number, messageId: number) =>
+    ({
+      type: 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE',
+      userId,
+      messageId,
+    } as const),
 
-type EditMessageAction = {
-  type: typeof EDIT_MESSAGE;
-  userId: number;
-  messageId: number;
-  text: string;
+  editMessage: (userId: number, messageId: number, text: string) =>
+    ({
+      type: 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE',
+      userId,
+      messageId,
+      text,
+    } as const),
 };
-export const editMessage = (
-  userId: number,
-  messageId: number,
-  text: string,
-): EditMessageAction => ({
-  type: EDIT_MESSAGE,
-  userId,
-  messageId,
-  text,
-});
 
 export default dialogsReducer;

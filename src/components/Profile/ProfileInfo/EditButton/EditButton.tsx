@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useFormikContext } from 'formik';
 
-import { setEditing } from '../../../../redux/profile-reducer/profile-reducer';
+import { profileActions } from '../../../../redux/profile-reducer/profile-reducer';
 
 type EditButtonProps = {
   isEditing: boolean;
@@ -27,7 +27,7 @@ const EditButton: FC<EditButtonProps> = ({ isEditing, isSubmitting, isValid }) =
                     py-0.5 px-4
                     sm:mb-4 lg:mb-0
                     sm:w-full lg:w-auto"
-      onClick={() => (isEditing ? submitForm() : dispatch(setEditing(true)))}
+      onClick={() => (isEditing ? submitForm() : dispatch(profileActions.setEditing(true)))}
       disabled={isSubmitting || !isValid}
     >
       {isEditing ? 'Save' : 'Edit mode'}

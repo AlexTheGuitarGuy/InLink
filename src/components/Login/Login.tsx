@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 
 import { login } from '../../redux/auth-reducer/auth-reducer';
 import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-reducer/auth-selector';
-import { setAlert } from '../../redux/app-reducer/app-reducer';
+import { appActions } from '../../redux/app-reducer/app-reducer';
 
 import { LoginPayload } from '../../types/types';
 
@@ -39,7 +39,7 @@ const Login: FC<{}> = () => {
 
   const onSubmit = (values: LoginPayload, { setSubmitting }: FormikHelpers<LoginPayload>) => {
     dispatch(login(values) as unknown as Promise<string>).then((message: string) => {
-      dispatch(setAlert({ message, type: 'success' }));
+      dispatch(appActions.setAlert({ message, type: 'success' }));
     });
     setSubmitting(false);
   };

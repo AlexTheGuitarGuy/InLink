@@ -11,7 +11,7 @@ import {
 } from 'formik';
 import * as Yup from 'yup';
 
-import { post } from '../../../../redux/profile-reducer/profile-reducer';
+import { profileActions } from '../../../../redux/profile-reducer/profile-reducer';
 
 type PostFormValues = {
   postText: string;
@@ -33,7 +33,7 @@ const PublishPost = () => {
 
   const onSubmit = ({ postText }: PostFormValues, { resetForm }: FormikHelpers<PostFormValues>) => {
     if (postText.trim()) {
-      dispatch(post(postText));
+      dispatch(profileActions.post(postText));
       resetForm();
     }
   };
