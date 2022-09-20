@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+@media screen(sm) {
+  html {
+    background-color: rgb(243 244 246);
+  }
+}
+
+@media screen(lg) {
+  html {
+    background-color: rgb(209 213 219);
+  }
+}
+
+@layer base {
+  html {
+    font-size: 15px;
+    --tw-bg-opacity: 1;
+  }
+
+  body {
+    margin: 0;
+
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  p {
+    margin: 0 0 10px;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
