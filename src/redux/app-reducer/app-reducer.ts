@@ -1,7 +1,7 @@
 import { auth } from '../auth-reducer/auth-reducer';
 import { Alert } from '../../types/types';
 import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState, InferAction } from '../redux-store';
+import { RootState, InferAction, InferThunk } from '../redux-store';
 
 const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED';
 const SET_ALERT = 'IN_LINK/APP_REDUCER/SET_ALERT';
@@ -16,6 +16,8 @@ const initialState = {
 export type AppReducerState = typeof initialState;
 
 type AppAction = InferAction<typeof appActions>;
+
+type AppThunk = InferThunk<AppAction>;
 
 const appReducer = (state = initialState, action: AppAction): AppReducerState => {
   switch (action.type) {
@@ -50,8 +52,6 @@ export const appActions = {
       payload: { isSidebarHidden },
     } as const),
 };
-
-type AppThunk = ThunkAction<Promise<void>, RootState, unknown, AppAction>;
 
 export const initializeApp = (): AppThunk => async (dispatch) => {
   const authPromise = dispatch(auth());

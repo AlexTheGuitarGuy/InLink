@@ -1,17 +1,17 @@
 import { RootState } from '../redux-store';
 
-export const getIsLoggedIn = (state: RootState): boolean => {
+export const getIsLoggedIn = (state: RootState) => {
   return state.auth.isLoggedIn;
 };
 
-export const getCaptchaURL = (state: RootState): string | null => {
+export const getCaptchaURL = (state: RootState) => {
   return state.auth.captchaURL;
 };
 
-export const getLogin = (state: RootState): string | null => {
+export const getLogin = (state: RootState) => {
   return state.auth.login;
 };
 
-export const getUID = (state: RootState): number | null => {
+export const getUID = (state: RootState) => {
   return state.auth.id;
 };

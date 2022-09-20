@@ -1,8 +1,8 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { ReactNode, StrictMode, useEffect } from 'react';
 import { Navigate } from 'react-router';
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import { getMyProfile } from './redux/profile-reducer/profile-reducer';
@@ -19,6 +19,7 @@ import Users from './components/Users/Users';
 import Messages from './components/Messages/Messages';
 import Profile from './components/Profile/Profile';
 import Header from './components/Header/Header';
+import { store } from './redux/redux-store';
 
 const App = () => {
   const isAppInitialized = useSelector(getIsAppInitialized);

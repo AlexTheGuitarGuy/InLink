@@ -1,17 +1,10 @@
 import { Middleware } from 'redux';
-
-import { profileAPI } from '../../api/API';
+import { profileAPI } from '../../api/profileAPI';
 import { updateObjInArr } from '../../utils/object-helpers';
-import {
-  Photo,
-  ProfileData,
-  Post,
-  InputProfileData,
-  FormikStatus,
-  ResultCodes,
-} from '../../types/types';
+import { Photo, Post, InputProfileData, FormikStatus } from '../../types/types';
+import { ResultCodes, GetProfileResponse } from '../../api/API';
 import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState, InferAction } from '../redux-store';
+import { RootState, InferAction, InferThunk } from '../redux-store';
 
 const initialState = {
   posts: [
@@ -27,8 +20,8 @@ const initialState = {
       likes: 111,
     },
   ] as Post[],
-  profileData: null as ProfileData | null,
-  myData: null as ProfileData | null,
+  profileData: null as GetProfileResponse | null,
+  myData: null as GetProfileResponse | null,
   profileStatus: '',
   storedText: '',
   isLoading: false,
@@ -38,6 +31,8 @@ const initialState = {
 export type ProfileReducerState = typeof initialState;
 
 type ProfileAction = InferAction<typeof profileActions>;
+
+type ProfileThunk = InferThunk<ProfileAction, void | string>;
 
 const profileReducer = (state = initialState, action: ProfileAction): ProfileReducerState => {
   switch (action.type) {
@@ -75,8 +70,8 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS':
       return {
         ...state,
-        myData: { ...state.myData, photos: { ...action.file } } as ProfileData,
-        profileData: { ...state.profileData, photos: { ...action.file } } as ProfileData,
+        myData: { ...state.myData, photos: { ...action.file } } as GetProfileResponse,
+        profileData: { ...state.profileData, photos: { ...action.file } } as GetProfileResponse,
       };
 
     case 'IN_LINK/PROFILE_REDUCER/DELETE_POST':
@@ -88,7 +83,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/EDIT_POST':
       return {
         ...state,
-        posts: updateObjInArr(state.posts, 'id', action.id, {
+        posts: updateObjInArr<Post, { text: string }>(state.posts, 'id', action.id, {
           text: action.payload,
         }),
       };
@@ -116,13 +111,13 @@ export const profileActions = {
       payload: { isEditing },
     } as const),
 
-  setProfile: (profileData: ProfileData) =>
+  setProfile: (profileData: GetProfileResponse) =>
     ({
       type: 'IN_LINK/PROFILE_REDUCER/SET_PROFILE',
       payload: { profileData },
     } as const),
 
-  setMyProfile: (myData: ProfileData) =>
+  setMyProfile: (myData: GetProfileResponse) =>
     ({
       type: 'IN_LINK/PROFILE_REDUCER/SET_MY_PROFILE',
       payload: { myData },
@@ -146,8 +141,6 @@ export const profileActions = {
       file,
     } as const),
 };
-
-type ProfileThunk = ThunkAction<Promise<void | string>, RootState, unknown, ProfileAction>;
 
 const getData = (
   uid: number,
@@ -202,6 +195,8 @@ export const uploadPFP = (file: File): ProfileThunk => {
 export const uploadProfileInfo =
   (profileInfo: InputProfileData, setStatus: (status: FormikStatus) => void): ProfileThunk =>
   async (dispatch, getState) => {
+    if (!getState().profilePage.profileData) throw 'Profile data is null';
+
     const userId = getState().profilePage.profileData!.userId;
 
     const data = await profileAPI.uploadProfileInfo({

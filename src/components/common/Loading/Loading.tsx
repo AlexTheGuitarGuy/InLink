@@ -3,7 +3,11 @@ import cn from 'classnames';
 
 const Loading = ({ dimensions = 60 }) => {
   return (
-    <div className={cn('flex justify-center items-center', { 'h-screen': dimensions >= 60 })}>
+    <div
+      className={cn('flex justify-center items-center', {
+        'h-screen xl:h-[92vh] lg:h-[88vh]': dimensions >= 60,
+      })}
+    >
       <svg
         aria-hidden="true"
         className={`text-gray-200 w-${dimensions} h-${dimensions} animate-spin dark:text-gray-600 fill-blue-600`}

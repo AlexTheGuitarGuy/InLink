@@ -1,7 +1,8 @@
-import { securityAPI } from '../../api/API';
-import { LoginPayload, ResultCodes, ResultCodesWithCaptcha } from '../../types/types';
+import { securityAPI } from '../../api/securityAPI';
+import { ResultCodes, ResultCodesWithCaptcha } from '../../api/API';
+import { LoginPayload } from '../../types/types';
 import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState, InferAction } from '../redux-store';
+import { RootState, InferAction, InferThunk } from '../redux-store';
 
 const initialState = {
   id: 0,
@@ -14,6 +15,8 @@ const initialState = {
 export type AuthReducerState = typeof initialState;
 
 type AuthAction = InferAction<typeof authActions>;
+
+type AuthThunk = InferThunk<AuthAction, void | string>;
 
 const authReducer = (state = initialState, action: AuthAction): AuthReducerState => {
   switch (action.type) {
@@ -48,8 +51,6 @@ const authActions = {
       payload: { captchaURL },
     } as const),
 };
-
-type AuthThunk = ThunkAction<Promise<void | string>, RootState, unknown, AuthAction>;
 
 export const auth = (): AuthThunk => {
   return async (dispatch) => {

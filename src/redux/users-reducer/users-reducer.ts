@@ -1,8 +1,10 @@
-import { userAPI } from '../../api/API';
+import { userAPI } from '../../api/userAPI';
 import { updateObjInArr } from '../../utils/object-helpers';
-import { User, ResultCodes } from '../../types/types';
+import { User } from '../../types/types';
+import { ResultCodes } from '../../api/API';
+
 import { ThunkAction } from '@reduxjs/toolkit';
-import { InferAction, RootState } from '../redux-store';
+import { InferAction, RootState, InferThunk } from '../redux-store';
 
 const initialState = {
   users: [] as User[],
@@ -18,6 +20,8 @@ const initialState = {
 export type UsersPageReducerState = typeof initialState;
 
 type UsersAction = InferAction<typeof usersActions>;
+
+type UsersThunk = InferThunk<UsersAction>;
 
 const usersPageReducer = (state = initialState, action: UsersAction): UsersPageReducerState => {
   switch (action.type) {
@@ -88,8 +92,6 @@ export const usersActions = {
       id,
     } as const),
 };
-
-type UsersThunk = ThunkAction<Promise<void>, RootState, unknown, UsersAction>;
 
 export const requestUsers = (page: number, pageSize: number): UsersThunk => {
   return async (dispatch) => {
