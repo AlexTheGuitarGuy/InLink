@@ -3,6 +3,7 @@ import { updateObjInArr } from '../../utils/object-helpers'
 import { Photo, Post, InputProfileData, FormikStatus } from '../../types/types'
 import { ResultCodes, GetProfileResponse } from '../../api/API'
 import { InferAction, InferThunk } from '../redux-store'
+import { setAlertFromThunk } from '../app-reducer/app-reducer'
 
 const initialState = {
   posts: [
@@ -30,7 +31,7 @@ export type ProfileReducerState = typeof initialState
 
 type ProfileAction = InferAction<typeof profileActions>
 
-type ProfileThunk = InferThunk<ProfileAction, void | string>
+type ProfileThunk = InferThunk<ProfileAction>
 
 const profileReducer = (state = initialState, action: ProfileAction): ProfileReducerState => {
   switch (action.type) {
@@ -205,7 +206,7 @@ export const uploadProfileInfo =
     if (data.resultCode === ResultCodes.Success) {
       dispatch(getMyProfile(userId))
       dispatch(profileActions.setEditing(false))
-      return Promise.resolve('profile edited')
+      dispatch(setAlertFromThunk({ message: 'profile edited', type: 'success' }))
     } else {
       const message = data.messages.length > 0 ? data.messages[0] : 'An error has occurred'
 
@@ -219,9 +220,13 @@ export const uploadProfileInfo =
         setStatus({
           error: { [parsedLocation]: errorText },
         })
+
+        dispatch(setAlertFromThunk({ message: errorText, type: 'error' }))
+
+        return
       }
 
-      return Promise.reject(message)
+      dispatch(setAlertFromThunk({ message, type: 'error' }))
     }
   }
 

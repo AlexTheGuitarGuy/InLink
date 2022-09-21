@@ -52,6 +52,12 @@ export const appActions = {
     } as const),
 }
 
+export const setAlertFromThunk =
+  (alert: Alert): AppThunk =>
+  async (dispatch) => {
+    dispatch(appActions.setAlert(alert))
+  }
+
 export const initializeApp = (): AppThunk => async (dispatch) => {
   const authPromise = dispatch(auth())
 

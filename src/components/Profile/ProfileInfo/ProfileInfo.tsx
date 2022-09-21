@@ -62,11 +62,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     values: InputProfileData,
     { setStatus, setSubmitting }: FormikHelpers<InputProfileData>,
   ) => {
-    dispatch(uploadProfileInfo(values, setStatus) as unknown as Promise<string>).then(
-      (message: string) => {
-        dispatch(appActions.setAlert({ message, type: 'success' }))
-      },
-    )
+    dispatch(uploadProfileInfo(values, setStatus))
     setSubmitting(false)
   }
 

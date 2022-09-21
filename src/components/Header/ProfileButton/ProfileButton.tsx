@@ -27,9 +27,7 @@ const ProfileButton = () => {
   const handleLogout = () => {
     setShowProfileData(false)
 
-    ;(dispatch(logout()) as unknown as Promise<string>).then((message) => {
-      dispatch(appActions.setAlert({ message, type: 'alert' }))
-    })
+    dispatch(logout())
   }
 
   return (

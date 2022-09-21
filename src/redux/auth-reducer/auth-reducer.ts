@@ -2,6 +2,7 @@ import { securityAPI } from '../../api/securityAPI'
 import { ResultCodes, ResultCodesWithCaptcha } from '../../api/API'
 import { LoginPayload } from '../../types/types'
 import { InferAction, InferThunk } from '../redux-store'
+import { setAlertFromThunk } from '../app-reducer/app-reducer'
 
 const initialState = {
   id: 0,
@@ -15,7 +16,7 @@ export type AuthReducerState = typeof initialState
 
 type AuthAction = InferAction<typeof authActions>
 
-type AuthThunk = InferThunk<AuthAction, void | string>
+type AuthThunk = InferThunk<AuthAction>
 
 const authReducer = (state = initialState, action: AuthAction): AuthReducerState => {
   switch (action.type) {
@@ -79,12 +80,12 @@ export const login = ({
 
     if (data.resultCode === ResultCodes.Success) {
       dispatch(auth())
-      return Promise.resolve('logged in')
+      dispatch(setAlertFromThunk({ message: 'logged in', type: 'success' }))
     } else {
       if (data.resultCode === ResultCodesWithCaptcha.CaptchaRequired) dispatch(getCaptchaURL())
 
       const message = data.messages[0].length > 0 ? data.messages[0] : 'An error has occurred'
-      return Promise.reject(message)
+      dispatch(setAlertFromThunk({ message, type: 'error' }))
     }
   }
 }
@@ -96,9 +97,9 @@ export const logout = (): AuthThunk => {
     if (data.resultCode === ResultCodes.Success) {
       dispatch(authActions.setData({ id: 0, login: '', email: '', isLoggedIn: false }))
       dispatch(authActions.setCaptcha(''))
-      return Promise.resolve('logged out')
+      dispatch(setAlertFromThunk({ message: 'logged out', type: 'alert' }))
     } else {
-      return Promise.reject("couldn't log out")
+      dispatch(setAlertFromThunk({ message: "couldn't log out", type: 'error' }))
     }
   }
 }

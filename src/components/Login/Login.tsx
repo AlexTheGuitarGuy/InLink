@@ -5,14 +5,14 @@ import * as Yup from 'yup'
 
 import { login } from '../../redux/auth-reducer/auth-reducer'
 import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-reducer/auth-selector'
-import { appActions } from '../../redux/app-reducer/app-reducer'
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
+import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks'
 
 import { LoginPayload } from '../../types/types'
 
 const Login: FC<{}> = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn)
   const captchaURL = useAppSelector(getCaptchaURL)
+
   const dispatch = useAppDispatch()
 
   if (isLoggedIn) return <Navigate to={'/profile'} />
@@ -30,9 +30,7 @@ const Login: FC<{}> = () => {
   })
 
   const onSubmit = (values: LoginPayload, { setSubmitting }: FormikHelpers<LoginPayload>) => {
-    dispatch(login(values) as unknown as Promise<string>).then((message: string) => {
-      dispatch(appActions.setAlert({ message, type: 'success' }))
-    })
+    dispatch(login(values))
     setSubmitting(false)
   }
 
