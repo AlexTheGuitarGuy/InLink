@@ -2,7 +2,7 @@
   "name": "InLink",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://AlexTheGuitarGuy.github.io/reactProject",
+  "homepage": "https://AlexTheGuitarGuy.github.io/InLink",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.14.1",
