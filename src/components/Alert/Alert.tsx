@@ -1,39 +1,39 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getAlert } from '../../redux/app-reducer/app-selector';
-import cn from 'classnames';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { getAlert } from '../../redux/app-reducer/app-selector'
+import cn from 'classnames'
 
 const Alert = () => {
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState(false)
 
-  const alert = useSelector(getAlert);
-  const { type, message } = alert;
-
-  useEffect(() => {
-    message && setIsShown(true);
-  }, [alert]);
+  const alert = useSelector(getAlert)
+  const { type, message } = alert
 
   useEffect(() => {
-    const timeOut = setTimeout(() => setIsShown(false), 3000);
+    message && setIsShown(true)
+  }, [alert, message])
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => setIsShown(false), 3000)
     return () => {
-      clearTimeout(timeOut);
-    };
-  }, [alert]);
+      clearTimeout(timeOut)
+    }
+  }, [alert])
 
-  let alertTitle;
+  let alertTitle
   switch (type) {
     case 'error':
-      alertTitle = 'An error has occurred:';
-      break;
+      alertTitle = 'An error has occurred:'
+      break
     case 'success':
-      alertTitle = 'Operation successful:';
-      break;
+      alertTitle = 'Operation successful:'
+      break
     case 'alert':
-      alertTitle = 'Message:';
+      alertTitle = 'Message:'
   }
 
   return (
-    <div className="w-full fixed z-20 flex justify-end lg:right-4">
+    <div className='w-full fixed z-20 flex justify-end lg:right-4'>
       <div
         className={cn(
           `lg:w-1/3 sm:w-full px-4 py-3 
@@ -46,13 +46,13 @@ const Alert = () => {
           { 'opacity-100': isShown },
           { 'opacity-0 pointer-events-none': !isShown },
         )}
-        role="alert"
+        role='alert'
       >
-        <strong className="font-bold">{alertTitle}</strong>
-        <span className="ml-2 block sm:inline">{message}</span>
+        <strong className='font-bold'>{alertTitle}</strong>
+        <span className='ml-2 block sm:inline'>{message}</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Alert;
+export default Alert

@@ -1,8 +1,10 @@
-import React from 'react';
-import Status from './Status';
-import { act } from 'react-test-renderer';
+import React from 'react'
 
-const ReactTestRenderer = require('react-test-renderer');
+export const Mock = () => <div>mock</div>
+/*import Status from './Status'
+import { act } from 'react-test-renderer'
+
+const ReactTestRenderer = require('react-test-renderer')*/
 
 /*describe('Status component', () => {
   let testStatus = 'hello world';

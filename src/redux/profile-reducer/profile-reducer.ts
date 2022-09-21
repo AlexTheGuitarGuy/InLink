@@ -1,10 +1,8 @@
-import { Middleware } from 'redux';
-import { profileAPI } from '../../api/profileAPI';
-import { updateObjInArr } from '../../utils/object-helpers';
-import { Photo, Post, InputProfileData, FormikStatus } from '../../types/types';
-import { ResultCodes, GetProfileResponse } from '../../api/API';
-import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState, InferAction, InferThunk } from '../redux-store';
+import { profileAPI } from '../../api/profileAPI'
+import { updateObjInArr } from '../../utils/object-helpers'
+import { Photo, Post, InputProfileData, FormikStatus } from '../../types/types'
+import { ResultCodes, GetProfileResponse } from '../../api/API'
+import { InferAction, InferThunk } from '../redux-store'
 
 const initialState = {
   posts: [
@@ -26,13 +24,13 @@ const initialState = {
   storedText: '',
   isLoading: false,
   isEditing: false,
-};
+}
 
-export type ProfileReducerState = typeof initialState;
+export type ProfileReducerState = typeof initialState
 
-type ProfileAction = InferAction<typeof profileActions>;
+type ProfileAction = InferAction<typeof profileActions>
 
-type ProfileThunk = InferThunk<ProfileAction, void | string>;
+type ProfileThunk = InferThunk<ProfileAction, void | string>
 
 const profileReducer = (state = initialState, action: ProfileAction): ProfileReducerState => {
   switch (action.type) {
@@ -48,13 +46,13 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
               likes: 0,
             },
           ],
-        };
+        }
       }
 
       return {
         ...state,
         storedText: '',
-      };
+      }
     }
 
     case 'IN_LINK/PROFILE_REDUCER/SET_PROFILE':
@@ -65,20 +63,20 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
       return {
         ...state,
         ...action.payload,
-      };
+      }
 
     case 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS':
       return {
         ...state,
         myData: { ...state.myData, photos: { ...action.file } } as GetProfileResponse,
         profileData: { ...state.profileData, photos: { ...action.file } } as GetProfileResponse,
-      };
+      }
 
     case 'IN_LINK/PROFILE_REDUCER/DELETE_POST':
       return {
         ...state,
         posts: state.posts.filter((p) => p.id !== action.id),
-      };
+      }
 
     case 'IN_LINK/PROFILE_REDUCER/EDIT_POST':
       return {
@@ -86,12 +84,12 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
         posts: updateObjInArr<Post, { text: string }>(state.posts, 'id', action.id, {
           text: action.payload,
         }),
-      };
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const profileActions = {
   post: (payload: string) => ({ type: 'IN_LINK/PROFILE_REDUCER/POST', payload } as const),
@@ -140,91 +138,91 @@ export const profileActions = {
       type: 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS',
       file,
     } as const),
-};
+}
 
 const getData = (
   uid: number,
   action: typeof profileActions.setProfile | typeof profileActions.setMyProfile,
 ): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(profileActions.setLoading(true));
-    const data = await profileAPI.getProfile(uid);
-    dispatch(action(data));
-    dispatch(profileActions.setLoading(false));
-  };
-};
+    dispatch(profileActions.setLoading(true))
+    const data = await profileAPI.getProfile(uid)
+    dispatch(action(data))
+    dispatch(profileActions.setLoading(false))
+  }
+}
 
 export const getProfile = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(getData(uid, profileActions.setProfile));
-  };
-};
+    dispatch(getData(uid, profileActions.setProfile))
+  }
+}
 
 export const getMyProfile = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(getData(uid, profileActions.setMyProfile));
-  };
-};
+    dispatch(getData(uid, profileActions.setMyProfile))
+  }
+}
 
 export const getStatus = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(profileActions.setLoading(true));
-    const data = await profileAPI.getStatus(uid);
-    dispatch(profileActions.setStatus(data));
-    dispatch(profileActions.setLoading(false));
-  };
-};
+    dispatch(profileActions.setLoading(true))
+    const data = await profileAPI.getStatus(uid)
+    dispatch(profileActions.setStatus(data))
+    dispatch(profileActions.setLoading(false))
+  }
+}
 
 export const updateStatus = (payload: string): ProfileThunk => {
   return async (dispatch) => {
-    const result = await profileAPI.updateStatus(payload);
-    if (result === ResultCodes.Success) dispatch(profileActions.setStatus(payload));
-  };
-};
+    const result = await profileAPI.updateStatus(payload)
+    if (result === ResultCodes.Success) dispatch(profileActions.setStatus(payload))
+  }
+}
 
 export const uploadPFP = (file: File): ProfileThunk => {
   return async (dispatch) => {
-    const { data, resultCode } = await profileAPI.uploadPFP(file);
+    const { data, resultCode } = await profileAPI.uploadPFP(file)
 
     if (resultCode === ResultCodes.Success) {
-      dispatch(profileActions.uploadSuccess(data.photos));
+      dispatch(profileActions.uploadSuccess(data.photos))
     }
-  };
-};
+  }
+}
 
 export const uploadProfileInfo =
   (profileInfo: InputProfileData, setStatus: (status: FormikStatus) => void): ProfileThunk =>
   async (dispatch, getState) => {
-    if (!getState().profilePage.profileData) throw 'Profile data is null';
+    if (!getState().profilePage.profileData) throw new Error('Profile data is null')
 
-    const userId = getState().profilePage.profileData!.userId;
+    const userId = getState().profilePage.profileData!.userId
 
     const data = await profileAPI.uploadProfileInfo({
       ...profileInfo,
       userId,
-    });
+    })
 
     if (data.resultCode === ResultCodes.Success) {
-      dispatch(getMyProfile(userId));
-      dispatch(profileActions.setEditing(false));
-      return Promise.resolve('profile edited');
+      dispatch(getMyProfile(userId))
+      dispatch(profileActions.setEditing(false))
+      return Promise.resolve('profile edited')
     } else {
-      const message = data.messages.length > 0 ? data.messages[0] : 'An error has occurred';
+      const message = data.messages.length > 0 ? data.messages[0] : 'An error has occurred'
 
-      const regExp = /\(([^)]+)\)/;
-      const errorLocation = regExp?.exec(message)?.[1];
+      const regExp = /\(([^)]+)\)/
+      const errorLocation = regExp?.exec(message)?.[1]
 
       if (errorLocation) {
-        const errorText = message.slice(0, message.indexOf('(')).trim();
-        const parsedLocation = errorLocation.toLowerCase().split('->').join('.');
+        const errorText = message.slice(0, message.indexOf('(')).trim()
+        const parsedLocation = errorLocation.toLowerCase().split('->').join('.')
 
         setStatus({
           error: { [parsedLocation]: errorText },
-        });
+        })
       }
 
-      return Promise.reject(message);
+      return Promise.reject(message)
     }
-  };
+  }
 
-export default profileReducer;
+export default profileReducer

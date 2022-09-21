@@ -1,23 +1,9 @@
-import React, { FC, ChangeEvent, useState } from 'react'
-import {
-  ErrorMessage,
-  Field,
-  Form,
-  Formik,
-  FormikBag,
-  FormikErrors,
-  FormikHelpers,
-  FormikProps,
-} from 'formik'
+import React, { FC, ChangeEvent } from 'react'
+import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
 
-import {
-  getMyProfile,
-  uploadPFP,
-  uploadProfileInfo,
-} from '../../../redux/profile-reducer/profile-reducer'
+import { uploadPFP, uploadProfileInfo } from '../../../redux/profile-reducer/profile-reducer'
 import { appActions } from '../../../redux/app-reducer/app-reducer'
-import { getUID } from '../../../redux/auth-reducer/auth-selector'
 
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 

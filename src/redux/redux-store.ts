@@ -1,5 +1,5 @@
 import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux'
-import { ThunkAction, configureStore } from '@reduxjs/toolkit'
+import { ThunkAction } from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
 
 import dialogsReducer from './dialogs-reducer/dialogs-reducer'

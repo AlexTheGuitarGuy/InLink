@@ -1,7 +1,10 @@
-import React from 'react';
-import Paginator from './Paginator';
+import React from 'react'
 
-const ReactTestRenderer = require('react-test-renderer');
+export const Mock = () => <div>mock</div>
+
+/*import Paginator from './Paginator';
+
+const ReactTestRenderer = require('react-test-renderer');*/
 
 /*describe('Paginator component', () => {
   test('selected page has separate style', () => {

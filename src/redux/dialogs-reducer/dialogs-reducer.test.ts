@@ -1,9 +1,8 @@
-import dialogsReducer, { DialogsReducerState, dialogsActions } from './dialogs-reducer';
-import { DialogsUser, UserMessage } from '../../types/types';
-import User1Image from '../../assets/pfps/u1.jpg';
-import User2Image from '../../assets/pfps/u2.jpg';
-import User3Image from '../../assets/pfps/u3.jpg';
-import User4Image from '../../assets/pfps/u4.jpg';
+import dialogsReducer, { DialogsReducerState, dialogsActions } from './dialogs-reducer'
+import User1Image from '../../assets/pfps/u1.jpg'
+import User2Image from '../../assets/pfps/u2.jpg'
+import User3Image from '../../assets/pfps/u3.jpg'
+import User4Image from '../../assets/pfps/u4.jpg'
 
 const state: DialogsReducerState = {
   users: [
@@ -125,15 +124,15 @@ const state: DialogsReducerState = {
       { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
     ],
   ],
-};
+}
 
 it('should add message "Hello fellow human being, I am Mark Zuckerberg" to userMessages[0] array', () => {
-  const action = dialogsActions.sendMessage(0, 'Hello fellow human being, I am Mark Zuckerberg');
+  const action = dialogsActions.sendMessage(0, 'Hello fellow human being, I am Mark Zuckerberg')
 
-  const newState = dialogsReducer(state, action);
+  const newState = dialogsReducer(state, action)
 
-  expect(newState.userMessages[0][3].text).toBe('Hello fellow human being, I am Mark Zuckerberg');
-});
+  expect(newState.userMessages[0][3].text).toBe('Hello fellow human being, I am Mark Zuckerberg')
+})
 
 /*  it('should delete element with id 2 from userMessages[0] array', () => {
     const action = dialogsActions.deleteMessage(0, 2);

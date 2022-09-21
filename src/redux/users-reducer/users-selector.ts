@@ -1,34 +1,33 @@
-import { RootState } from '../redux-store';
-import { User } from '../../types/types';
+import { RootState } from '../redux-store'
 
 export const getUsers = (state: RootState) => {
-  return state.usersPage.users;
-};
+  return state.usersPage.users
+}
 
 export const getPortionSize = (state: RootState) => {
-  return state.usersPage.portionSize;
-};
+  return state.usersPage.portionSize
+}
 
 export const getPage = (state: RootState) => {
-  return state.usersPage.page;
-};
+  return state.usersPage.page
+}
 
 export const getPageSize = (state: RootState) => {
-  return state.usersPage.pageSize;
-};
+  return state.usersPage.pageSize
+}
 
 export const getTotalUsers = (state: RootState) => {
-  return state.usersPage.totalUsers;
-};
+  return state.usersPage.totalUsers
+}
 
 export const getCurrentPagesBeginning = (state: RootState) => {
-  return state.usersPage.currentPagesBeginning;
-};
+  return state.usersPage.currentPagesBeginning
+}
 
 export const getIsLoading = (state: RootState) => {
-  return state.usersPage.isLoading;
-};
+  return state.usersPage.isLoading
+}
 
 export const getFollowQueue = (state: RootState) => {
-  return state.usersPage.followQueue;
-};
+  return state.usersPage.followQueue
+}

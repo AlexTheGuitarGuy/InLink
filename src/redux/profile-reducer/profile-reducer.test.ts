@@ -1,7 +1,4 @@
-import profileReducer, { ProfileReducerState, profileActions } from './profile-reducer';
-import { GetProfileResponse } from '../../api/API';
-
-import { Post } from '../../types/types';
+import profileReducer, { ProfileReducerState, profileActions } from './profile-reducer'
 
 const state: ProfileReducerState = {
   posts: [
@@ -23,29 +20,29 @@ const state: ProfileReducerState = {
   storedText: '',
   isLoading: false,
   isEditing: false,
-};
+}
 
 it(`should add a post that contains text "testing is good"`, () => {
-  const action = profileActions.post('testing is good');
+  const action = profileActions.post('testing is good')
 
-  const newState = profileReducer(state, action);
+  const newState = profileReducer(state, action)
 
-  expect(newState.posts.length).toBe(4);
-  expect(newState.posts[3].text).toBe('testing is good');
-});
+  expect(newState.posts.length).toBe(4)
+  expect(newState.posts[3].text).toBe('testing is good')
+})
 
 it(`should delete post with id 3`, () => {
-  const action = profileActions.deletePost(3);
+  const action = profileActions.deletePost(3)
 
-  const newState = profileReducer(state, action);
+  const newState = profileReducer(state, action)
 
-  expect(newState.posts.find((p) => p.id === 3)).toBe(undefined);
-});
+  expect(newState.posts.find((p) => p.id === 3)).toBe(undefined)
+})
 
 it(`should edit post with id 3 to be "I also like Jest!"`, () => {
-  const action = profileActions.editPost(3, 'I also like Jest');
+  const action = profileActions.editPost(3, 'I also like Jest')
 
-  const newState = profileReducer(state, action);
+  const newState = profileReducer(state, action)
 
-  expect(newState.posts.find((p) => p.id === 3)?.text).toBe('I also like Jest');
-});
+  expect(newState.posts.find((p) => p.id === 3)?.text).toBe('I also like Jest')
+})

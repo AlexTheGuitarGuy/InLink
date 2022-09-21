@@ -1,10 +1,9 @@
-import { updateObjInArr } from '../../utils/object-helpers';
-import { DialogsUser, UserMessage } from '../../types/types';
-import User1Image from '../../assets/pfps/u1.jpg';
-import User2Image from '../../assets/pfps/u2.jpg';
-import User3Image from '../../assets/pfps/u3.jpg';
-import User4Image from '../../assets/pfps/u4.jpg';
-import { InferAction } from '../redux-store';
+import { DialogsUser, UserMessage } from '../../types/types'
+import User1Image from '../../assets/pfps/u1.jpg'
+import User2Image from '../../assets/pfps/u2.jpg'
+import User3Image from '../../assets/pfps/u3.jpg'
+import User4Image from '../../assets/pfps/u4.jpg'
+import { InferAction } from '../redux-store'
 
 const initialState = {
   users: [
@@ -126,11 +125,11 @@ const initialState = {
       { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
     ],
   ] as UserMessage[][],
-};
+}
 
-export type DialogsReducerState = typeof initialState;
+export type DialogsReducerState = typeof initialState
 
-type DialogAction = InferAction<typeof dialogsActions>;
+type DialogAction = InferAction<typeof dialogsActions>
 
 const dialogsReducer = (state = initialState, action: DialogAction): DialogsReducerState => {
   switch (action.type) {
@@ -143,14 +142,14 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
               e.push({
                 text: action.text,
                 type: 'sent',
-              });
-            return e;
+              })
+            return e
           }),
-        };
+        }
       }
       return {
         ...state,
-      };
+      }
 
     /*    case 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE':
       return {
@@ -173,9 +172,9 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
         }),
       };*/
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const dialogsActions = {
   sendMessage: (id: number, text: string) =>
@@ -199,6 +198,6 @@ export const dialogsActions = {
       messageId,
       text,
     } as const),
-};
+}
 
-export default dialogsReducer;
+export default dialogsReducer

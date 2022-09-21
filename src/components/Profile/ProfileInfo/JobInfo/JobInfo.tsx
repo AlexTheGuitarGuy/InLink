@@ -1,14 +1,12 @@
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import cn from 'classnames';
-import { RootState } from '../../../../redux/redux-store';
-import { ErrorMessage, Field } from 'formik';
+import React, { FC } from 'react'
+import cn from 'classnames'
+import { ErrorMessage, Field } from 'formik'
 
 type JobInfoProps = {
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  isEditing: boolean;
-};
+  lookingForAJob: boolean
+  lookingForAJobDescription: string
+  isEditing: boolean
+}
 
 const JobInfo: FC<JobInfoProps> = ({ lookingForAJob, lookingForAJobDescription, isEditing }) => {
   return (
@@ -24,39 +22,39 @@ const JobInfo: FC<JobInfoProps> = ({ lookingForAJob, lookingForAJobDescription, 
             { 'w-full': isEditing },
           )}
         >
-          <div className="order-1">
+          <div className='order-1'>
             {isEditing ? (
-              <div className="mr-1 mt-1 inline">
-                <Field type="checkbox" name="lookingForAJob" checked={lookingForAJob} />
+              <div className='mr-1 mt-1 inline'>
+                <Field type='checkbox' name='lookingForAJob' checked={lookingForAJob} />
               </div>
             ) : (
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png"
-                alt="looking for job"
-                className="w-5 h-5 inline lg:mr-1"
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png'
+                alt='looking for job'
+                className='w-5 h-5 inline lg:mr-1'
               />
             )}
             is looking for a job
           </div>
 
-          <div className="order-2 mt-2 text-center w-full">
+          <div className='order-2 mt-2 text-center w-full'>
             {lookingForAJob && isEditing ? (
               <>
                 <Field
-                  name="lookingForAJobDescription"
-                  placeholder="Please enter your skills..."
-                  as="textarea"
-                  className="resize-none py-1 px-4 rounded 
+                  name='lookingForAJobDescription'
+                  placeholder='Please enter your skills...'
+                  as='textarea'
+                  className='resize-none py-1 px-4 rounded 
                           border border-gray-300
                           w-full
                           focus:outline-none focus:border-gray-500
-                          transition"
+                          transition'
                 />
                 <ErrorMessage
-                  name="lookingForAJobDescription"
-                  component="div"
-                  className="bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-                      rounded absolute whitespace-nowrap"
+                  name='lookingForAJobDescription'
+                  component='div'
+                  className='bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
+                      rounded absolute whitespace-nowrap'
                 />
               </>
             ) : lookingForAJobDescription && !isEditing ? (
@@ -66,7 +64,7 @@ const JobInfo: FC<JobInfoProps> = ({ lookingForAJob, lookingForAJobDescription, 
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default JobInfo;
+export default JobInfo

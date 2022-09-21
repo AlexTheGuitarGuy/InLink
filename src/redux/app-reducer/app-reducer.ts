@@ -1,23 +1,22 @@
-import { auth } from '../auth-reducer/auth-reducer';
-import { Alert } from '../../types/types';
-import { ThunkAction } from '@reduxjs/toolkit';
-import { RootState, InferAction, InferThunk } from '../redux-store';
+import { auth } from '../auth-reducer/auth-reducer'
+import { Alert } from '../../types/types'
+import { InferAction, InferThunk } from '../redux-store'
 
-const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED';
-const SET_ALERT = 'IN_LINK/APP_REDUCER/SET_ALERT';
-const SET_SIDEBAR_HIDDEN = 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN';
+const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED'
+const SET_ALERT = 'IN_LINK/APP_REDUCER/SET_ALERT'
+const SET_SIDEBAR_HIDDEN = 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN'
 
 const initialState = {
   isAppInitialized: false,
   isSidebarHidden: false,
   alert: { message: '', type: 'alert' } as Alert,
-};
+}
 
-export type AppReducerState = typeof initialState;
+export type AppReducerState = typeof initialState
 
-type AppAction = InferAction<typeof appActions>;
+type AppAction = InferAction<typeof appActions>
 
-type AppThunk = InferThunk<AppAction>;
+type AppThunk = InferThunk<AppAction>
 
 const appReducer = (state = initialState, action: AppAction): AppReducerState => {
   switch (action.type) {
@@ -27,11 +26,11 @@ const appReducer = (state = initialState, action: AppAction): AppReducerState =>
       return {
         ...state,
         ...action.payload,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 export const appActions = {
   initializeSuccess: () =>
@@ -51,14 +50,14 @@ export const appActions = {
       type: SET_SIDEBAR_HIDDEN,
       payload: { isSidebarHidden },
     } as const),
-};
+}
 
 export const initializeApp = (): AppThunk => async (dispatch) => {
-  const authPromise = dispatch(auth());
+  const authPromise = dispatch(auth())
 
-  await Promise.all([authPromise]);
+  await Promise.all([authPromise])
 
-  dispatch(appActions.initializeSuccess());
-};
+  dispatch(appActions.initializeSuccess())
+}
 
-export default appReducer;
+export default appReducer
