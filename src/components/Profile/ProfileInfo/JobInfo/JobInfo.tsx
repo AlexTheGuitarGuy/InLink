@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import cn from 'classnames'
-import { ErrorMessage, Field } from 'formik'
+import { Field } from 'formik'
+import FormInput from '../../../common/Inputs/FormInput/FormInput'
 
 type JobInfoProps = {
   lookingForAJob: boolean
@@ -39,24 +40,14 @@ const JobInfo: FC<JobInfoProps> = ({ lookingForAJob, lookingForAJobDescription, 
 
           <div className='order-2 mt-2 text-center w-full'>
             {lookingForAJob && isEditing ? (
-              <>
-                <Field
-                  name='lookingForAJobDescription'
-                  placeholder='Please enter your skills...'
-                  as='textarea'
-                  className='resize-none py-1 px-4 rounded 
-                          border border-gray-300
-                          w-full
-                          focus:outline-none focus:border-gray-500
-                          transition'
-                />
-                <ErrorMessage
-                  name='lookingForAJobDescription'
-                  component='div'
-                  className='bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-                      rounded absolute whitespace-nowrap'
-                />
-              </>
+              <FormInput
+                field={{
+                  name: 'lookingForAJobDescription',
+                  placeholder: 'Please enter your skills...',
+                  as: 'textarea',
+                  className: 'resize-none py-1 px-4 w-full',
+                }}
+              />
             ) : lookingForAJobDescription && !isEditing ? (
               '"' + lookingForAJobDescription + '"'
             ) : null}

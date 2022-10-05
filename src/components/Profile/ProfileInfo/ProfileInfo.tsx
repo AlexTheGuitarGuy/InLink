@@ -1,14 +1,14 @@
 import React, { FC, ChangeEvent } from 'react'
-import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
 
 import { uploadPFP, uploadProfileInfo } from '../../../redux/profile-reducer/profile-reducer'
-import { appActions } from '../../../redux/app-reducer/app-reducer'
 
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 
 import { InputProfileData } from '../../../types/types'
 import { useAppDispatch } from '../../../hooks/reduxHooks'
+import FormInput from '../../common/Inputs/FormInput/FormInput'
 
 import EditButton from './EditButton/EditButton'
 import Status from './Status/Status'
@@ -99,24 +99,14 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
             <div className='lg:mt-8 lg:ml-4 sm:flex sm:flex-col lg:flex-none'>
               <div className='text-2xl sm:mx-auto lg:mx-0 xl:text-3xl'>
                 {isEditing ? (
-                  <>
-                    <Field
-                      type='text'
-                      name='fullName'
-                      placeholder='Please insert your name...'
-                      className='p-2 rounded 
-                                            border border-gray-300
-                                            focus:outline-none focus:border-gray-500
-                                            transition
-                                            sm:text-center lg:text-left'
-                    />
-                    <ErrorMessage
-                      name='fullName'
-                      component='div'
-                      className='bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-                      rounded absolute whitespace-nowrap'
-                    />
-                  </>
+                  <FormInput
+                    field={{
+                      type: 'text',
+                      name: 'fullName',
+                      placeholder: 'Please insert your name...',
+                      className: 'sm:text-center lg:text-left p-2 ',
+                    }}
+                  />
                 ) : (
                   fullName
                 )}

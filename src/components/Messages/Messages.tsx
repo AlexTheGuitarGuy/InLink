@@ -45,7 +45,7 @@ const Messages = () => {
         key={index}
         element={
           <div className='flex flex-col h-full w-full relative'>
-            <div className='lg:mx-16 mx-3 mb-14 overflow-scroll  h-screen'>
+            <div className='lg:mx-16 mx-3 mb-14 overflow-y-scroll  h-screen'>
               {conversationComponents[index]}
             </div>
             <div

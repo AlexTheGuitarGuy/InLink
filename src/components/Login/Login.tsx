@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Navigate } from 'react-router-dom'
-import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/auth-reducer/auth-reducer'
@@ -8,6 +8,7 @@ import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-reducer/auth-sele
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks'
 
 import { LoginPayload } from '../../types/types'
+import FormInput from '../common/Inputs/FormInput/FormInput'
 
 const Login: FC<{}> = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn)
@@ -57,47 +58,24 @@ const Login: FC<{}> = () => {
                 <Form className='text-xl'>
                   <>
                     <div className='mb-6'>
-                      <Field
-                        type='email'
-                        name='email'
-                        placeholder='Email address'
-                        className='block w-full
-                            px-4 py-2 m-0
-                            font-normal text-gray-700
-                            bg-white bg-clip-padding
-                            border border-solid border-gray-300 rounded
-                            transition ease-in-out
-                            focus:text-gray-800
-                            focus:bg-white focus:border-gray-600
-                            focus:outline-none'
-                      />
-                      <ErrorMessage
-                        name='email'
-                        component='div'
-                        className='bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-                      rounded absolute whitespace-nowrap'
+                      <FormInput
+                        field={{
+                          type: 'email',
+                          name: 'email',
+                          placeholder: 'Email address',
+                          className: 'w-full px-4 py-2',
+                        }}
                       />
                     </div>
 
                     <div className='mb-6'>
-                      <Field
-                        type='password'
-                        name='password'
-                        placeholder='Password'
-                        className='block w-full
-                        px-4 py-2  m-0
-                        font-normal text-gray-700
-                        bg-white bg-clip-padding
-                        border border-solid border-gray-300 rounded
-                        transition ease-in-out
-                        focus:text-gray-800 focus:bg-white focus:border-gray-600
-                        focus:outline-none'
-                      />
-                      <ErrorMessage
-                        name='password'
-                        component='div'
-                        className='bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-                      rounded absolute whitespace-nowrap'
+                      <FormInput
+                        field={{
+                          type: 'password',
+                          name: 'password',
+                          placeholder: 'Password',
+                          className: 'w-full px-4 py-2',
+                        }}
                       />
                     </div>
 
@@ -106,6 +84,7 @@ const Login: FC<{}> = () => {
                         <Field
                           type='checkbox'
                           name='rememberMe'
+                          id='rememberMe'
                           className='h-4 w-4 mr-2
                           border border-gray-300
                           rounded-sm
@@ -113,7 +92,7 @@ const Login: FC<{}> = () => {
                         />
                         <label
                           className='inline-block text-gray-800 cursor-pointer'
-                          htmlFor='exampleCheck'
+                          htmlFor='rememberMe'
                         >
                           Remember me
                         </label>
@@ -148,25 +127,14 @@ const Login: FC<{}> = () => {
                       <div className='flex justify-center'>
                         <div className='mt-6 text-gray-700'>
                           <img src={captchaURL} alt='captcha' className='mb-4 w-full' />
-                          <Field
-                            type='text'
-                            name='captcha'
-                            placeholder='Captcha'
-                            className='block w-full
-                                      px-4 py-2 m-0
-                                      font-normal text-gray-700
-                                      bg-white bg-clip-padding
-                                      border border-solid border-gray-300 rounded
-                                      transition ease-in-out
-                                      focus:text-gray-800
-                                      focus:bg-white focus:border-gray-600
-                                      focus:outline-none'
-                          />
-                          <ErrorMessage
-                            name='captcha'
-                            component='div'
-                            className='bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-                            rounded absolute whitespace-nowrap'
+
+                          <FormInput
+                            field={{
+                              type: 'text',
+                              name: 'captcha',
+                              placeholder: 'Captcha',
+                              className: 'w-full px-4 py-2',
+                            }}
                           />
                         </div>
                       </div>

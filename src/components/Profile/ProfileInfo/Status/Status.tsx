@@ -4,6 +4,7 @@ import cn from 'classnames'
 import { updateStatus } from '../../../../redux/profile-reducer/profile-reducer'
 import { getStatus } from '../../../../redux/profile-reducer/profile-selector'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
+import RegularInput from '../../../common/Inputs/RegularInput/RegularInput'
 
 type StatusProps = {
   isOwner: boolean
@@ -46,16 +47,18 @@ const Status: FC<StatusProps> = ({ isOwner }) => {
         </div>
       ) : (
         <div>
-          <input
-            onChange={editLocalStatus}
-            className='p-1 lg:pl-2.5 rounded
-            font-semibold text-gray-700
-            border border-gray-300
-            focus:outline-none focus:border-gray-500
-            transition sm:text-center lg:text-left'
-            autoFocus={true}
-            onBlur={deactivateEdit}
-            defaultValue={localStatus}
+          <RegularInput
+            field={{
+              placeholder: 'Status...',
+              className: 'p-1 lg:pl-2.5 sm:text-center lg:text-left',
+            }}
+            restProps={{
+              onChange: editLocalStatus,
+              autoFocus: true,
+              onBlur: deactivateEdit,
+              defaultValue: localStatus,
+            }}
+            as='input'
           />
         </div>
       )}

@@ -4,6 +4,7 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps } from 'f
 import * as Yup from 'yup'
 
 import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
+import FormInput from '../../common/Inputs/FormInput/FormInput'
 
 type MessageFormValues = {
   messageText: string
@@ -20,11 +21,11 @@ const SendText: FC<SendTextProps> = ({ id }) => {
     messageText: '',
   }
 
+  const maxMessageLen = 512
   const validationSchema = Yup.object({
     messageText: Yup.string()
       .trim()
-      .required('Cannot send empty message')
-      .max(256, 'Message too long. Maximum is 256 characters.'),
+      .max(maxMessageLen, `Message too long. Maximum is ${maxMessageLen} characters.`),
   })
 
   const onSubmit = (
@@ -43,21 +44,13 @@ const SendText: FC<SendTextProps> = ({ id }) => {
       {({ isSubmitting, isValid }: FormikProps<MessageFormValues>) => (
         <Form>
           <div className='flex flex-row justify-center'>
-            <Field
-              as='textarea'
-              type='text'
-              name='messageText'
-              placeholder='Enter your message'
-              className='resize-none w-full rounded-lg p-2 
-              border border-gray-300
-              focus:outline-none focus:border-gray-500
-              transition'
-            />
-            <ErrorMessage
-              name='messageText'
-              component='div'
-              className='bg-red-100 border border-red-400 text-red-700 px-2 ml-2 
-                      rounded absolute whitespace-nowrap'
+            <FormInput
+              field={{
+                as: 'textarea',
+                name: 'messageText',
+                placeholder: 'Enter your message...',
+                className: 'resize-none w-full rounded-lg p-2',
+              }}
             />
 
             <div>

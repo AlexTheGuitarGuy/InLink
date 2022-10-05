@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 
 import Loading from '../common/Loading/Loading'
 import UserItems from './UserItems/UserItems'
+import UsersSearch from './UsersSearch/UsersSearch'
 import Paginator from '../common/Paginator/Paginator'
 
 const Users = () => {
@@ -41,6 +42,7 @@ const Users = () => {
                   sm:h-screen lg:h-auto
     '
     >
+      <UsersSearch />
       <UserItems />
       <div className='mt-4'>
         <Paginator
