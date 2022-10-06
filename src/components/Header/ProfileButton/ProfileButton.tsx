@@ -2,7 +2,6 @@ import React, { LegacyRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 
-import { appActions } from '../../../redux/app-reducer/app-reducer'
 import { getMyData } from '../../../redux/profile-reducer/profile-selector'
 import { getIsLoggedIn, getLogin } from '../../../redux/auth-reducer/auth-selector'
 import { logout } from '../../../redux/auth-reducer/auth-reducer'
@@ -10,6 +9,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 import useTagBlur from '../../../hooks/useTagBlur'
+
+import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
 
 const ProfileButton = () => {
   const [showProfileData, setShowProfileData] = useState(false)
@@ -59,32 +60,27 @@ const ProfileButton = () => {
           >
             <>
               <div className='font-semibold text-gray-700 sm:text-lg lg:text-base'>{login}</div>
-              <NavLink
+              <PrimaryButton
+                color='gray'
+                as='navlink'
                 to='/profile'
-                className='font-semibold
-                              bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-                              lg:py-0.5 lg:px-4 
+                className='lg:py-0.5 lg:px-4 
                               sm:py-2 sm:px-6
-                              lg:mt-2 sm:mt-4
-                              text-gray-100 text-center
-                              rounded
-                              transition-colors cursor-pointer'
+                              lg:mt-2 sm:mt-4 
+                              text-center'
               >
                 Go to profile
-              </NavLink>
-              <button
+              </PrimaryButton>
+              <PrimaryButton
+                color='rose'
                 onClick={handleLogout}
-                className='font-semibold
-                              bg-rose-500 hover:bg-rose-600 active:bg-rose-700
-                              lg:py-0.5 lg:px-4 
+                className='lg:py-0.5 lg:px-4 
                               sm:py-2 sm:px-6
-                              lg:mt-2 sm:mt-4
-                              text-gray-100 text-center
-                              rounded
-                              transition-colors cursor-pointer'
+                              lg:mt-2 sm:mt-4 
+                              text-center'
               >
                 Log out
-              </button>
+              </PrimaryButton>
             </>
           </div>
         </>

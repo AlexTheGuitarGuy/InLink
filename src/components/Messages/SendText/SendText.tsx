@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 
 import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
 import FormInput from '../../common/Inputs/FormInput/FormInput'
+import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
 
 type MessageFormValues = {
   messageText: string
@@ -53,23 +54,14 @@ const SendText: FC<SendTextProps> = ({ id }) => {
               }}
             />
 
-            <div>
-              <button
-                disabled={isSubmitting || !isValid}
-                type='submit'
-                className='bg-gray-400 hover:bg-gray-500 active:bg-gray-600
-                          text-gray-100 text-center
-                          rounded-full ml-4 px-2 py-2 mt-2
-                          transition-colors cursor-pointer
-                          focus:outline-none focus:ring-0'
-              >
-                <img
-                  src={require('../../../assets/send.png')}
-                  alt='Send'
-                  className='w-8 h-8 mr-3'
-                />
-              </button>
-            </div>
+            <PrimaryButton
+              disabled={isSubmitting || !isValid}
+              type='submit'
+              className='rounded-full ml-4 p-3 mt-2'
+              color='gray'
+            >
+              <img src={require('../../../assets/send.png')} alt='Send' className='w-8 h-8 mr-3' />
+            </PrimaryButton>
           </div>
         </Form>
       )}

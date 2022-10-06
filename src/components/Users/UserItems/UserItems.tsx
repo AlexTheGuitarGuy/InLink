@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 
 import Loading from '../../common/Loading/Loading'
+import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
 
 const UserItems = () => {
   const users = useAppSelector(getUsers)
@@ -67,30 +68,18 @@ const UserItems = () => {
           </div>
         </NavLink>
 
-        <button
+        <PrimaryButton
           disabled={isDisabled}
           onClick={() => {
             buttonAction(e.id)
           }}
-          className={cn(
-            `
-          sm:text-xs lg:text-md
-          text-gray-100 text-center
-          lg:py-1 lg:px-4
-          sm:py-0.5 sm:px-2 
-          rounded
-          transition-colors cursor-pointer font-semibold focus:outline-none focus:ring-0
-          `,
-            {
-              'bg-gray-500 hover:bg-gray-600 active:bg-gray-700': !isDisabled,
-            },
-            {
-              'bg-gray-300 text-gray-500 cursor-not-allowed': isDisabled,
-            },
-          )}
+          className='sm:text-xs lg:text-md
+                    lg:py-1 lg:px-4
+                    sm:py-0.5 sm:px-2'
+          color='gray'
         >
           {(isDisabled && <Loading dimensions={5} />) || <>{buttonText}</>}
-        </button>
+        </PrimaryButton>
       </div>
     )
   })

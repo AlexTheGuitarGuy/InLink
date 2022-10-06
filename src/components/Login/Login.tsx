@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks'
 
 import { LoginPayload } from '../../types/types'
 import FormInput from '../common/Inputs/FormInput/FormInput'
+import PrimaryButton from '../common/Buttons/PrimaryButton/PrimaryButton'
 
 const Login: FC<{}> = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn)
@@ -20,9 +21,15 @@ const Login: FC<{}> = () => {
 
   const initialValues: LoginPayload = { email: '', password: '', rememberMe: false, captcha: '' }
 
+  const passwordMinLength = 4
   const validationSchema = Yup.object({
     email: Yup.string().email('invalid email').required(),
-    password: Yup.string().required().min(6, 'Password is too short - should be 6 chars minimum'),
+    password: Yup.string()
+      .required()
+      .min(
+        passwordMinLength,
+        `Password is too short - should be ${passwordMinLength} chars minimum`,
+      ),
     rememberMe: Yup.boolean().default(false),
     captcha: Yup.string().when('!captcha && captchaURL', {
       is: true,
@@ -99,24 +106,15 @@ const Login: FC<{}> = () => {
                       </div>
                     </div>
 
-                    <button
+                    <PrimaryButton
                       type='submit'
                       className='inline-block
-                                px-7 py-3
-                                bg-blue-600
-                                text-white font-medium text-sm leading-snug uppercase
-                                rounded shadow-md
-                                hover:bg-blue-700 hover:shadow-lg
-                                focus:bg-blue-700 focus:shadow-lg
-                                focus:outline-none focus:ring-0
-                                active:bg-blue-800 active:shadow-lg
-                                transition duration-150 ease-in-out w-full'
-                      data-mdb-ripple='true'
-                      data-mdb-ripple-color='light'
+                                px-7 py-3 w-full text-sm'
                       disabled={isSubmitting}
+                      color='blue'
                     >
-                      Sign in
-                    </button>
+                      Log in
+                    </PrimaryButton>
 
                     <div className='text-gray-700 mt-6'>
                       Free account for visitors:

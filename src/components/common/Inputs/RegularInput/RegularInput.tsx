@@ -19,7 +19,7 @@ type RegularInputProps = {
 const RegularInput: FC<RegularInputProps> = ({
 	field: { type = 'text', ...field },
 	label,
-	as,
+	as = 'input',
 	restProps,
 }) => {
 	return (

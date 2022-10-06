@@ -7,9 +7,8 @@ type FormInputProps = {
 		type?: string
 		name: string
 		placeholder: string
-		as?: string
+		as?: 'input' | 'textarea'
 		className?: string
-		id?: string
 	}
 	error?: {
 		className?: string
@@ -36,6 +35,7 @@ const FormInput: FC<FormInputProps> = ({
 			)}
 			<Field
 				{...field}
+				id={field.name}
 				type={type}
 				className={cn(
 					`rounded 
