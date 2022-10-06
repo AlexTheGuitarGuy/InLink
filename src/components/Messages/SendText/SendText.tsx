@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
-import { ErrorMessage, Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
 
 import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
@@ -57,10 +57,10 @@ const SendText: FC<SendTextProps> = ({ id }) => {
             <PrimaryButton
               disabled={isSubmitting || !isValid}
               type='submit'
-              className='rounded-full ml-4 p-3 mt-2'
+              className='rounded-full ml-4 py-3 px-5'
               color='gray'
             >
-              <img src={require('../../../assets/send.png')} alt='Send' className='w-8 h-8 mr-3' />
+              <img src={require('../../../assets/send.png')} alt='Send' className='w-8 h-8' />
             </PrimaryButton>
           </div>
         </Form>

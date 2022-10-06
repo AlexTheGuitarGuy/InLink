@@ -4,16 +4,16 @@ import {
   GetCaptchaURLResponse,
   ResultCodes,
   ResultCodesWithCaptcha,
-} from './API';
-import { LoginPayload } from '../types/types';
+} from './API'
+import { LoginPayload } from '../types/types'
 
 export const securityAPI = {
   me: async () => {
     const response = await instance.get<
       CommonResponse<ResultCodes, { id: number; email: string; login: string }>
-    >('https://social-network.samuraijs.com/api/1.0/auth/me');
+    >('auth/me')
 
-    return response.data;
+    return response.data
   },
 
   login: async ({ email, password, rememberMe, captcha }: LoginPayload) => {
@@ -24,20 +24,20 @@ export const securityAPI = {
       password,
       rememberMe,
       captcha,
-    });
+    })
 
-    return response.data;
+    return response.data
   },
 
   logout: async () => {
-    const response = await instance.delete<CommonResponse<ResultCodes, {}>>(`auth/login`);
+    const response = await instance.delete<CommonResponse<ResultCodes, {}>>(`auth/login`)
 
-    return response.data;
+    return response.data
   },
 
   getCaptchaURL: async () => {
-    const response = await instance.get<GetCaptchaURLResponse>(`/security/get-captcha-url`);
+    const response = await instance.get<GetCaptchaURLResponse>(`/security/get-captcha-url`)
 
-    return response.data;
+    return response.data
   },
-};
+}

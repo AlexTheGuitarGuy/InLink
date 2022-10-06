@@ -7,13 +7,10 @@ import { InferAction, InferThunk } from '../redux-store'
 
 const initialState = {
   users: [] as User[],
-  page: 1,
-  totalUsers: 0,
-  isLoading: false,
   followQueue: [] as number[],
-  portionSize: 0,
-  pageSize: 0,
+  totalUsers: 0,
   currentPagesBeginning: 0,
+  isLoading: false,
 }
 
 export type UsersPageReducerState = typeof initialState
@@ -34,7 +31,6 @@ const usersPageReducer = (state = initialState, action: UsersAction): UsersPageR
           }),
       }
     case 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS':
-    case 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE':
     case 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS_NB':
     case 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING':
       return {
@@ -59,12 +55,6 @@ export const usersActions = {
       type: 'IN_LINK/USERS_PAGE_REDUCER/SET_FOLLOW_STATUS',
       id,
       followed,
-    } as const),
-
-  setPage: (page: number) =>
-    ({
-      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE',
-      payload: { page },
     } as const),
 
   setUsersNb: (totalUsers: number) =>
@@ -92,11 +82,22 @@ export const usersActions = {
     } as const),
 }
 
-export const requestUsers = (page: number, pageSize: number): UsersThunk => {
+export type UsersRequest = {
+  page: number
+  count: number
+  term?: string
+  friend?: boolean
+}
+
+export const requestUsers = ({ page, count, term = '', friend }: UsersRequest): UsersThunk => {
   return async (dispatch) => {
     dispatch(usersActions.setLoading(true))
 
-    const data = await userAPI.getUsers(page, pageSize)
+    let newURL = `users?page=${page}&count=${count}`
+    if (term) newURL = `${newURL}&term=${term}`
+    if (friend) newURL = `${newURL}&friend=${friend}`
+
+    const data = await userAPI.getUsers(newURL)
 
     dispatch(usersActions.setUsers(data.items))
     dispatch(usersActions.setUsersNb(data.totalCount))

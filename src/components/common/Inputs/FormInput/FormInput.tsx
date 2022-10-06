@@ -6,7 +6,7 @@ type FormInputProps = {
 	field: {
 		type?: string
 		name: string
-		placeholder: string
+		placeholder?: string
 		as?: 'input' | 'textarea'
 		className?: string
 	}

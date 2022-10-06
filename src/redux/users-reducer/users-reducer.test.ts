@@ -1,4 +1,4 @@
-import usersPageReducer, { usersActions, UsersPageReducerState } from './users-reducer';
+import usersPageReducer, { usersActions, UsersPageReducerState } from './users-reducer'
 
 const state: UsersPageReducerState = {
   users: [
@@ -91,36 +91,33 @@ const state: UsersPageReducerState = {
       followed: false,
     },
   ],
-  page: 1,
   totalUsers: 0,
   isLoading: false,
-  followQueue: [],
-  portionSize: 0,
-  pageSize: 8,
+  followQueue: [] as number[],
   currentPagesBeginning: 0,
-};
+}
 
 it(`should turn follow status of user with id 2 from false to true`, () => {
-  const action = usersActions.setFollowStatus(2, true);
+  const action = usersActions.setFollowStatus(2, true)
 
-  const newState = usersPageReducer(state, action);
+  const newState = usersPageReducer(state, action)
 
-  expect(newState.users.find((e) => e.id === 2)?.followed).toBe(true);
-});
+  expect(newState.users.find((e) => e.id === 2)?.followed).toBe(true)
+})
 
 it(`should add user with id 2 to follow queue`, () => {
-  const action = usersActions.updateFollowQueue(2);
+  const action = usersActions.updateFollowQueue(2)
 
-  const newState = usersPageReducer(state, action);
+  const newState = usersPageReducer(state, action)
 
-  expect(newState.followQueue.some((e) => e === 2)).toBe(true);
-});
+  expect(newState.followQueue.some((e) => e === 2)).toBe(true)
+})
 
 it(`should remove user with id 2 from follow queue`, () => {
-  const action = usersActions.updateFollowQueue(2);
+  const action = usersActions.updateFollowQueue(2)
 
-  let newState = usersPageReducer(state, action);
-  newState = usersPageReducer(newState, action);
+  let newState = usersPageReducer(state, action)
+  newState = usersPageReducer(newState, action)
 
-  expect(newState.followQueue.some((e) => e === 2)).toBe(false);
-});
+  expect(newState.followQueue.some((e) => e === 2)).toBe(false)
+})

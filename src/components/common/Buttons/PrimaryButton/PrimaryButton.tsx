@@ -27,8 +27,8 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
 	let disabledBackground = ''
 	switch (color) {
 		case 'gray': {
-			regularBackground = `bg-gray-600 hover:bg-gray-700 
-		                    	focus:bg-gray-700 active:bg-gray-800`
+			regularBackground = `bg-gray-500 hover:bg-gray-600 
+		                    	focus:bg-gray-600 active:bg-gray-700`
 			disabledBackground = `bg-gray-300`
 			break
 		}
