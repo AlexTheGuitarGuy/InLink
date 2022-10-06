@@ -1,14 +1,19 @@
-import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import FormInput from '../../common/Inputs/FormInput/FormInput'
 import * as Yup from 'yup'
 import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
+import { useSearchParams } from 'react-router-dom'
 
 type SearchFormValues = {
+	usersType: string
 	search: string
 }
 
 const UsersSearch = () => {
+	const [searchParams, setSearchParams] = useSearchParams()
+
 	const initialValues = {
+		usersType: 'all',
 		search: '',
 	}
 
@@ -20,12 +25,17 @@ const UsersSearch = () => {
 	})
 
 	const onSubmit = (
-		{ search }: SearchFormValues,
+		{ search, usersType }: SearchFormValues,
 		{ setSubmitting }: FormikHelpers<SearchFormValues>,
 	) => {
-		if (search.trim()) {
-			alert(search)
-		}
+		let newURL = `?page=${searchParams.get('page')}&count=${searchParams.get('count')}`
+
+		if (search.trim()) newURL += `&term=${search}`
+
+		if (usersType !== 'all') newURL += `&friend=${usersType === 'friends' ? true : false}`
+
+		setSearchParams(newURL)
+
 		setSubmitting(false)
 	}
 
@@ -38,6 +48,25 @@ const UsersSearch = () => {
 							field={{ name: 'search', className: 'py-1 px-3 lg:w-auto w-full' }}
 							label={{ text: 'search for users', className: 'block' }}
 						/>
+						<div className='mt-1'>
+							<Field
+								name='usersType'
+								as='select'
+								className='bg-gray-100 
+												border border-gray-300 
+												text-gray-900 
+												text-sm 
+												rounded 
+												focus:ring-blue-500 focus:border-blue-500 
+												p-2.5 w-full
+												transition
+												focus:outline-none'
+							>
+								<option value='all'>All</option>
+								<option value='friends'>Friends</option>
+								<option value='non-friends'>Non-Friends</option>
+							</Field>
+						</div>
 						<div className='flex justify-end'>
 							<PrimaryButton type='submit' className='px-3 py-0.5 mt-2'>
 								submit

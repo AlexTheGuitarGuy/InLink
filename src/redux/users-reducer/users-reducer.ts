@@ -82,20 +82,11 @@ export const usersActions = {
     } as const),
 }
 
-export type UsersRequest = {
-  page: number
-  count: number
-  term?: string
-  friend?: boolean
-}
-
-export const requestUsers = ({ page, count, term = '', friend }: UsersRequest): UsersThunk => {
+export const requestUsers = (params: string): UsersThunk => {
   return async (dispatch) => {
     dispatch(usersActions.setLoading(true))
 
-    let newURL = `users?page=${page}&count=${count}`
-    if (term) newURL = `${newURL}&term=${term}`
-    if (friend) newURL = `${newURL}&friend=${friend}`
+    let newURL = `users${params}`
 
     const data = await userAPI.getUsers(newURL)
 

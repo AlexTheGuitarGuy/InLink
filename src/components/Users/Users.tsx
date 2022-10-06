@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { getIsLoading, getTotalUsers } from '../../redux/users-reducer/users-selector'
-import { requestUsers, UsersRequest } from '../../redux/users-reducer/users-reducer'
+import { requestUsers } from '../../redux/users-reducer/users-reducer'
 
 import useScreenSize from '../../hooks/useScreenSize'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
@@ -10,7 +10,7 @@ import Loading from '../common/Loading/Loading'
 import UserItems from './UserItems/UserItems'
 import UsersSearch from './UsersSearch/UsersSearch'
 import Paginator from '../common/Paginator/Paginator'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 
 const Users = () => {
   const totalUsers = useAppSelector(getTotalUsers)
@@ -23,20 +23,28 @@ const Users = () => {
   const count = screenSize.dynamicWidth < 1366 ? 11 : 6
   const portionSize = screenSize.dynamicWidth < 1366 ? 5 : 10
 
+  const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
   const allParams = Object.fromEntries(searchParams)
 
   const changePage = (page: number) => {
-    dispatch(requestUsers({ page, count }))
-    setSearchParams(`?page=${page}&count=${count}`)
+    let newURL = `?page=${page}&count=${count}`
+
+    if (allParams.term) newURL += `&term=${allParams.term}`
+    if (allParams.friend) newURL += `&friend=${allParams.friend}`
+
+    setSearchParams(newURL)
   }
 
   useEffect(() => {
     if (!allParams.page) {
-      dispatch(requestUsers({ page: 1, count }))
       setSearchParams(`?page=1&count=${count}`)
     }
   }, [allParams.page, dispatch, count, setSearchParams])
+
+  useEffect(() => {
+    dispatch(requestUsers(location.search))
+  }, [location.search, dispatch])
 
   if (isLoading) return <Loading />
 
