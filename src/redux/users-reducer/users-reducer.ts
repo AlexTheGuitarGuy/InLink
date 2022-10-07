@@ -7,10 +7,12 @@ import { InferAction, InferThunk } from '../redux-store'
 
 const initialState = {
   users: [] as User[],
+  frontPageFriends: [] as User[],
   followQueue: [] as number[],
   totalUsers: 0,
   currentPagesBeginning: 0,
   isLoading: false,
+  pageSize: 0,
 }
 
 export type UsersPageReducerState = typeof initialState
@@ -33,6 +35,8 @@ const usersPageReducer = (state = initialState, action: UsersAction): UsersPageR
     case 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS':
     case 'IN_LINK/USERS_PAGE_REDUCER/SET_USERS_NB':
     case 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING':
+    case 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE_SIZE':
+    case 'IN_LINK/USERS_PAGE_REDUCER/SET_FRONT_PAGE_FRIENDS':
       return {
         ...state,
         ...action.payload,
@@ -69,10 +73,22 @@ export const usersActions = {
       payload: { users },
     } as const),
 
+  setFrontPageFriends: (frontPageFriends: User[]) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_FRONT_PAGE_FRIENDS',
+      payload: { frontPageFriends },
+    } as const),
+
   setLoading: (isLoading: boolean) =>
     ({
       type: 'IN_LINK/USERS_PAGE_REDUCER/SET_LOADING',
       payload: { isLoading },
+    } as const),
+
+  setPageSize: (pageSize: number) =>
+    ({
+      type: 'IN_LINK/USERS_PAGE_REDUCER/SET_PAGE_SIZE',
+      payload: { pageSize },
     } as const),
 
   updateFollowQueue: (id: number) =>
@@ -93,6 +109,42 @@ export const requestUsers = (params: string): UsersThunk => {
     dispatch(usersActions.setUsers(data.items))
     dispatch(usersActions.setUsersNb(data.totalCount))
     dispatch(usersActions.setLoading(false))
+  }
+}
+
+export const fetchFrontPageFriends = (): UsersThunk => {
+  return async (dispatch) => {
+    const presentationUser1 = await userAPI.getUsers(
+      `users?page=1&count=1&term=samurai+dimych&friend=true`,
+    )
+    const presentationUser2 = await userAPI.getUsers(
+      `users?page=1&count=1&term=Natalie+Danilchenkofff&friend=true`,
+    )
+
+    const presentationUser3 = await userAPI.getUsers(
+      `users?page=1&count=1&term=Дмитрий+Долидов&friend=true`,
+    )
+
+    let howManyFallbackFriends = 1
+    if (!presentationUser1.items.length) howManyFallbackFriends++
+    if (!presentationUser2.items.length) howManyFallbackFriends++
+    if (!presentationUser3.items.length) howManyFallbackFriends++
+
+    const fallbackFriends = await userAPI.getUsers(
+      `users?page=1&count=${howManyFallbackFriends}&friend=true`,
+    )
+
+    const friendsArray = [
+      ...presentationUser1.items,
+      ...presentationUser2.items,
+      ...presentationUser3.items,
+      ...fallbackFriends.items,
+    ]
+    if (friendsArray.length === 4) dispatch(usersActions.setFrontPageFriends(friendsArray))
+    else {
+      const anyUsers = await userAPI.getUsers(`users?page=1&count=4`)
+      dispatch(usersActions.setFrontPageFriends(anyUsers.items))
+    }
   }
 }
 

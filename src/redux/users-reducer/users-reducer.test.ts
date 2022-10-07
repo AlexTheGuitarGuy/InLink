@@ -91,10 +91,12 @@ const state: UsersPageReducerState = {
       followed: false,
     },
   ],
+  frontPageFriends: [],
   totalUsers: 0,
   isLoading: false,
-  followQueue: [] as number[],
+  followQueue: [],
   currentPagesBeginning: 0,
+  pageSize: 0,
 }
 
 it(`should turn follow status of user with id 2 from false to true`, () => {

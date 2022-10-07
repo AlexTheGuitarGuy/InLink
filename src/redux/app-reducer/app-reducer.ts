@@ -1,4 +1,5 @@
 import { auth } from '../auth-reducer/auth-reducer'
+import { fetchFrontPageFriends } from '../users-reducer/users-reducer'
 import { Alert } from '../../types/types'
 import { InferAction, InferThunk } from '../redux-store'
 
@@ -60,8 +61,9 @@ export const setAlertFromThunk =
 
 export const initializeApp = (): AppThunk => async (dispatch) => {
   const authPromise = dispatch(auth())
+  const usersPromise = dispatch(fetchFrontPageFriends())
 
-  await Promise.all([authPromise])
+  await Promise.all([authPromise, usersPromise])
 
   dispatch(appActions.initializeSuccess())
 }

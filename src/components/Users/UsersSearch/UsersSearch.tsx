@@ -28,7 +28,7 @@ const UsersSearch = () => {
 		{ search, usersType }: SearchFormValues,
 		{ setSubmitting }: FormikHelpers<SearchFormValues>,
 	) => {
-		let newURL = `?page=${searchParams.get('page')}&count=${searchParams.get('count')}`
+		let newURL = `?page=1&count=${searchParams.get('count')}`
 
 		if (search.trim()) newURL += `&term=${search}`
 

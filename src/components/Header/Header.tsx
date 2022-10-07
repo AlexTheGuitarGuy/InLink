@@ -5,13 +5,14 @@ import Nav from './Nav/Nav'
 import { useLocation } from 'react-router-dom'
 import { compose } from 'redux'
 import { useSelector } from 'react-redux'
-import { getDialogsPage } from '../../redux/dialogs-reducer/dialogs-selector'
+import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 import useScreenSize from '../../hooks/useScreenSize'
 import GoBack from '../../assets/go-back.png'
+import Placeholder from '../../assets/pfps/placeholder.jpg'
 
 const Header = () => {
   const location = useLocation()
-  const { users } = useSelector(getDialogsPage)
+  const users = useSelector(getFrontPageFriends)
   const screenSize = useScreenSize()
 
   if (!users) return null
@@ -21,7 +22,7 @@ const Header = () => {
     !location.pathname.match('/messages/all') &&
     screenSize.dynamicWidth < 1366
   ) {
-    const currentDialogUser = users[+location.pathname[location.pathname.length - 1] - 1]
+    const currentDialogUser = users[+location.pathname[location.pathname.length - 1]]
 
     if (!currentDialogUser) return null
 
@@ -39,7 +40,7 @@ const Header = () => {
           </NavLink>
 
           <img
-            src={currentDialogUser.avatar}
+            src={currentDialogUser.photos.small || Placeholder}
             alt={currentDialogUser.name}
             className='h-8 w-8 mt-2
                         ml-4

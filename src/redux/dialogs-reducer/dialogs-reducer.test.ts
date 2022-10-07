@@ -1,35 +1,11 @@
 import dialogsReducer, { DialogsReducerState, dialogsActions } from './dialogs-reducer'
-import User1Image from '../../assets/pfps/u1.jpg'
-import User2Image from '../../assets/pfps/u2.jpg'
-import User3Image from '../../assets/pfps/u3.jpg'
-import User4Image from '../../assets/pfps/u4.jpg'
 
 const state: DialogsReducerState = {
-  users: [
-    {
-      avatar: User1Image,
-      name: 'Denis Johnson',
-    },
-    {
-      avatar: User2Image,
-      name: 'Hannah White',
-    },
-    {
-      avatar: User3Image,
-      name: 'Jane Doe',
-    },
-    {
-      avatar: User4Image,
-      name: 'Walter Laine',
-    },
-  ],
   userMessages: [
     [
       {
-        name: 'Denis Johnson',
         text: `Lorem Ipsum is simply dummy text`,
         type: 'received',
-        avatar: User1Image,
       },
       {
         text: `Where does it come from?
@@ -38,18 +14,14 @@ const state: DialogsReducerState = {
         type: 'sent',
       },
       {
-        name: 'Denis Johnson',
         text: `accompanied by English versions from the 1914 translation by H. Rackham.`,
         type: 'received',
-        avatar: User1Image,
       },
     ],
     [
       {
-        name: 'Hannah White',
         text: 'It is a long established fact that a reader will be distracted by the readable content',
         type: 'received',
-        avatar: User2Image,
       },
       {
         text: 'has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n',
@@ -60,17 +32,13 @@ const state: DialogsReducerState = {
         type: 'sent',
       },
       {
-        name: 'Hannah White',
         text: 'Lorem Ipsum is simply dummy text',
         type: 'received',
-        avatar: User2Image,
       },
       { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
       {
-        name: 'Hannah White',
         text: 'It is a long established fact that a reader will be distracted by the readable content',
         type: 'received',
-        avatar: User2Image,
       },
       {
         text: ' with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
@@ -81,10 +49,8 @@ const state: DialogsReducerState = {
         type: 'sent',
       },
       {
-        name: 'Hannah White',
         text: 'Lorem Ipsum is simply dummy text',
         type: 'received',
-        avatar: User2Image,
       },
       {
         text: 'Lorem Ipsum is simply dummy text',
@@ -92,12 +58,10 @@ const state: DialogsReducerState = {
       },
     ],
     [
-      { name: 'Jane Doe', text: 'Where does it come from?', type: 'received', avatar: User3Image },
       {
         text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
         type: 'sent',
       },
-      { name: 'Jane Doe', text: 'Lorem Ipsum', type: 'received', avatar: User3Image },
       { text: 'Lorem Ipsum', type: 'sent' },
       {
         text: 'Lorem Ipsum used since the 1500s is reproduced below',
@@ -106,20 +70,16 @@ const state: DialogsReducerState = {
     ],
     [
       {
-        name: 'Jane Doe',
         text: 'Lorem Ipsum used since the 1500s is reproduced below',
         type: 'received',
-        avatar: User4Image,
       },
       {
         text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. ',
         type: 'sent',
       },
       {
-        name: 'Jane Doe',
         text: 'Lorem Ipsum',
         type: 'received',
-        avatar: User4Image,
       },
       { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
     ],

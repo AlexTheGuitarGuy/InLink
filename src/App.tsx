@@ -33,10 +33,6 @@ const App = () => {
   }, [dispatch, uid])
 
   useEffect(() => {
-    dispatch(initializeApp())
-  }, [dispatch, isAppInitialized])
-
-  useEffect(() => {
     const handleRejection = (event: PromiseRejectionEvent) => {
       if (event?.reason?.substring) {
         if (event.reason.substring(0, 18) === 'Invalid url format')
@@ -52,6 +48,10 @@ const App = () => {
       window.removeEventListener('unhandledrejection', handleRejection)
     }
   })
+
+  useEffect(() => {
+    dispatch(initializeApp())
+  }, [dispatch, isAppInitialized])
 
   if (!isAppInitialized) return <Loading />
 

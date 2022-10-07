@@ -2,13 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { getDialogUsers } from '../../../redux/dialogs-reducer/dialogs-selector'
-import { DialogsUser } from '../../../types/types'
+import { getFrontPageFriends } from '../../../redux/users-reducer/users-selector'
+import Placeholder from '../../../assets/pfps/placeholder.jpg'
 
 const FriendItems = () => {
-  const friends = useSelector(getDialogUsers)
+  const friends = useSelector(getFrontPageFriends)
 
-  let friendList = friends.map(({ name, avatar }: DialogsUser, index: number) => {
+  let friendList = friends.map(({ name, photos }, index: number) => {
     if (index < 5) {
       return (
         <NavLink to={`/messages/${index}`} key={name}>
@@ -22,7 +22,7 @@ const FriendItems = () => {
           '
           >
             <img
-              src={avatar}
+              src={photos.small || Placeholder}
               alt={name}
               className='h-12 w-12
               xl:h-16 xl:w-16
@@ -41,7 +41,9 @@ const FriendItems = () => {
       <div className='text-lg ml-2 xl:text-xl'>Contacts:</div>
       <div>
         {friendList}
-        {friendList.length > 5 && <span className='font-normal ml-4 text-sm'>and more...</span>}
+        <NavLink to='/users?friend=true' className='font-normal ml-4 text-sm hover:underline'>
+          See all..
+        </NavLink>
       </div>
     </div>
   )

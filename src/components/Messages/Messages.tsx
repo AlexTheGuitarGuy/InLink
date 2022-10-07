@@ -4,7 +4,8 @@ import { Navigate } from 'react-router'
 import { compose } from 'redux'
 import { useSelector } from 'react-redux'
 
-import { getUserMessages, getDialogsUsers } from '../../redux/dialogs-reducer/dialogs-selector'
+import { getUserMessages } from '../../redux/dialogs-reducer/dialogs-selector'
+import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 import { getMyData } from '../../redux/profile-reducer/profile-selector'
 
 import withAuthRedirect from '../../HOC/withAuthRedirect'
@@ -19,24 +20,24 @@ import Loading from '../common/Loading/Loading'
 
 const Messages = () => {
   const userMessages = useSelector(getUserMessages)
-  const users = useSelector(getDialogsUsers)
+  const users = useSelector(getFrontPageFriends)
   const myData = useSelector(getMyData)
 
   const screenSize = useScreenSize()
+
+  if (!myData || !users) return <Loading />
 
   const conversationComponents = userMessages.map(
     (conversation: UserMessageType[], conversationIndex: number) => {
       return conversation.map((message: UserMessageType, messageIndex: number) => {
         return (
           <div key={messageIndex}>
-            <UserMessage message={message} />
+            <UserMessage message={message} conversationIndex={conversationIndex} users={users} />
           </div>
         )
       })
     },
   )
-
-  if (!myData) return <Loading />
 
   const routes = conversationComponents.map((conversationComponent: ReactNode[], index: number) => {
     return (

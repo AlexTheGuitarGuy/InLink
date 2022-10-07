@@ -4,8 +4,16 @@ export const getUsers = (state: RootState) => {
   return state.usersPage.users
 }
 
+export const getFrontPageFriends = (state: RootState) => {
+  return state.usersPage.frontPageFriends
+}
+
 export const getTotalUsers = (state: RootState) => {
   return state.usersPage.totalUsers
+}
+
+export const getPageSize = (state: RootState) => {
+  return state.usersPage.pageSize
 }
 
 export const getCurrentPagesBeginning = (state: RootState) => {

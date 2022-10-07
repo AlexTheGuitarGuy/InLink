@@ -1,7 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
-import { getIsLoading, getTotalUsers } from '../../redux/users-reducer/users-selector'
-import { requestUsers } from '../../redux/users-reducer/users-reducer'
+import {
+  getIsLoading,
+  getPageSize,
+  getTotalUsers,
+  getUsers,
+} from '../../redux/users-reducer/users-selector'
+import { requestUsers, usersActions } from '../../redux/users-reducer/users-reducer'
 
 import useScreenSize from '../../hooks/useScreenSize'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
@@ -15,32 +20,40 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 const Users = () => {
   const totalUsers = useAppSelector(getTotalUsers)
   const isLoading = useAppSelector(getIsLoading)
+  const users = useAppSelector(getUsers)
 
   const dispatch = useAppDispatch()
 
   const screenSize = useScreenSize()
 
-  const count = screenSize.dynamicWidth < 1366 ? 11 : 6
+  useEffect(() => {
+    dispatch(usersActions.setPageSize(screenSize.dynamicWidth < 1366 ? 11 : 6))
+  }, [dispatch, screenSize.dynamicWidth])
+  const count = useAppSelector(getPageSize)
+
   const portionSize = screenSize.dynamicWidth < 1366 ? 5 : 10
 
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
   const allParams = Object.fromEntries(searchParams)
 
-  const changePage = (page: number) => {
-    let newURL = `?page=${page}&count=${count}`
+  const changePage = useCallback(
+    (page: number) => {
+      let newURL = `?page=${page}&count=${count}`
 
-    if (allParams.term) newURL += `&term=${allParams.term}`
-    if (allParams.friend) newURL += `&friend=${allParams.friend}`
+      if (allParams.term) newURL += `&term=${allParams.term}`
+      if (allParams.friend) newURL += `&friend=${allParams.friend}`
 
-    setSearchParams(newURL)
-  }
+      setSearchParams(newURL)
+    },
+    [count, allParams, setSearchParams],
+  )
 
   useEffect(() => {
     if (!allParams.page) {
-      setSearchParams(`?page=1&count=${count}`)
+      changePage(1)
     }
-  }, [allParams.page, dispatch, count, setSearchParams])
+  }, [changePage, allParams.page])
 
   useEffect(() => {
     dispatch(requestUsers(location.search))
@@ -58,16 +71,22 @@ const Users = () => {
     '
     >
       <UsersSearch />
-      <UserItems />
-      <div className='mt-4'>
-        <Paginator
-          page={+allParams.page}
-          pageSize={+allParams.count}
-          portionSize={portionSize}
-          totalElems={totalUsers}
-          changePage={changePage}
-        />
-      </div>
+      {users.length ? (
+        <>
+          <UserItems />
+          <div className='mt-4'>
+            <Paginator
+              page={+allParams.page}
+              pageSize={+allParams.count}
+              portionSize={portionSize}
+              totalElems={totalUsers}
+              changePage={changePage}
+            />
+          </div>
+        </>
+      ) : (
+        <div className='text-center'>No users match these parameters.</div>
+      )}
     </div>
   )
 }

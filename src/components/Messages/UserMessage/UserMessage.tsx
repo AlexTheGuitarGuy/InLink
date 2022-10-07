@@ -1,17 +1,23 @@
-import React, { FC } from 'react';
-import cn from 'classnames';
-import { getMyData } from '../../../redux/profile-reducer/profile-selector';
-import { useSelector } from 'react-redux';
-import { UserMessage as UserMessageType } from '../../../types/types';
-import Placeholder from '../../../assets/pfps/placeholder.jpg';
+import React, { FC } from 'react'
+import cn from 'classnames'
+import { getMyData } from '../../../redux/profile-reducer/profile-selector'
+import { useSelector } from 'react-redux'
+import { User, UserMessage as UserMessageType } from '../../../types/types'
+import Placeholder from '../../../assets/pfps/placeholder.jpg'
 
 type UserMessageProps = {
-  message: UserMessageType;
-};
+  message: UserMessageType
+  conversationIndex: number
+  users: User[]
+}
 
-const UserMessage: FC<UserMessageProps> = ({ message: { name, type, text, avatar } }) => {
-  const isFromMe = type === 'sent';
-  const myData = useSelector(getMyData);
+const UserMessage: FC<UserMessageProps> = ({
+  message: { type, text },
+  conversationIndex,
+  users,
+}) => {
+  const isFromMe = type === 'sent'
+  const myData = useSelector(getMyData)
 
   const messages = (
     <div
@@ -24,8 +30,10 @@ const UserMessage: FC<UserMessageProps> = ({ message: { name, type, text, avatar
       )}
     >
       <img
-        src={(isFromMe ? myData?.photos?.small : avatar) || Placeholder}
-        alt={name}
+        src={
+          (isFromMe ? myData?.photos?.small : users[conversationIndex].photos.small) || Placeholder
+        }
+        alt={users[conversationIndex].name}
         className={cn('h-10 w-10 rounded-full', { 'order-1': !isFromMe }, { 'order-2': isFromMe })}
       />
 
@@ -43,9 +51,9 @@ const UserMessage: FC<UserMessageProps> = ({ message: { name, type, text, avatar
         {text}
       </div>
     </div>
-  );
+  )
 
-  return <div>{messages}</div>;
-};
+  return <div>{messages}</div>
+}
 
-export default UserMessage;
+export default UserMessage
