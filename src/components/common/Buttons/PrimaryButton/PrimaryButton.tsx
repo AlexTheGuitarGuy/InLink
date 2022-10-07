@@ -32,6 +32,18 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
 			disabledBackground = `bg-gray-300`
 			break
 		}
+		case 'lightGray': {
+			regularBackground = `bg-gray-300 hover:bg-gray-400 
+		                    	focus:bg-gray-400 active:bg-gray-500`
+			disabledBackground = `bg-gray-100`
+			break
+		}
+		case 'background': {
+			regularBackground = `bg-gray-100 hover:bg-gray-200 
+		                    	focus:bg-gray-200 active:bg-gray-300`
+			disabledBackground = `bg-gray-300`
+			break
+		}
 		case 'blue': {
 			regularBackground = `bg-blue-600 hover:bg-blue-700 
 		                    	focus:bg-blue-700 active:bg-blue-800`

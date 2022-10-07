@@ -53,15 +53,16 @@ const SendText: FC<SendTextProps> = ({ id }) => {
                 className: 'resize-none w-full rounded-lg p-2',
               }}
             />
-
-            <PrimaryButton
-              disabled={isSubmitting || !isValid}
-              type='submit'
-              className='rounded-full ml-4 py-3 px-5'
-              color='gray'
-            >
-              <img src={require('../../../assets/send.png')} alt='Send' className='w-8 h-8' />
-            </PrimaryButton>
+            <div className='flex items-center'>
+              <PrimaryButton
+                disabled={isSubmitting || !isValid}
+                type='submit'
+                className='rounded-full ml-4 shadow-none h-12 w-12 flex justify-center items-center'
+                color='lightGray'
+              >
+                <img src={require('../../../assets/send.png')} alt='Send' className='w-8 h-8' />
+              </PrimaryButton>
+            </div>
           </div>
         </Form>
       )}
