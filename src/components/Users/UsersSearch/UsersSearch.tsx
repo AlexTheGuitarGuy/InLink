@@ -3,6 +3,8 @@ import FormInput from '../../common/Inputs/FormInput/FormInput'
 import * as Yup from 'yup'
 import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
 import { useSearchParams } from 'react-router-dom'
+import { debounce } from 'lodash'
+import { ChangeEvent, useEffect, useRef } from 'react'
 
 type SearchFormValues = {
 	usersType: string
@@ -11,6 +13,7 @@ type SearchFormValues = {
 
 const UsersSearch = () => {
 	const [searchParams, setSearchParams] = useSearchParams()
+	const formRef = useRef<FormikProps<SearchFormValues>>(null)
 
 	const initialValues = {
 		usersType: 'all',
@@ -39,13 +42,40 @@ const UsersSearch = () => {
 		setSubmitting(false)
 	}
 
+	const debouncedSearch = useRef(
+		debounce(() => {
+			if (formRef.current) {
+				formRef.current.handleSubmit()
+			}
+		}, 5000),
+	).current
+	useEffect(() => {
+		return () => {
+			debouncedSearch.cancel()
+		}
+	}, [debouncedSearch])
+
 	return (
-		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-			{({ isSubmitting, isValid }: FormikProps<SearchFormValues>) => (
+		<Formik
+			initialValues={initialValues}
+			validationSchema={validationSchema}
+			onSubmit={onSubmit}
+			innerRef={formRef}
+		>
+			{({ isSubmitting, isValid, submitForm, handleChange }: FormikProps<SearchFormValues>) => (
 				<Form className='flex justify-end lg:mr-60 lg:mb-2 lg:my-0 my-6 lg:mx-0 mx-20'>
 					<div className='lg:w-auto w-full'>
 						<FormInput
-							field={{ name: 'search', className: 'py-1 px-3 lg:w-auto w-full' }}
+							field={{
+								name: 'search',
+								className: 'py-1 px-3 lg:w-auto w-full',
+								restprops: {
+									onChange: (event: ChangeEvent<HTMLInputElement>) => {
+										handleChange(event)
+										debouncedSearch()
+									},
+								},
+							}}
 							label={{ text: 'search for users', className: 'block' }}
 						/>
 						<div className='mt-1'>
@@ -61,16 +91,15 @@ const UsersSearch = () => {
 												p-2.5 w-full
 												transition
 												focus:outline-none'
+								onChange={(event: ChangeEvent<HTMLInputElement>) => {
+									handleChange(event)
+									debouncedSearch()
+								}}
 							>
 								<option value='all'>All</option>
 								<option value='friends'>Friends</option>
 								<option value='non-friends'>Non-Friends</option>
 							</Field>
-						</div>
-						<div className='flex justify-end'>
-							<PrimaryButton type='submit' className='px-3 py-0.5 mt-2'>
-								submit
-							</PrimaryButton>
 						</div>
 					</div>
 				</Form>

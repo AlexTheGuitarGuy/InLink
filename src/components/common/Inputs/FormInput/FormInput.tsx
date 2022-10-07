@@ -9,6 +9,7 @@ type FormInputProps = {
 		placeholder?: string
 		as?: 'input' | 'textarea'
 		className?: string
+		restprops?: any
 	}
 	error?: {
 		className?: string
@@ -35,6 +36,7 @@ const FormInput: FC<FormInputProps> = ({
 			)}
 			<Field
 				{...field}
+				{...field.restprops}
 				id={field.name}
 				type={type}
 				className={cn(
