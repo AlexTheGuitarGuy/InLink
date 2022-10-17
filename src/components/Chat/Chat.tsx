@@ -41,11 +41,11 @@ const Chat = () => {
 		>
 			<Messages />
 			<PostText />
-			{status === 'error' && <div className='bg-red-100 font-normal'>An error has occured.</div>}
-			{status === 'pending' && <div className='bg-yellow-100 font-normal'>Connecting...</div>}
-			{status === 'ready' && showSuccess && (
-				<div className='bg-green-100 font-normal'>Connected.</div>
-			)}
+			<div className='font-normal'>
+				{status === 'error' && <div className='bg-red-100'>An error has occured.</div>}
+				{status === 'pending' && <div className='bg-yellow-100'>Connecting...</div>}
+				{status === 'ready' && showSuccess && <div className='bg-green-100'>Connected.</div>}
+			</div>
 		</div>
 	)
 }

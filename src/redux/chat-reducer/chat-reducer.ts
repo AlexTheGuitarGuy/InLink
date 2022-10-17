@@ -31,7 +31,9 @@ const chatReducer = (state = initialState, action: ChatAction): ChatReducerState
     case 'IN_LINK/CHAT_REDUCER/MESSAGES_RECEIVED':
       return {
         ...state,
-        messages: state.messages ? [...state.messages, ...action.messages] : [...action.messages],
+        messages: state.messages?.length
+          ? [...state.messages, ...action.messages]
+          : [...action.messages],
       }
     default:
       return state
@@ -61,8 +63,17 @@ const newMessagesHandlerCreator = (dispatch: Dispatch, getState: () => RootState
   if (_newMessagesHandler === null)
     _newMessagesHandler = (messages: MessageData[]) => {
       const areMessagesInitialized = getState().chat.areMessagesInitialized
+      const currentMessages = getState().chat.messages
       if ((messages.length > 1 && !areMessagesInitialized) || messages.length === 1) {
         dispatch(chatActions.messagesReceived(messages))
+        dispatch(chatActions.messagesInitialized(true))
+      } else if (
+        messages.length > 1 &&
+        areMessagesInitialized &&
+        currentMessages?.length &&
+        currentMessages.length < messages.length
+      ) {
+        dispatch(chatActions.messagesReceived(messages.slice(currentMessages.length)))
         dispatch(chatActions.messagesInitialized(true))
       }
     }
