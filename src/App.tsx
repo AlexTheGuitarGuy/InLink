@@ -15,6 +15,7 @@ import Loading from './components/common/Loading/Loading'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Alert from './components/Alert/Alert'
 import Login from './components/Login/Login'
+import Chat from './components/Chat/Chat'
 import Users from './components/Users/Users'
 import Messages from './components/Messages/Messages'
 import Profile from './components/Profile/Profile'
@@ -78,6 +79,7 @@ const App = () => {
             <Route path='/' element={<Navigate to='/profile' />} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/chat' element={<Chat />} />
 
             <Route path='/messages/*' element={<Messages />} />
 

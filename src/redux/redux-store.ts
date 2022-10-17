@@ -8,9 +8,11 @@ import navbarReducer from './navbar-reducer/navbar-reducer'
 import usersPageReducer from './users-reducer/users-reducer'
 import authReducer from './auth-reducer/auth-reducer'
 import appReducer from './app-reducer/app-reducer'
+import chatReducer from './chat-reducer/chat-reducer'
 
 const reducers = combineReducers({
   profilePage: profileReducer,
+  chat: chatReducer,
   dialogsPage: dialogsReducer,
   navbar: navbarReducer,
   usersPage: usersPageReducer,
