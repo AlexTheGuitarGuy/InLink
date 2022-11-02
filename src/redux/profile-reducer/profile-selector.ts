@@ -1,4 +1,4 @@
-import { RootState } from '../redux-store'
+import { RootState } from '../store'
 
 export const getProfilePage = (state: RootState) => {
   return state.profilePage

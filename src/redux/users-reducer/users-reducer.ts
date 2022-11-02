@@ -3,7 +3,7 @@ import { updateObjInArr } from '../../utils/object-helpers'
 import { User } from '../../types/types'
 import { ResultCodes } from '../../api/API'
 
-import { InferAction, InferThunk } from '../redux-store'
+import { InferAction, InferThunk } from '../store'
 
 const initialState = {
   users: [] as User[],

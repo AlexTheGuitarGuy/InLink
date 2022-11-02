@@ -1,4 +1,4 @@
-import { RootState } from '../redux-store'
+import { RootState } from '../store'
 
 export const getUsers = (state: RootState) => {
   return state.usersPage.users

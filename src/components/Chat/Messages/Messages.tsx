@@ -1,37 +1,75 @@
-import { FC, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 
 import { useAppSelector } from '../../../hooks/reduxHooks'
-import { getMessages } from '../../../redux/chat-reducer/chat-selector'
+import { getMessages, getStatus } from '../../../redux/chat-reducer/chat-selector'
+import { getUID } from '../../../redux/auth-reducer/auth-selector'
 import useScreenSize from '../../../hooks/useScreenSize'
+import { NavLink } from 'react-router-dom'
+import placeholder from '../../../assets/pfps/placeholder.jpg'
+import cn from 'classnames'
 
 const Messages = () => {
-	const messages = useAppSelector(getMessages)
+  const messages = useAppSelector(getMessages)
+  const status = useAppSelector(getStatus)
+  const myUID = useAppSelector(getUID)
 
-	const bottomRef = useRef<HTMLDivElement>(null)
+  const bottomRef = useRef<HTMLDivElement>(null)
 
-	const { dynamicHeight } = useScreenSize()
+  const { dynamicHeight } = useScreenSize()
 
-	useEffect(() => {
-		const distanceFromTop = bottomRef.current?.getBoundingClientRect().top
-		const screenAlignment = distanceFromTop && distanceFromTop - dynamicHeight
-		const scrollRange = dynamicHeight / 8
-		if (screenAlignment && screenAlignment < scrollRange && screenAlignment > -scrollRange)
-			bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-	}, [messages, dynamicHeight])
+  useEffect(() => {
+    setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 1000)
+  }, [status])
 
-	return (
-		<div>
-			{messages?.map(({ message, userName }) => {
-				return (
-					<div className='bg-green-100 p-3 m-2' key={uuidv1()}>
-						{userName}: {message}
-					</div>
-				)
-			})}
-			<div ref={bottomRef}></div>
-		</div>
-	)
+  useEffect(() => {
+    const distanceFromTop = bottomRef.current?.getBoundingClientRect().top
+    const screenAlignment = distanceFromTop && distanceFromTop - dynamicHeight
+    const scrollRange = dynamicHeight / 8
+    if (screenAlignment && screenAlignment < scrollRange && screenAlignment > -scrollRange)
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, dynamicHeight])
+
+  return (
+    <div>
+      {messages?.map(({ message, userName, userId, photo }) => {
+        const isThisMe = myUID === userId
+        return (
+          <div
+            className={cn('p-3 m-2 rounded-lg border-y lg:border border-gray-300 lg:bg-gray-200', {
+              'flex flex-col items-end': isThisMe,
+            })}
+            key={uuidv1()}
+          >
+            <NavLink to={`/profile/${userId}`}>
+              <div className='flex items-center'>
+                <img
+                  src={photo || placeholder}
+                  className={cn(
+                    `h-16 w-16 p-0.5 mr-2
+                    rounded-full
+                    inline
+                    transition-colors hover:bg-gray-700 active:bg-gray-800`,
+                    { 'order-last': isThisMe },
+                  )}
+                  alt='user'
+                />
+                <span className='hover:underline font-bold mx-2'>{userName}</span>
+              </div>
+            </NavLink>
+            <div
+              className={cn('mx-8 my-2 break-all', {
+                'flex justify-end': isThisMe,
+              })}
+            >
+              {message}
+            </div>
+          </div>
+        )
+      })}
+      <div ref={bottomRef}></div>
+    </div>
+  )
 }
 
 export default Messages

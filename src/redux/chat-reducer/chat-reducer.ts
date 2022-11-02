@@ -1,4 +1,4 @@
-import { InferAction, InferThunk, RootState } from '../redux-store'
+import { InferAction, InferThunk, RootState } from '../store'
 import {
   chatAPI,
   MessageData,
@@ -110,7 +110,7 @@ export const stopMessagesListening = (): ChatThunk => {
 }
 
 export const sendMessage = (message: string): ChatThunk => {
-  return async (dispatch) => {
+  return async () => {
     chatAPI.sendMessage(message)
   }
 }

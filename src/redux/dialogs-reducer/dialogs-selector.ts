@@ -1,4 +1,4 @@
-import { RootState } from '../redux-store'
+import { RootState } from '../store'
 
 export const getDialogsPage = (state: RootState) => {
   return state.dialogsPage

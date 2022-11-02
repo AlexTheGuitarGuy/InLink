@@ -2,7 +2,7 @@ import { profileAPI } from '../../api/profileAPI'
 import { updateObjInArr } from '../../utils/object-helpers'
 import { Photo, Post, InputProfileData, FormikStatus } from '../../types/types'
 import { ResultCodes, GetProfileResponse } from '../../api/API'
-import { InferAction, InferThunk } from '../redux-store'
+import { InferAction, InferThunk } from '../store'
 import { setAlertFromThunk } from '../app-reducer/app-reducer'
 
 const initialState = {

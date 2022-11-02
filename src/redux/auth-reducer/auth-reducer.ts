@@ -1,7 +1,7 @@
 import { securityAPI } from '../../api/securityAPI'
 import { ResultCodes, ResultCodesWithCaptcha } from '../../api/API'
 import { LoginPayload } from '../../types/types'
-import { InferAction, InferThunk } from '../redux-store'
+import { InferAction, InferThunk } from '../store'
 import { setAlertFromThunk } from '../app-reducer/app-reducer'
 
 const initialState = {

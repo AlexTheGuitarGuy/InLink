@@ -1,5 +1,9 @@
 import { FormikErrors } from 'formik'
 
+export interface EnumObject {
+  [enumValue: number]: string
+}
+
 export type Alert = {
   message: string
   type: 'success' | 'error' | 'alert'

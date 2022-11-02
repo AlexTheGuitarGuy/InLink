@@ -1,5 +1,5 @@
 import { UserMessage } from '../../types/types'
-import { InferAction } from '../redux-store'
+import { InferAction } from '../store'
 
 const initialState = {
   userMessages: [

@@ -1,4 +1,4 @@
-import { RootState } from '../redux-store'
+import { RootState } from '../store'
 
 export const getIsAppInitialized = (state: RootState) => {
   return state.app.isAppInitialized
