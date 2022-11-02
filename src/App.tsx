@@ -78,7 +78,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Navigate to='/profile' />} />
             <Route path='/profile/:uid' element={<Profile />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
             <Route path='/chat' element={<Chat />} />
 
             <Route path='/messages/*' element={<Messages />} />

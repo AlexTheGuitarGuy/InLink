@@ -41,22 +41,24 @@ const Messages = () => {
             })}
             key={uuidv1()}
           >
-            <NavLink to={`/profile/${userId}`}>
-              <div className='flex items-center'>
-                <img
-                  src={photo || placeholder}
-                  className={cn(
-                    `h-16 w-16 p-0.5 mr-2
+            <div className='w-fit'>
+              <NavLink to={`/profile/${userId}`}>
+                <div className='flex items-center'>
+                  <img
+                    src={photo || placeholder}
+                    className={cn(
+                      `h-16 w-16 p-0.5 mr-2
                     rounded-full
                     inline
                     transition-colors hover:bg-gray-700 active:bg-gray-800`,
-                    { 'order-last': isThisMe },
-                  )}
-                  alt='user'
-                />
-                <span className='hover:underline font-bold mx-2'>{userName}</span>
-              </div>
-            </NavLink>
+                      { 'order-last': isThisMe },
+                    )}
+                    alt='user'
+                  />
+                  <span className='hover:underline font-bold mx-2'>{userName}</span>
+                </div>
+              </NavLink>
+            </div>
             <div
               className={cn('mx-8 my-2 break-all', {
                 'flex justify-end': isThisMe,

@@ -19,7 +19,7 @@ import MyPosts from './MyPosts/MyPosts'
 const Profile = () => {
   const isEditing = useAppSelector(getIsEditing)
   const { profileData, myData } = useAppSelector(getProfilePage)
-
+  const myUID = useAppSelector(getUID)
   const loggedUser = useAppSelector(getUID)
   const isLoading = useAppSelector(getIsLoading)
 
@@ -35,7 +35,7 @@ const Profile = () => {
     }
   }, [dispatch, loggedUser, currentUserPage])
 
-  const isOwner = !currentUserPage
+  const isOwner = !!(currentUserPage && +currentUserPage === myUID)
 
   if (isLoading || !profileData || !myData) return <Loading />
   if (!isOwner && isEditing) dispatch(profileActions.setEditing(false))
