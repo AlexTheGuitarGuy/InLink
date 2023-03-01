@@ -4,7 +4,11 @@ export type MessageData = {
   userId: number
   userName: string
 }
-export type Status = 'ready' | 'pending' | 'error'
+export enum Status {
+  READY = 'ready',
+  PENDING = 'pending',
+  ERROR = 'error',
+}
 
 const subscribers = {
   message: [] as MessageSubscriber[],
@@ -20,13 +24,13 @@ let ws = null as WebSocket | null
 
 const closeHandler = () => {
   console.error('WS CLOSED')
-  updateStatus('pending')
+  updateStatus(Status.PENDING)
   setTimeout(createChannel, 3000)
 }
 
 const openHandler = () => {
   console.log('WS OPENED')
-  updateStatus('ready')
+  updateStatus(Status.READY)
 }
 
 const messageHandler = (event: MessageEvent) => {
@@ -37,7 +41,7 @@ const messageHandler = (event: MessageEvent) => {
 
 const errorHandler = () => {
   console.error('An error has occurred during WebSocket connection. Try refreshing the page.')
-  updateStatus('error')
+  updateStatus(Status.ERROR)
 }
 
 const updateStatus = (status: Status) => {
@@ -57,7 +61,7 @@ const createChannel = () => {
   effectCleanup()
   ws?.close()
   ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-  updateStatus('pending')
+  updateStatus(Status.PENDING)
 
   ws?.addEventListener('close', closeHandler)
   ws?.addEventListener('open', openHandler)

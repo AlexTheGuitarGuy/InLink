@@ -69,7 +69,7 @@ export type Post = {
   id: string
   text: string
   likes: number
-  likedByUser?: boolean
+  likedByUser: boolean
 }
 
 export type FormikStatus = {

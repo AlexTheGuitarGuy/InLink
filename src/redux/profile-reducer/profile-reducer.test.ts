@@ -1,17 +1,20 @@
 import profileReducer, { ProfileReducerState, profileActions } from './profile-reducer'
+import { v1 as uuidv1 } from 'uuid'
 
 const state: ProfileReducerState = {
   posts: [
     {
-      id: '1',
+      id: uuidv1(),
       text: 'Hello world',
       likes: 333,
+      likedByUser: false,
     },
-    { id: '2', text: 'I am a coder in react!', likes: 222 },
+    { id: uuidv1(), text: 'I am a coder in react!', likes: 222, likedByUser: true },
     {
-      id: '3',
+      id: uuidv1(),
       text: 'I code everyday',
       likes: 111,
+      likedByUser: false,
     },
   ],
   profileData: null,

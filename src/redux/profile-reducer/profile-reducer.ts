@@ -12,13 +12,14 @@ const initialState = {
       id: uuidv1(),
       text: 'Hello world',
       likes: 333,
+      likedByUser: false,
     },
-    { id: uuidv1(), text: 'I am a coder in react!', likes: 222 },
+    { id: uuidv1(), text: 'I am a coder in react!', likes: 222, likedByUser: true },
     {
       id: uuidv1(),
-
       text: 'I code everyday',
       likes: 111,
+      likedByUser: false,
     },
   ] as Post[],
   profileData: null as GetProfileResponse | null,
@@ -46,6 +47,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
             {
               id: uuidv1(),
               text: action.payload,
+              likedByUser: false,
               likes: 0,
             },
           ],
