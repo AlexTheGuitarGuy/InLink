@@ -66,9 +66,10 @@ export type NavItem = {
 }
 
 export type Post = {
-  id: number
+  id: string
   text: string
   likes: number
+  likedByUser?: boolean
 }
 
 export type FormikStatus = {

@@ -1,14 +1,27 @@
+import { ThumbUpOffAlt, ThumbUpAlt } from '@mui/icons-material'
+
 import React, { FC } from 'react'
-import LikeIcon from '../../../../assets/like.jpg'
+import { useDispatch } from 'react-redux'
+import { profileActions } from '../../../../redux/profile-reducer/profile-reducer'
+import { Post } from '../../../../types/types'
 
 type PostCardProps = {
-  text: string
-  likes: number
+  postData: Post
   pfp: string
   userName: string
 }
 
-const PostCard: FC<PostCardProps> = ({ text, likes, pfp, userName }) => {
+const PostCard: FC<PostCardProps> = ({
+  postData: { id, likes, text, likedByUser },
+  pfp,
+  userName,
+}) => {
+  const dispatch = useDispatch()
+
+  const triggerLike = () => {
+    dispatch(profileActions.triggerLike(id))
+  }
+
   return (
     <div className='mt-4 flex flex-col lg:text-l sm:text-sm'>
       <div
@@ -38,18 +51,14 @@ const PostCard: FC<PostCardProps> = ({ text, likes, pfp, userName }) => {
                     font-semibold'
       >
         <div className='text-center mt-2 break-words'>{text}</div>
-        <div className='mt-2'>
-          <img
-            src={LikeIcon}
-            alt='likes'
-            className='w-4 h-4
-              xl:w-6 xl:h-6
-             mb-1 mr-1.5
-             xl:mb-3
-             inline'
-          />
+        <button className='mt-2 items-center cursor-pointer' onClick={triggerLike}>
+          {likedByUser ? (
+            <ThumbUpAlt className='mr-1 mb-0.5' />
+          ) : (
+            <ThumbUpOffAlt className='mr-1 mb-0.5' />
+          )}
           {likes}
-        </div>
+        </button>
       </div>
     </div>
   )

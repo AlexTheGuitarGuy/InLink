@@ -1,5 +1,6 @@
+import { v1 as uuidv1 } from 'uuid'
+
 import { profileAPI } from '../../api/profileAPI'
-import { updateObjInArr } from '../../utils/object-helpers'
 import { Photo, Post, InputProfileData, FormikStatus } from '../../types/types'
 import { ResultCodes, GetProfileResponse } from '../../api/API'
 import { InferAction, InferThunk } from '../store'
@@ -8,13 +9,14 @@ import { setAlertFromThunk } from '../app-reducer/app-reducer'
 const initialState = {
   posts: [
     {
-      id: 1,
+      id: uuidv1(),
       text: 'Hello world',
       likes: 333,
     },
-    { id: 2, text: 'I am a coder in react!', likes: 222 },
+    { id: uuidv1(), text: 'I am a coder in react!', likes: 222 },
     {
-      id: 3,
+      id: uuidv1(),
+
       text: 'I code everyday',
       likes: 111,
     },
@@ -42,7 +44,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
           posts: [
             ...state.posts,
             {
-              id: state.posts.length + 1,
+              id: uuidv1(),
               text: action.payload,
               likes: 0,
             },
@@ -53,6 +55,27 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
       return {
         ...state,
         storedText: '',
+      }
+    }
+
+    case 'IN_LINK/PROFILE_REDUCER/TRIGGER_LIKE': {
+      const newPosts = [...state.posts]
+
+      const likedPost = newPosts.find((post) => post.id === action.postId)
+
+      if (!likedPost) return { ...state }
+
+      if (!likedPost.likedByUser) {
+        likedPost.likes++
+        likedPost.likedByUser = true
+      } else {
+        likedPost.likes--
+        likedPost.likedByUser = false
+      }
+
+      return {
+        ...state,
+        posts: [...newPosts],
       }
     }
 
@@ -79,13 +102,13 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
         posts: state.posts.filter((p) => p.id !== action.id),
       }
 
-    case 'IN_LINK/PROFILE_REDUCER/EDIT_POST':
+    /*    case 'IN_LINK/PROFILE_REDUCER/EDIT_POST':
       return {
         ...state,
         posts: updateObjInArr<Post, { text: string }>(state.posts, 'id', action.id, {
           text: action.payload,
         }),
-      }
+      }*/
 
     default:
       return state
@@ -93,11 +116,11 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
 }
 
 export const profileActions = {
-  post: (payload: string) => ({ type: 'IN_LINK/PROFILE_REDUCER/POST', payload } as const),
+  createPost: (payload: string) => ({ type: 'IN_LINK/PROFILE_REDUCER/POST', payload } as const),
 
-  deletePost: (id: number) => ({ type: 'IN_LINK/PROFILE_REDUCER/DELETE_POST', id } as const),
+  deletePost: (id: string) => ({ type: 'IN_LINK/PROFILE_REDUCER/DELETE_POST', id } as const),
 
-  editPost: (id: number, payload: string) =>
+  editPost: (id: string, payload: string) =>
     ({
       type: 'IN_LINK/PROFILE_REDUCER/EDIT_POST',
       id,
@@ -138,6 +161,11 @@ export const profileActions = {
     ({
       type: 'IN_LINK/PROFILE_REDUCER/UPLOAD_PHOTO_SUCCESS',
       file,
+    } as const),
+  triggerLike: (postId: string) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/TRIGGER_LIKE',
+      postId,
     } as const),
 }
 

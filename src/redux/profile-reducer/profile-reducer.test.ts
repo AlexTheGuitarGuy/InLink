@@ -3,13 +3,13 @@ import profileReducer, { ProfileReducerState, profileActions } from './profile-r
 const state: ProfileReducerState = {
   posts: [
     {
-      id: 1,
+      id: '1',
       text: 'Hello world',
       likes: 333,
     },
-    { id: 2, text: 'I am a coder in react!', likes: 222 },
+    { id: '2', text: 'I am a coder in react!', likes: 222 },
     {
-      id: 3,
+      id: '3',
       text: 'I code everyday',
       likes: 111,
     },
@@ -23,7 +23,7 @@ const state: ProfileReducerState = {
 }
 
 it(`should add a post that contains text "testing is good"`, () => {
-  const action = profileActions.post('testing is good')
+  const action = profileActions.createPost('testing is good')
 
   const newState = profileReducer(state, action)
 
@@ -32,17 +32,17 @@ it(`should add a post that contains text "testing is good"`, () => {
 })
 
 it(`should delete post with id 3`, () => {
-  const action = profileActions.deletePost(3)
+  const action = profileActions.deletePost('3')
 
   const newState = profileReducer(state, action)
 
-  expect(newState.posts.find((p) => p.id === 3)).toBe(undefined)
+  expect(newState.posts.find((p) => p.id === '3')).toBe(undefined)
 })
 
 it(`should edit post with id 3 to be "I also like Jest!"`, () => {
-  const action = profileActions.editPost(3, 'I also like Jest')
+  const action = profileActions.editPost('3', 'I also like Jest')
 
   const newState = profileReducer(state, action)
 
-  expect(newState.posts.find((p) => p.id === 3)?.text).toBe('I also like Jest')
+  expect(newState.posts.find((p) => p.id === '3')?.text).toBe('I also like Jest')
 })

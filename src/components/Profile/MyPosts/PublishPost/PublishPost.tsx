@@ -28,7 +28,7 @@ const PublishPost = () => {
     { resetForm, setSubmitting }: FormikHelpers<PostFormValues>,
   ) => {
     if (postText.trim()) {
-      dispatch(profileActions.post(postText))
+      dispatch(profileActions.createPost(postText))
       resetForm()
     }
     setSubmitting(false)

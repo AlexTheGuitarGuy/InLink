@@ -17,8 +17,8 @@ type MyPostsProps = {
 const MyPosts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
   const posts = useSelector(getPosts)
 
-  const postElements = posts.map(({ id, text, likes }: Post) => (
-    <PostCard key={id} text={text} likes={likes} pfp={pfp || placeholder} userName={userName} />
+  const postElements = posts.map((postData: Post) => (
+    <PostCard key={postData.id} postData={postData} pfp={pfp || placeholder} userName={userName} />
   ))
 
   return (
