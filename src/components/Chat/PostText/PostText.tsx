@@ -1,5 +1,6 @@
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
+import { Send } from '@mui/icons-material'
 
 import { sendMessage } from '../../../redux/chat-reducer/chat-reducer'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
@@ -59,7 +60,7 @@ const PostText = () => {
                 className='rounded-full ml-4 shadow-none h-12 w-12 flex justify-center items-center'
                 color='background'
               >
-                <img src={require('../../../assets/send.png')} alt='Send' className='w-8 h-8' />
+                <Send fontSize='medium' className='text-gray-700' />
               </PrimaryButton>
             </div>
           </div>

@@ -5,9 +5,10 @@ import Nav from './Nav/Nav'
 import { useLocation } from 'react-router-dom'
 import { compose } from 'redux'
 import { useSelector } from 'react-redux'
+import { KeyboardBackspace } from '@mui/icons-material'
+
 import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 import useScreenSize from '../../hooks/useScreenSize'
-import GoBack from '../../assets/go-back.png'
 import Placeholder from '../../assets/pfps/placeholder.jpg'
 
 const Header = () => {
@@ -35,8 +36,8 @@ const Header = () => {
         h-16`}
       >
         <div className='order-1 flex'>
-          <NavLink to={'messages/all'}>
-            <img src={GoBack} alt='go back' className='mt-2 w-8 h-8' />
+          <NavLink to={'messages/all'} className='mt-1.5'>
+            <KeyboardBackspace fontSize='medium' />
           </NavLink>
 
           <img

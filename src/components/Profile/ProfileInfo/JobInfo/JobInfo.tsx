@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import cn from 'classnames'
 import { Field } from 'formik'
+import { Search } from '@mui/icons-material'
+
 import FormInput from '../../../common/Inputs/FormInput/FormInput'
 
 type JobInfoProps = {
@@ -29,11 +31,7 @@ const JobInfo: FC<JobInfoProps> = ({ lookingForAJob, lookingForAJobDescription, 
                 <Field type='checkbox' name='lookingForAJob' checked={lookingForAJob} />
               </div>
             ) : (
-              <img
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png'
-                alt='looking for job'
-                className='w-5 h-5 inline lg:mr-1'
-              />
+              <Search />
             )}
             is looking for a job
           </div>
@@ -49,7 +47,7 @@ const JobInfo: FC<JobInfoProps> = ({ lookingForAJob, lookingForAJobDescription, 
                 }}
               />
             ) : lookingForAJobDescription && !isEditing ? (
-              '"' + lookingForAJobDescription + '"'
+              <span className='break-words'>{lookingForAJobDescription}</span>
             ) : null}
           </div>
         </div>

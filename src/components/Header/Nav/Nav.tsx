@@ -1,32 +1,34 @@
-import { NavLink } from 'react-router-dom';
-import React, { LegacyRef, useState } from 'react';
-import cn from 'classnames';
-import { getNavItems } from '../../../redux/navbar-reducer/navbar-selector';
-import { useSelector } from 'react-redux';
-import useTagBlur from '../../../hooks/useTagBlur';
-import { useLocation } from 'react-router';
-import useScreenSize from '../../../hooks/useScreenSize';
-import { NavItem } from '../../../types/types';
+import { NavLink } from 'react-router-dom'
+import React, { LegacyRef, useState } from 'react'
+import cn from 'classnames'
+import { Menu } from '@mui/icons-material'
+
+import { getNavItems } from '../../../redux/navbar-reducer/navbar-selector'
+import { useSelector } from 'react-redux'
+import useTagBlur from '../../../hooks/useTagBlur'
+import { useLocation } from 'react-router'
+import useScreenSize from '../../../hooks/useScreenSize'
+import { NavItem } from '../../../types/types'
 
 const Nav = () => {
-  const navItems = useSelector(getNavItems);
-  const [shouldShowMenu, setShouldShowMenu] = useState(false);
+  const navItems = useSelector(getNavItems)
+  const [shouldShowMenu, setShouldShowMenu] = useState(false)
 
-  const menuRef = useTagBlur(shouldShowMenu, setShouldShowMenu);
-  const screenSize = useScreenSize();
+  const menuRef = useTagBlur(shouldShowMenu, setShouldShowMenu)
+  const screenSize = useScreenSize()
 
-  const location = useLocation();
+  const location = useLocation()
 
   let navElements = navItems.map((navItem: NavItem) => {
-    let isActive = false;
-    if (location.pathname.match(navItem.to)) isActive = true;
+    let isActive = false
+    if (location.pathname.match(navItem.to)) isActive = true
     return (
       <NavLink
         key={navItem.name}
         to={navItem.to}
-        className="sm:mb-3 lg:mb-0"
+        className='sm:mb-3 lg:mb-0'
         onClick={() => {
-          setShouldShowMenu(false);
+          setShouldShowMenu(false)
         }}
       >
         <div
@@ -59,8 +61,8 @@ const Nav = () => {
           {navItem.name}
         </div>
       </NavLink>
-    );
-  });
+    )
+  })
 
   if (screenSize.dynamicWidth < 1366) {
     return (
@@ -71,11 +73,7 @@ const Nav = () => {
             'bg-gray-200': shouldShowMenu,
           })}
         >
-          <img
-            src={require('../../../assets/burger-menu.png')}
-            alt="burger menu"
-            className="w-8 h-8"
-          />
+          <Menu fontSize='large' />
         </button>
 
         <nav>
@@ -98,10 +96,10 @@ const Nav = () => {
           </div>
         </nav>
       </div>
-    );
+    )
   }
 
-  return <nav className="flex flex-row">{navElements}</nav>;
-};
+  return <nav className='flex flex-row'>{navElements}</nav>
+}
 
-export default Nav;
+export default Nav
