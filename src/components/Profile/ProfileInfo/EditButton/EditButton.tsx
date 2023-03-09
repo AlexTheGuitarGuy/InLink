@@ -13,19 +13,48 @@ type EditButtonProps = {
 
 const EditButton: FC<EditButtonProps> = ({ isEditing, isSubmitting, isValid }) => {
   const dispatch = useDispatch()
-  const { submitForm } = useFormikContext()
+  const { submitForm, resetForm } = useFormikContext()
 
   return (
-    <PrimaryButton
-      color='gray'
-      onClick={() => (isEditing ? submitForm() : dispatch(profileActions.setEditing(true)))}
-      disabled={isSubmitting || !isValid}
-      className='py-0.5 px-4
-                    sm:mb-4 lg:mb-0
-                    sm:w-full lg:w-auto'
-    >
-      {isEditing ? 'Save' : 'Edit mode'}
-    </PrimaryButton>
+    <>
+      {isEditing ? (
+        <div className='space-x-2'>
+          <PrimaryButton
+            color='blue'
+            onClick={() => submitForm()}
+            disabled={isSubmitting || !isValid}
+            className='py-0.5 px-4
+                          sm:mb-4 lg:mb-0
+                          sm:w-full lg:w-auto'
+          >
+            Save
+          </PrimaryButton>
+          <PrimaryButton
+            color='rose'
+            onClick={() => {
+              resetForm()
+              dispatch(profileActions.setEditing(false))
+            }}
+            className='py-0.5 px-4
+                          sm:mb-4 lg:mb-0
+                          sm:w-full lg:w-auto'
+          >
+            Cancel
+          </PrimaryButton>
+        </div>
+      ) : (
+        <PrimaryButton
+          color='gray'
+          onClick={() => dispatch(profileActions.setEditing(true))}
+          disabled={isSubmitting || !isValid}
+          className='py-0.5 px-4
+                          sm:mb-4 lg:mb-0
+                          sm:w-full lg:w-auto'
+        >
+          Edit mode
+        </PrimaryButton>
+      )}
+    </>
   )
 }
 
