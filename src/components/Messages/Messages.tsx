@@ -27,16 +27,22 @@ const Messages = () => {
 
   if (!myData || !users) return <Loading />
 
+  const createConversationComponent = (
+    conversation: UserMessageType[],
+    conversationIndex: number,
+  ) =>
+    conversation.map((message: UserMessageType) => (
+      <UserMessage
+        key={message.id}
+        message={message}
+        conversationIndex={conversationIndex}
+        users={users}
+      />
+    ))
+
   const conversationComponents = userMessages.map(
-    (conversation: UserMessageType[], conversationIndex: number) => {
-      return conversation.map((message: UserMessageType, messageIndex: number) => {
-        return (
-          <div key={messageIndex}>
-            <UserMessage message={message} conversationIndex={conversationIndex} users={users} />
-          </div>
-        )
-      })
-    },
+    (conversation: UserMessageType[], conversationIndex: number) =>
+      createConversationComponent(conversation, conversationIndex),
   )
 
   const routes = conversationComponents.map((conversationComponent: ReactNode[], index: number) => {

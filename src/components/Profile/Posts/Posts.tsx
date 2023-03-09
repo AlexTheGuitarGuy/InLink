@@ -14,11 +14,17 @@ type MyPostsProps = {
   userName: string
 }
 
-const MyPosts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
+const Posts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
   const posts = useSelector(getPosts)
 
-  const postElements = posts.map((postData: Post) => (
-    <PostCard key={postData.id} postData={postData} pfp={pfp || placeholder} userName={userName} />
+  let postElements = posts.map((postData: Post) => (
+    <PostCard
+      key={postData.id}
+      postData={postData}
+      pfp={pfp || placeholder}
+      userName={userName}
+      isOwner={isOwner}
+    />
   ))
 
   return (
@@ -27,7 +33,7 @@ const MyPosts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
       lg:bg-gray-100 lg:rounded-lg lg:p-8 
       sm:pt-4 lg:mt-4
       sm:mx-4 lg:mx-0
-      text-gray-700 font-semibold 
+      text-gray-700 font-semibold
 
       lg:border-none
 
@@ -42,4 +48,4 @@ const MyPosts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
   )
 }
 
-export default MyPosts
+export default Posts

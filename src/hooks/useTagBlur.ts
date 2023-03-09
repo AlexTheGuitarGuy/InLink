@@ -9,9 +9,9 @@ const useTagBlur = (flag: boolean, setFlag: (newFlag: boolean) => void) => {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('mouseup', handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('mouseup', handleClickOutside)
     }
   }, [ref, flag, setFlag])
 

@@ -55,6 +55,7 @@ export type DialogsUser = {
 }
 
 export type UserMessage = {
+  id: string
   type: 'sent' | 'received'
   text: string
 }

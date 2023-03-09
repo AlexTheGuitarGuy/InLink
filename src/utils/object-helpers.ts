@@ -1,8 +1,13 @@
 import { EnumObject } from '../types/types'
 
-export function updateObjInArr<T, P>(arr: T[], idLabel: keyof T, replaceId: number, newData: P) {
+export function updateObjInArr<T, P>(
+  arr: T[],
+  idLabel: keyof T,
+  replaceId: number | string,
+  newData: P,
+) {
   return arr.map((element) => {
-    if (+element[idLabel] === replaceId) return { ...element, ...newData }
+    if (element[idLabel] === replaceId) return { ...element, ...newData }
     return element
   })
 }

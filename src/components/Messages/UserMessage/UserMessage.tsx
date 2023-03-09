@@ -1,9 +1,13 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import cn from 'classnames'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { getMyData } from '../../../redux/profile-reducer/profile-selector'
-import { useSelector } from 'react-redux'
 import { User, UserMessage as UserMessageType } from '../../../types/types'
 import Placeholder from '../../../assets/pfps/placeholder.jpg'
+import EditOptions from '../../common/Menu/EditOptions/EditOptions'
+import EditText, { EditTextButtonColor } from '../../common/Inputs/EditText/EditText'
+import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
 
 type UserMessageProps = {
   message: UserMessageType
@@ -12,14 +16,17 @@ type UserMessageProps = {
 }
 
 const UserMessage: FC<UserMessageProps> = ({
-  message: { type, text },
+  message: { type, text, id },
   conversationIndex,
   users,
 }) => {
-  const isFromMe = type === 'sent'
+  const [isEditing, setIsEditing] = useState(false)
+  const dispatch = useDispatch()
   const myData = useSelector(getMyData)
 
-  const messages = (
+  const isFromMe = type === 'sent'
+
+  return (
     <div
       className={cn(
         'flex font-normal mt-8',
@@ -29,6 +36,20 @@ const UserMessage: FC<UserMessageProps> = ({
         { 'mr-8': !isFromMe },
       )}
     >
+      {!isEditing && (
+        <div className={cn('mt-2 mx-1', { 'order-first': isFromMe }, { 'order-last': !isFromMe })}>
+          <EditOptions
+            onEdit={() => {
+              setIsEditing(true)
+            }}
+            onDelete={() => {
+              dispatch(dialogsActions.deleteMessage(id))
+            }}
+            absolutePosition='left-0'
+            canEdit={isFromMe}
+          />
+        </div>
+      )}
       <img
         src={
           (isFromMe ? myData?.photos?.small : users[conversationIndex].photos.small) || Placeholder
@@ -46,14 +67,30 @@ const UserMessage: FC<UserMessageProps> = ({
           {
             'mr-4 order-1 bg-blue-400 text-white rounded-l-lg': isFromMe,
           },
+          {
+            'w-full': isEditing,
+          },
         )}
       >
-        {text}
+        {isEditing ? (
+          <EditText
+            text={text}
+            onDone={(resultText) => {
+              dispatch(dialogsActions.editMessage(id, resultText))
+              setIsEditing(false)
+            }}
+            onClear={() => {
+              setIsEditing(false)
+            }}
+            textAreaClassName='w-full h-20'
+            buttonsColor={EditTextButtonColor.Blue}
+          />
+        ) : (
+          <>{text}</>
+        )}
       </div>
     </div>
   )
-
-  return <div>{messages}</div>
 }
 
 export default UserMessage

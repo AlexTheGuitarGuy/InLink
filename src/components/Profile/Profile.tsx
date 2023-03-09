@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import withAuthRedirect from '../../HOC/withAuthRedirect'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import Loading from '../common/Loading/Loading'
-import MyPosts from './MyPosts/MyPosts'
+import Posts from './Posts/Posts'
 
 const Profile = () => {
   const isEditing = useAppSelector(getIsEditing)
@@ -50,7 +50,7 @@ const Profile = () => {
         pfp={pfp.large}
         profileData={isOwner ? myData : profileData}
       />
-      <MyPosts isOwner={isOwner} pfp={pfp.small} userName={profileData.fullName} />
+      <Posts isOwner={isOwner} pfp={pfp.small} userName={profileData.fullName} />
     </div>
   )
 }

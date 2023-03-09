@@ -5,6 +5,7 @@ import { Photo, Post, InputProfileData, FormikStatus } from '../../types/types'
 import { ResultCodes, GetProfileResponse } from '../../api/API'
 import { InferAction, InferThunk } from '../store'
 import { setAlertFromThunk } from '../app-reducer/app-reducer'
+import { updateObjInArr } from '../../utils/object-helpers'
 
 const initialState = {
   posts: [
@@ -104,13 +105,13 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
         posts: state.posts.filter((p) => p.id !== action.id),
       }
 
-    /*    case 'IN_LINK/PROFILE_REDUCER/EDIT_POST':
+    case 'IN_LINK/PROFILE_REDUCER/EDIT_POST':
       return {
         ...state,
         posts: updateObjInArr<Post, { text: string }>(state.posts, 'id', action.id, {
           text: action.payload,
         }),
-      }*/
+      }
 
     default:
       return state

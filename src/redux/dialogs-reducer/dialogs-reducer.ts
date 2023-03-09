@@ -1,90 +1,107 @@
+import { v1 as uuidv1 } from 'uuid'
 import { UserMessage } from '../../types/types'
 import { InferAction } from '../store'
+import { updateObjInArr } from '../../utils/object-helpers'
 
 const initialState = {
   userMessages: [
     [
       {
-        text: `Lorem Ipsum is simply dummy text`,
+        id: uuidv1(),
+        text: 'Lorem Ipsum is simply dummy text',
         type: 'received',
       },
       {
-        text: `Where does it come from?
-              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-              `,
+        id: uuidv1(),
+        text: 'Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
         type: 'sent',
       },
       {
-        text: `accompanied by English versions from the 1914 translation by H. Rackham.`,
+        id: uuidv1(),
+        text: 'accompanied by English versions from the 1914 translation by H. Rackham.',
         type: 'received',
       },
     ],
     [
       {
+        id: uuidv1(),
         text: 'It is a long established fact that a reader will be distracted by the readable content',
         type: 'received',
       },
       {
-        text: 'has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n',
+        id: uuidv1(),
+        text: 'has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
         type: 'sent',
       },
       {
+        id: uuidv1(),
         text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below',
         type: 'sent',
       },
       {
+        id: uuidv1(),
         text: 'Lorem Ipsum is simply dummy text',
         type: 'received',
       },
-      { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
+      { id: uuidv1(), text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
       {
+        id: uuidv1(),
         text: 'It is a long established fact that a reader will be distracted by the readable content',
         type: 'received',
       },
       {
-        text: ' with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+        id: uuidv1(),
+        text: 'with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
         type: 'sent',
       },
       {
+        id: uuidv1(),
         text: 'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below',
         type: 'sent',
       },
       {
+        id: uuidv1(),
         text: 'Lorem Ipsum is simply dummy text',
         type: 'received',
       },
       {
+        id: uuidv1(),
         text: 'Lorem Ipsum is simply dummy text',
         type: 'sent',
       },
     ],
     [
-      { text: 'Where does it come from?', type: 'received' },
+      { id: uuidv1(), text: 'Where does it come from?', type: 'received' },
       {
+        id: uuidv1(),
         text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.',
         type: 'sent',
       },
-      { text: 'Lorem Ipsum', type: 'received' },
-      { text: 'Lorem Ipsum', type: 'sent' },
+      { id: uuidv1(), text: 'Lorem Ipsum', type: 'received' },
+      { id: uuidv1(), text: 'Lorem Ipsum', type: 'sent' },
       {
+        id: uuidv1(),
         text: 'Lorem Ipsum used since the 1500s is reproduced below',
         type: 'sent',
       },
     ],
     [
       {
+        id: uuidv1(),
         text: 'Lorem Ipsum used since the 1500s is reproduced below',
         type: 'received',
       },
       {
+        id: uuidv1(),
         text: '"Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. ',
         type: 'sent',
       },
       {
+        id: uuidv1(),
         text: 'Lorem Ipsum',
         type: 'received',
       },
-      { text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
+      { id: uuidv1(), text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
     ],
   ] as UserMessage[][],
 }
@@ -99,13 +116,14 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
       if (action.text) {
         return {
           ...state,
-          userMessages: state.userMessages.map((e, i) => {
-            if (i === action.to)
-              e.push({
+          userMessages: state.userMessages.map((messages, conversationIndex) => {
+            if (conversationIndex === action.to)
+              messages.push({
+                id: uuidv1(),
                 text: action.text,
                 type: 'sent',
               })
-            return e
+            return messages
           }),
         }
       }
@@ -113,26 +131,23 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
         ...state,
       }
 
-    /*    case 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE':
+    case 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE':
       return {
         ...state,
-        userMessages: state.userMessages.map((e, i) => {
-          if (i === action.userId) return e.filter((m) => m.id !== action.messageId);
-          return e;
+        userMessages: state.userMessages.map((messages) => {
+          return messages.filter((message) => message.id !== action.messageId)
         }),
-      };
+      }
 
     case 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE':
       return {
         ...state,
-        userMessages: state.userMessages.map((e, i) => {
-          if (i === action.userId)
-            return updateObjInArr(e, 'id', action.messageId, {
-              text: action.text,
-            });
-          return e;
+        userMessages: state.userMessages.map((messages) => {
+          return updateObjInArr(messages, 'id', action.messageId, {
+            text: action.text,
+          })
         }),
-      };*/
+      }
     default:
       return state
   }
@@ -146,17 +161,15 @@ export const dialogsActions = {
       text,
     } as const),
 
-  deleteMessage: (userId: number, messageId: number) =>
+  deleteMessage: (messageId: string) =>
     ({
       type: 'IN_LINK/DIALOGS_REDUCER/DELETE_MESSAGE',
-      userId,
       messageId,
     } as const),
 
-  editMessage: (userId: number, messageId: number, text: string) =>
+  editMessage: (messageId: string, text: string) =>
     ({
       type: 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE',
-      userId,
       messageId,
       text,
     } as const),
