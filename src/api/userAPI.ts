@@ -8,13 +8,22 @@ export const userAPI = {
     return response.data
   },
 
+  isFollowing: async (id: number) => {
+    const response = await instance.get<boolean>(`follow/${id}`)
+
+    return response.data
+  },
+
   unfollow: async (id: number) => {
+    console.log(id)
     const response = await instance.delete<CommonResponse<ResultCodes, {}>>(`follow/${id}`)
 
     return response.data
   },
 
   follow: async (id: number) => {
+    console.log(id)
+
     const response = await instance.post<CommonResponse<ResultCodes, {}>>(`follow/${id}`)
 
     return response.data

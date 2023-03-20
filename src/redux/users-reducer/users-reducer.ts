@@ -148,7 +148,7 @@ export const fetchFrontPageFriends = (): UsersThunk => {
   }
 }
 
-export const followUnfollowFlow = (
+const _followUnfollowFlow = (
   id: number,
   request: typeof userAPI.follow | typeof userAPI.unfollow,
   followStatus: boolean,
@@ -157,22 +157,26 @@ export const followUnfollowFlow = (
     dispatch(usersActions.updateFollowQueue(id))
     const data = await request(id)
 
+    console.log('result', data)
+
     if (data.resultCode === ResultCodes.Success) {
       dispatch(usersActions.setFollowStatus(id, followStatus))
+    } else {
+      throw new Error(data.messages[0])
     }
     dispatch(usersActions.updateFollowQueue(id))
   }
 }
 
-export const follow = (id: number): UsersThunk => {
+export const followInUsers = (id: number): UsersThunk => {
   return async (dispatch) => {
-    dispatch(followUnfollowFlow(id, userAPI.follow, true))
+    dispatch(_followUnfollowFlow(id, userAPI.follow, true))
   }
 }
 
-export const unfollow = (id: number): UsersThunk => {
+export const unfollowInUsers = (id: number): UsersThunk => {
   return async (dispatch) => {
-    dispatch(followUnfollowFlow(id, userAPI.unfollow, false))
+    dispatch(_followUnfollowFlow(id, userAPI.unfollow, false))
   }
 }
 

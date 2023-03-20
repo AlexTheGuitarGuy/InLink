@@ -6,6 +6,7 @@ import { ResultCodes, GetProfileResponse } from '../../api/API'
 import { InferAction, InferThunk } from '../store'
 import { setAlertFromThunk } from '../app-reducer/app-reducer'
 import { updateObjInArr } from '../../utils/object-helpers'
+import { userAPI } from '../../api/userAPI'
 
 const initialState = {
   posts: [
@@ -29,6 +30,8 @@ const initialState = {
   storedText: '',
   isLoading: false,
   isEditing: false,
+  currentUserFollowed: false,
+  userId: null as number | null,
 }
 
 export type ProfileReducerState = typeof initialState
@@ -87,6 +90,8 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/SET_STATUS':
     case 'IN_LINK/PROFILE_REDUCER/SET_LOADING':
     case 'IN_LINK/PROFILE_REDUCER/SET_IS_EDITING':
+    case 'IN_LINK/PROFILE_REDUCER/SET_CURRENT_USER_FOLLOWED':
+    case 'IN_LINK/PROFILE_REDUCER/SET_USER_ID':
       return {
         ...state,
         ...action.payload,
@@ -170,6 +175,13 @@ export const profileActions = {
       type: 'IN_LINK/PROFILE_REDUCER/TRIGGER_LIKE',
       postId,
     } as const),
+  setCurrentUserFollowed: (currentUserFollowed: boolean) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_CURRENT_USER_FOLLOWED',
+      payload: { currentUserFollowed },
+    } as const),
+  setUserId: (userId: number) =>
+    ({ type: 'IN_LINK/PROFILE_REDUCER/SET_USER_ID', payload: { userId } } as const),
 }
 
 const getData = (
@@ -260,5 +272,38 @@ export const uploadProfileInfo =
       dispatch(setAlertFromThunk({ message, type: 'error' }))
     }
   }
+
+export const getIsCurrentUserFollowed =
+  (id: number): ProfileThunk =>
+  async (dispatch) => {
+    const data = await userAPI.isFollowing(id)
+    dispatch(profileActions.setCurrentUserFollowed(data))
+  }
+
+const _followUnfollowFlow = (
+  id: number,
+  request: typeof userAPI.follow | typeof userAPI.unfollow,
+  followStatus: boolean,
+): ProfileThunk => {
+  return async (dispatch) => {
+    const data = await request(id)
+
+    if (data.resultCode === ResultCodes.Success) {
+      dispatch(profileActions.setCurrentUserFollowed(followStatus))
+    }
+  }
+}
+
+export const followInProfile = (id: number): ProfileThunk => {
+  return async (dispatch) => {
+    dispatch(_followUnfollowFlow(id, userAPI.follow, true))
+  }
+}
+
+export const unfollowInProfile = (id: number): ProfileThunk => {
+  return async (dispatch) => {
+    dispatch(_followUnfollowFlow(id, userAPI.unfollow, false))
+  }
+}
 
 export default profileReducer

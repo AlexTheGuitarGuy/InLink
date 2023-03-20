@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { useAppSelector } from '../../../hooks/reduxHooks'
 import { getStatus } from '../../../redux/chat-reducer/chat-selector'
 import cn from 'classnames'
-import Loading from '../../common/Loading/Loading'
+import Loading, { Dimensions } from '../../common/Loading/Loading'
 
 type ChatStatusProps = {
   showSuccess: boolean
@@ -31,7 +31,7 @@ const ChatStatus: FC<ChatStatusProps> = ({ showSuccess }) => {
       {isReady && 'Connected.'}
       {isPending && (
         <div className='flex space-x-3'>
-          <Loading dimensions={5} />
+          <Loading dimensions={Dimensions.small} />
           <div>Connecting...</div>
         </div>
       )}

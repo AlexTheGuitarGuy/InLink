@@ -2,18 +2,25 @@ import React, { FC, ChangeEvent } from 'react'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
 
-import { uploadPFP, uploadProfileInfo } from '../../../redux/profile-reducer/profile-reducer'
+import {
+  followInProfile,
+  unfollowInProfile,
+  uploadPFP,
+  uploadProfileInfo,
+} from '../../../redux/profile-reducer/profile-reducer'
 
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 
 import { InputProfileData } from '../../../types/types'
-import { useAppDispatch } from '../../../hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 import FormInput from '../../common/Inputs/FormInput/FormInput'
 
 import EditButton from './EditButton/EditButton'
 import Status from './Status/Status'
 import JobInfo from './JobInfo/JobInfo'
 import Contacts from './Contacts/Contacts'
+import FollowButton from '../../common/Buttons/FollowButton/FollowButton'
+import { getCurrentUserFollowed, getUserId } from '../../../redux/profile-reducer/profile-selector'
 
 export type ProfileInfoProps = {
   isOwner: boolean
@@ -29,7 +36,8 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
   profileData: { lookingForAJob, lookingForAJobDescription, fullName, contacts },
 }) => {
   const dispatch = useAppDispatch()
-
+  const currentUserFollowed = useAppSelector(getCurrentUserFollowed)
+  const id = useAppSelector(getUserId) as number
   const updatePFP = (event: ChangeEvent<HTMLInputElement>) => {
     const element = event.currentTarget as HTMLInputElement
     const fileList: FileList | null = element.files
@@ -42,6 +50,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     fullName,
     lookingForAJob,
     lookingForAJobDescription,
+    id,
   }
 
   const validationSchema = Yup.object({
@@ -114,10 +123,17 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
               <div className='mt-2 sm:mx-auto lg:mx-0'>
                 <Status isOwner={isOwner} />
               </div>
-              {isOwner && (
+              {isOwner ? (
                 <div className='mt-4'>
                   <EditButton isEditing={isEditing} isSubmitting={isSubmitting} isValid={isValid} />
                 </div>
+              ) : (
+                <FollowButton
+                  id={id}
+                  followed={currentUserFollowed}
+                  onFollow={() => dispatch(followInProfile(id))}
+                  onUnfollow={() => dispatch(unfollowInProfile(id))}
+                />
               )}
               {isOwner && isEditing && (
                 <div className='my-4'>

@@ -23,6 +23,8 @@ const state: ProfileReducerState = {
   storedText: '',
   isLoading: false,
   isEditing: false,
+  currentUserFollowed: false,
+  userId: null,
 }
 
 it(`should add a post that contains text "testing is good"`, () => {

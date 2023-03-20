@@ -4,6 +4,14 @@ export const getProfilePage = (state: RootState) => {
   return state.profilePage
 }
 
+export const getCurrentUserFollowed = (state: RootState) => {
+  return state.profilePage.currentUserFollowed
+}
+
+export const getUserId = (state: RootState) => {
+  return state.profilePage.userId
+}
+
 export const getCurrentUserData = (state: RootState) => {
   return getProfilePage(state).profileData
 }

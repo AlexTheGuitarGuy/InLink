@@ -8,7 +8,12 @@ import {
   getProfilePage,
 } from '../../redux/profile-reducer/profile-selector'
 import { getUID } from '../../redux/auth-reducer/auth-selector'
-import { getProfile, getStatus, profileActions } from '../../redux/profile-reducer/profile-reducer'
+import {
+  getProfile,
+  getStatus,
+  getIsCurrentUserFollowed,
+  profileActions,
+} from '../../redux/profile-reducer/profile-reducer'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 
 import withAuthRedirect from '../../HOC/withAuthRedirect'
@@ -28,10 +33,13 @@ const Profile = () => {
   const currentUserPage = useParams().uid
 
   useEffect(() => {
-    const user = (currentUserPage && +currentUserPage) || (loggedUser && +loggedUser)
-    if (user) {
-      dispatch(getProfile(user))
-      dispatch(getStatus(user))
+    const userId = (currentUserPage && +currentUserPage) || (loggedUser && +loggedUser)
+    if (userId) {
+      console.log('userId: ', userId)
+      dispatch(profileActions.setUserId(userId))
+      dispatch(getProfile(userId))
+      dispatch(getStatus(userId))
+      dispatch(getIsCurrentUserFollowed(userId))
     }
   }, [dispatch, loggedUser, currentUserPage])
 

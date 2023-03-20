@@ -23,6 +23,7 @@ export type ContactsObj = {
 }
 
 export type InputProfileData = {
+  id: number
   aboutMe: string
   contacts: ContactsObj
   fullName: string
