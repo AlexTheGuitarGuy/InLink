@@ -7,3 +7,7 @@ export const getDialogsPage = (state: RootState) => {
 export const getUserMessages = (state: RootState) => {
   return getDialogsPage(state).userMessages
 }
+
+export const getStoredMessages = (state: RootState) => {
+  return getDialogsPage(state).storedMessages
+}

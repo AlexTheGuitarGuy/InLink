@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Navigate } from 'react-router'
 import { compose } from 'redux'
@@ -15,15 +15,23 @@ import { UserMessage as UserMessageType } from '../../types/types'
 
 import UserMessage from './UserMessage/UserMessage'
 import Users from './Users/Users'
-import SendText from './SendText/SendText'
+import MessageForm from './MessagesForm/MessagesForm'
 import Loading from '../common/Loading/Loading'
+import { dialogsActions } from '../../redux/dialogs-reducer/dialogs-reducer'
+import { useAppDispatch } from '../../hooks/reduxHooks'
 
 const Messages = () => {
   const userMessages = useSelector(getUserMessages)
   const users = useSelector(getFrontPageFriends)
   const myData = useSelector(getMyData)
 
+  const dispatch = useAppDispatch()
+
   const screenSize = useScreenSize()
+
+  useEffect(() => {
+    dispatch(dialogsActions.initializeStoredMessages(userMessages.length))
+  }, [dispatch, userMessages])
 
   if (!myData || !users) return <Loading />
 
@@ -59,7 +67,7 @@ const Messages = () => {
               className='fixed bottom-0 lg:w-3/5 sm:w-full self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300'
             >
-              <SendText id={index} />
+              <MessageForm index={index} />
             </div>
           </div>
         }

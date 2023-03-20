@@ -1,5 +1,4 @@
-import React, { FC } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { ChangeEvent, FC } from 'react'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
 
@@ -7,17 +6,20 @@ import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
 import FormInput from '../../common/Inputs/FormInput/FormInput'
 import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
 import { Send } from '@mui/icons-material'
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
+import { getStoredMessages } from '../../../redux/dialogs-reducer/dialogs-selector'
 
 type MessageFormValues = {
   messageText: string
 }
 
 type SendTextProps = {
-  id: number
+  index: number
 }
 
-const SendText: FC<SendTextProps> = ({ id }) => {
-  const dispatch = useDispatch()
+const MessagesForm: FC<SendTextProps> = ({ index }) => {
+  const dispatch = useAppDispatch()
+  const storedMessages = useAppSelector(getStoredMessages)
 
   const initialValues = {
     messageText: '',
@@ -35,7 +37,7 @@ const SendText: FC<SendTextProps> = ({ id }) => {
     { resetForm, setSubmitting }: FormikHelpers<MessageFormValues>,
   ) => {
     if (messageText.trim()) {
-      dispatch(dialogsActions.sendMessage(id, messageText))
+      dispatch(dialogsActions.sendMessage(index, messageText))
       resetForm()
     }
     setSubmitting(false)
@@ -53,6 +55,11 @@ const SendText: FC<SendTextProps> = ({ id }) => {
                 name: 'messageText',
                 placeholder: 'Enter your message...',
                 className: 'resize-none w-full rounded-lg p-2',
+                restprops: {
+                  onChange: (event: ChangeEvent<HTMLInputElement>) =>
+                    dispatch(dialogsActions.storeMessage(event.target.value, index)),
+                  value: storedMessages[index],
+                },
               }}
             />
             <div className='flex items-center'>
@@ -72,4 +79,4 @@ const SendText: FC<SendTextProps> = ({ id }) => {
   )
 }
 
-export default SendText
+export default MessagesForm

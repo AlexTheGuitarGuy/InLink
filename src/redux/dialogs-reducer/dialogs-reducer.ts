@@ -104,6 +104,7 @@ const initialState = {
       { id: uuidv1(), text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
     ],
   ] as UserMessage[][],
+  storedMessages: [] as string[],
 }
 
 export type DialogsReducerState = typeof initialState
@@ -148,6 +149,24 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
           })
         }),
       }
+
+    case 'IN_LINK/DIALOGS_REDUCER/STORE_MESSAGE':
+      console.log('stored messages', state.storedMessages)
+
+      return {
+        ...state,
+        storedMessages: [
+          ...state.storedMessages.map((message, index) => {
+            return action.index === index ? action.message : message
+          }),
+        ],
+      }
+    case 'IN_LINK/DIALOGS_REDUCER/INITIALIZE_STORED_MESSAGES':
+      console.log('initialize stored messages', action.length)
+      return {
+        ...state,
+        storedMessages: action.length ? new Array(action.length).fill('') : [],
+      }
     default:
       return state
   }
@@ -172,6 +191,18 @@ export const dialogsActions = {
       type: 'IN_LINK/DIALOGS_REDUCER/EDIT_MESSAGE',
       messageId,
       text,
+    } as const),
+
+  storeMessage: (message: string, index: number) =>
+    ({
+      type: 'IN_LINK/DIALOGS_REDUCER/STORE_MESSAGE',
+      message,
+      index,
+    } as const),
+  initializeStoredMessages: (length: number) =>
+    ({
+      type: 'IN_LINK/DIALOGS_REDUCER/INITIALIZE_STORED_MESSAGES',
+      length,
     } as const),
 }
 

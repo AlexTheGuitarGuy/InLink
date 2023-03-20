@@ -103,6 +103,7 @@ const state: DialogsReducerState = {
       { id: uuidv1(), text: 'Lorem Ipsum is simply dummy text', type: 'sent' },
     ],
   ] as UserMessage[][],
+  storedMessages: [],
 }
 
 it('should add message "Hello fellow human being, I am Mark Zuckerberg" to userMessages[0] array', () => {
