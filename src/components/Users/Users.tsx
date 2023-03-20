@@ -1,17 +1,11 @@
 import React, { useCallback, useEffect } from 'react'
 
-import {
-  getIsLoading,
-  getPageSize,
-  getTotalUsers,
-  getUsers,
-} from '../../redux/users-reducer/users-selector'
+import { getPageSize, getTotalUsers, getUsers } from '../../redux/users-reducer/users-selector'
 import { requestUsers, usersActions } from '../../redux/users-reducer/users-reducer'
 
 import useScreenSize from '../../hooks/useScreenSize'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 
-import Loading from '../common/Loading/Loading'
 import UserItems from './UserItems/UserItems'
 import UsersSearch from './UsersSearch/UsersSearch'
 import Paginator from '../common/Paginator/Paginator'
@@ -19,7 +13,6 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 
 const Users = () => {
   const totalUsers = useAppSelector(getTotalUsers)
-  const isLoading = useAppSelector(getIsLoading)
   const users = useAppSelector(getUsers)
 
   const dispatch = useAppDispatch()
@@ -58,8 +51,6 @@ const Users = () => {
   useEffect(() => {
     dispatch(requestUsers(location.search))
   }, [location.search, dispatch])
-
-  if (isLoading) return <Loading />
 
   return (
     <div

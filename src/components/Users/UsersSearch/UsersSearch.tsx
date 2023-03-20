@@ -17,7 +17,7 @@ const UsersSearch = () => {
 
   const initialValues = {
     usersType: 'all',
-    search: '',
+    search: searchParams.get('term') || '',
   }
 
   const maxSearchLen = 50

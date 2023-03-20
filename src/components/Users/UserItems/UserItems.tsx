@@ -1,15 +1,16 @@
 import React, { memo } from 'react'
 
-import { getUsers } from '../../../redux/users-reducer/users-selector'
+import { getIsLoading, getUsers } from '../../../redux/users-reducer/users-selector'
 import { User } from '../../../types/types'
 import { useAppSelector } from '../../../hooks/reduxHooks'
 import Loading from '../../common/Loading/Loading'
 import UserItem from './UserItem/UserItem'
 
 const UserItems = () => {
+  const isLoading = useAppSelector(getIsLoading)
   const users = useAppSelector(getUsers)
 
-  if (!users) return <Loading />
+  if (isLoading || !users.length) return <Loading />
 
   return (
     <div
