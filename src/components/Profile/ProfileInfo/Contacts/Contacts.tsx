@@ -1,7 +1,9 @@
 import React, { FC } from 'react'
+
+import { ContactsObj } from '../../../../types/types'
+import { swapElements } from '../../../../utils/array-helpers'
 import TextContact from './TextContact/TextContact'
 import InputContact from './InputContact/InputContact'
-import { ContactsObj } from '../../../../types/types'
 
 type ContactsProps = {
   contacts: ContactsObj
@@ -29,7 +31,13 @@ const Contacts: FC<ContactsProps> = ({ contacts, isEditing, status }) => {
     }
   }
 
-  const parsedContacts = Object.keys(contacts).map((key: string) => {
+  const contactKeys = Object.keys(contacts)
+
+  swapElements(contactKeys, contactKeys.indexOf('vk'), contactKeys.length - 3)
+  swapElements(contactKeys, contactKeys.indexOf('website'), contactKeys.length - 2)
+  swapElements(contactKeys, contactKeys.indexOf('mainLink'), contactKeys.length - 1)
+
+  const parsedContacts = contactKeys.map((key: string) => {
     let error: string = ''
     const asyncErrorKey = status?.error && Object.keys(status?.error)[0]
     const asyncErrorValue = status?.error && Object.values(status?.error)[0]
@@ -51,9 +59,12 @@ const Contacts: FC<ContactsProps> = ({ contacts, isEditing, status }) => {
   })
 
   return (
-    <div className='mt-2 text-gray-700'>
+    <div className='mt-2 text-gray-700 space-y-2'>
       Contacts:
-      <div className='ml-1'>{isEmpty && !isEditing ? 'None' : parsedContacts}</div>
+      <div>
+        {isEmpty && !isEditing ? 'None' : parsedContacts.slice(0, parsedContacts.length - 2)}
+      </div>
+      <div>{isEmpty && !isEditing ? 'None' : parsedContacts.slice(parsedContacts.length - 2)}</div>
     </div>
   )
 }
