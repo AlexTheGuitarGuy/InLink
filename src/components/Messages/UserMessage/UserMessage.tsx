@@ -8,6 +8,7 @@ import Placeholder from '../../../assets/pfps/placeholder.jpg'
 import EditOptions from '../../common/Menu/EditOptions/EditOptions'
 import EditText, { EditTextButtonColor } from '../../common/Inputs/EditText/EditText'
 import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
+import { NavLink } from 'react-router-dom'
 
 type UserMessageProps = {
   message: UserMessageType
@@ -50,13 +51,22 @@ const UserMessage: FC<UserMessageProps> = ({
           />
         </div>
       )}
-      <img
-        src={
-          (isFromMe ? myData?.photos?.small : users[conversationIndex].photos.small) || Placeholder
+      <NavLink
+        to={
+          '/profile/' +
+          (!isFromMe ? users[conversationIndex].uniqueUrlName || users[conversationIndex].id : '')
         }
-        alt={users[conversationIndex].name}
-        className={cn('h-10 w-10 rounded-full', { 'order-1': !isFromMe }, { 'order-2': isFromMe })}
-      />
+        className={cn('w-12', { 'order-1': !isFromMe }, { 'order-2': isFromMe })}
+      >
+        <img
+          src={
+            (isFromMe ? myData?.photos?.small : users[conversationIndex].photos.small) ||
+            Placeholder
+          }
+          alt={users[conversationIndex].name}
+          className='h-10 w-10 rounded-full'
+        />
+      </NavLink>
 
       <div
         className={cn(
@@ -66,6 +76,9 @@ const UserMessage: FC<UserMessageProps> = ({
           },
           {
             'mr-4 order-1 bg-blue-400 text-white rounded-l-lg': isFromMe,
+          },
+          {
+            'w-fit': !isEditing,
           },
           {
             'w-full': isEditing,
