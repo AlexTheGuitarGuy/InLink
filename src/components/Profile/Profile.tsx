@@ -35,7 +35,6 @@ const Profile = () => {
   useEffect(() => {
     const userId = (currentUserPage && +currentUserPage) || (loggedUser && +loggedUser)
     if (userId) {
-      console.log('userId: ', userId)
       dispatch(profileActions.setUserId(userId))
       dispatch(getProfile(userId))
       dispatch(getStatus(userId))

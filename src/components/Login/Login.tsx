@@ -61,11 +61,12 @@ const Login: FC<{}> = () => {
               onSubmit={onSubmit}
               enableReinitialize
             >
-              {({ isSubmitting, values: { rememberMe } }: FormikProps<LoginPayload>) => (
+              {({ isSubmitting, isValid }: FormikProps<LoginPayload>) => (
                 <Form className='text-xl'>
                   <>
                     <div className='mb-6'>
                       <FormInput
+                        error={{ isError: !isValid }}
                         field={{
                           type: 'email',
                           name: 'email',
@@ -77,6 +78,7 @@ const Login: FC<{}> = () => {
 
                     <div className='mb-6'>
                       <FormInput
+                        error={{ isError: !isValid }}
                         field={{
                           type: 'password',
                           name: 'password',
@@ -127,6 +129,7 @@ const Login: FC<{}> = () => {
                           <img src={captchaURL} alt='captcha' className='mb-4 w-full' />
 
                           <FormInput
+                            error={{ isError: !isValid }}
                             field={{
                               type: 'text',
                               name: 'captcha',

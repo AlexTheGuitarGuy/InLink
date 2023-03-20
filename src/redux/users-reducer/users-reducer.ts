@@ -157,8 +157,6 @@ const _followUnfollowFlow = (
     dispatch(usersActions.updateFollowQueue(id))
     const data = await request(id)
 
-    console.log('result', data)
-
     if (data.resultCode === ResultCodes.Success) {
       dispatch(usersActions.setFollowStatus(id, followStatus))
     } else {

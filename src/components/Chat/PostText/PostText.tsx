@@ -52,6 +52,7 @@ const PostText = () => {
                 placeholder: 'Enter your message...',
                 className: 'resize-none w-full rounded-lg p-2',
               }}
+              error={{ isError: !isValid }}
             />
             <div className='flex items-center'>
               <PrimaryButton

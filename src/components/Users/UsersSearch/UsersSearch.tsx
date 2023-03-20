@@ -62,10 +62,11 @@ const UsersSearch = () => {
       onSubmit={onSubmit}
       innerRef={formRef}
     >
-      {({ isSubmitting, isValid, submitForm, handleChange }: FormikProps<SearchFormValues>) => (
+      {({ isValid, handleChange }: FormikProps<SearchFormValues>) => (
         <Form className='flex justify-end lg:mr-60 lg:mb-2 lg:my-0 my-6 lg:mx-0 mx-20'>
           <div className='lg:w-auto w-full'>
             <FormInput
+              error={{ isError: !isValid }}
               field={{
                 name: 'search',
                 className: 'py-1 px-3 lg:w-auto w-full',

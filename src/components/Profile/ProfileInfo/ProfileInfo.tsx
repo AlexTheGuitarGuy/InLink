@@ -109,6 +109,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
               <div className='text-2xl sm:mx-auto lg:mx-0 xl:text-3xl'>
                 {isEditing ? (
                   <FormInput
+                    error={{ isError: !isValid }}
                     field={{
                       type: 'text',
                       name: 'fullName',

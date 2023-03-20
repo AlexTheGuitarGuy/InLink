@@ -15,15 +15,12 @@ export const userAPI = {
   },
 
   unfollow: async (id: number) => {
-    console.log(id)
     const response = await instance.delete<CommonResponse<ResultCodes, {}>>(`follow/${id}`)
 
     return response.data
   },
 
   follow: async (id: number) => {
-    console.log(id)
-
     const response = await instance.post<CommonResponse<ResultCodes, {}>>(`follow/${id}`)
 
     return response.data
