@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import ProfileButton from './ProfileButton/ProfileButton'
-import Nav from './Nav/Nav'
+import Navbar from './Navbar/Navbar'
 import { useLocation } from 'react-router-dom'
 import { compose } from 'redux'
 import { useSelector } from 'react-redux'
@@ -75,7 +75,7 @@ const Header = () => {
       </div>
 
       <div className='lg:order-2 sm:order-1'>
-        <Nav />
+        <Navbar />
       </div>
 
       <div

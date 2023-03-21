@@ -3,15 +3,18 @@ import React, { LegacyRef, useState } from 'react'
 import cn from 'classnames'
 import { Menu } from '@mui/icons-material'
 
-import { getNavItems } from '../../../redux/navbar-reducer/navbar-selector'
-import { useSelector } from 'react-redux'
 import useTagBlur from '../../../hooks/useTagBlur'
 import { useLocation } from 'react-router'
 import useScreenSize from '../../../hooks/useScreenSize'
 import { NavItem } from '../../../types/types'
 
-const Nav = () => {
-  const navItems = useSelector(getNavItems)
+const Navbar = () => {
+  const navItems: NavItem[] = [
+    { to: '/profile', name: 'Profile' },
+    { to: '/messages', name: 'Messages' },
+    { to: '/chat', name: 'Chat' },
+    { to: '/users', name: 'Users' },
+  ]
   const [shouldShowMenu, setShouldShowMenu] = useState(false)
 
   const menuRef = useTagBlur(shouldShowMenu, setShouldShowMenu)
@@ -102,4 +105,4 @@ const Nav = () => {
   return <nav className='flex flex-row'>{navElements}</nav>
 }
 
-export default Nav
+export default Navbar

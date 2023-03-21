@@ -62,7 +62,6 @@ export type UserMessage = {
 }
 
 export type NavItem = {
-  id: number
   to: string
   name: string
 }
