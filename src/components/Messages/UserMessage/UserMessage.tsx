@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMyData } from '../../../redux/profile-reducer/profile-selector'
 import { User, UserMessage as UserMessageType } from '../../../types/types'
 import Placeholder from '../../../assets/pfps/placeholder.jpg'
-import EditOptions from '../../common/Menu/EditOptions/EditOptions'
+import EditOptions from '../../common/Dropdown/EditOptions/EditOptions'
 import EditText, { EditTextButtonColor } from '../../common/Inputs/EditText/EditText'
 import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
 import { NavLink } from 'react-router-dom'
+import ConfirmDialog from '../../common/Dialogs/ConfirmDialog/ConfirmDialog'
 
 type UserMessageProps = {
   message: UserMessageType
@@ -22,6 +23,7 @@ const UserMessage: FC<UserMessageProps> = ({
   users,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
   const dispatch = useDispatch()
   const myData = useSelector(getMyData)
 
@@ -37,6 +39,18 @@ const UserMessage: FC<UserMessageProps> = ({
         { 'mr-8': !isFromMe },
       )}
     >
+      <ConfirmDialog
+        isShown={confirmDelete}
+        onClose={() => {
+          setConfirmDelete(false)
+        }}
+        onSubmit={() => {
+          dispatch(dialogsActions.deleteMessage(id))
+          setConfirmDelete(false)
+        }}
+        confirmText='Are you sure you want to delete this message?'
+      ></ConfirmDialog>
+
       {!isEditing && (
         <div className={cn('mt-2 mx-1', { 'order-first': isFromMe }, { 'order-last': !isFromMe })}>
           <EditOptions
@@ -44,7 +58,7 @@ const UserMessage: FC<UserMessageProps> = ({
               setIsEditing(true)
             }}
             onDelete={() => {
-              dispatch(dialogsActions.deleteMessage(id))
+              setConfirmDelete(true)
             }}
             absolutePosition='left-0'
             canEdit={isFromMe}

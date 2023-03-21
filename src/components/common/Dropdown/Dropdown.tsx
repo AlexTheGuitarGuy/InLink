@@ -2,13 +2,13 @@ import { FC, ReactNode } from 'react'
 import cn from 'classnames'
 import { v1 as uuidv1 } from 'uuid'
 
-export type MenuProps = {
+export type DropdownProps = {
   open: boolean
   children: ReactNode[]
   absolutePosition?: string
 }
 
-const Menu: FC<MenuProps> = ({ open, children, absolutePosition = 'right-0' }) => {
+const Dropdown: FC<DropdownProps> = ({ open, children, absolutePosition = 'right-0' }) => {
   return (
     <div
       className={cn(
@@ -29,4 +29,4 @@ const Menu: FC<MenuProps> = ({ open, children, absolutePosition = 'right-0' }) =
   )
 }
 
-export default Menu
+export default Dropdown

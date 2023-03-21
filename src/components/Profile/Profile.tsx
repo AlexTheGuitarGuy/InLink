@@ -2,11 +2,7 @@ import React, { useEffect } from 'react'
 import { compose } from 'redux'
 import { useParams } from 'react-router-dom'
 
-import {
-  getIsEditing,
-  getIsLoading,
-  getProfilePage,
-} from '../../redux/profile-reducer/profile-selector'
+import { getIsEditing, getProfilePage } from '../../redux/profile-reducer/profile-selector'
 import { getUID } from '../../redux/auth-reducer/auth-selector'
 import {
   getProfile,
@@ -26,7 +22,6 @@ const Profile = () => {
   const { profileData, myData } = useAppSelector(getProfilePage)
   const myUID = useAppSelector(getUID)
   const loggedUser = useAppSelector(getUID)
-  const isLoading = useAppSelector(getIsLoading)
 
   const dispatch = useAppDispatch()
 
@@ -44,7 +39,7 @@ const Profile = () => {
 
   const isOwner = !!(currentUserPage && +currentUserPage === myUID)
 
-  if (isLoading || !profileData || !myData) return <Loading />
+  if (!profileData || !myData) return <Loading />
   if (!isOwner && isEditing) dispatch(profileActions.setEditing(false))
 
   const pfp = profileData.photos

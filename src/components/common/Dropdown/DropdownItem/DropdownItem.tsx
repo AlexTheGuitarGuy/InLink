@@ -7,7 +7,7 @@ export type MenuItemProps = {
   setMenuOpen?: (value: boolean) => void
 }
 
-const MenuItem: FC<MenuItemProps> = ({ children, icon, onClick, setMenuOpen }) => {
+const DropdownItem: FC<MenuItemProps> = ({ children, icon, onClick, setMenuOpen }) => {
   let ItemClicked = () => {
     if (onClick) onClick()
     if (setMenuOpen) setMenuOpen(false)
@@ -25,4 +25,4 @@ const MenuItem: FC<MenuItemProps> = ({ children, icon, onClick, setMenuOpen }) =
   )
 }
 
-export default MenuItem
+export default DropdownItem

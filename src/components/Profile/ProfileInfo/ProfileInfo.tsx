@@ -37,7 +37,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
 }) => {
   const dispatch = useAppDispatch()
   const currentUserFollowed = useAppSelector(getCurrentUserFollowed)
-  const id = useAppSelector(getUserId) as number
+  const id = useAppSelector(getUserId)!
   const updatePFP = (event: ChangeEvent<HTMLInputElement>) => {
     const element = event.currentTarget as HTMLInputElement
     const fileList: FileList | null = element.files

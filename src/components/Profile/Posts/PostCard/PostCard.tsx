@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux'
 
 import { profileActions } from '../../../../redux/profile-reducer/profile-reducer'
 import { Post } from '../../../../types/types'
-import EditOptions from '../../../common/Menu/EditOptions/EditOptions'
+import EditOptions from '../../../common/Dropdown/EditOptions/EditOptions'
 import EditText from '../../../common/Inputs/EditText/EditText'
+import ConfirmDialog from '../../../common/Dialogs/ConfirmDialog/ConfirmDialog'
 
 type PostCardProps = {
   postData: Post
@@ -21,11 +22,25 @@ const PostCard: FC<PostCardProps> = ({
   isOwner,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
 
   const dispatch = useDispatch()
 
   return (
     <div className='mt-4 flex flex-col lg:text-l sm:text-sm'>
+      {/* Dialogs */}
+      <ConfirmDialog
+        isShown={confirmDelete}
+        onClose={() => {
+          setConfirmDelete(false)
+        }}
+        onSubmit={() => {
+          dispatch(profileActions.deletePost(id))
+          setConfirmDelete(false)
+        }}
+        confirmText='Are you sure you want to delete this post?'
+      ></ConfirmDialog>
+
       {/* Header */}
       <div
         className='order-1 p-4
@@ -52,7 +67,9 @@ const PostCard: FC<PostCardProps> = ({
         {isOwner && !isEditing && (
           <EditOptions
             onEdit={() => setIsEditing(true)}
-            onDelete={() => dispatch(profileActions.deletePost(id))}
+            onDelete={() => {
+              setConfirmDelete(true)
+            }}
           />
         )}
       </div>
