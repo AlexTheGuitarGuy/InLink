@@ -52,12 +52,7 @@ const PublishPost = () => {
           <PrimaryButton
             disabled={isSubmitting || !isValid}
             type='submit'
-            className='text-sm text-center
-
-                      lg:py-1.5
-                      sm:py-0.5 px-4 
-
-                      rounded w-full'
+            className='text-sm text-center py-1.5 px-4 rounded w-full'
           >
             Publish
           </PrimaryButton>

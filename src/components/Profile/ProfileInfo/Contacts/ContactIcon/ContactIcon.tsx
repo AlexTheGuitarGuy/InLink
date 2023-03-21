@@ -4,7 +4,7 @@ import { Facebook, GitHub, Instagram, Twitter, YouTube } from '@mui/icons-materi
 import { ContactProps } from '../Contacts'
 import VkIcon from '../../../../common/Icons/VkIcon/VkIcon'
 
-const TextContact: FC<ContactProps> = ({ contactName, contactAddress }) => {
+const ContactIcon: FC<ContactProps> = ({ contactName, contactAddress }) => {
   const iconsMap = {
     facebook: <Facebook />,
     github: <GitHub />,
@@ -18,8 +18,6 @@ const TextContact: FC<ContactProps> = ({ contactName, contactAddress }) => {
     youtube: <YouTube />,
   }
 
-  console.log('location', window.location.href)
-
   return (
     <button onClick={() => (window.location.href = contactAddress || window.location.href)}>
       {iconsMap[contactName as keyof typeof iconsMap]}
@@ -27,4 +25,4 @@ const TextContact: FC<ContactProps> = ({ contactName, contactAddress }) => {
   )
 }
 
-export default TextContact
+export default ContactIcon

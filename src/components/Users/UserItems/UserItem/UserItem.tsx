@@ -30,29 +30,14 @@ const UserItem: FC<UserItemProps> = ({ user, index, self }) => {
           src={user.photos.small || placeholder}
           alt='userPfp'
           className='rounded-full 
-            lg:w-20 lg:h-20
-            sm:w-10 sm:h-10 
+            w-20 h-20
             p-0.5
               transition-colors hover:bg-gray-700 active:bg-gray-800'
         />
 
         <div className='mt-3 ml-3 flex flex-col'>
-          <div
-            className='lg:text-xl sm:text-sm 
-            border-b border-transparent 
-            hover:border-gray-600 active:border-gray-500
-            hover:text-gray-600 active:text-gray-500'
-          >
-            {user.name}
-          </div>
-          <div
-            className='font-normal sm:text-sm lg:text-md
-                        border-b border-transparent 
-            hover:border-gray-600 active:border-gray-500
-            hover:text-gray-600 active:text-gray-500'
-          >
-            {user.status}
-          </div>
+          <div className='text-xl border-b border-transparent'>{user.name}</div>
+          <div className='font-normal border-b border-transparent'>{user.status}</div>
         </div>
       </NavLink>
 

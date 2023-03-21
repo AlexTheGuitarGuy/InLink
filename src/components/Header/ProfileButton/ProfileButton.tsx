@@ -1,5 +1,4 @@
 import React, { LegacyRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 
 import { getMyData } from '../../../redux/profile-reducer/profile-selector'
@@ -84,16 +83,9 @@ const ProfileButton = () => {
           </div>
         </>
       ) : (
-        <NavLink
-          to={'/login'}
-          className='font-semibold
-            bg-gray-500 hover:bg-gray-600 active:bg-gray-700
-            py-1 px-4 text-gray-100 text-center
-            rounded
-            transition-colors cursor-pointer'
-        >
+        <PrimaryButton to={'/login'} as='navlink' className='px-2 py-1'>
           Log in
-        </NavLink>
+        </PrimaryButton>
       )}
     </div>
   )

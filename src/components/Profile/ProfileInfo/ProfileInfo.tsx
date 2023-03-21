@@ -79,25 +79,25 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
           <div className='mt-2 sm:mx-auto lg:mx-0'>
             <Status isOwner={isOwner} />
           </div>
-          {isOwner ? (
-            <div className='mt-4'>
+          <div className='mt-3 mx-auto lg:mx-0 '>
+            {isOwner ? (
               <PrimaryButton
                 onClick={() => setIsEditShown(true)}
-                className='py-0.5 px-4
-                          sm:mb-4 lg:mb-0
-                          sm:w-full lg:w-auto'
+                className='lg:py-0.5 lg:px-4
+                          py-2 sm:px-6
+                          mb-4 lg:mb-0'
               >
                 Edit
               </PrimaryButton>
-            </div>
-          ) : (
-            <FollowButton
-              id={id}
-              followed={currentUserFollowed}
-              onFollow={() => dispatch(followInProfile(id))}
-              onUnfollow={() => dispatch(unfollowInProfile(id))}
-            />
-          )}
+            ) : (
+              <FollowButton
+                id={id}
+                followed={currentUserFollowed}
+                onFollow={() => dispatch(followInProfile(id))}
+                onUnfollow={() => dispatch(unfollowInProfile(id))}
+              />
+            )}
+          </div>
           {isOwner && (
             <div className='my-4'>
               <div>Upload profile picture:</div>

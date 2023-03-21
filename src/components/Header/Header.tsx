@@ -64,17 +64,17 @@ const Header = () => {
 
   return (
     <header
-      className={`px-4 bg-gray-100 text-gray-700
+      className='px-4 bg-gray-100 text-gray-700
         rounded-b border-b border-gray-400
         flex justify-between items-center 
         whitespace-nowrap
-        h-16`}
+        h-16'
     >
-      <div className={'lg:order-3 sm:order-3'}>
+      <div className='lg:order-3 sm:order-3'>
         <ProfileButton />
       </div>
 
-      <div className={'lg:order-2 sm:order-1'}>
+      <div className='lg:order-2 sm:order-1'>
         <Nav />
       </div>
 

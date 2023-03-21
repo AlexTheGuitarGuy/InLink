@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { ContactsObj } from '../../../../types/types'
 import { swapElements } from '../../../../utils/array-helpers'
-import ContactIcon from './TextContact/TextContact'
+import ContactIcon from './ContactIcon/ContactIcon'
 import InputContact from './InputContact/InputContact'
 
 type ContactsProps = {
