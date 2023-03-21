@@ -151,8 +151,6 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
       }
 
     case 'IN_LINK/DIALOGS_REDUCER/STORE_MESSAGE':
-      console.log('stored messages', state.storedMessages)
-
       return {
         ...state,
         storedMessages: [
@@ -162,7 +160,6 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
         ],
       }
     case 'IN_LINK/DIALOGS_REDUCER/INITIALIZE_STORED_MESSAGES':
-      console.log('initialize stored messages', action.length)
       return {
         ...state,
         storedMessages: action.length ? new Array(action.length).fill('') : [],
