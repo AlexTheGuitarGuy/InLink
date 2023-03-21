@@ -113,7 +113,6 @@ const Login: FC<{}> = () => {
                       className='inline-block
                                 px-7 py-3 w-full text-sm'
                       disabled={isSubmitting}
-                      color='blue'
                     >
                       Log in
                     </PrimaryButton>

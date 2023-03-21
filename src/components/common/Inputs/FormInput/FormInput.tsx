@@ -46,7 +46,8 @@ const FormInput: FC<FormInputProps> = ({
                     border border-gray-300 border-solid
                     focus:outline-none focus:border-gray-600
                     transition ease-in-out
-                    bg-clip-padding`,
+                    bg-clip-padding
+                    px-3 py-2 w-full`,
           field.className,
           { 'bg-rose-50 border-rose-300 focus:border-rose-600 text-rose-800': isError },
         )}

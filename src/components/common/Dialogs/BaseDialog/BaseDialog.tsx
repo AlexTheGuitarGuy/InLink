@@ -17,7 +17,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
   onSubmit,
   name = 'Dialog',
   children,
-  showFooter,
+  showFooter = true,
   isShown,
 }: BaseDialogProps) => {
   const handleClose = () => {
@@ -32,7 +32,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
   return (
     <div
       className={cn(
-        'fixed z-50 left-0 top-0 w-full h-full bg-black/30 transition-opacity duration-100 text-gray-800',
+        'fixed z-40 left-0 top-0 w-full h-full bg-black/30 transition-opacity duration-100 text-gray-800',
         {
           'opacity-100': isShown,
           'opacity-0 pointer-events-none': !isShown,
@@ -42,7 +42,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
       <div
         ref={ref as RefObject<HTMLDivElement>}
         className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                    bg-white shadow-md rounded
+                    bg-white shadow-md rounded max-h-[80vh]
                     flex flex-col divide-y border-gray-500'
       >
         <header className='flex justify-between px-6 py-3'>
@@ -54,15 +54,15 @@ const BaseDialog: FC<BaseDialogProps> = ({
             <Close className='-mt-1' />
           </button>
         </header>
-        <main>{children}</main>
+        {children}
         {showFooter && (
           <footer className='flex justify-end px-6 py-3'>
             <div className='flex space-x-4'>
-              <PrimaryButton onClick={handleClose} className='px-5 py-2' color='rose'>
-                Cancel
-              </PrimaryButton>
-              <PrimaryButton onClick={handleSubmit} className='px-5 py-2' color='blue'>
+              <PrimaryButton onClick={handleSubmit} className='px-5 py-2' type='submit'>
                 Done
+              </PrimaryButton>
+              <PrimaryButton onClick={handleClose} className='px-5 py-2' color='rose' type='reset'>
+                Cancel
               </PrimaryButton>
             </div>
           </footer>

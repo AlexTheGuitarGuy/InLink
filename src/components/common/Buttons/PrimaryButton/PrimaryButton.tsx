@@ -14,7 +14,7 @@ type PrimaryButtonProps = {
 }
 
 const PrimaryButton: FC<PrimaryButtonProps> = ({
-  color = 'gray',
+  color = 'blue',
   onClick,
   children,
   className,

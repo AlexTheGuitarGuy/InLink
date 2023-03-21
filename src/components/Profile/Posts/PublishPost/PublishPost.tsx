@@ -58,7 +58,6 @@ const PublishPost = () => {
                       sm:py-0.5 px-4 
 
                       rounded w-full'
-            color='gray'
           >
             Publish
           </PrimaryButton>

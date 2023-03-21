@@ -29,7 +29,6 @@ const initialState = {
   profileStatus: '',
   storedText: '',
   isLoading: false,
-  isEditing: false,
   currentUserFollowed: false,
   userId: null as number | null,
 }
@@ -38,7 +37,7 @@ export type ProfileReducerState = typeof initialState
 
 type ProfileAction = InferAction<typeof profileActions>
 
-type ProfileThunk = InferThunk<ProfileAction>
+type ProfileThunk = InferThunk<ProfileAction, void | { success: boolean }>
 
 const profileReducer = (state = initialState, action: ProfileAction): ProfileReducerState => {
   switch (action.type) {
@@ -89,7 +88,6 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/SET_MY_PROFILE':
     case 'IN_LINK/PROFILE_REDUCER/SET_STATUS':
     case 'IN_LINK/PROFILE_REDUCER/SET_LOADING':
-    case 'IN_LINK/PROFILE_REDUCER/SET_IS_EDITING':
     case 'IN_LINK/PROFILE_REDUCER/SET_CURRENT_USER_FOLLOWED':
     case 'IN_LINK/PROFILE_REDUCER/SET_USER_ID':
       return {
@@ -133,12 +131,6 @@ export const profileActions = {
       type: 'IN_LINK/PROFILE_REDUCER/EDIT_POST',
       id,
       payload,
-    } as const),
-
-  setEditing: (isEditing: boolean) =>
-    ({
-      type: 'IN_LINK/PROFILE_REDUCER/SET_IS_EDITING',
-      payload: { isEditing },
     } as const),
 
   setProfile: (profileData: GetProfileResponse) =>
@@ -236,7 +228,7 @@ export const uploadPFP = (file: File): ProfileThunk => {
 
 export const uploadProfileInfo =
   (profileInfo: InputProfileData, setStatus: (status: FormikStatus) => void): ProfileThunk =>
-  async (dispatch, getState) => {
+  async (dispatch, getState): Promise<{ success: boolean }> => {
     if (!getState().profilePage.profileData) throw new Error('Profile data is null')
 
     const userId = getState().profilePage.profileData!.userId
@@ -248,8 +240,8 @@ export const uploadProfileInfo =
 
     if (data.resultCode === ResultCodes.Success) {
       dispatch(getMyProfile(userId))
-      dispatch(profileActions.setEditing(false))
       dispatch(setAlertFromThunk({ message: 'profile edited', type: 'success' }))
+      return { success: true }
     } else {
       const message = data.messages.length > 0 ? data.messages[0] : 'An error has occurred'
 
@@ -265,11 +257,11 @@ export const uploadProfileInfo =
         })
 
         dispatch(setAlertFromThunk({ message: errorText, type: 'error' }))
-
-        return
+        return { success: false }
       }
 
       dispatch(setAlertFromThunk({ message, type: 'error' }))
+      return { success: false }
     }
   }
 

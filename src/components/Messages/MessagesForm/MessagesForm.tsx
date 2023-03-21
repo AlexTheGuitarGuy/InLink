@@ -54,7 +54,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
                 as: 'textarea',
                 name: 'messageText',
                 placeholder: 'Enter your message...',
-                className: 'resize-none w-full rounded-lg p-2',
+                className: 'resize-none rounded-lg',
                 restprops: {
                   onChange: (event: ChangeEvent<HTMLInputElement>) =>
                     dispatch(dialogsActions.storeMessage(event.target.value, index)),

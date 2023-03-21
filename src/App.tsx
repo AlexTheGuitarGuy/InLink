@@ -57,7 +57,7 @@ const App = () => {
   if (!isAppInitialized) return <Loading />
 
   return (
-    <div className='w-full h-screen'>
+    <div className='w-full'>
       {isLoggedIn && (
         <div className='fixed w-60 mt-12 z-0'>
           <Sidebar />

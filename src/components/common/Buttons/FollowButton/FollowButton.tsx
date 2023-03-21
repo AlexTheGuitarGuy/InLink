@@ -31,7 +31,6 @@ const FollowButton: FC<FollowButtonProps> = ({ id, followed, onFollow, onUnfollo
           className='sm:text-xs lg:text-md
                     lg:py-1 lg:px-4
                     sm:py-0.5 sm:px-2'
-          color='gray'
         >
           {(isDisabled && <Loading dimensions={Dimensions.small} />) || <>{buttonText}</>}
         </PrimaryButton>

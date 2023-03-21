@@ -22,7 +22,6 @@ const state: ProfileReducerState = {
   profileStatus: '',
   storedText: '',
   isLoading: false,
-  isEditing: false,
   currentUserFollowed: false,
   userId: null,
 }

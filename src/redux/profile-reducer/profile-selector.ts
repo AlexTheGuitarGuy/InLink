@@ -40,10 +40,6 @@ export const getPosts = (state: RootState) => {
   return getProfilePage(state).posts
 }
 
-export const getIsEditing = (state: RootState) => {
-  return getProfilePage(state).isEditing
-}
-
 export const getStatus = (state: RootState) => {
   return getProfilePage(state).profileStatus
 }

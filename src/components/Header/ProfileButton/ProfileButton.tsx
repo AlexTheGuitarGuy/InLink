@@ -61,7 +61,6 @@ const ProfileButton = () => {
             <>
               <div className='font-semibold text-gray-700 sm:text-lg lg:text-base'>{login}</div>
               <PrimaryButton
-                color='gray'
                 as='navlink'
                 to='/profile'
                 className='lg:py-0.5 lg:px-4 

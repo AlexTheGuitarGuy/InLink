@@ -8,45 +8,51 @@ import FormInput from '../../../common/Inputs/FormInput/FormInput'
 type JobInfoProps = {
   lookingForAJob: boolean
   lookingForAJobDescription: string
-  isEditing: boolean
+  isEditMode: boolean
+  isError?: boolean
 }
 
-const JobInfo: FC<JobInfoProps> = ({ lookingForAJob, lookingForAJobDescription, isEditing }) => {
+const JobInfo: FC<JobInfoProps> = ({
+  lookingForAJob,
+  lookingForAJobDescription,
+  isEditMode,
+  isError,
+}) => {
   return (
-    <div className={cn({ 'w-full': !isEditing })}>
-      {(lookingForAJob || isEditing) && (
+    <div>
+      {(lookingForAJob || isEditMode) && (
         <div
-          className={cn(
-            `border rounded-lg border-gray-300
-              bg-gray-200
-              p-4 
-              text-gray-700
-              flex items-center flex-col`,
-            { 'w-full': isEditing },
-          )}
+          className={cn(`text-gray-700`, {
+            'bg-gray-200 p-4 border rounded-lg border-gray-300 flex items-center flex-col':
+              !isEditMode,
+          })}
         >
-          <div className='order-1'>
-            {isEditing ? (
-              <div className='mr-1 mt-1 inline'>
-                <Field type='checkbox' name='lookingForAJob' checked={lookingForAJob} />
-              </div>
+          <div className='order-1 space-x-1 flex'>
+            {isEditMode ? (
+              <Field
+                id='lookingForAJob'
+                type='checkbox'
+                name='lookingForAJob'
+                checked={lookingForAJob}
+              />
             ) : (
               <Search />
             )}
-            is looking for a job
+            <label htmlFor='lookingForAJob'>looking for a job</label>
           </div>
 
           <div className='order-2 mt-2 text-center w-full'>
-            {lookingForAJob && isEditing ? (
+            {lookingForAJob && isEditMode ? (
               <FormInput
+                error={{ isError: !!isError }}
                 field={{
                   name: 'lookingForAJobDescription',
                   placeholder: 'Please enter your skills...',
                   as: 'textarea',
-                  className: 'resize-none py-1 px-4 w-full',
+                  className: 'resize-none',
                 }}
               />
-            ) : lookingForAJobDescription && !isEditing ? (
+            ) : lookingForAJobDescription && !isEditMode ? (
               <span className='break-words'>{lookingForAJobDescription}</span>
             ) : null}
           </div>

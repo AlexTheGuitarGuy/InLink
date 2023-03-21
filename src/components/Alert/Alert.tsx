@@ -33,7 +33,7 @@ const Alert = () => {
   }
 
   return (
-    <div className='w-full fixed z-20 flex justify-end lg:right-4'>
+    <div className='w-full fixed z-50 flex justify-end lg:right-4'>
       <div
         className={cn(
           `lg:w-1/3 sm:w-full px-4 py-3 

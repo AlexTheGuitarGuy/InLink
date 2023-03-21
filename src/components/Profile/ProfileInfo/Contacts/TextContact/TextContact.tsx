@@ -18,6 +18,8 @@ const TextContact: FC<ContactProps> = ({ contactName, contactAddress }) => {
     youtube: <YouTube />,
   }
 
+  console.log('location', window.location.href)
+
   return (
     <button onClick={() => (window.location.href = contactAddress || window.location.href)}>
       {iconsMap[contactName as keyof typeof iconsMap]}
