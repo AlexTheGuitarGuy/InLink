@@ -60,7 +60,7 @@ const UserMessage: FC<UserMessageProps> = ({
             : '')
         }
         className={cn('w-12', {
-          'opacity-0 pointer-events-none': type === 'sent' || (next && next.type === 'received'),
+          'opacity-0 pointer-events-none': type === 'sent' || next?.type === 'received',
         })}
       >
         <img
@@ -92,11 +92,17 @@ const UserMessage: FC<UserMessageProps> = ({
         )}
 
         <div
-          className={cn('p-2', {
-            'order-2 bg-gray-400 text-white rounded-r-lg rounded-tl-lg': type === 'received',
-            'order-1 bg-blue-400 text-white rounded-l-lg rounded-tr-lg': type === 'sent',
-            'rounded-bl-lg': type === 'received' && next && next.type === 'received',
-            'rounded-br-lg': type === 'sent' && next && next.type === 'sent',
+          className={cn('p-2 text-white', {
+            'order-2 bg-gray-400 rounded-r-xl': type === 'received',
+            'order-1 bg-blue-400 rounded-l-xl': type === 'sent',
+
+            'rounded-tl-xl': type === 'received' && previous?.type === 'sent',
+            'rounded-tr-xl': type === 'sent' && previous?.type === 'received',
+
+            'rounded-bl-md': type === 'received' && next?.type === 'received',
+            'rounded-tl-md': type === 'received' && (!previous || previous.type === 'received'),
+            'rounded-br-md': type === 'sent' && next?.type === 'sent',
+            'rounded-tr-md': type === 'sent' && (!previous || previous.type === 'sent'),
           })}
         >
           {isEditing ? (
