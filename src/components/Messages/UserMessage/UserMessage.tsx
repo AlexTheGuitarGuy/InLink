@@ -13,6 +13,8 @@ import ConfirmDialog from '../../common/Dialogs/ConfirmDialog/ConfirmDialog'
 
 type UserMessageProps = {
   message: UserMessageType
+  array: UserMessageType[]
+
   conversationIndex: number
   users: User[]
 }
@@ -31,13 +33,10 @@ const UserMessage: FC<UserMessageProps> = ({
 
   return (
     <div
-      className={cn(
-        'flex font-normal mt-8',
-        {
-          'justify-end ml-8': isFromMe,
-        },
-        { 'mr-8': !isFromMe },
-      )}
+      className={cn('flex font-normal mt-8', {
+        'justify-end ml-8': isFromMe,
+        'mr-8': !isFromMe,
+      })}
     >
       <ConfirmDialog
         isShown={confirmDelete}
@@ -52,7 +51,7 @@ const UserMessage: FC<UserMessageProps> = ({
       ></ConfirmDialog>
 
       {!isEditing && (
-        <div className={cn('mt-2 mx-1', { 'order-first': isFromMe }, { 'order-last': !isFromMe })}>
+        <div className={cn('mt-2 mx-1', { 'order-first': isFromMe, 'order-last': !isFromMe })}>
           <EditOptions
             onEdit={() => {
               setIsEditing(true)

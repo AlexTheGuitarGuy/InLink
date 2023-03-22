@@ -22,7 +22,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
   const storedMessages = useAppSelector(getStoredMessages)
 
   const initialValues = {
-    messageText: '',
+    messageText: storedMessages[index] || '',
   }
 
   const maxMessageLen = 512
@@ -38,14 +38,15 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
   ) => {
     if (messageText.trim()) {
       dispatch(dialogsActions.sendMessage(index, messageText))
-      resetForm()
+      dispatch(dialogsActions.storeMessage('', index))
+      resetForm({ values: { messageText: '' } })
     }
     setSubmitting(false)
   }
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {({ isSubmitting, isValid }: FormikProps<MessageFormValues>) => (
+      {({ isSubmitting, isValid, handleChange }: FormikProps<MessageFormValues>) => (
         <Form>
           <div className='flex flex-row justify-center'>
             <FormInput
@@ -56,9 +57,10 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
                 placeholder: 'Enter your message...',
                 className: 'resize-none rounded-lg',
                 restprops: {
-                  onChange: (event: ChangeEvent<HTMLInputElement>) =>
-                    dispatch(dialogsActions.storeMessage(event.target.value, index)),
-                  value: storedMessages[index],
+                  onChange: (event: ChangeEvent<HTMLInputElement>) => {
+                    handleChange(event)
+                    dispatch(dialogsActions.storeMessage(event.target.value, index))
+                  },
                 },
               }}
             />

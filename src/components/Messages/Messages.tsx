@@ -39,17 +39,18 @@ const Messages = () => {
     conversation: UserMessageType[],
     conversationIndex: number,
   ) =>
-    conversation.map((message: UserMessageType) => (
+    conversation.map((message: UserMessageType, index, array) => (
       <UserMessage
         key={message.id}
         message={message}
         conversationIndex={conversationIndex}
         users={users}
+        array={array}
       />
     ))
 
   const conversationComponents = userMessages.map(
-    (conversation: UserMessageType[], conversationIndex: number) =>
+    (conversation: UserMessageType[], conversationIndex) =>
       createConversationComponent(conversation, conversationIndex),
   )
 
@@ -60,7 +61,7 @@ const Messages = () => {
         key={index}
         element={
           <div className='flex flex-col h-full w-full relative'>
-            <div className='lg:mx-16 mx-3 mb-14 overflow-y-scroll  h-screen'>
+            <div className='lg:mx-16 mx-3 mb-14 overflow-y-scroll h-[78vh] h-full'>
               {conversationComponents[index]}
             </div>
             <div
@@ -80,7 +81,7 @@ const Messages = () => {
       className='flex
          lg:bg-gray-100 lg:rounded-lg lg:p-8
          text-gray-700 lg:font-semibold
-         xl:h-[92vh] lg:h-[88vh] h-screen w-full'
+         xl:h-[92vh] lg:h-[88vh] w-full'
     >
       {screenSize.dynamicWidth >= 1366 && <Users users={users} />}
 

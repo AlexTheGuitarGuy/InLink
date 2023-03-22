@@ -60,7 +60,7 @@ const Messages = () => {
               </NavLink>
             </div>
             <div
-              className={cn('mx-8 my-2 break-all', {
+              className={cn('my-2 break-all', {
                 'flex justify-end': isThisMe,
               })}
             >
