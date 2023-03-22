@@ -96,13 +96,13 @@ const UserMessage: FC<UserMessageProps> = ({
             'order-2 bg-gray-400 rounded-r-xl': type === 'received',
             'order-1 bg-blue-400 rounded-l-xl': type === 'sent',
 
-            'rounded-tl-xl': type === 'received' && previous?.type === 'sent',
-            'rounded-tr-xl': type === 'sent' && previous?.type === 'received',
+            'rounded-tl-xl': type === 'received' && (!previous || previous.type === 'sent'),
+            'rounded-tr-xl': type === 'sent' && (!previous || previous.type === 'received'),
 
             'rounded-bl-md': type === 'received' && next?.type === 'received',
-            'rounded-tl-md': type === 'received' && (!previous || previous.type === 'received'),
+            'rounded-tl-md': type === 'received' && previous?.type === 'received',
             'rounded-br-md': type === 'sent' && next?.type === 'sent',
-            'rounded-tr-md': type === 'sent' && (!previous || previous.type === 'sent'),
+            'rounded-tr-md': type === 'sent' && previous?.type === 'sent',
           })}
         >
           {isEditing ? (
