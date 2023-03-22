@@ -46,6 +46,7 @@ const Messages = () => {
         conversationIndex={conversationIndex}
         users={users}
         array={array}
+        index={index}
       />
     ))
 
@@ -60,10 +61,8 @@ const Messages = () => {
         path={`/${index}`}
         key={index}
         element={
-          <div className='flex flex-col h-full w-full relative'>
-            <div className='lg:mx-16 mx-3 mb-14 overflow-y-scroll h-[78vh] h-full'>
-              {conversationComponents[index]}
-            </div>
+          <div className='flex flex-col h-full w-full relative overflow-y-scroll overflow-x-hidden'>
+            <div className='space-y-1 h-[78vh]'>{conversationComponents[index]}</div>
             <div
               className='fixed bottom-0 lg:w-3/5 sm:w-full self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300'
