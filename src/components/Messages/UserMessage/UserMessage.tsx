@@ -1,44 +1,55 @@
 import React, { FC, useState } from 'react'
 import cn from 'classnames'
-import { useDispatch } from 'react-redux'
 
-import { User, UserMessage as UserMessageType } from '../../../types/types'
 import Placeholder from '../../../assets/pfps/placeholder.jpg'
 import EditOptions from '../../common/Dropdown/EditOptions/EditOptions'
 import EditText, { EditTextButtonColor } from '../../common/Inputs/EditText/EditText'
-import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
 import { NavLink } from 'react-router-dom'
 import ConfirmDialog from '../../common/Dialogs/ConfirmDialog/ConfirmDialog'
 
 type UserMessageProps = {
-  message: UserMessageType
-  index: number
-  array: UserMessageType[]
-
-  conversationIndex: number
-  users: User[]
+  message: string
+  userName: string
+  userPhoto: string | null
+  userProfileLink: string
+  isFromMe: boolean
+  isNextFromSameUser: boolean
+  isPreviousFromSameUser: boolean
+  isFirst: boolean
+  isLast: boolean
+  onEdit: (text: string) => void
+  onDelete: () => void
 }
 
 const UserMessage: FC<UserMessageProps> = ({
-  message: { type, text, id },
-  index,
-  array,
-  conversationIndex,
-  users,
+  message,
+  userName,
+  userPhoto,
+  userProfileLink,
+  isFromMe,
+  isNextFromSameUser,
+  isPreviousFromSameUser,
+  isFirst,
+  isLast,
+  onEdit,
+  onDelete,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
-  const dispatch = useDispatch()
-
-  const previous = array[index - 1]
-  const next = array[index + 1]
+  const [showEditOptions, setShowEditOptions] = useState(false)
+  const [isEditOptionsMenuOpen, setIsEditOptionsMenuOpen] = useState(false)
 
   return (
     <div
-      className={cn('flex items-end font-normal', {
-        'justify-end mr-3': type === 'sent',
-        'ml-3': type === 'received',
+      className={cn('flex font-normal', {
+        'justify-end': isFromMe,
       })}
+      onMouseEnter={() => {
+        setShowEditOptions(true)
+      }}
+      onMouseLeave={() => {
+        setShowEditOptions(false)
+      }}
     >
       <ConfirmDialog
         isShown={confirmDelete}
@@ -46,41 +57,31 @@ const UserMessage: FC<UserMessageProps> = ({
           setConfirmDelete(false)
         }}
         onSubmit={() => {
-          dispatch(dialogsActions.deleteMessage(id))
           setConfirmDelete(false)
+          onDelete()
         }}
         confirmText='Are you sure you want to delete this message?'
       ></ConfirmDialog>
 
-      {type === 'received' && next?.type === 'sent' && (
-        <NavLink
-          to={
-            '/profile/' +
-            (type === 'received'
-              ? users[conversationIndex].uniqueUrlName || users[conversationIndex].id
-              : '')
-          }
-          className='w-12 absolute'
-        >
-          <img
-            src={users[conversationIndex].photos.small || Placeholder}
-            alt={users[conversationIndex].name}
-            className='h-10 w-10 rounded-full'
-          />
-        </NavLink>
-      )}
-
       <div
-        className={cn('flex max-w-[85%]', {
-          'mr-12': type === 'sent',
-          'ml-12': type === 'received',
+        className={cn('flex max-w-[85%] relative', {
+          'ml-12': !isFromMe,
+          'mt-3': !isPreviousFromSameUser,
         })}
       >
+        {!isFromMe && (!isNextFromSameUser || isLast) && (
+          <NavLink to={userProfileLink} className='w-12 absolute -left-12 -bottom-2'>
+            <img src={userPhoto || Placeholder} alt={userName} className='h-10 w-10 rounded-full' />
+          </NavLink>
+        )}
+
         {!isEditing && (
           <div
-            className={cn('mx-1', {
-              'order-first': type === 'sent',
-              'order-last': type === 'received',
+            className={cn('mx-1 transition-opacity', {
+              'order-first': isFromMe,
+              'order-last': !isFromMe,
+              'opacity-100': showEditOptions || isEditOptionsMenuOpen,
+              'opacity-0': !showEditOptions && !isEditOptionsMenuOpen,
             })}
           >
             <EditOptions
@@ -90,34 +91,37 @@ const UserMessage: FC<UserMessageProps> = ({
               onDelete={() => {
                 setConfirmDelete(true)
               }}
+              onToggleMenu={(open) => {
+                setIsEditOptionsMenuOpen(open)
+              }}
               absolutePosition='left-0'
-              canEdit={type === 'sent'}
+              canEdit={isFromMe}
             />
           </div>
         )}
 
         <div
-          className={cn('px-4 py-1 text-white', {
-            'order-2 bg-gray-400 rounded-r-3xl': type === 'received',
-            'order-1 bg-blue-400 rounded-l-3xl': type === 'sent',
+          className={cn('px-4 py-1 text-white font-medium', {
+            'order-2 bg-gray-400 rounded-r-3xl': !isFromMe,
+            'order-1 bg-blue-400 rounded-l-3xl': isFromMe,
 
-            'rounded-tl-3xl': type === 'received' && (!previous || previous.type === 'sent'),
-            'rounded-tr-3xl': type === 'sent' && (!previous || previous.type === 'received'),
+            'rounded-tl-3xl': !isFromMe && (isFirst || !isPreviousFromSameUser),
+            'rounded-tr-3xl': isFromMe && (isFirst || !isPreviousFromSameUser),
 
-            'rounded-bl': type === 'received' && next?.type === 'received',
-            'rounded-tl': type === 'received' && previous?.type === 'received',
-            'rounded-br': type === 'sent' && next?.type === 'sent',
-            'rounded-tr': type === 'sent' && previous?.type === 'sent',
+            'rounded-tl-md': !isFromMe && isPreviousFromSameUser,
+            'rounded-bl-md': !isFromMe && isNextFromSameUser,
+            'rounded-tr-md': isFromMe && isPreviousFromSameUser,
+            'rounded-br-md': isFromMe && isNextFromSameUser,
 
             'w-[70vw]': isEditing,
           })}
         >
           {isEditing ? (
             <EditText
-              text={text}
+              text={message}
               onDone={(resultText) => {
-                dispatch(dialogsActions.editMessage(id, resultText))
                 setIsEditing(false)
+                onEdit(resultText)
               }}
               onClear={() => {
                 setIsEditing(false)
@@ -126,7 +130,7 @@ const UserMessage: FC<UserMessageProps> = ({
               buttonsColor={EditTextButtonColor.Blue}
             />
           ) : (
-            <>{text}</>
+            <>{message}</>
           )}
         </div>
       </div>

@@ -45,7 +45,7 @@ const PublishPost = () => {
               as: 'textarea',
               name: 'postText',
               placeholder: 'Type what you think...',
-              className: 'resize-none py-2 px-4 w-full',
+              className: 'resize-none py-2 px-4 w-full mb-2',
             }}
           />
 

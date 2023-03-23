@@ -10,6 +10,7 @@ export type EditOptionsProps = {
   onDelete: () => void
   absolutePosition?: string
   canEdit?: boolean
+  onToggleMenu?: (open: boolean) => void
 }
 
 const EditOptions: FC<EditOptionsProps> = ({
@@ -17,25 +18,31 @@ const EditOptions: FC<EditOptionsProps> = ({
   onDelete,
   absolutePosition,
   canEdit = true,
+  onToggleMenu,
 }) => {
   const [menuOpen, setMenuOpen] = useState(false)
-  const menuRef = useTagBlur(menuOpen, setMenuOpen)
+  const menuOpenHandler = (open: boolean) => {
+    setMenuOpen(open)
+    if (onToggleMenu) onToggleMenu(open)
+  }
+
+  const menuRef = useTagBlur(menuOpen, menuOpenHandler)
 
   return (
     <div className='relative font-normal' ref={menuRef as RefObject<HTMLDivElement>}>
       <button
-        onClick={() => setMenuOpen(!menuOpen)}
+        onClick={() => menuOpenHandler(!menuOpen)}
         className='cursor-pointer hover:bg-gray-200 active:bg-gray-300 rounded'
       >
         <MoreVert />
       </button>
       <Dropdown open={menuOpen} absolutePosition={absolutePosition}>
         {canEdit && (
-          <DropdownItem icon={<Edit />} onClick={onEdit} setMenuOpen={setMenuOpen}>
+          <DropdownItem icon={<Edit />} onClick={onEdit} setMenuOpen={menuOpenHandler}>
             Edit
           </DropdownItem>
         )}
-        <DropdownItem icon={<Delete />} onClick={onDelete} setMenuOpen={setMenuOpen}>
+        <DropdownItem icon={<Delete />} onClick={onDelete} setMenuOpen={menuOpenHandler}>
           Delete
         </DropdownItem>
       </Dropdown>

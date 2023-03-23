@@ -42,11 +42,22 @@ const Messages = () => {
     conversation.map((message: UserMessageType, index, array) => (
       <UserMessage
         key={message.id}
-        message={message}
-        conversationIndex={conversationIndex}
-        users={users}
-        array={array}
-        index={index}
+        message={message.text}
+        isFromMe={message.type === 'sent'}
+        isPreviousFromSameUser={array[index - 1]?.type === 'received'}
+        isNextFromSameUser={array[index + 1]?.type === 'received'}
+        isFirst={index === 0}
+        isLast={index === array.length - 1}
+        onDelete={() => dispatch(dialogsActions.deleteMessage(message.id))}
+        onEdit={(text) => dispatch(dialogsActions.editMessage(message.id, text))}
+        userProfileLink={
+          '/profile/' +
+          (message.type === 'received'
+            ? users[conversationIndex].uniqueUrlName || users[conversationIndex].id
+            : '')
+        }
+        userName={users[conversationIndex].name}
+        userPhoto={users[conversationIndex].photos.small}
       />
     ))
 
@@ -62,7 +73,7 @@ const Messages = () => {
         key={index}
         element={
           <div className='flex flex-col h-full w-full relative overflow-y-scroll'>
-            <div className='space-y-1 h-[78vh] mt-4'>{conversationComponents[index]}</div>
+            <div className='space-y-1 h-[78vh] mt-4 mx-8'>{conversationComponents[index]}</div>
             <div
               className='fixed bottom-0 lg:w-3/5 sm:w-full self-center
               pb-4 rounded-t px-2 py-2 bg-gray-300'
@@ -86,7 +97,7 @@ const Messages = () => {
 
       <Routes>
         {screenSize.dynamicWidth < 1366 && <Route path='/all' element={<Users users={users} />} />}
-        <Route path='/' element={<Navigate to={'0'} />} />
+        <Route path='/' element={<Navigate to='0' />} />
         {routes}
       </Routes>
     </div>

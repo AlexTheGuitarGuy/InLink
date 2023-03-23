@@ -5,9 +5,7 @@ import { useAppSelector } from '../../../hooks/reduxHooks'
 import { getMessages, getStatus } from '../../../redux/chat-reducer/chat-selector'
 import { getUID } from '../../../redux/auth-reducer/auth-selector'
 import useScreenSize from '../../../hooks/useScreenSize'
-import { NavLink } from 'react-router-dom'
-import placeholder from '../../../assets/pfps/placeholder.jpg'
-import cn from 'classnames'
+import UserMessage from '../../Messages/UserMessage/UserMessage'
 
 const Messages = () => {
   const messages = useAppSelector(getMessages)
@@ -31,44 +29,23 @@ const Messages = () => {
   }, [messages, dynamicHeight])
 
   return (
-    <div>
-      {messages?.map(({ message, userName, userId, photo }, index, array) => {
-        const isThisMe = myUID === userId
-        return (
-          <div
-            className={cn('p-3 m-2 rounded-lg border-y lg:border border-gray-300 lg:bg-gray-200', {
-              'flex flex-col items-end': isThisMe,
-            })}
-            key={uuidv1()}
-          >
-            <div className='w-fit'>
-              <NavLink to={`/profile/${userId}`}>
-                <div className='flex items-center'>
-                  <img
-                    src={photo || placeholder}
-                    className={cn(
-                      `h-16 w-16 p-0.5 mr-2
-                    rounded-full
-                    inline
-                    transition-colors hover:bg-gray-700 active:bg-gray-800`,
-                      { 'order-last': isThisMe },
-                    )}
-                    alt='user'
-                  />
-                  <span className='hover:underline font-bold mx-2'>{userName}</span>
-                </div>
-              </NavLink>
-            </div>
-            <div
-              className={cn('my-2 break-all', {
-                'flex justify-end': isThisMe,
-              })}
-            >
-              {message}
-            </div>
-          </div>
-        )
-      })}
+    <div className='space-y-0.5'>
+      {messages?.map(({ message, userName, userId, photo }, index, array) => (
+        <UserMessage
+          key={uuidv1()}
+          message={message}
+          userName={userName}
+          userPhoto={photo}
+          userProfileLink={`/profile/${userId}`}
+          isFromMe={myUID === userId}
+          isNextFromSameUser={userId === array[index + 1]?.userId}
+          isPreviousFromSameUser={userId === array[index - 1]?.userId}
+          isFirst={index === 0}
+          isLast={index === array.length - 1}
+          onEdit={() => {}}
+          onDelete={() => {}}
+        />
+      ))}
       <div ref={bottomRef}></div>
     </div>
   )
