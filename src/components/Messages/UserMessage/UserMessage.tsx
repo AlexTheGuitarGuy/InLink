@@ -35,7 +35,7 @@ const UserMessage: FC<UserMessageProps> = ({
 
   return (
     <div
-      className={cn('flex items-end font-normal relative', {
+      className={cn('flex items-end font-normal', {
         'justify-end mr-3': type === 'sent',
         'ml-3': type === 'received',
       })}
@@ -60,7 +60,7 @@ const UserMessage: FC<UserMessageProps> = ({
               ? users[conversationIndex].uniqueUrlName || users[conversationIndex].id
               : '')
           }
-          className='w-12 absolute -bottom-1'
+          className='w-12 absolute'
         >
           <img
             src={users[conversationIndex].photos.small || Placeholder}
@@ -108,6 +108,8 @@ const UserMessage: FC<UserMessageProps> = ({
             'rounded-tl': type === 'received' && previous?.type === 'received',
             'rounded-br': type === 'sent' && next?.type === 'sent',
             'rounded-tr': type === 'sent' && previous?.type === 'sent',
+
+            'w-[70vw]': isEditing,
           })}
         >
           {isEditing ? (
@@ -120,7 +122,7 @@ const UserMessage: FC<UserMessageProps> = ({
               onClear={() => {
                 setIsEditing(false)
               }}
-              textAreaClassName='h-20'
+              textAreaClassName='h-20 w-full'
               buttonsColor={EditTextButtonColor.Blue}
             />
           ) : (
