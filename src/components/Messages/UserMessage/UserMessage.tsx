@@ -93,16 +93,16 @@ const UserMessage: FC<UserMessageProps> = ({
 
         <div
           className={cn('p-2 text-white', {
-            'order-2 bg-gray-400 rounded-r-xl': type === 'received',
-            'order-1 bg-blue-400 rounded-l-xl': type === 'sent',
+            'order-2 bg-gray-400 rounded-r-3xl': type === 'received',
+            'order-1 bg-blue-400 rounded-l-3xl': type === 'sent',
 
-            'rounded-tl-xl': type === 'received' && (!previous || previous.type === 'sent'),
-            'rounded-tr-xl': type === 'sent' && (!previous || previous.type === 'received'),
+            'rounded-tl-3xl': type === 'received' && (!previous || previous.type === 'sent'),
+            'rounded-tr-3xl': type === 'sent' && (!previous || previous.type === 'received'),
 
-            'rounded-bl-md': type === 'received' && next?.type === 'received',
-            'rounded-tl-md': type === 'received' && previous?.type === 'received',
-            'rounded-br-md': type === 'sent' && next?.type === 'sent',
-            'rounded-tr-md': type === 'sent' && previous?.type === 'sent',
+            'rounded-bl': type === 'received' && next?.type === 'received',
+            'rounded-tl': type === 'received' && previous?.type === 'received',
+            'rounded-br': type === 'sent' && next?.type === 'sent',
+            'rounded-tr': type === 'sent' && previous?.type === 'sent',
           })}
         >
           {isEditing ? (
