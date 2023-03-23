@@ -32,7 +32,7 @@ const Messages = () => {
 
   return (
     <div>
-      {messages?.map(({ message, userName, userId, photo }) => {
+      {messages?.map(({ message, userName, userId, photo }, index, array) => {
         const isThisMe = myUID === userId
         return (
           <div

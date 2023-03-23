@@ -35,7 +35,7 @@ const UserMessage: FC<UserMessageProps> = ({
 
   return (
     <div
-      className={cn('flex items-end font-normal space-x-2', {
+      className={cn('flex items-end font-normal relative', {
         'justify-end mr-3': type === 'sent',
         'ml-3': type === 'received',
       })}
@@ -52,25 +52,30 @@ const UserMessage: FC<UserMessageProps> = ({
         confirmText='Are you sure you want to delete this message?'
       ></ConfirmDialog>
 
-      <NavLink
-        to={
-          '/profile/' +
-          (type === 'received'
-            ? users[conversationIndex].uniqueUrlName || users[conversationIndex].id
-            : '')
-        }
-        className={cn('w-12', {
-          'opacity-0 pointer-events-none': type === 'sent' || next?.type === 'received',
+      {type === 'received' && next?.type === 'sent' && (
+        <NavLink
+          to={
+            '/profile/' +
+            (type === 'received'
+              ? users[conversationIndex].uniqueUrlName || users[conversationIndex].id
+              : '')
+          }
+          className='w-12 absolute -bottom-1'
+        >
+          <img
+            src={users[conversationIndex].photos.small || Placeholder}
+            alt={users[conversationIndex].name}
+            className='h-10 w-10 rounded-full'
+          />
+        </NavLink>
+      )}
+
+      <div
+        className={cn('flex max-w-[85%]', {
+          'mr-12': type === 'sent',
+          'ml-12': type === 'received',
         })}
       >
-        <img
-          src={users[conversationIndex].photos.small || Placeholder}
-          alt={users[conversationIndex].name}
-          className='h-10 w-10 rounded-full'
-        />
-      </NavLink>
-
-      <div className='flex max-w-[85%]'>
         {!isEditing && (
           <div
             className={cn('mx-1', {
@@ -92,7 +97,7 @@ const UserMessage: FC<UserMessageProps> = ({
         )}
 
         <div
-          className={cn('p-2 text-white', {
+          className={cn('px-4 py-1 text-white', {
             'order-2 bg-gray-400 rounded-r-3xl': type === 'received',
             'order-1 bg-blue-400 rounded-l-3xl': type === 'sent',
 
