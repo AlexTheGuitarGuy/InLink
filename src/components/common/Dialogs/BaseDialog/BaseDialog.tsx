@@ -11,14 +11,18 @@ export type BaseDialogProps = {
   name?: string
   children?: ReactNode
   showFooter?: boolean
+  center?: boolean
+  customFooter?: ReactNode
 }
 const BaseDialog: FC<BaseDialogProps> = ({
   onClose,
   onSubmit,
-  name = 'Dialog',
+  name = '',
   children,
   showFooter = true,
   isShown,
+  center = true,
+  customFooter,
 }: BaseDialogProps) => {
   const handleClose = () => {
     onClose()
@@ -41,9 +45,12 @@ const BaseDialog: FC<BaseDialogProps> = ({
     >
       <div
         ref={ref as RefObject<HTMLDivElement>}
-        className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                    bg-white shadow-md rounded max-h-[80vh]
-                    flex flex-col divide-y border-gray-500'
+        className={cn(
+          `absolute 
+          bg-white shadow-md rounded max-h-[80vh]
+          flex flex-col divide-y border-gray-500`,
+          { 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2': center },
+        )}
       >
         <header className='flex justify-between px-6 py-3'>
           <h5 className='font-semibold text-xl'>{name}</h5>
@@ -57,14 +64,21 @@ const BaseDialog: FC<BaseDialogProps> = ({
         {children}
         {showFooter && (
           <footer className='flex justify-end px-6 py-3'>
-            <div className='flex space-x-4'>
-              <PrimaryButton onClick={handleSubmit} className='px-5 py-2' type='submit'>
-                Done
-              </PrimaryButton>
-              <PrimaryButton onClick={handleClose} className='px-5 py-2' color='rose' type='reset'>
-                Cancel
-              </PrimaryButton>
-            </div>
+            {customFooter || (
+              <div className='flex space-x-4'>
+                <PrimaryButton onClick={handleSubmit} className='px-5 py-2' type='submit'>
+                  Done
+                </PrimaryButton>
+                <PrimaryButton
+                  onClick={handleClose}
+                  className='px-5 py-2'
+                  color='rose'
+                  type='reset'
+                >
+                  Cancel
+                </PrimaryButton>
+              </div>
+            )}
           </footer>
         )}
       </div>

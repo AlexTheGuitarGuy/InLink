@@ -30,7 +30,7 @@ const FormInput: FC<FormInputProps> = ({
 }) => {
   const isError = error?.isError || otherError?.text
   return (
-    <>
+    <span className='flex flex-col w-full'>
       {label && (
         <label htmlFor={field.name} className={cn(label.className, { 'text-rose-800': isError })}>
           {label.text}
@@ -68,7 +68,7 @@ const FormInput: FC<FormInputProps> = ({
           />
         )}
       </small>
-    </>
+    </span>
   )
 }
 export default FormInput

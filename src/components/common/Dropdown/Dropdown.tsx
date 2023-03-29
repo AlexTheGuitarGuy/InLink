@@ -12,7 +12,7 @@ const Dropdown: FC<DropdownProps> = ({ open, children, absolutePosition = 'right
   return (
     <div
       className={cn(
-        'absolute shadow-md flex flex-col bg-white py-1 -mt-2 rounded w-fit transition-all duration-75',
+        'z-40 absolute shadow-md flex flex-col bg-white py-1 -mt-2 rounded w-fit transition-all duration-75',
         {
           'opacity-0 pointer-events-none': !open,
         },
