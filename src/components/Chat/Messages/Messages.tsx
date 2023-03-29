@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 
 import { useAppSelector } from '../../../hooks/reduxHooks'
-import { getMessages } from '../../../redux/chat-reducer/chat-selector'
+import { getChatOpen, getMessages } from '../../../redux/chat-reducer/chat-selector'
 import { getUID } from '../../../redux/auth-reducer/auth-selector'
 import useScreenSize from '../../../hooks/useScreenSize'
 import UserMessage from '../../common/Messages/UserMessage/UserMessage'
@@ -10,7 +10,7 @@ import UserMessage from '../../common/Messages/UserMessage/UserMessage'
 const Messages = () => {
   const messages = useAppSelector(getMessages)
   const myUID = useAppSelector(getUID)
-  const chatOpen = useAppSelector((state) => state.chat.chatOpen)
+  const chatOpen = useAppSelector(getChatOpen)
 
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -30,7 +30,7 @@ const Messages = () => {
 
   return (
     <div className='space-y-0.5'>
-      {messages?.map(({ message, userName, userId, photo }, index, array) => (
+      {messages?.map(({ message, userName, userId, photo, isPending }, index, array) => (
         <UserMessage
           key={uuidv1()}
           message={message}
@@ -44,6 +44,7 @@ const Messages = () => {
           isLast={index === array.length - 1}
           onEdit={() => {}}
           onDelete={() => {}}
+          isPending={isPending}
         />
       ))}
       <div ref={bottomRef}></div>

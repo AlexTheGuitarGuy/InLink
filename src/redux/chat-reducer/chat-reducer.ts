@@ -37,6 +37,11 @@ const chatReducer = (state = initialState, action: ChatAction): ChatReducerState
           ? [...state.messages, ...action.messages]
           : [...action.messages],
       }
+    case 'IN_LINK/CHAT_REDUCER/REMOVE_PENDING_MESSAGES':
+      return {
+        ...state,
+        messages: state.messages?.filter((message) => !message.isPending) || [],
+      }
     default:
       return state
   }
@@ -63,6 +68,8 @@ export const chatActions = {
       type: 'IN_LINK/CHAT_REDUCER/SET_CHAT_OPEN',
       payload: { chatOpen },
     } as const),
+
+  removePendingMessages: () => ({ type: 'IN_LINK/CHAT_REDUCER/REMOVE_PENDING_MESSAGES' } as const),
 }
 
 let _newMessagesHandler: MessageSubscriber | null = null
@@ -83,6 +90,8 @@ const newMessagesHandlerCreator = (dispatch: Dispatch, getState: () => RootState
         dispatch(chatActions.messagesReceived(messages.slice(currentMessages.length)))
         dispatch(chatActions.messagesInitialized(true))
       }
+
+      dispatch(chatActions.removePendingMessages())
     }
 
   return _newMessagesHandler as MessageSubscriber
@@ -117,7 +126,19 @@ export const stopMessagesListening = (): ChatThunk => {
 }
 
 export const sendMessage = (message: string): ChatThunk => {
-  return async () => {
+  return async (dispatch, getState) => {
+    const myData = getState().profilePage.myData
+    dispatch(
+      chatActions.messagesReceived([
+        {
+          userId: myData?.userId || 0,
+          userName: myData?.fullName || '',
+          photo: myData?.photos.small || '',
+          message,
+          isPending: true,
+        },
+      ]),
+    )
     chatAPI.sendMessage(message)
   }
 }

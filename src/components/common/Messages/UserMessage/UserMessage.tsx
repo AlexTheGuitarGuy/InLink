@@ -19,6 +19,7 @@ type UserMessageProps = {
   isLast: boolean
   onEdit: (text: string) => void
   onDelete: () => void
+  isPending?: boolean
 }
 
 const UserMessage: FC<UserMessageProps> = ({
@@ -33,6 +34,7 @@ const UserMessage: FC<UserMessageProps> = ({
   isLast,
   onEdit,
   onDelete,
+  isPending,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
@@ -104,6 +106,7 @@ const UserMessage: FC<UserMessageProps> = ({
           className={cn('px-4 py-1 text-white font-medium', {
             'order-2 bg-gray-400 rounded-r-3xl': !isFromMe,
             'order-1 bg-blue-400 rounded-l-3xl': isFromMe,
+            'opacity-50': isPending,
 
             'rounded-tl-3xl': !isFromMe && (isFirst || !isPreviousFromSameUser),
             'rounded-tr-3xl': isFromMe && (isFirst || !isPreviousFromSameUser),
@@ -116,6 +119,11 @@ const UserMessage: FC<UserMessageProps> = ({
             'w-[70vw]': isEditing,
           })}
         >
+          {!isFromMe && !isPreviousFromSameUser && (
+            <NavLink to={userProfileLink} className='text-sm font-semibold text-gray-200 block'>
+              {userName}
+            </NavLink>
+          )}
           {isEditing ? (
             <EditText
               text={message}
