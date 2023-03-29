@@ -10,13 +10,13 @@ import { useState } from 'react'
 import { getChatOpen } from '../../../redux/chat-reducer/chat-selector'
 
 const ChatShortcut = () => {
-  const screenSize = useScreenSize()
-
   const dispatch = useAppDispatch()
 
+  const chatOpen = useAppSelector(getChatOpen)
+
+  const screenSize = useScreenSize()
   const startHeight = 100
   const startWidth = screenSize.dynamicWidth - 80
-  const chatOpen = useAppSelector(getChatOpen)
 
   const [isDragging, setIsDragging] = useState(false)
 
@@ -66,7 +66,6 @@ const ChatShortcut = () => {
       className={cn(
         'fixed h-screen w-screen pointer-events-none z-40 opacity-100 transition-all scale-100',
         {
-          'opacity-0 pointer-events-none': chatOpen,
           'opacity-70 scale-95': isDragging,
         },
       )}

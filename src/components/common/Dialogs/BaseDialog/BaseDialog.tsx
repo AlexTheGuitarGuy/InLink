@@ -17,7 +17,7 @@ export type BaseDialogProps = {
 const BaseDialog: FC<BaseDialogProps> = ({
   onClose,
   onSubmit,
-  name = 'Dialog',
+  name = '',
   children,
   showFooter = true,
   isShown,

@@ -38,10 +38,13 @@ const Chat = () => {
       }
     >
       <ChatStatus />
-      <div className='w-[80vw] lg:w-[60vw] max-h-[55vh] text-gray-700 font-semibold flex'>
-        <div className='bg-gray-100 overflow-y-scroll w-full px-8'>
-          <Messages />
-        </div>
+      <div
+        className='w-[80vw] lg:w-[60vw] h-[90vh]
+      text-gray-700 bg-gray-100 font-semibold 
+      overflow-y-scroll overflow-x-hidden
+      px-8'
+      >
+        <Messages />
       </div>
     </BaseDialog>
   )
