@@ -2,15 +2,15 @@ import { useEffect, useRef } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 
 import { useAppSelector } from '../../../hooks/reduxHooks'
-import { getMessages, getStatus } from '../../../redux/chat-reducer/chat-selector'
+import { getMessages } from '../../../redux/chat-reducer/chat-selector'
 import { getUID } from '../../../redux/auth-reducer/auth-selector'
 import useScreenSize from '../../../hooks/useScreenSize'
-import UserMessage from '../../Messages/UserMessage/UserMessage'
+import UserMessage from '../../common/Messages/UserMessage/UserMessage'
 
 const Messages = () => {
   const messages = useAppSelector(getMessages)
-  const status = useAppSelector(getStatus)
   const myUID = useAppSelector(getUID)
+  const chatOpen = useAppSelector((state) => state.chat.chatOpen)
 
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -18,7 +18,7 @@ const Messages = () => {
 
   useEffect(() => {
     setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 1000)
-  }, [status])
+  }, [chatOpen])
 
   useEffect(() => {
     const distanceFromTop = bottomRef.current?.getBoundingClientRect().top

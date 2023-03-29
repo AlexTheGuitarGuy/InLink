@@ -1,14 +1,20 @@
-import React, { FC } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../../../hooks/reduxHooks'
 import { getStatus } from '../../../redux/chat-reducer/chat-selector'
 import cn from 'classnames'
 import Loading, { Dimensions } from '../../common/Loading/Loading'
 
-type ChatStatusProps = {
-  showSuccess: boolean
-}
-const ChatStatus: FC<ChatStatusProps> = ({ showSuccess }) => {
+const ChatStatus = () => {
   const status = useAppSelector(getStatus)
+
+  const [showSuccess, setShowSuccess] = useState(true)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setShowSuccess(false), 5000)
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [status])
 
   const isReady = status === 'ready'
   const isPending = status === 'pending'
@@ -20,9 +26,11 @@ const ChatStatus: FC<ChatStatusProps> = ({ showSuccess }) => {
     <div
       className={cn(
         `w-fit
+              absolute right-4 top-16
               p-2 my-2
               font-normal
-              rounded-lg border`,
+              rounded border
+              z-50`,
         { 'bg-green-100 border-green-200': isReady },
         { 'bg-yellow-100 border-yellow-200': isPending },
         { 'bg-red-100 border-red-200': isError },

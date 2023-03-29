@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react'
 import cn from 'classnames'
 
-import Placeholder from '../../../assets/pfps/placeholder.jpg'
-import EditOptions from '../../common/Dropdown/EditOptions/EditOptions'
-import EditText, { EditTextButtonColor } from '../../common/Inputs/EditText/EditText'
+import Placeholder from '../../../../assets/pfps/placeholder.jpg'
+import EditOptions from '../../Dropdown/EditOptions/EditOptions'
+import EditText, { EditTextButtonColor } from '../../Inputs/EditText/EditText'
 import { NavLink } from 'react-router-dom'
-import ConfirmDialog from '../../common/Dialogs/ConfirmDialog/ConfirmDialog'
+import ConfirmDialog from '../../Dialogs/ConfirmDialog/ConfirmDialog'
 
 type UserMessageProps = {
   message: string

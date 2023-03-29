@@ -12,6 +12,7 @@ const initialState = {
   messages: null as MessageData[] | null,
   areMessagesInitialized: false,
   status: 'pending' as Status,
+  chatOpen: false,
 }
 
 export type ChatReducerState = typeof initialState
@@ -24,6 +25,7 @@ const chatReducer = (state = initialState, action: ChatAction): ChatReducerState
   switch (action.type) {
     case 'IN_LINK/CHAT_REDUCER/MESSAGES_INITIALIZED':
     case 'IN_LINK/CHAT_REDUCER/STATUS_CHANGED':
+    case 'IN_LINK/CHAT_REDUCER/SET_CHAT_OPEN':
       return {
         ...state,
         ...action.payload,
@@ -40,7 +42,7 @@ const chatReducer = (state = initialState, action: ChatAction): ChatReducerState
   }
 }
 
-const chatActions = {
+export const chatActions = {
   messagesReceived: (messages: MessageData[]) =>
     ({
       type: 'IN_LINK/CHAT_REDUCER/MESSAGES_RECEIVED',
@@ -55,6 +57,11 @@ const chatActions = {
     ({
       type: 'IN_LINK/CHAT_REDUCER/STATUS_CHANGED',
       payload: { status },
+    } as const),
+  setChatOpen: (chatOpen: boolean) =>
+    ({
+      type: 'IN_LINK/CHAT_REDUCER/SET_CHAT_OPEN',
+      payload: { chatOpen },
     } as const),
 }
 

@@ -12,7 +12,6 @@ const Navbar = () => {
   const navItems: NavItem[] = [
     { to: '/profile', name: 'Profile' },
     { to: '/messages', name: 'Messages' },
-    { to: '/chat', name: 'Chat' },
     { to: '/users', name: 'Users' },
   ]
   const [shouldShowMenu, setShouldShowMenu] = useState(false)

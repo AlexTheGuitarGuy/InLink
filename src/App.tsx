@@ -15,11 +15,11 @@ import Loading from './components/common/Loading/Loading'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Alert from './components/Alert/Alert'
 import Login from './components/Login/Login'
-import Chat from './components/Chat/Chat'
 import Users from './components/Users/Users'
 import Messages from './components/Messages/Messages'
 import Profile from './components/Profile/Profile'
 import Header from './components/Header/Header'
+import ChatFunctionality from './components/Chat/ChatFunctionality'
 
 const App = () => {
   const isAppInitialized = useAppSelector(getIsAppInitialized)
@@ -57,12 +57,14 @@ const App = () => {
   if (!isAppInitialized) return <Loading />
 
   return (
-    <div className='w-full'>
+    <div>
       {isLoggedIn && (
         <div className='fixed w-60 mt-12 z-0'>
           <Sidebar />
         </div>
       )}
+
+      <ChatFunctionality />
 
       <div className='fixed w-full z-20 sm:-mt-14 lg:mt-auto'>
         <Header />
@@ -79,8 +81,6 @@ const App = () => {
             <Route path='/' element={<Navigate to='/profile' />} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
-            <Route path='/chat' element={<Chat />} />
-
             <Route path='/messages/*' element={<Messages />} />
 
             <Route path='/login' element={<Login />} />

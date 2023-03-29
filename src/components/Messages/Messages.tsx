@@ -13,7 +13,7 @@ import useScreenSize from '../../hooks/useScreenSize'
 
 import { UserMessage as UserMessageType } from '../../types/types'
 
-import UserMessage from './UserMessage/UserMessage'
+import UserMessage from '../common/Messages/UserMessage/UserMessage'
 import Users from './Users/Users'
 import MessageForm from './MessagesForm/MessagesForm'
 import Loading from '../common/Loading/Loading'
@@ -44,8 +44,8 @@ const Messages = () => {
         key={message.id}
         message={message.text}
         isFromMe={message.type === 'sent'}
-        isPreviousFromSameUser={array[index - 1]?.type === 'received'}
-        isNextFromSameUser={array[index + 1]?.type === 'received'}
+        isPreviousFromSameUser={array[index - 1]?.type === message.type}
+        isNextFromSameUser={array[index + 1]?.type === message.type}
         isFirst={index === 0}
         isLast={index === array.length - 1}
         onDelete={() => dispatch(dialogsActions.deleteMessage(message.id))}
