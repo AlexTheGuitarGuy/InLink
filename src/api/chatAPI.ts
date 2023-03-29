@@ -3,6 +3,7 @@ export type MessageData = {
   photo: string
   userId: number
   userName: string
+  isPending?: boolean
 }
 export enum Status {
   READY = 'ready',
@@ -65,8 +66,8 @@ const createChannel = () => {
 
   ws?.addEventListener('close', closeHandler)
   ws?.addEventListener('open', openHandler)
-  ws?.addEventListener('message', messageHandler)
   ws?.addEventListener('error', errorHandler)
+  ws?.addEventListener('message', messageHandler)
 }
 
 export const chatAPI = {
