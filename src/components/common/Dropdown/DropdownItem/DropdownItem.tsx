@@ -15,8 +15,8 @@ const DropdownItem: FC<MenuItemProps> = ({ children, icon, onClick, setMenuOpen 
   return (
     <button
       onClick={ItemClicked}
-      className='bg-white hover:bg-gray-200
-                active:bg-gray-300 active:transition-colors active:ease-in-out
+      className='bg-white
+                active:bg-neutralBg active:transition-colors active:ease-in-out
                 w-full flex items-center space-x-2 px-2 py-1 text-lg'
     >
       <div className='flex justify-center'>{icon}</div>

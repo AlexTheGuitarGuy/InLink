@@ -48,7 +48,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
         className={cn(
           `absolute 
           bg-neutralBg shadow-md rounded max-h-[95vh]
-          flex flex-col divide-y border-gray-500`,
+          flex flex-col divide-y border-neutral-500`,
           { 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2': center },
         )}
       >
@@ -56,7 +56,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
           <h5 className='font-semibold text-xl'>{name}</h5>
           <button
             onClick={handleClose}
-            className='hover:bg-gray-200 transition-colors duration-75 ease-in-out rounded p-0.5'
+            className='hover:bg-neutral-200 transition-colors duration-75 ease-in-out rounded p-0.5'
           >
             <Close className='-mt-1' />
           </button>

@@ -104,8 +104,8 @@ const UserMessage: FC<UserMessageProps> = ({
 
         <div
           className={cn('px-4 py-1 text-white font-medium break-words', {
-            'order-2 bg-gray-400 rounded-r-3xl': !isFromMe,
-            'order-1 bg-blue-400 rounded-l-3xl': isFromMe,
+            'order-2 bg-neutral-400 rounded-r-3xl': !isFromMe,
+            'order-1 bg-onPrimaryBg rounded-l-3xl': isFromMe,
             'opacity-50': isPending,
 
             'rounded-tl-3xl': !isFromMe && (isFirst || !isPreviousFromSameUser),
@@ -120,7 +120,7 @@ const UserMessage: FC<UserMessageProps> = ({
           })}
         >
           {!isFromMe && !isPreviousFromSameUser && (
-            <NavLink to={userProfileLink} className='text-sm font-semibold text-gray-200 block'>
+            <NavLink to={userProfileLink} className='text-sm font-semibold block'>
               {userName}
             </NavLink>
           )}

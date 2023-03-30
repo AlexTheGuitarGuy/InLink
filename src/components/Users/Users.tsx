@@ -55,9 +55,8 @@ const Users = () => {
   return (
     <div
       className='flex justify-between flex-col
-                  lg:bg-gray-100 lg:rounded-lg 
-                  lg:p-8
-                  text-gray-700 font-semibold
+                  lg:bg-neutralBg lg:rounded-lg
+                  lg:p-8 font-semibold
                   sm:h-screen lg:h-auto
     '
     >

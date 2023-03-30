@@ -83,15 +83,14 @@ const UsersSearch = () => {
               <Field
                 name='usersType'
                 as='select'
-                className='bg-gray-100
-                            border border-gray-300
-                            text-gray-900
+                className='bg-neutralBg
+                            border border-onNeutralBg
                             text-sm
                             rounded
-                            focus:ring-blue-500 focus:border-blue-500
+                            focus:ring-1
+                            focus:ring-onPrimaryBg focus:border-onPrimaryBg
                             p-2.5 w-full
-                            transition
-                            focus:outline-none'
+                            transition'
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                   handleChange(event)
                   debouncedSearch()

@@ -41,7 +41,7 @@ const Alert = () => {
           transition-opacity
           absolute`,
           { 'bg-red-100 border border-red-400 text-red-700': type === 'error' },
-          { 'bg-green-100 border border-green-400 text-green-700': type === 'success' },
+          { 'bg-primaryBg border border-onPrimaryBg text-primary': type === 'success' },
           { 'bg-yellow-100 border border-yellow-400 text-yellow-700': type === 'alert' },
           { 'opacity-100': isShown },
           { 'opacity-0 pointer-events-none': !isShown },

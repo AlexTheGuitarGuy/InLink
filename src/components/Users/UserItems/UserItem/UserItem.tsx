@@ -24,7 +24,7 @@ const UserItem: FC<UserItemProps> = ({ user, index, self }) => {
       className={cn(
         `flex justify-between items-center
                 my-2 p-4`,
-        { 'border-b border-gray-300': index !== self.length - 1 },
+        { 'border-b border-onNeutralBg': index !== self.length - 1 },
       )}
     >
       <NavLink to={'/profile/' + (user.uniqueUrlName || user.id)} className='flex'>
@@ -34,7 +34,7 @@ const UserItem: FC<UserItemProps> = ({ user, index, self }) => {
           className='rounded-full 
             w-20 h-20
             p-0.5
-              transition-colors hover:bg-gray-700 active:bg-gray-800'
+              transition-colors hover:bg-neutral-900'
         />
 
         <div className='mt-3 ml-3 flex flex-col'>

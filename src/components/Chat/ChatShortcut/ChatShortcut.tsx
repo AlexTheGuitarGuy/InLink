@@ -74,7 +74,7 @@ const ChatShortcut: FC<ChatShortcutProps> = ({ onOpen }) => {
                     rounded-full
                     text-white bg-primary
                     flex justify-center items-center'
-        style={{ x, y }}
+        style={{ x, y, touchAction: 'none' }}
         {...bind()}
       >
         <ChatBubble fontSize='large' />

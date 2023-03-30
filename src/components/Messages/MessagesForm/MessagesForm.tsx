@@ -71,7 +71,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
                 className='rounded-full ml-4 shadow-none h-12 w-12 flex justify-center items-center'
                 color={ButtonColor.transparent}
               >
-                <Send fontSize='medium' className='text-gray-700' />
+                <Send fontSize='medium' />
               </PrimaryButton>
             </div>
           </div>

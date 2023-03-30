@@ -107,7 +107,7 @@ code {
 
 .theme-light {
   --neutralBg: theme('colors.white');
-  --onNeutralBg: var(--color-neutral-400);
+  --onNeutralBg: var(--color-neutral-300);
   --primaryBg: var(--color-primary-100);
   --onPrimaryBg: var(--color-primary-400);
   --primary: var(--color-primary-500);
