@@ -40,7 +40,7 @@ const Status: FC<StatusProps> = ({ isOwner }) => {
         <div
           onClick={activateEdit}
           className={cn(`p-1 rounded max-w-sm`, {
-            'hover:bg-gray-200 cursor-pointer': isOwner,
+            'hover:bg-neutral-200 cursor-pointer': isOwner,
           })}
         >
           {status ? '"' + status + '"' : 'No status'}

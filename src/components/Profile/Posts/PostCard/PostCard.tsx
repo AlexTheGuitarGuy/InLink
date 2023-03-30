@@ -44,9 +44,9 @@ const PostCard: FC<PostCardProps> = ({
       {/* Header */}
       <div
         className='order-1 p-4
-      border-x border-t border-gray-300
+      border-x border-t border-onPrimaryBg
+      bg-primaryBg
       rounded-tl rounded-tr
-      bg-gray-100 text-gray-700
       flex justify-between'
       >
         {/* User Data */}
@@ -57,7 +57,7 @@ const PostCard: FC<PostCardProps> = ({
             className='rounded-full
                       w-10 h-10
                       xl:w-16 xl:h-16
-                      bg-gray-700
+                      bg-neutral-900
                       p-0.5 inline'
           />
           <span className='ml-2'>{userName}</span>
@@ -77,10 +77,9 @@ const PostCard: FC<PostCardProps> = ({
       {/* Body */}
       <div
         className='order-2 p-4
-                    border border-gray-300
+                    border border-onNeutralBg
+                    bg-neutral-100
                     rounded-bl rounded-br
-                    bg-gray-200
-                    text-gray-700
                     flex flex-col'
       >
         {isEditing ? (

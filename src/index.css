@@ -4,13 +4,13 @@
 
 @media screen(sm) {
   html {
-    background-color: rgb(243 244 246);
+    @apply bg-neutralBg;
   }
 }
 
 @media screen(lg) {
   html {
-    background-color: rgb(209 213 219);
+    @apply bg-neutral-200;
   }
 }
 
@@ -107,14 +107,14 @@ code {
 
 .theme-light {
   --neutralBg: theme('colors.white');
-  --onNeutralBg: var(--color-neutral-900);
+  --onNeutralBg: var(--color-neutral-400);
   --primaryBg: var(--color-primary-100);
-  --onPrimaryBg: var(--color-primary-900);
+  --onPrimaryBg: var(--color-primary-400);
   --primary: var(--color-primary-500);
 }
 
 .theme-dark {
-  --neutralBg: var(--color-neutral-900);
+  --neutralBg: var(--color-neutral-300);
   --onNeutralBg: theme('colors.white');
   --primaryBg: var(--color-primary-900);
   --onPrimaryBg: var(--color-primary-50);

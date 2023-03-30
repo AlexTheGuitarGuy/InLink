@@ -30,14 +30,14 @@ const Posts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
   return (
     <div
       className='flex flex-col justify-between
-      lg:bg-gray-100 lg:rounded-lg lg:p-8 
+      lg:bg-neutralBg lg:rounded-lg lg:p-8
       sm:pt-4 lg:mt-4
       sm:mx-4 lg:mx-0
-      text-gray-700 font-semibold
+      font-semibold
 
       lg:border-none
 
-      sm:border-t-2 sm:border-gray-300
+      sm:border-t-2 sm:border-neutral-100
     '
     >
       <div className='lg:w-3/4 sm:w-full mx-auto'>

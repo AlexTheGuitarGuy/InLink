@@ -135,7 +135,7 @@ const UserMessage: FC<UserMessageProps> = ({
                 setIsEditing(false)
               }}
               textAreaClassName='h-20 w-full'
-              buttonsColor={EditTextButtonColor.Blue}
+              buttonsColor={EditTextButtonColor.primary}
             />
           ) : (
             <>{message}</>

@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 import useTagBlur from '../../../hooks/useTagBlur'
 
-import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '../../common/Buttons/PrimaryButton/PrimaryButton'
 
 const ProfileButton = () => {
   const [showProfileData, setShowProfileData] = useState(false)
@@ -70,7 +70,7 @@ const ProfileButton = () => {
                 Go to profile
               </PrimaryButton>
               <PrimaryButton
-                color='rose'
+                color={ButtonColor.rose}
                 onClick={handleLogout}
                 className='lg:py-0.5 lg:px-4 
                               sm:py-2 sm:px-6
