@@ -72,7 +72,7 @@ const EditProfileDialog: FC<EditProfileDialogProps> = ({
           onSubmit={() => submitForm()}
           name='Edit profile data'
         >
-          <Form className='bg-neutral-100 lg:w-[600px] md:w-[450px] w-[300px] overflow-y-scroll'>
+          <Form className='bg-neutralBg lg:w-[600px] md:w-[450px] w-[300px] overflow-y-scroll'>
             <div className='w-3/4 mx-auto py-4 space-y-10'>
               <div>
                 <FormInput

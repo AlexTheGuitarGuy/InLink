@@ -39,7 +39,7 @@ const ProfileButton = () => {
               src={myData?.photos?.small || placeholder}
               alt='pfp'
               className='rounded-full w-12 h-12 p-0.5
-              transition-colors hover:bg-neutral-900'
+              transition-colors hover:bg-neutralFocus'
             />
           </button>
 

@@ -58,10 +58,10 @@ const PostText = () => {
               <PrimaryButton
                 disabled={isSubmitting || !isValid || status !== 'ready'}
                 type='submit'
-                className='rounded-full ml-4 shadow-none h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg'
+                className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg'
                 color={ButtonColor.transparent}
               >
-                <Send fontSize='medium' className='text-gray-700' />
+                <Send fontSize='medium' />
               </PrimaryButton>
             </div>
           </div>

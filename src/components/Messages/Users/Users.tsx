@@ -11,7 +11,7 @@ type UsersProps = {
 const Users: FC<UsersProps> = ({ users }) => {
   const userElements = users.map(({ name, photos }, index) => {
     return (
-      <div key={name} className='sm:border-b sm:border-neutral-200 lg:border-none'>
+      <div key={name} className='sm:border-b sm:border-neutralFocus lg:border-none'>
         <NavLink
           to={`/messages/${index}`}
           className={({ isActive }) =>
@@ -19,12 +19,11 @@ const Users: FC<UsersProps> = ({ users }) => {
               `p-2 flex items-center mt-4
               transition-colors
               border-b-2
-              hover:bg-neutral-200 active:bg-neutral-300
-              hover:text-neutral-600 active:text-neutral-700
-              hover:border-neutral-400 active:border-neutral-500
             `,
               {
-                'bg-neutral-300 text-neutral-700 border-neutral-500': isActive,
+                'bg-onNeutralBg border-neutralFocus': isActive,
+                'hover:bg-neutralChild active:bg-onNeutralBg hover:border-onNeutralBg active:border-neutralFocus':
+                  !isActive,
               },
             )
           }
@@ -47,7 +46,7 @@ const Users: FC<UsersProps> = ({ users }) => {
   })
 
   return (
-    <div className='lg:border-r lg:border-neutral-300 lg:w-1/5 sm:w-full'>
+    <div className='lg:border-r lg:border-neutralFocus lg:w-1/5 sm:w-full'>
       <div
         className='text-xl
                   sm:text-center lg:text-left

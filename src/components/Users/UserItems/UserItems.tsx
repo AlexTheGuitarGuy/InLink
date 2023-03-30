@@ -16,7 +16,7 @@ const UserItems = () => {
     <div
       className='lg:mx-60
         lg:border lg:rounded-lg lg:border-onNeutralBg
-        lg:bg-neutralBg'
+        lg:bg-neutralChild'
     >
       {users.map((user: User, index: number, self: User[]) => (
         <UserItem key={user.id} user={user} index={index} self={self} />

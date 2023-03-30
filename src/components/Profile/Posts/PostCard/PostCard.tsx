@@ -57,7 +57,7 @@ const PostCard: FC<PostCardProps> = ({
             className='rounded-full
                       w-10 h-10
                       xl:w-16 xl:h-16
-                      bg-neutral-900
+                      bg-neutralFocus
                       p-0.5 inline'
           />
           <span className='ml-2'>{userName}</span>
@@ -78,7 +78,7 @@ const PostCard: FC<PostCardProps> = ({
       <div
         className='order-2 p-4
                     border border-onNeutralBg
-                    bg-neutral-100
+                    bg-neutralChild
                     rounded-bl rounded-br
                     flex flex-col'
       >

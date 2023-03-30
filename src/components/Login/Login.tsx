@@ -121,7 +121,7 @@ const Login: FC<{}> = () => {
 
                     {captchaURL && (
                       <div className='flex justify-center'>
-                        <div className='mt-6 text-neutral-700'>
+                        <div className='mt-6'>
                           <img src={captchaURL} alt='captcha' className='mb-4 w-full' />
 
                           <FormInput

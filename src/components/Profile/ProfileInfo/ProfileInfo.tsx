@@ -70,7 +70,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
           <img
             src={pfp || placeholder}
             alt='pfp'
-            className='rounded-full bg-neutral-900 p-1
+            className='rounded-full bg-neutralFocus p-1
                        w-52 h-52
                        xl:w-60 xl:h-60
                        sm:mx-auto'

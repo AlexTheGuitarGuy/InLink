@@ -56,9 +56,7 @@ const Users = () => {
     <div
       className='flex justify-between flex-col
                   lg:bg-neutralBg lg:rounded-lg
-                  lg:p-8 font-semibold
-                  sm:h-screen lg:h-auto
-    '
+                  lg:p-8 font-semibold'
     >
       <UsersSearch />
       {users.length ? (

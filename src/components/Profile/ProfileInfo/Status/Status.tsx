@@ -39,8 +39,8 @@ const Status: FC<StatusProps> = ({ isOwner }) => {
       {!isEditing ? (
         <div
           onClick={activateEdit}
-          className={cn(`p-1 rounded max-w-sm`, {
-            'hover:bg-neutral-200 cursor-pointer': isOwner,
+          className={cn(`p-1 rounded max-w-sm transition-colors duration-150`, {
+            'hover:bg-onNeutralBg cursor-pointer': isOwner,
           })}
         >
           {status ? '"' + status + '"' : 'No status'}

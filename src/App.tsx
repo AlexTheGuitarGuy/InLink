@@ -59,7 +59,7 @@ const App = () => {
   if (!isAppInitialized) return <Loading />
 
   return (
-    <div>
+    <div className='text-neutralFocus bg-appBg min-h-screen'>
       {isLoggedIn && (
         <div className='fixed w-60 mt-12 z-0'>
           <Sidebar />

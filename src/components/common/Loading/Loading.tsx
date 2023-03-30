@@ -20,7 +20,7 @@ const Loading: FC<LoadingProps> = ({ dimensions = Dimensions.fullscreen }) => {
     >
       <svg
         aria-hidden='true'
-        className={cn('animate-spin fill-primary', {
+        className={cn('animate-spin fill-primaryFocus', {
           'w-4 h-4': dimensions === Dimensions.small,
           'w-8 h-8': dimensions === Dimensions.medium,
           'w-12 h-12': dimensions === Dimensions.large,

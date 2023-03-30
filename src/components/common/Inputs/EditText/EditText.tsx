@@ -24,22 +24,22 @@ const EditText: FC<EditTextProps> = ({
   buttonsColor = EditTextButtonColor.neutral,
 }) => {
   const [dynamicText, setDynamicText] = useState(text)
-  let buttonsTextColor = 'text-black'
-  let buttonsBackground = 'hover:bg-neutral-300 active:bg-neutral-400'
+  let buttonsTextColor = ''
+  let buttonsBackground = ''
 
   switch (buttonsColor) {
     case EditTextButtonColor.neutral: {
+      buttonsBackground = 'hover:bg-neutralBg'
       break
     }
     case EditTextButtonColor.primary: {
-      buttonsTextColor = 'text-white'
-      buttonsBackground = 'hover:bg-primary'
+      buttonsBackground = 'hover:bg-primaryChild'
       break
     }
   }
 
   return (
-    <div className='text-black'>
+    <div>
       <RegularInput
         as='textarea'
         field={{ placeholder: 'Edit post...', className: textAreaClassName }}
@@ -50,7 +50,7 @@ const EditText: FC<EditTextProps> = ({
           value: dynamicText,
         }}
       />
-      <div className={cn('flex justify-end mt-2', buttonsTextColor)}>
+      <div className={cn('flex justify-end mt-2 bg-neutral', buttonsTextColor)}>
         <Done
           className={cn('cursor-pointer rounded', buttonsBackground)}
           onClick={() => onDone(dynamicText)}

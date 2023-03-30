@@ -16,8 +16,8 @@ const FriendItems = () => {
             className='p-2 flex items-center mt-4
                         transition-colors
                         border-b-2 border-transparent
-                        hover:bg-neutral-200 active:bg-neutral-300
-                        hover:border-neutral-400 active:border-neutral-500
+                        hover:bg-neutralChild active:bg-onNeutralBg
+                        hover:border-onNeutralBg active:border-neutralFocus
           '
           >
             <img

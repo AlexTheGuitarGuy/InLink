@@ -6,8 +6,8 @@ export const modes = ['light', 'dark']
 
 function withThemes<P extends Object>(Component: ComponentType<P>) {
   return (props: P) => {
-    const [color] = useStickyState(colors[0], 'theme-color')
-    const [mode] = useStickyState(modes[0], 'theme-mode')
+    const [color] = useStickyState(colors[2], 'theme-color')
+    const [mode] = useStickyState(modes[1], 'theme-mode')
 
     return (
       <div

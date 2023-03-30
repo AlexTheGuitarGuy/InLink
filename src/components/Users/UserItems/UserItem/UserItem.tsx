@@ -34,7 +34,7 @@ const UserItem: FC<UserItemProps> = ({ user, index, self }) => {
           className='rounded-full 
             w-20 h-20
             p-0.5
-              transition-colors hover:bg-neutral-900'
+              transition-colors hover:bg-neutralFocus'
         />
 
         <div className='mt-3 ml-3 flex flex-col'>
