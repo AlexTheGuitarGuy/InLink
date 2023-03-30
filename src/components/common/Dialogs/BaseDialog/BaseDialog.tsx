@@ -47,7 +47,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
         ref={ref as RefObject<HTMLDivElement>}
         className={cn(
           `absolute 
-          bg-white shadow-md rounded max-h-[80vh]
+          bg-white shadow-md rounded max-h-[95vh]
           flex flex-col divide-y border-gray-500`,
           { 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2': center },
         )}

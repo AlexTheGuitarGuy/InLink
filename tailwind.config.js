@@ -12,6 +12,13 @@ module.exports = {
         xl: '1920px',
         '2xl': '2350px',
       },
+      colors: {
+        onNeutralBg: 'var(--onNeutralBg)',
+        neutralBg: 'var(--neutralBg)',
+        onPrimaryBg: 'var(--onPrimaryBg)',
+        primaryBg: 'var(--primaryBg)',
+        primary: 'var(--primary)',
+      },
     },
   },
 }

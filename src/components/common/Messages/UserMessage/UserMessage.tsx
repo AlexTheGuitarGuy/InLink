@@ -77,7 +77,7 @@ const UserMessage: FC<UserMessageProps> = ({
           </NavLink>
         )}
 
-        {!isEditing && (
+        {!isEditing && !isPending && (
           <div
             className={cn('mx-1 transition-opacity', {
               'order-first': isFromMe,
@@ -103,7 +103,7 @@ const UserMessage: FC<UserMessageProps> = ({
         )}
 
         <div
-          className={cn('px-4 py-1 text-white font-medium', {
+          className={cn('px-4 py-1 text-white font-medium break-words', {
             'order-2 bg-gray-400 rounded-r-3xl': !isFromMe,
             'order-1 bg-blue-400 rounded-l-3xl': isFromMe,
             'opacity-50': isPending,

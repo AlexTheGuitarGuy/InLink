@@ -15,7 +15,11 @@ import Status from './Status/Status'
 import JobInfo from './JobInfo/JobInfo'
 import Contacts from './Contacts/Contacts'
 import FollowButton from '../../common/Buttons/FollowButton/FollowButton'
-import { getCurrentUserFollowed, getUserId } from '../../../redux/profile-reducer/profile-selector'
+import {
+  getCurrentUserFollowed,
+  getIsFollowingInProgress,
+  getUserId,
+} from '../../../redux/profile-reducer/profile-selector'
 import EditProfileDialog from './EditProfileDialog/EditProfileDialog'
 import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
 
@@ -33,6 +37,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
   const dispatch = useAppDispatch()
   const currentUserFollowed = useAppSelector(getCurrentUserFollowed)
   const id = useAppSelector(getUserId)!
+  const isFollowingInProgress = useAppSelector(getIsFollowingInProgress)
   const updatePFP = (event: ChangeEvent<HTMLInputElement>) => {
     const element = event.currentTarget as HTMLInputElement
     const fileList: FileList | null = element.files
@@ -95,6 +100,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
                 followed={currentUserFollowed}
                 onFollow={() => dispatch(followInProfile(id))}
                 onUnfollow={() => dispatch(unfollowInProfile(id))}
+                checkIsDisabled={() => isFollowingInProgress}
               />
             )}
           </div>

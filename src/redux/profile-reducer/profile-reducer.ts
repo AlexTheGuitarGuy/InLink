@@ -30,6 +30,7 @@ const initialState = {
   storedText: '',
   isLoading: false,
   currentUserFollowed: false,
+  isFollowingInProgress: false,
   userId: null as number | null,
 }
 
@@ -84,6 +85,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
       }
     }
 
+    case 'IN_LINK/PROFILE_REDUCER/SET_IS_FOLLOWING_IN_PROGRESS':
     case 'IN_LINK/PROFILE_REDUCER/SET_PROFILE':
     case 'IN_LINK/PROFILE_REDUCER/SET_MY_PROFILE':
     case 'IN_LINK/PROFILE_REDUCER/SET_STATUS':
@@ -174,6 +176,12 @@ export const profileActions = {
     } as const),
   setUserId: (userId: number) =>
     ({ type: 'IN_LINK/PROFILE_REDUCER/SET_USER_ID', payload: { userId } } as const),
+
+  setIsFollowingInProgress: (isFollowingInProgress: boolean) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_IS_FOLLOWING_IN_PROGRESS',
+      payload: { isFollowingInProgress },
+    } as const),
 }
 
 const getData = (
@@ -278,11 +286,16 @@ const _followUnfollowFlow = (
   followStatus: boolean,
 ): ProfileThunk => {
   return async (dispatch) => {
+    dispatch(profileActions.setIsFollowingInProgress(true))
     const data = await request(id)
 
     if (data.resultCode === ResultCodes.Success) {
       dispatch(profileActions.setCurrentUserFollowed(followStatus))
+    } else {
+      throw new Error(data.messages[0])
     }
+
+    dispatch(profileActions.setIsFollowingInProgress(false))
   }
 }
 

@@ -3,17 +3,14 @@ import { animated, useSpring } from 'react-spring'
 
 import useScreenSize from '../../../hooks/useScreenSize'
 import { useGesture } from 'react-use-gesture'
-import { chatActions } from '../../../redux/chat-reducer/chat-reducer'
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 import cn from 'classnames'
-import { useState } from 'react'
-import { getChatOpen } from '../../../redux/chat-reducer/chat-selector'
+import { FC, useState } from 'react'
 
-const ChatShortcut = () => {
-  const dispatch = useAppDispatch()
+type ChatShortcutProps = {
+  onOpen: () => void
+}
 
-  const chatOpen = useAppSelector(getChatOpen)
-
+const ChatShortcut: FC<ChatShortcutProps> = ({ onOpen }) => {
   const screenSize = useScreenSize()
   const startHeight = 100
   const startWidth = screenSize.dynamicWidth - 80
@@ -49,7 +46,7 @@ const ChatShortcut = () => {
       },
       onClick: () => {
         api.start({ x: startWidth, y: startHeight })
-        dispatch(chatActions.setChatOpen(!chatOpen))
+        onOpen && onOpen()
       },
     },
     {
@@ -75,7 +72,7 @@ const ChatShortcut = () => {
                     bottom-0 right-0
                     w-16 h-16
                     rounded-full
-                    bg-blue-700 text-white
+                    text-white bg-primary
                     flex justify-center items-center'
         style={{ x, y }}
         {...bind()}

@@ -5,8 +5,9 @@ import { NavLink } from 'react-router-dom'
 import placeholder from '../../../../assets/pfps/placeholder.jpg'
 import { User } from '../../../../types/types'
 import FollowButton from '../../../common/Buttons/FollowButton/FollowButton'
-import { useAppDispatch } from '../../../../hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
 import { followInUsers, unfollowInUsers } from '../../../../redux/users-reducer/users-reducer'
+import { getFollowQueue } from '../../../../redux/users-reducer/users-selector'
 
 type UserItemProps = {
   user: User
@@ -15,6 +16,7 @@ type UserItemProps = {
 }
 const UserItem: FC<UserItemProps> = ({ user, index, self }) => {
   const dispatch = useAppDispatch()
+  const followQueue = useAppSelector(getFollowQueue)
 
   return (
     <div
@@ -46,6 +48,7 @@ const UserItem: FC<UserItemProps> = ({ user, index, self }) => {
         followed={user.followed}
         onFollow={() => dispatch(followInUsers(user.id))}
         onUnfollow={() => dispatch(unfollowInUsers(user.id))}
+        checkIsDisabled={(id) => followQueue.some((elem: number) => elem === id)}
       />
     </div>
   )
