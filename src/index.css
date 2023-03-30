@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@media screen(sm) {
-  html {
-    @apply bg-neutralBg;
-  }
-}
-
-@media screen(lg) {
-  html {
-    @apply bg-neutral-200;
-  }
-}
-
 @layer base {
   html {
     font-size: 15px;
@@ -106,17 +94,25 @@ code {
 }
 
 .theme-light {
-  --neutralBg: theme('colors.white');
-  --onNeutralBg: var(--color-neutral-300);
-  --primaryBg: var(--color-primary-100);
-  --onPrimaryBg: var(--color-primary-400);
-  --primary: var(--color-primary-500);
+  --appBg: var(--color-neutral-200);
+  --neutralFocus: var(--color-neutral-600);
+  --neutralChild: var(--color-neutral-200);
+  --neutralBg: var(--color-neutral-100);
+  --onNeutralBg: var(--color-neutral-400);
+  --primaryChild: var(--color-primary-500);
+  --primaryFocus: var(--color-primary-700);
+  --primaryBg: var(--color-primary-400);
+  --onPrimaryBg: var(--color-primary-500);
 }
 
 .theme-dark {
-  --neutralBg: var(--color-neutral-300);
-  --onNeutralBg: theme('colors.white');
-  --primaryBg: var(--color-primary-900);
-  --onPrimaryBg: var(--color-primary-50);
-  --primary: var(--color-primary-400);
+  --appBg: var(--color-neutral-900);
+  --neutralFocus: var(--color-neutral-300);
+  --neutralChild: var(--color-neutral-600);
+  --neutralBg: var(--color-neutral-700);
+  --onNeutralBg: var(--color-neutral-900);
+  --primaryChild: var(--color-primary-400);
+  --primaryFocus: var(--color-primary-300);
+  --primaryBg: var(--color-primary-500);
+  --onPrimaryBg: var(--color-primary-600);
 }

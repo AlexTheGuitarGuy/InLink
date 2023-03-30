@@ -72,7 +72,7 @@ const ChatShortcut: FC<ChatShortcutProps> = ({ onOpen }) => {
                     bottom-0 right-0
                     w-16 h-16
                     rounded-full
-                    text-white bg-primary
+                    text-white bg-primaryChild
                     flex justify-center items-center'
         style={{ x, y, touchAction: 'none' }}
         {...bind()}

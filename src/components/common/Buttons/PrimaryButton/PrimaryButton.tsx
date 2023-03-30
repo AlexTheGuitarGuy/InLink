@@ -33,7 +33,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   let regularBackground = ''
   switch (color) {
     case ButtonColor.neutral: {
-      regularBackground = `bg-neutral-500 ring-neutralBg`
+      regularBackground = `bg-neutralBg ring-neutralFocus`
       break
     }
     case ButtonColor.transparent: {
@@ -41,7 +41,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       break
     }
     case ButtonColor.primary: {
-      regularBackground = `bg-primary ring-onPrimaryBg`
+      regularBackground = `bg-primaryBg ring-onPrimaryBg`
       break
     }
     case ButtonColor.rose: {
@@ -55,7 +55,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       {as === 'button' && (
         <button
           className={cn(
-            `text-white font-semibold
+            `font-semibold
 	                    rounded
 	                    active:ring-1
 	                    shadow-md 
@@ -78,7 +78,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       {as === 'navlink' && to && (
         <NavLink
           className={cn(
-            `text-white font-semibold
+            `font-semibold
 	                    rounded
 	                    active:ring-1
 	                    shadow-md 

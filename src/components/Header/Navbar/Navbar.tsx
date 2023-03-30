@@ -44,7 +44,7 @@ const Navbar = () => {
             lg:p-0 lg:mr-4 lg:rounded-none
             lg:border-b-2
                         
-            sm:active:bg-neutral-200
+            sm:active:bg-neutralFocus
             sm:px-2 sm:py-1 
             sm:rounded 
             sm:w-full
@@ -52,8 +52,8 @@ const Navbar = () => {
             
             `,
             {
-              'lg:border-neutral-500 lg:bg-transparent bg-neutral-300': isActive,
-              'lg:border-transparent lg:hover:border-onNeutralBg': !isActive,
+              'lg:border-onNeutralBg lg:bg-transparent bg-neutralChild': isActive,
+              'lg:border-transparent lg:hover:border-neutralChild': !isActive,
             },
           )}
         >
@@ -69,7 +69,7 @@ const Navbar = () => {
         <button
           onClick={() => setShouldShowMenu(!shouldShowMenu)}
           className={cn('rounded p-1', {
-            'bg-onNeutralBg': shouldShowMenu,
+            'bg-neutralChild': shouldShowMenu,
           })}
         >
           <Menu fontSize='large' />

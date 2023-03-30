@@ -29,7 +29,7 @@ const Header = () => {
 
     return (
       <header
-        className={`px-4 bg-neutral-100
+        className={`px-4 bg-neutralBg
         rounded-b border-b border-onNeutralBg
         flex justify-between items-center 
         whitespace-nowrap
@@ -53,8 +53,8 @@ const Header = () => {
         <div
           className='order-3
         lg:text-4xl sm:text-2xl font-semibold
-        hover:text-neutral-600 active:text-neutral-500
-        transition-colors'
+        hover:opacity-90 active:opacity-70
+        transition-opacity'
         >
           <NavLink to={'/'}>InLink</NavLink>
         </div>
@@ -81,8 +81,8 @@ const Header = () => {
       <div
         className='lg:order-1 sm:order-2
         lg:text-4xl sm:text-2xl font-semibold
-        hover:text-neutral-600 active:text-neutral-500
-        transition-colors'
+        hover:opacity-90 active:opacity-70
+        transition-opacity'
       >
         <NavLink to={'/'}>InLink</NavLink>
       </div>
