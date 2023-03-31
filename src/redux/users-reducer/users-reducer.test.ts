@@ -104,7 +104,7 @@ it(`should turn follow status of user with id 2 from false to true`, () => {
 
   const newState = usersPageReducer(state, action)
 
-  expect(newState.users.find((e) => e.id === 2)?.followed).toBe(true)
+  expect(newState.users?.find((e) => e.id === 2)?.followed).toBe(true)
 })
 
 it(`should add user with id 2 to follow queue`, () => {

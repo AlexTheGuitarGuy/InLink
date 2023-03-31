@@ -10,7 +10,7 @@ const UserItems = () => {
   const isLoading = useAppSelector(getIsLoading)
   const users = useAppSelector(getUsers)
 
-  if (isLoading || !users.length) return <Loading />
+  if (isLoading || users === null) return <Loading />
 
   return (
     <div

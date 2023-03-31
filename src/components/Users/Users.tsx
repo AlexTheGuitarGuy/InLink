@@ -10,6 +10,7 @@ import UserItems from './UserItems/UserItems'
 import UsersSearch from './UsersSearch/UsersSearch'
 import Paginator from '../common/Paginator/Paginator'
 import { useLocation, useSearchParams } from 'react-router-dom'
+import Loading from '../common/Loading/Loading'
 
 const Users = () => {
   const totalUsers = useAppSelector(getTotalUsers)
@@ -58,22 +59,28 @@ const Users = () => {
                   lg:bg-neutralBg lg:rounded-lg
                   lg:p-8 font-semibold'
     >
-      <UsersSearch />
-      {users.length ? (
-        <>
-          <UserItems />
-          <div className='mt-4'>
-            <Paginator
-              page={+allParams.page}
-              pageSize={+allParams.count}
-              portionSize={portionSize}
-              totalElems={totalUsers}
-              changePage={changePage}
-            />
-          </div>
-        </>
+      {users === null ? (
+        <Loading />
       ) : (
-        <div className='text-center'>No users match these parameters.</div>
+        <>
+          <UsersSearch />
+          {users.length ? (
+            <>
+              <UserItems />
+              <div className='mt-4'>
+                <Paginator
+                  page={+allParams.page}
+                  pageSize={+allParams.count}
+                  portionSize={portionSize}
+                  totalElems={totalUsers}
+                  changePage={changePage}
+                />
+              </div>
+            </>
+          ) : (
+            <div className='text-center'>No users match these parameters.</div>
+          )}
+        </>
       )}
     </div>
   )

@@ -6,7 +6,7 @@ import { ResultCodes } from '../../api/API'
 import { InferAction, InferThunk } from '../store'
 
 const initialState = {
-  users: [] as User[],
+  users: null as User[] | null,
   frontPageFriends: [] as User[],
   followQueue: [] as number[],
   totalUsers: 0,
