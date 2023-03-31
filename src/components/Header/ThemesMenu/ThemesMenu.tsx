@@ -50,7 +50,7 @@ const ThemesMenu = () => {
               )}
             >
               <div
-                className={cn(`w-9 h-9 rounded-full`, {
+                className={cn(`w-8 h-8 rounded-full`, {
                   'bg-red-500': colorItem === 'red',
                   'bg-green-500': colorItem === 'green',
                   'bg-blue-500': colorItem === 'blue',
