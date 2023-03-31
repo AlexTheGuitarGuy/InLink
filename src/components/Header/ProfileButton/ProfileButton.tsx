@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 import useTagBlur from '../../../hooks/useTagBlur'
 
-import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '../../common/Buttons/PrimaryButton/PrimaryButton'
 
 const ProfileButton = () => {
   const [showProfileData, setShowProfileData] = useState(false)
@@ -39,7 +39,7 @@ const ProfileButton = () => {
               src={myData?.photos?.small || placeholder}
               alt='pfp'
               className='rounded-full w-12 h-12 p-0.5
-              transition-colors hover:bg-gray-700 active:bg-gray-800'
+              transition-colors hover:bg-primaryBg'
             />
           </button>
 
@@ -47,8 +47,8 @@ const ProfileButton = () => {
             className={cn(
               `fixed right-2 top-16
                 flex flex-col
-                bg-gray-200 p-8
-                border-x border-b border-gray-400
+                bg-neutralBg p-8
+                border-x border-b border-onNeutralBg
                 rounded-b-lg
                 font-semibold 
                 transition-opacity`,
@@ -58,7 +58,7 @@ const ProfileButton = () => {
             ref={profileDataRef as LegacyRef<HTMLDivElement>}
           >
             <>
-              <div className='font-semibold text-gray-700 sm:text-lg lg:text-base'>{login}</div>
+              <div className='font-semibold sm:text-lg lg:text-base'>{login}</div>
               <PrimaryButton
                 as='navlink'
                 to='/profile'
@@ -70,7 +70,7 @@ const ProfileButton = () => {
                 Go to profile
               </PrimaryButton>
               <PrimaryButton
-                color='rose'
+                color={ButtonColor.rose}
                 onClick={handleLogout}
                 className='lg:py-0.5 lg:px-4 
                               sm:py-2 sm:px-6

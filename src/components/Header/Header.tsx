@@ -1,15 +1,15 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import ProfileButton from './ProfileButton/ProfileButton'
 import Navbar from './Navbar/Navbar'
 import { useLocation } from 'react-router-dom'
-import { compose } from 'redux'
 import { useSelector } from 'react-redux'
 import { KeyboardBackspace } from '@mui/icons-material'
 
 import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 import useScreenSize from '../../hooks/useScreenSize'
 import Placeholder from '../../assets/pfps/placeholder.jpg'
+import ThemesMenu from './ThemesMenu/ThemesMenu'
 
 const Header = () => {
   const location = useLocation()
@@ -29,8 +29,8 @@ const Header = () => {
 
     return (
       <header
-        className={`px-4 bg-gray-100 text-gray-700
-        rounded-b border-b border-gray-400
+        className={`px-4 bg-neutralBg
+        rounded-b border-b border-onNeutralBg
         flex justify-between items-center 
         whitespace-nowrap
         h-16`}
@@ -53,8 +53,8 @@ const Header = () => {
         <div
           className='order-3
         lg:text-4xl sm:text-2xl font-semibold
-        hover:text-gray-600 active:text-gray-500
-        transition-colors'
+        hover:opacity-90 active:opacity-70
+        transition-opacity'
         >
           <NavLink to={'/'}>InLink</NavLink>
         </div>
@@ -64,13 +64,14 @@ const Header = () => {
 
   return (
     <header
-      className='px-4 bg-gray-100 text-gray-700
-        rounded-b border-b border-gray-400
+      className='px-4 bg-neutralBg
+        rounded-b border-b border-onNeutralBg
         flex justify-between items-center 
         whitespace-nowrap
         h-16'
     >
-      <div className='lg:order-3 sm:order-3'>
+      <div className='lg:order-3 sm:order-3 flex space-x-3'>
+        <ThemesMenu />
         <ProfileButton />
       </div>
 
@@ -81,8 +82,8 @@ const Header = () => {
       <div
         className='lg:order-1 sm:order-2
         lg:text-4xl sm:text-2xl font-semibold
-        hover:text-gray-600 active:text-gray-500
-        transition-colors'
+        hover:opacity-90 active:opacity-70
+        transition-opacity'
       >
         <NavLink to={'/'}>InLink</NavLink>
       </div>
@@ -90,4 +91,4 @@ const Header = () => {
   )
 }
 
-export default compose(memo)(Header)
+export default Header

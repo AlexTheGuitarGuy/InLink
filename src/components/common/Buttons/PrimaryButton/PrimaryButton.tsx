@@ -2,8 +2,15 @@ import { FC, MouseEventHandler, ReactNode } from 'react'
 import cn from 'classnames'
 import { NavLink } from 'react-router-dom'
 
+export enum ButtonColor {
+  neutral = 'neutral',
+  transparent = 'transparent',
+  primary = 'primary',
+  rose = 'rose',
+}
+
 type PrimaryButtonProps = {
-  color?: string
+  color?: ButtonColor
   children: ReactNode
   onClick?: MouseEventHandler<HTMLButtonElement>
   className?: string
@@ -14,7 +21,7 @@ type PrimaryButtonProps = {
 }
 
 const PrimaryButton: FC<PrimaryButtonProps> = ({
-  color = 'blue',
+  color = ButtonColor.primary,
   onClick,
   children,
   className,
@@ -24,35 +31,21 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   to,
 }) => {
   let regularBackground = ''
-  let disabledBackground = ''
   switch (color) {
-    case 'gray': {
-      regularBackground = `bg-gray-500 hover:bg-gray-600 
-		                    	focus:bg-gray-600 active:bg-gray-700`
-      disabledBackground = `bg-gray-300`
+    case ButtonColor.neutral: {
+      regularBackground = `bg-neutralBg ring-neutralFocus`
       break
     }
-    case 'lightGray': {
-      regularBackground = `bg-gray-300 hover:bg-gray-400 
-		                    	focus:bg-gray-400 active:bg-gray-500`
-      disabledBackground = `bg-gray-100`
+    case ButtonColor.transparent: {
+      regularBackground = `backdrop-blur ring-neutralBg`
       break
     }
-    case 'background': {
-      regularBackground = `backdrop-blur hover:bg-gray-400`
-      disabledBackground = `bg-gray-300`
+    case ButtonColor.primary: {
+      regularBackground = `bg-primaryChild ring-primaryFocus`
       break
     }
-    case 'blue': {
-      regularBackground = `bg-blue-600 hover:bg-blue-700 
-		                    	focus:bg-blue-700 active:bg-blue-800`
-      disabledBackground = `bg-blue-300`
-      break
-    }
-    case 'rose': {
-      regularBackground = `bg-rose-600 hover:bg-rose-700 
-		                    	focus:bg-rose-700 active:bg-rose-800`
-      disabledBackground = `bg-rose-300`
+    case ButtonColor.rose: {
+      regularBackground = `bg-rose-600 ring-rose-400`
       break
     }
   }
@@ -62,23 +55,16 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       {as === 'button' && (
         <button
           className={cn(
-            `text-white font-semibold
+            `font-semibold
 	                    rounded
-
+	                    active:ring-1
 	                    shadow-md 
 	                    focus:outline-none focus:ring-0
-	                    transition duration-150 ease-in-out`,
+                        duration-150 ease-in-out transition-all`,
             {
-              'active:shadow-lg focus:shadow-lg hover:shadow-lg': !disabled,
-            },
-            {
-              [regularBackground]: !disabled,
-            },
-            {
-              'cursor-not-allowed': disabled,
-            },
-            {
-              [disabledBackground]: disabled,
+              'hover:shadow-xl active:shadow-none ease-in-out': !disabled,
+              [regularBackground]: regularBackground,
+              'cursor-not-allowed opacity-70': disabled,
             },
             className,
           )}
@@ -92,23 +78,16 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       {as === 'navlink' && to && (
         <NavLink
           className={cn(
-            `text-white font-semibold
+            `font-semibold
 	                    rounded
-
+	                    active:ring-1
 	                    shadow-md 
 	                    focus:outline-none focus:ring-0
-	                    transition duration-150 ease-in-out`,
+                        duration-150 ease-in-out transition-all`,
             {
-              'active:shadow-lg focus:shadow-lg hover:shadow-lg': !disabled,
-            },
-            {
-              [regularBackground]: !disabled,
-            },
-            {
-              'cursor-not-allowed': disabled,
-            },
-            {
-              [disabledBackground]: disabled,
+              'hover:shadow-xl active:shadow-none ease-in-out': !disabled,
+              [regularBackground]: regularBackground,
+              'cursor-not-allowed opacity-70': disabled,
             },
             className,
           )}

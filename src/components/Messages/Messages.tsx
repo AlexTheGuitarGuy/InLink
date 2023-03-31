@@ -72,11 +72,13 @@ const Messages = () => {
         path={`/${index}`}
         key={index}
         element={
-          <div className='flex flex-col h-full w-full relative overflow-y-scroll'>
-            <div className='space-y-1 h-[78vh] mt-4 mx-8'>{conversationComponents[index]}</div>
+          <div className='flex flex-col h-full w-full relative'>
+            <div className='space-y-1 h-[78vh] mt-4 mx-8 overflow-x-hidden'>
+              {conversationComponents[index]}
+            </div>
             <div
               className='fixed bottom-0 lg:w-3/5 sm:w-full self-center
-              pb-4 rounded-t px-2 py-2 bg-gray-300'
+              pb-4 rounded-t px-2 py-2 bg-neutralBg'
             >
               <MessageForm index={index} />
             </div>
@@ -89,9 +91,7 @@ const Messages = () => {
   return (
     <div
       className='flex
-         lg:bg-gray-100 lg:rounded-lg lg:p-8
-         text-gray-700 lg:font-semibold
-         xl:h-[92vh] lg:h-[88vh] w-full'
+         lg:bg-neutralBg lg:rounded-lg lg:p-8 lg:font-semibold'
     >
       {screenSize.dynamicWidth >= 1366 && <Users users={users} />}
 

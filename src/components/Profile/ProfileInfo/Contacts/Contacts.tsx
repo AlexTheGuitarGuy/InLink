@@ -58,7 +58,7 @@ const Contacts: FC<ContactsProps> = ({ contacts, isEditMode, status }) => {
   })
 
   return (
-    <div className='mt-2 text-gray-700'>
+    <div className='mt-2'>
       Contacts:
       {isEmpty && !isEditMode ? (
         <div>None</div>

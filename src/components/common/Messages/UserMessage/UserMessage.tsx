@@ -77,7 +77,7 @@ const UserMessage: FC<UserMessageProps> = ({
           </NavLink>
         )}
 
-        {!isEditing && (
+        {!isEditing && !isPending && (
           <div
             className={cn('mx-1 transition-opacity', {
               'order-first': isFromMe,
@@ -103,9 +103,9 @@ const UserMessage: FC<UserMessageProps> = ({
         )}
 
         <div
-          className={cn('px-4 py-1 text-white font-medium', {
-            'order-2 bg-gray-400 rounded-r-3xl': !isFromMe,
-            'order-1 bg-blue-400 rounded-l-3xl': isFromMe,
+          className={cn('px-4 py-1 font-medium break-words', {
+            'order-2 bg-neutralChild rounded-r-3xl': !isFromMe,
+            'order-1 bg-primaryBg rounded-l-3xl': isFromMe,
             'opacity-50': isPending,
 
             'rounded-tl-3xl': !isFromMe && (isFirst || !isPreviousFromSameUser),
@@ -120,7 +120,7 @@ const UserMessage: FC<UserMessageProps> = ({
           })}
         >
           {!isFromMe && !isPreviousFromSameUser && (
-            <NavLink to={userProfileLink} className='text-sm font-semibold text-gray-200 block'>
+            <NavLink to={userProfileLink} className='text-sm font-semibold block'>
               {userName}
             </NavLink>
           )}
@@ -134,8 +134,8 @@ const UserMessage: FC<UserMessageProps> = ({
               onClear={() => {
                 setIsEditing(false)
               }}
-              textAreaClassName='h-20 w-full'
-              buttonsColor={EditTextButtonColor.Blue}
+              textAreaClassName='h-20 w-full bg-primaryBg'
+              buttonsColor={EditTextButtonColor.primary}
             />
           ) : (
             <>{message}</>

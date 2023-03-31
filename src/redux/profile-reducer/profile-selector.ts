@@ -8,6 +8,10 @@ export const getCurrentUserFollowed = (state: RootState) => {
   return state.profilePage.currentUserFollowed
 }
 
+export const getIsFollowingInProgress = (state: RootState) => {
+  return state.profilePage.isFollowingInProgress
+}
+
 export const getUserId = (state: RootState) => {
   return state.profilePage.userId
 }

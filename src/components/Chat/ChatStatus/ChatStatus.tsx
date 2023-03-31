@@ -31,7 +31,7 @@ const ChatStatus = () => {
               font-normal
               rounded border
               z-50`,
-        { 'bg-green-100 border-green-200': isReady },
+        { 'bg-primaryBg border-onPrimaryBg': isReady },
         { 'bg-yellow-100 border-yellow-200': isPending },
         { 'bg-red-100 border-red-200': isError },
       )}

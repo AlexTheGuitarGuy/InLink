@@ -45,7 +45,7 @@ const Login: FC<{}> = () => {
   return (
     <section className='h-screen relative'>
       <div className='px-6 py-12 h-full'>
-        <div className='flex justify-center items-center flex-wrap h-full text-gray-700'>
+        <div className='flex justify-center items-center flex-wrap h-full'>
           <div className='sm:w-8/12 lg:w-6/12 mb-12 sm:mb-0'>
             <img
               src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg'
@@ -54,7 +54,7 @@ const Login: FC<{}> = () => {
             />
           </div>
           <div className='sm:w-8/12 lg:w-5/12 lg:ml-20'>
-            <div className='text-gray-700 font-bold text-center mb-6'>Log into InLink</div>
+            <div className='font-bold text-center mb-6'>Log into InLink</div>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -95,14 +95,11 @@ const Login: FC<{}> = () => {
                           name='rememberMe'
                           id='rememberMe'
                           className='h-4 w-4 mr-2
-                          border border-gray-300
+                          border border-onNeutralBg
                           rounded-sm
                           focus:outline-none cursor-pointer'
                         />
-                        <label
-                          className='inline-block text-gray-800 cursor-pointer'
-                          htmlFor='rememberMe'
-                        >
+                        <label className='inline-block cursor-pointer' htmlFor='rememberMe'>
                           Remember me
                         </label>
                       </div>
@@ -117,14 +114,14 @@ const Login: FC<{}> = () => {
                       Log in
                     </PrimaryButton>
 
-                    <div className='text-gray-700 mt-6'>
+                    <div className='mt-6'>
                       Free account for visitors:
                       <div>Email: free@samuraijs.com</div> <div>Password: free</div>
                     </div>
 
                     {captchaURL && (
                       <div className='flex justify-center'>
-                        <div className='mt-6 text-gray-700'>
+                        <div className='mt-6'>
                           <img src={captchaURL} alt='captcha' className='mb-4 w-full' />
 
                           <FormInput

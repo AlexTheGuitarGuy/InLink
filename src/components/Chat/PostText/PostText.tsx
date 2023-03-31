@@ -6,7 +6,7 @@ import { sendMessage } from '../../../redux/chat-reducer/chat-reducer'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 
 import FormInput from '../../common/Inputs/FormInput/FormInput'
-import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '../../common/Buttons/PrimaryButton/PrimaryButton'
 import { getStatus } from '../../../redux/chat-reducer/chat-selector'
 
 type ChatFormValues = {
@@ -58,10 +58,10 @@ const PostText = () => {
               <PrimaryButton
                 disabled={isSubmitting || !isValid || status !== 'ready'}
                 type='submit'
-                className='rounded-full ml-4 shadow-none h-12 w-12 flex justify-center items-center'
-                color='background'
+                className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg shadow-none'
+                color={ButtonColor.transparent}
               >
-                <Send fontSize='medium' className='text-gray-700' />
+                <Send fontSize='medium' />
               </PrimaryButton>
             </div>
           </div>

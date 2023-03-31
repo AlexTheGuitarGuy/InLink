@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import { getIsLoading, getUsers } from '../../../redux/users-reducer/users-selector'
 import { User } from '../../../types/types'
@@ -15,8 +15,8 @@ const UserItems = () => {
   return (
     <div
       className='lg:mx-60
-        lg:border lg:rounded-lg lg:border-gray-300
-        lg:bg-gray-200'
+        lg:border lg:rounded-lg lg:border-onNeutralBg
+        lg:bg-neutralChild'
     >
       {users.map((user: User, index: number, self: User[]) => (
         <UserItem key={user.id} user={user} index={index} self={self} />
@@ -25,4 +25,4 @@ const UserItems = () => {
   )
 }
 
-export default memo(UserItems)
+export default UserItems

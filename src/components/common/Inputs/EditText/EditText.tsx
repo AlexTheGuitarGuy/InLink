@@ -4,8 +4,8 @@ import { Clear, Done } from '@mui/icons-material'
 import cn from 'classnames'
 
 export enum EditTextButtonColor {
-  Gray = 'gray',
-  Blue = 'blue',
+  neutral = 'neutral',
+  primary = 'primary',
 }
 
 export type EditTextProps = {
@@ -21,25 +21,25 @@ const EditText: FC<EditTextProps> = ({
   onDone,
   onClear,
   textAreaClassName,
-  buttonsColor = 'gray',
+  buttonsColor = EditTextButtonColor.neutral,
 }) => {
   const [dynamicText, setDynamicText] = useState(text)
-  let buttonsTextColor = 'text-black'
-  let buttonsBackground = 'hover:bg-gray-300 active:bg-gray-400'
+  let buttonsTextColor = ''
+  let buttonsBackground = ''
 
   switch (buttonsColor) {
-    case 'gray': {
+    case EditTextButtonColor.neutral: {
+      buttonsBackground = 'hover:bg-neutralBg'
       break
     }
-    case 'blue': {
-      buttonsTextColor = 'text-white'
-      buttonsBackground = 'hover:bg-blue-500 active:bg-blue-600'
+    case EditTextButtonColor.primary: {
+      buttonsBackground = 'hover:bg-primaryChild'
       break
     }
   }
 
   return (
-    <div className='text-black'>
+    <div>
       <RegularInput
         as='textarea'
         field={{ placeholder: 'Edit post...', className: textAreaClassName }}
@@ -50,7 +50,7 @@ const EditText: FC<EditTextProps> = ({
           value: dynamicText,
         }}
       />
-      <div className={cn('flex justify-end mt-2', buttonsTextColor)}>
+      <div className={cn('flex justify-end mt-2 bg-neutral', buttonsTextColor)}>
         <Done
           className={cn('cursor-pointer rounded', buttonsBackground)}
           onClick={() => onDone(dynamicText)}

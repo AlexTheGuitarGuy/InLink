@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 import { User } from '../../../types/types'
@@ -11,20 +11,19 @@ type UsersProps = {
 const Users: FC<UsersProps> = ({ users }) => {
   const userElements = users.map(({ name, photos }, index) => {
     return (
-      <div key={name} className='sm:border-b sm:border-gray-200 lg:border-none'>
+      <div key={name} className='sm:border-b sm:border-neutralFocus lg:border-none'>
         <NavLink
           to={`/messages/${index}`}
           className={({ isActive }) =>
             cn(
               `p-2 flex items-center mt-4
               transition-colors
-              border-b-2 border-transparent
-              hover:bg-gray-200 active:bg-gray-300
-              hover:text-gray-600 active:text-gray-700
-              hover:border-gray-400 active:border-gray-500
+              border-b-2
             `,
               {
-                'bg-gray-300 text-gray-700 border-gray-500': isActive,
+                'bg-onNeutralBg border-neutralFocus': isActive,
+                'hover:bg-neutralChild active:bg-onNeutralBg hover:border-onNeutralBg active:border-neutralFocus':
+                  !isActive,
               },
             )
           }
@@ -47,7 +46,7 @@ const Users: FC<UsersProps> = ({ users }) => {
   })
 
   return (
-    <div className='lg:border-r lg:border-gray-300 lg:w-1/5 sm:w-full'>
+    <div className='lg:border-r lg:border-neutralFocus lg:w-1/5 sm:w-full'>
       <div
         className='text-xl
                   sm:text-center lg:text-left
@@ -60,4 +59,4 @@ const Users: FC<UsersProps> = ({ users }) => {
   )
 }
 
-export default memo(Users)
+export default Users

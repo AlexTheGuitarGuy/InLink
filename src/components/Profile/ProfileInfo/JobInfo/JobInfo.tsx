@@ -22,8 +22,8 @@ const JobInfo: FC<JobInfoProps> = ({
     <div>
       {(lookingForAJob || isEditMode) && (
         <div
-          className={cn(`text-gray-700`, {
-            'bg-gray-200 p-4 border rounded-lg border-gray-300 flex items-center flex-col':
+          className={cn({
+            'bg-primaryBg p-4 border rounded-lg border-onPrimaryBg flex items-center flex-col':
               !isEditMode,
           })}
         >

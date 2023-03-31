@@ -1,13 +1,17 @@
-import { ComponentMeta } from '@storybook/react'
+import { ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import ChatShortcut from '../components/Chat/ChatShortcut/ChatShortcut'
+import withThemes from '../HOC/withThemes'
 
 export default {
   title: 'Chat/ChatShortcut',
   component: ChatShortcut,
-} as ComponentMeta<typeof ChatShortcut>
+  decorators: [withThemes(ChatShortcut)],
+}
 
-export const Default = () => {
-  return <ChatShortcut />
+export const Template: ComponentStory<typeof ChatShortcut> = (args) => <ChatShortcut {...args} />
+
+Template.args = {
+  onOpen: () => {},
 }

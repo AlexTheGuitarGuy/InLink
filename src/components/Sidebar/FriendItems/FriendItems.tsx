@@ -16,9 +16,8 @@ const FriendItems = () => {
             className='p-2 flex items-center mt-4
                         transition-colors
                         border-b-2 border-transparent
-                        hover:bg-gray-200 active:bg-gray-300
-                        hover:text-gray-600 active:text-gray-700
-                        hover:border-gray-400 active:border-gray-500
+                        hover:bg-neutralChild active:bg-onNeutralBg
+                        hover:border-onNeutralBg active:border-neutralFocus
           '
           >
             <img
@@ -37,7 +36,7 @@ const FriendItems = () => {
   })
 
   return (
-    <div className='text-gray-500 bg-gray-100 p-2 -mr-4 rounded-lg font-semibold'>
+    <div className='bg-neutralBg p-2 -mr-4 rounded-lg font-semibold'>
       <div className='text-lg ml-2 xl:text-xl'>Contacts:</div>
       <div>
         {friendList}

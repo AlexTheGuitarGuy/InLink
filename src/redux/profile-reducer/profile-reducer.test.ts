@@ -17,14 +17,7 @@ const state: ProfileReducerState = {
       likedByUser: false,
     },
   ],
-  profileData: null,
-  myData: null,
-  profileStatus: '',
-  storedText: '',
-  isLoading: false,
-  currentUserFollowed: false,
-  userId: null,
-}
+} as ProfileReducerState
 
 it(`should add a post that contains text "testing is good"`, () => {
   const action = profileActions.createPost('testing is good')

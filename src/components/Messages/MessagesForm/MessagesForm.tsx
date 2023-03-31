@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 
 import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
 import FormInput from '../../common/Inputs/FormInput/FormInput'
-import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '../../common/Buttons/PrimaryButton/PrimaryButton'
 import { Send } from '@mui/icons-material'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 import { getStoredMessages } from '../../../redux/dialogs-reducer/dialogs-selector'
@@ -68,10 +68,10 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
               <PrimaryButton
                 disabled={isSubmitting || !isValid}
                 type='submit'
-                className='rounded-full ml-4 shadow-none h-12 w-12 flex justify-center items-center'
-                color='background'
+                className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg shadow-none'
+                color={ButtonColor.transparent}
               >
-                <Send fontSize='medium' className='text-gray-700' />
+                <Send fontSize='medium' />
               </PrimaryButton>
             </div>
           </div>

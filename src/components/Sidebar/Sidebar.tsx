@@ -1,5 +1,4 @@
-import React, { memo, useEffect } from 'react'
-import { compose } from 'redux'
+import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -32,4 +31,4 @@ const Sidebar = () => {
   )
 }
 
-export default compose(memo)(Sidebar)
+export default Sidebar

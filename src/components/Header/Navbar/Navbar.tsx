@@ -40,23 +40,19 @@ const Navbar = () => {
             font-semibold 
             
             lg:text-lg sm:text-2xl
-            lg:hover:text-gray-600 lg:active:text-gray-500
             lg:hover:bg-transparent
             lg:p-0 lg:mr-4 lg:rounded-none
             lg:border-b-2
                         
-            sm:active:bg-gray-300 
+            sm:active:bg-neutralFocus
             sm:px-2 sm:py-1 
             sm:rounded 
             sm:w-full
             sm:text-center
-            
             `,
             {
-              'lg:border-gray-500 lg:bg-transparent sm:bg-gray-300': isActive,
-            },
-            {
-              'lg:border-transparent lg:hover:border-gray-400': !isActive,
+              'lg:border-onNeutralBg lg:bg-transparent bg-neutralChild': isActive,
+              'lg:border-transparent lg:hover:border-neutralChild': !isActive,
             },
           )}
         >
@@ -72,7 +68,7 @@ const Navbar = () => {
         <button
           onClick={() => setShouldShowMenu(!shouldShowMenu)}
           className={cn('rounded p-1', {
-            'bg-gray-200': shouldShowMenu,
+            'bg-neutralChild': shouldShowMenu,
           })}
         >
           <Menu fontSize='large' />
@@ -84,17 +80,17 @@ const Navbar = () => {
               `fixed left-0 top-16
                 flex flex-col justify-center
                 w-full
-                bg-gray-200 p-8
-                border-b border-gray-400
+                bg-neutralBg p-8
+                border-b border-onNeutralBg
                 rounded-b
                 font-semibold
                 transition-opacity`,
-              { 'opacity-0': !shouldShowMenu },
+              { 'opacity-0 pointer-events-none': !shouldShowMenu },
               { 'opacity-100': shouldShowMenu },
             )}
             ref={menuRef as LegacyRef<HTMLDivElement>}
           >
-            {shouldShowMenu && navElements}
+            {navElements}
           </div>
         </nav>
       </div>

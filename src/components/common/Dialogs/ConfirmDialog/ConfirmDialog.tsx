@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { ErrorOutline } from '@mui/icons-material'
 
 import BaseDialog, { BaseDialogProps } from '../BaseDialog/BaseDialog'
-import PrimaryButton from '../../Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '../../Buttons/PrimaryButton/PrimaryButton'
 
 export type ConfirmDialogProps = {
   confirmText?: string
@@ -23,7 +23,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = ({
           <PrimaryButton onClick={onSubmit} className='px-5 py-3 text-lg'>
             Yes
           </PrimaryButton>
-          <PrimaryButton onClick={onClose} className='px-5 py-3 text-lg' color='rose'>
+          <PrimaryButton onClick={onClose} className='px-5 py-3 text-lg' color={ButtonColor.rose}>
             No
           </PrimaryButton>
         </div>

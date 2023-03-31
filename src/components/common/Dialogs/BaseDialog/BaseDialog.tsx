@@ -1,7 +1,7 @@
 import { FC, ReactNode, RefObject } from 'react'
 import cn from 'classnames'
 import { Close } from '@mui/icons-material'
-import PrimaryButton from '../../Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '../../Buttons/PrimaryButton/PrimaryButton'
 import useTagBlur from '../../../../hooks/useTagBlur'
 
 export type BaseDialogProps = {
@@ -36,7 +36,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
   return (
     <div
       className={cn(
-        'fixed z-40 left-0 top-0 w-full h-full bg-black/30 transition-opacity duration-100 text-gray-800',
+        'fixed z-40 left-0 top-0 w-full h-full bg-black/30 transition-opacity duration-100',
         {
           'opacity-100': isShown,
           'opacity-0 pointer-events-none': !isShown,
@@ -47,8 +47,8 @@ const BaseDialog: FC<BaseDialogProps> = ({
         ref={ref as RefObject<HTMLDivElement>}
         className={cn(
           `absolute 
-          bg-white shadow-md rounded max-h-[80vh]
-          flex flex-col divide-y border-gray-500`,
+          bg-neutralBg shadow-md rounded max-h-[95vh]
+          flex flex-col divide-y divide-onNeutralBg`,
           { 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2': center },
         )}
       >
@@ -56,7 +56,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
           <h5 className='font-semibold text-xl'>{name}</h5>
           <button
             onClick={handleClose}
-            className='hover:bg-gray-200 transition-colors duration-75 ease-in-out rounded p-0.5'
+            className='hover:bg-neutralChild transition-colors duration-75 ease-in-out rounded p-0.5'
           >
             <Close className='-mt-1' />
           </button>
@@ -72,7 +72,7 @@ const BaseDialog: FC<BaseDialogProps> = ({
                 <PrimaryButton
                   onClick={handleClose}
                   className='px-5 py-2'
-                  color='rose'
+                  color={ButtonColor.rose}
                   type='reset'
                 >
                   Cancel

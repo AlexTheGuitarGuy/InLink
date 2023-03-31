@@ -39,14 +39,11 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
         onClick={() => changeOnClick(i)}
         className={cn(
           `mx-1 cursor-pointer transition-colors 
-          hover:text-gray-600 active:text-gray-500
           p-0.5
           border-b-2`,
           {
-            'bg-gray-200 rounded': i === page,
-          },
-          {
-            'border-transparent hover:border-gray-600': !(i === page),
+            'border-onPrimaryBg': i === page,
+            'border-transparent hover:border-onPrimaryBg': !(i === page),
           },
         )}
       >
@@ -67,8 +64,7 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
         changePage(page)
       }}
       className='mx-1 cursor-pointer transition-colors
-          hover:text-gray-600 active:text-gray-500
-          border-b-2 border-transparent hover:border-gray-600 p-0.5'
+          border-b-2 border-transparent hover:border-onPrimaryBg p-0.5'
     >
       {symbol}
     </span>
@@ -81,8 +77,7 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
     <span
       onClick={() => changeOnClick(page)}
       className='mx-1 cursor-pointer transition-colors
-          hover:text-gray-600 active:text-gray-500
-          border-b-2 border-transparent hover:border-gray-600 p-0.5'
+          border-b-2 border-transparent hover:border-onPrimaryBg p-0.5'
     >
       {symbol}
     </span>

@@ -10,11 +10,17 @@ const ContactIcon: FC<ContactProps> = ({ contactName, contactAddress }) => {
     github: <GitHub />,
     instagram: <Instagram />,
     mainLink: (
-      <div className='mx-0.5 px-1 hover:bg-gray-200 transition-colors rounded'>main link</div>
+      <div className='mx-0.5 mt-2 px-1 hover:bg-neutralChild transition-colors rounded'>
+        main link
+      </div>
     ),
     twitter: <Twitter />,
-    vk: <VkIcon className='fill-gray-700 mt-40' />,
-    website: <div className='mx-0.5 px-1 hover:bg-gray-200 transition-colors rounded'>website</div>,
+    vk: <VkIcon className='fill-neutralFocus mt-40' />,
+    website: (
+      <div className='mx-0.5 mt-2 px-1 hover:bg-neutralChild transition-colors rounded'>
+        website
+      </div>
+    ),
     youtube: <YouTube />,
   }
 

@@ -20,6 +20,8 @@ import Messages from './components/Messages/Messages'
 import Profile from './components/Profile/Profile'
 import Header from './components/Header/Header'
 import ChatFunctionality from './components/Chat/ChatFunctionality'
+import { compose } from 'redux'
+import withThemes from './HOC/withThemes'
 
 const App = () => {
   const isAppInitialized = useAppSelector(getIsAppInitialized)
@@ -57,7 +59,7 @@ const App = () => {
   if (!isAppInitialized) return <Loading />
 
   return (
-    <div>
+    <div className='text-neutralFocus bg-appBg min-h-screen'>
       {isLoggedIn && (
         <div className='fixed w-60 mt-12 z-0'>
           <Sidebar />
@@ -94,4 +96,4 @@ const App = () => {
   )
 }
 
-export default App
+export default compose(withThemes)(App)

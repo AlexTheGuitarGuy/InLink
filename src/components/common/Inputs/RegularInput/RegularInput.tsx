@@ -36,11 +36,11 @@ const RegularInput: FC<RegularInputProps> = ({
           {...restProps}
           className={cn(
             `rounded 
-	                    border border-gray-300 border-solid
-	                    focus:outline-none focus:border-gray-600
-	                    focus:text-gray-800
-	                    transition ease-in-out
-	                    bg-clip-padding`,
+                    border border-onNeutralBg border-solid bg-neutralChild
+                    focus:outline-none focus:ring-2 focus:ring-primaryFocus
+                    transition ease-in-out
+                    bg-clip-padding
+                    px-3 py-2 w-full`,
             field.className,
           )}
         />
@@ -50,9 +50,9 @@ const RegularInput: FC<RegularInputProps> = ({
           {...field}
           className={cn(
             `rounded 
-                    border border-gray-300
-                    focus:outline-none focus:border-gray-500
-                    transition`,
+                    border border-onNeutralBg border-solid bg-neutralChild
+                    focus:outline-none focus:ring-2 focus:ring-primaryFocus
+                    transition ease-in-out`,
             field.className,
           )}
           {...restProps}

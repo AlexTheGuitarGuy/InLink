@@ -15,7 +15,11 @@ import Status from './Status/Status'
 import JobInfo from './JobInfo/JobInfo'
 import Contacts from './Contacts/Contacts'
 import FollowButton from '../../common/Buttons/FollowButton/FollowButton'
-import { getCurrentUserFollowed, getUserId } from '../../../redux/profile-reducer/profile-selector'
+import {
+  getCurrentUserFollowed,
+  getIsFollowingInProgress,
+  getUserId,
+} from '../../../redux/profile-reducer/profile-selector'
 import EditProfileDialog from './EditProfileDialog/EditProfileDialog'
 import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
 
@@ -33,6 +37,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
   const dispatch = useAppDispatch()
   const currentUserFollowed = useAppSelector(getCurrentUserFollowed)
   const id = useAppSelector(getUserId)!
+  const isFollowingInProgress = useAppSelector(getIsFollowingInProgress)
   const updatePFP = (event: ChangeEvent<HTMLInputElement>) => {
     const element = event.currentTarget as HTMLInputElement
     const fileList: FileList | null = element.files
@@ -46,16 +51,14 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
       className='flex
                   sm:flex-col lg:flex-row
                   sm:align-center lg:justify-between
-                  lg:bg-gray-100 lg:rounded-lg 
+                  lg:bg-neutralBg lg:rounded-lg
 
                   lg:p-8 
                   sm:mx-4 lg:mx-0
                   sm:pt-8
                   sm:mb-4 lg:mb-0
 
-
-                  text-gray-700 font-semibold
-                  sm:text-sm'
+                  font-semibold sm:text-sm'
     >
       <EditProfileDialog
         isShown={isEditShown}
@@ -67,7 +70,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
           <img
             src={pfp || placeholder}
             alt='pfp'
-            className='rounded-full bg-gray-700 p-1
+            className='rounded-full bg-primaryBg p-1
                        w-52 h-52
                        xl:w-60 xl:h-60
                        sm:mx-auto'
@@ -95,6 +98,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
                 followed={currentUserFollowed}
                 onFollow={() => dispatch(followInProfile(id))}
                 onUnfollow={() => dispatch(unfollowInProfile(id))}
+                checkIsDisabled={() => isFollowingInProgress}
               />
             )}
           </div>
@@ -105,7 +109,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
               <input
                 type='file'
                 onChange={updatePFP}
-                className='text-gray-700 font-semibold
+                className='font-semibold
                               transition-colors cursor-pointer'
               />
             </div>
