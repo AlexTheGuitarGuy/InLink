@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 import { User } from '../../../types/types'
@@ -59,4 +59,4 @@ const Users: FC<UsersProps> = ({ users }) => {
   )
 }
 
-export default memo(Users)
+export default Users

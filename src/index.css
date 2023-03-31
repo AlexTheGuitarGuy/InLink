@@ -94,15 +94,15 @@ code {
 }
 
 .theme-light {
-  --appBg: var(--color-neutral-200);
+  --appBg: var(--color-neutral-300);
   --neutralFocus: var(--color-neutral-600);
   --neutralChild: var(--color-neutral-200);
   --neutralBg: var(--color-neutral-100);
   --onNeutralBg: var(--color-neutral-400);
-  --primaryChild: var(--color-primary-500);
-  --primaryFocus: var(--color-primary-700);
-  --primaryBg: var(--color-primary-400);
-  --onPrimaryBg: var(--color-primary-500);
+  --primaryChild: var(--color-primary-400);
+  --primaryFocus: var(--color-primary-600);
+  --primaryBg: var(--color-primary-300);
+  --onPrimaryBg: var(--color-primary-400);
 }
 
 .theme-dark {
@@ -111,8 +111,8 @@ code {
   --neutralChild: var(--color-neutral-600);
   --neutralBg: var(--color-neutral-700);
   --onNeutralBg: var(--color-neutral-900);
-  --primaryChild: var(--color-primary-400);
+  --primaryChild: var(--color-primary-500);
   --primaryFocus: var(--color-primary-300);
-  --primaryBg: var(--color-primary-500);
-  --onPrimaryBg: var(--color-primary-600);
+  --primaryBg: var(--color-primary-400);
+  --onPrimaryBg: var(--color-primary-300);
 }

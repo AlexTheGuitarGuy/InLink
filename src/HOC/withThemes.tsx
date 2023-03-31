@@ -1,13 +1,20 @@
 import React, { ComponentType } from 'react'
 import { useStickyState } from '../hooks/useStickyState'
 
-export const colors = ['blue', 'green', 'red']
-export const modes = ['light', 'dark']
+export enum Color {
+  blue = 'blue',
+  green = 'green',
+  red = 'red',
+}
+export enum Mode {
+  light = 'light',
+  dark = 'dark',
+}
 
 function withThemes<P extends Object>(Component: ComponentType<P>) {
   return (props: P) => {
-    const [color] = useStickyState(colors[0], 'theme-color')
-    const [mode] = useStickyState(modes[1], 'theme-mode')
+    const [color] = useStickyState(Object.values(Color)[0], 'theme-color')
+    const [mode] = useStickyState(Object.values(Mode)[0], 'theme-mode')
 
     return (
       <div

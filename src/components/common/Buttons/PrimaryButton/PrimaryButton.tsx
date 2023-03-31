@@ -41,7 +41,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       break
     }
     case ButtonColor.primary: {
-      regularBackground = `bg-primaryBg ring-onPrimaryBg`
+      regularBackground = `bg-primaryChild ring-primaryFocus`
       break
     }
     case ButtonColor.rose: {

@@ -1,15 +1,15 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import ProfileButton from './ProfileButton/ProfileButton'
 import Navbar from './Navbar/Navbar'
 import { useLocation } from 'react-router-dom'
-import { compose } from 'redux'
 import { useSelector } from 'react-redux'
 import { KeyboardBackspace } from '@mui/icons-material'
 
 import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 import useScreenSize from '../../hooks/useScreenSize'
 import Placeholder from '../../assets/pfps/placeholder.jpg'
+import ThemesMenu from './ThemesMenu/ThemesMenu'
 
 const Header = () => {
   const location = useLocation()
@@ -70,7 +70,8 @@ const Header = () => {
         whitespace-nowrap
         h-16'
     >
-      <div className='lg:order-3 sm:order-3'>
+      <div className='lg:order-3 sm:order-3 flex space-x-3'>
+        <ThemesMenu />
         <ProfileButton />
       </div>
 
@@ -90,4 +91,4 @@ const Header = () => {
   )
 }
 
-export default compose(memo)(Header)
+export default Header

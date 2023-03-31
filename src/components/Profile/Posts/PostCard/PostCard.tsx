@@ -44,7 +44,7 @@ const PostCard: FC<PostCardProps> = ({
       {/* Header */}
       <div
         className='order-1 p-4
-      border-x border-t border-onPrimaryBg
+      border border-onPrimaryBg
       bg-primaryBg
       rounded-tl rounded-tr
       flex justify-between'
@@ -77,7 +77,7 @@ const PostCard: FC<PostCardProps> = ({
       {/* Body */}
       <div
         className='order-2 p-4
-                    border border-onNeutralBg
+                    border border-t-0 border-onNeutralBg
                     bg-neutralChild
                     rounded-bl rounded-br
                     flex flex-col'

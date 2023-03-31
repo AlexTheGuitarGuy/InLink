@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import { getIsLoading, getUsers } from '../../../redux/users-reducer/users-selector'
 import { User } from '../../../types/types'
@@ -25,4 +25,4 @@ const UserItems = () => {
   )
 }
 
-export default memo(UserItems)
+export default UserItems

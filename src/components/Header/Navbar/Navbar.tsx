@@ -49,7 +49,6 @@ const Navbar = () => {
             sm:rounded 
             sm:w-full
             sm:text-center
-            
             `,
             {
               'lg:border-onNeutralBg lg:bg-transparent bg-neutralChild': isActive,

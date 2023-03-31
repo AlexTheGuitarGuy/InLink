@@ -68,7 +68,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
               <PrimaryButton
                 disabled={isSubmitting || !isValid}
                 type='submit'
-                className='rounded-full ml-4 shadow-none h-12 w-12 flex justify-center items-center'
+                className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg shadow-none'
                 color={ButtonColor.transparent}
               >
                 <Send fontSize='medium' />
