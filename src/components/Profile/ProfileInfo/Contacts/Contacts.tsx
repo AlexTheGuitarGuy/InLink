@@ -67,7 +67,7 @@ const Contacts: FC<ContactsProps> = ({ contacts, isEditMode, status }) => {
           {isEditMode ? (
             <div className='space-y-2 flex flex-col'>{parsedContacts}</div>
           ) : (
-            <div>
+            <div className='w-fit'>
               <div>{parsedContacts.slice(0, parsedContacts.length - 2)}</div>
               <div>{parsedContacts.slice(parsedContacts.length - 2)}</div>
             </div>

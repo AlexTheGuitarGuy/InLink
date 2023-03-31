@@ -24,11 +24,7 @@ const ContactIcon: FC<ContactProps> = ({ contactName, contactAddress }) => {
     youtube: <YouTube />,
   }
 
-  return (
-    <button onClick={() => (window.location.href = contactAddress || window.location.href)}>
-      {iconsMap[contactName as keyof typeof iconsMap]}
-    </button>
-  )
+  return <a href={contactAddress}>{iconsMap[contactName as keyof typeof iconsMap]}</a>
 }
 
 export default ContactIcon
