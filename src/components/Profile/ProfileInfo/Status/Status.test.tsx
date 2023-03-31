@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const Mock = () => <div>mock</div>
 /*import Status from './Status'
 import { act } from 'react-test-renderer'

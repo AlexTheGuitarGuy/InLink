@@ -1,9 +1,9 @@
-import React, { FC, RefObject, useState } from 'react'
 import { Delete, Edit, MoreVert } from '@mui/icons-material'
+import { FC, RefObject, useState } from 'react'
 
+import useTagBlur from '../../../../hooks/useTagBlur'
 import Dropdown from '../Dropdown'
 import DropdownItem from '../DropdownItem/DropdownItem'
-import useTagBlur from '../../../../hooks/useTagBlur'
 
 export type EditOptionsProps = {
   onEdit: () => void

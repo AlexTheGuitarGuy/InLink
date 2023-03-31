@@ -1,7 +1,7 @@
 import { v1 as uuidv1 } from 'uuid'
 import { UserMessage } from '../../types/types'
-import { InferAction } from '../store'
 import { updateObjInArr } from '../../utils/object-helpers'
+import { InferAction } from '../store'
 
 const initialState = {
   userMessages: [

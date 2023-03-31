@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
-import PrimaryButton from '../PrimaryButton/PrimaryButton'
-import Loading, { Dimensions } from '../../Loading/Loading'
+import { FC } from 'react'
 import { useAppSelector } from '../../../../hooks/reduxHooks'
 import { getIsLoggedIn, getUID } from '../../../../redux/auth-reducer/auth-selector'
+import Loading, { Dimensions } from '../../Loading/Loading'
+import PrimaryButton from '../PrimaryButton/PrimaryButton'
 
 type FollowButtonProps = {
   id: number

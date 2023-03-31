@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
+import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 import {
   chatActions,
   startMessagesListening,
   stopMessagesListening,
 } from '../../../redux/chat-reducer/chat-reducer'
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
 
-import Messages from '../Messages/Messages'
-import BaseDialog from '../../common/Dialogs/BaseDialog/BaseDialog'
-import PostText from '../PostText/PostText'
-import ChatStatus from '../ChatStatus/ChatStatus'
 import { getChatOpen } from '../../../redux/chat-reducer/chat-selector'
+import BaseDialog from '../../common/Dialogs/BaseDialog/BaseDialog'
+import ChatStatus from '../ChatStatus/ChatStatus'
+import Messages from '../Messages/Messages'
+import PostText from '../PostText/PostText'
 
 const Chat = () => {
   const chatOpen = useAppSelector(getChatOpen)

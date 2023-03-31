@@ -1,8 +1,8 @@
 import { Settings } from '@mui/icons-material'
-import { useState } from 'react'
 import cn from 'classnames'
-import { useStickyState } from '../../../hooks/useStickyState'
+import { useState } from 'react'
 import { Color, Mode } from '../../../HOC/withThemes'
+import { useStickyState } from '../../../hooks/useStickyState'
 import useTagBlur from '../../../hooks/useTagBlur'
 
 const ThemesMenu = () => {

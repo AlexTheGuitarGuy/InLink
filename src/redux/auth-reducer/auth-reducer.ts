@@ -1,8 +1,8 @@
-import { securityAPI } from '../../api/securityAPI'
 import { ResultCodes, ResultCodesWithCaptcha } from '../../api/API'
+import { securityAPI } from '../../api/securityAPI'
 import { LoginPayload } from '../../types/types'
-import { InferAction, InferThunk } from '../store'
 import { setAlertFromThunk } from '../app-reducer/app-reducer'
+import { InferAction, InferThunk } from '../store'
 
 const initialState = {
   id: 0,

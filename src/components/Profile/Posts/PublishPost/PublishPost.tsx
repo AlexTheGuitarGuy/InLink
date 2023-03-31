@@ -1,12 +1,11 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
 
 import { profileActions } from '../../../../redux/profile-reducer/profile-reducer'
 
-import FormInput from '../../../common/Inputs/FormInput/FormInput'
 import PrimaryButton from '../../../common/Buttons/PrimaryButton/PrimaryButton'
+import FormInput from '../../../common/Inputs/FormInput/FormInput'
 
 type PostFormValues = {
   postText: string

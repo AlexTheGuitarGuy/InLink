@@ -1,8 +1,6 @@
-import React from 'react'
-
+import { useAppSelector } from '../../../hooks/reduxHooks'
 import { getIsLoading, getUsers } from '../../../redux/users-reducer/users-selector'
 import { User } from '../../../types/types'
-import { useAppSelector } from '../../../hooks/reduxHooks'
 import Loading from '../../common/Loading/Loading'
 import UserItem from './UserItem/UserItem'
 

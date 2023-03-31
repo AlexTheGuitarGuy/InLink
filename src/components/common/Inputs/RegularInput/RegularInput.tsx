@@ -1,5 +1,5 @@
-import { FC } from 'react'
 import cn from 'classnames'
+import { FC } from 'react'
 
 type RegularInputProps = {
   field: {

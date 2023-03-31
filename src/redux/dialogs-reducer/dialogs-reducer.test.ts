@@ -1,6 +1,6 @@
-import dialogsReducer, { DialogsReducerState, dialogsActions } from './dialogs-reducer'
 import { v1 as uuidv1 } from 'uuid'
 import { UserMessage } from '../../types/types'
+import dialogsReducer, { dialogsActions, DialogsReducerState } from './dialogs-reducer'
 
 const state: DialogsReducerState = {
   userMessages: [

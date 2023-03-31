@@ -1,8 +1,8 @@
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { debounce } from 'lodash'
 import { ChangeEvent, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
-import { debounce } from 'lodash'
 
 import FormInput from '../../common/Inputs/FormInput/FormInput'
 

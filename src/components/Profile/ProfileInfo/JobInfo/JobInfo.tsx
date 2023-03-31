@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import { Search } from '@mui/icons-material'
 import cn from 'classnames'
 import { Field } from 'formik'
-import { Search } from '@mui/icons-material'
+import { FC } from 'react'
 
 import FormInput from '../../../common/Inputs/FormInput/FormInput'
 

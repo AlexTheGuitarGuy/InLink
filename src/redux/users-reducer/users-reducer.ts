@@ -1,7 +1,7 @@
-import { userAPI } from '../../api/userAPI'
-import { updateObjInArr } from '../../utils/object-helpers'
-import { User } from '../../types/types'
 import { ResultCodes } from '../../api/API'
+import { userAPI } from '../../api/userAPI'
+import { User } from '../../types/types'
+import { updateObjInArr } from '../../utils/object-helpers'
 
 import { InferAction, InferThunk } from '../store'
 

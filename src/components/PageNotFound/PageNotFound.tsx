@@ -1,6 +1,6 @@
-import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector'
-import { useSelector } from 'react-redux'
 import cn from 'classnames'
+import { useSelector } from 'react-redux'
+import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector'
 
 const PageNotFound = () => {
   const isSidebarHidden = useSelector(getIsSidebarHidden)

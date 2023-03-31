@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import cn from 'classnames'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getAlert } from '../../redux/app-reducer/app-selector'
-import cn from 'classnames'
 
 const Alert = () => {
   const [isShown, setIsShown] = useState(false)

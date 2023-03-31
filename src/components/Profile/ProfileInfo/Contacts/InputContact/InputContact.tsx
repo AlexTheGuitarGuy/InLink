@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-import { ContactProps } from '../Contacts'
 import FormInput from '../../../../common/Inputs/FormInput/FormInput'
+import { ContactProps } from '../Contacts'
 
 const InputContact: FC<ContactProps> = ({ contactName, error }) => {
   return (

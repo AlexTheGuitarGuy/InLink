@@ -1,14 +1,14 @@
-import React, { FC } from 'react'
-import BaseDialog from '../../../common/Dialogs/BaseDialog/BaseDialog'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
-import { InputProfileData } from '../../../../types/types'
-import FormInput from '../../../common/Inputs/FormInput/FormInput'
-import { uploadProfileInfo } from '../../../../redux/profile-reducer/profile-reducer'
-import JobInfo from '../JobInfo/JobInfo'
-import Contacts from '../Contacts/Contacts'
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
-import { getUserId } from '../../../../redux/profile-reducer/profile-selector'
+import { FC } from 'react'
 import * as Yup from 'yup'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
+import { uploadProfileInfo } from '../../../../redux/profile-reducer/profile-reducer'
+import { getUserId } from '../../../../redux/profile-reducer/profile-selector'
+import { InputProfileData } from '../../../../types/types'
+import BaseDialog from '../../../common/Dialogs/BaseDialog/BaseDialog'
+import FormInput from '../../../common/Inputs/FormInput/FormInput'
+import Contacts from '../Contacts/Contacts'
+import JobInfo from '../JobInfo/JobInfo'
 
 type EditProfileDialogProps = {
   profileData: InputProfileData

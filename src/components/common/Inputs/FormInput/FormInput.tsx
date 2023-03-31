@@ -1,6 +1,6 @@
+import cn from 'classnames'
 import { ErrorMessage, Field } from 'formik'
 import { FC } from 'react'
-import cn from 'classnames'
 
 type FormInputProps = {
   field: {

@@ -1,5 +1,4 @@
 import { ComponentStory } from '@storybook/react'
-import React from 'react'
 
 import ChatShortcut from '../components/Chat/ChatShortcut/ChatShortcut'
 import withThemes from '../HOC/withThemes'

@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
 import cn from 'classnames'
+import { FC } from 'react'
 
 export enum Dimensions {
   small = 'small',

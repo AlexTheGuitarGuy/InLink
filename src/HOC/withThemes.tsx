@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react'
+import { ComponentType } from 'react'
 import { useStickyState } from '../hooks/useStickyState'
 
 export enum Color {

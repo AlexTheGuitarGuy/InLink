@@ -1,5 +1,5 @@
-import profileReducer, { ProfileReducerState, profileActions } from './profile-reducer'
 import { v1 as uuidv1 } from 'uuid'
+import profileReducer, { profileActions, ProfileReducerState } from './profile-reducer'
 
 const state: ProfileReducerState = {
   posts: [

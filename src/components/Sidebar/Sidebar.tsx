@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 import { appActions } from '../../redux/app-reducer/app-reducer'
 import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector'

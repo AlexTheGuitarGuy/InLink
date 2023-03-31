@@ -1,9 +1,8 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
-import { getFrontPageFriends } from '../../../redux/users-reducer/users-selector'
 import Placeholder from '../../../assets/pfps/placeholder.jpg'
+import { getFrontPageFriends } from '../../../redux/users-reducer/users-selector'
 
 const FriendItems = () => {
   const friends = useSelector(getFrontPageFriends)

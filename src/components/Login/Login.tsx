@@ -1,15 +1,15 @@
-import React, { FC } from 'react'
-import { Navigate } from 'react-router-dom'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { FC } from 'react'
+import { Navigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { login } from '../../redux/auth-reducer/auth-reducer'
 import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-reducer/auth-selector'
-import { useAppSelector, useAppDispatch } from '../../hooks/reduxHooks'
 
 import { LoginPayload } from '../../types/types'
-import FormInput from '../common/Inputs/FormInput/FormInput'
 import PrimaryButton from '../common/Buttons/PrimaryButton/PrimaryButton'
+import FormInput from '../common/Inputs/FormInput/FormInput'
 
 const Login: FC<{}> = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn)

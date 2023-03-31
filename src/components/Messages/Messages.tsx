@@ -1,24 +1,24 @@
-import React, { ReactNode, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { Navigate } from 'react-router'
-import { compose } from 'redux'
+import { ReactNode, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router'
+import { Route, Routes } from 'react-router-dom'
+import { compose } from 'redux'
 
 import { getUserMessages } from '../../redux/dialogs-reducer/dialogs-selector'
-import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 import { getMyData } from '../../redux/profile-reducer/profile-selector'
+import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 
 import withAuthRedirect from '../../HOC/withAuthRedirect'
 import useScreenSize from '../../hooks/useScreenSize'
 
 import { UserMessage as UserMessageType } from '../../types/types'
 
-import UserMessage from '../common/Messages/UserMessage/UserMessage'
-import Users from './Users/Users'
-import MessageForm from './MessagesForm/MessagesForm'
-import Loading from '../common/Loading/Loading'
-import { dialogsActions } from '../../redux/dialogs-reducer/dialogs-reducer'
 import { useAppDispatch } from '../../hooks/reduxHooks'
+import { dialogsActions } from '../../redux/dialogs-reducer/dialogs-reducer'
+import Loading from '../common/Loading/Loading'
+import UserMessage from '../common/Messages/UserMessage/UserMessage'
+import MessageForm from './MessagesForm/MessagesForm'
+import Users from './Users/Users'
 
 const Messages = () => {
   const userMessages = useSelector(getUserMessages)

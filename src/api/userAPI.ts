@@ -1,5 +1,5 @@
-import { instance, CommonResponse, GetItemsResponse, ResultCodes } from './API'
 import { User } from '../types/types'
+import { CommonResponse, GetItemsResponse, instance, ResultCodes } from './API'
 
 export const userAPI = {
   getUsers: async (payload: string) => {

@@ -1,11 +1,11 @@
+import { LoginPayload } from '../types/types'
 import {
-  instance,
   CommonResponse,
   GetCaptchaURLResponse,
+  instance,
   ResultCodes,
   ResultCodesWithCaptcha,
 } from './API'
-import { LoginPayload } from '../types/types'
 
 export const securityAPI = {
   me: async () => {

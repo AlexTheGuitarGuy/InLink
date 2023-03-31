@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import cn from 'classnames'
+import { useEffect, useState } from 'react'
 import { useAppSelector } from '../../../hooks/reduxHooks'
 import { getStatus } from '../../../redux/chat-reducer/chat-selector'
-import cn from 'classnames'
 import Loading, { Dimensions } from '../../common/Loading/Loading'
 
 const ChatStatus = () => {

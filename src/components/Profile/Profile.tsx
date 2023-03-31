@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react'
-import { compose } from 'redux'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { compose } from 'redux'
 
-import { getProfilePage } from '../../redux/profile-reducer/profile-selector'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { getUID } from '../../redux/auth-reducer/auth-selector'
 import {
+  getIsCurrentUserFollowed,
   getProfile,
   getStatus,
-  getIsCurrentUserFollowed,
   profileActions,
 } from '../../redux/profile-reducer/profile-reducer'
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
+import { getProfilePage } from '../../redux/profile-reducer/profile-selector'
 
 import withAuthRedirect from '../../HOC/withAuthRedirect'
-import ProfileInfo from './ProfileInfo/ProfileInfo'
 import Loading from '../common/Loading/Loading'
 import Posts from './Posts/Posts'
+import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 const Profile = () => {
   const { profileData, myData } = useAppSelector(getProfilePage)

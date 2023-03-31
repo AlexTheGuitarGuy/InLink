@@ -1,13 +1,13 @@
-import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import { ThunkAction } from '@reduxjs/toolkit'
+import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
+import appReducer from './app-reducer/app-reducer'
+import authReducer from './auth-reducer/auth-reducer'
+import chatReducer from './chat-reducer/chat-reducer'
 import dialogsReducer from './dialogs-reducer/dialogs-reducer'
 import profileReducer from './profile-reducer/profile-reducer'
 import usersPageReducer from './users-reducer/users-reducer'
-import authReducer from './auth-reducer/auth-reducer'
-import appReducer from './app-reducer/app-reducer'
-import chatReducer from './chat-reducer/chat-reducer'
 
 const reducers = combineReducers({
   profilePage: profileReducer,

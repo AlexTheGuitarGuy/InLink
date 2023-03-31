@@ -1,10 +1,10 @@
 import { ChatBubble } from '@mui/icons-material'
 import { animated, useSpring } from 'react-spring'
 
-import useScreenSize from '../../../hooks/useScreenSize'
-import { useGesture } from 'react-use-gesture'
 import cn from 'classnames'
 import { FC, useState } from 'react'
+import { useGesture } from 'react-use-gesture'
+import useScreenSize from '../../../hooks/useScreenSize'
 
 type ChatShortcutProps = {
   onOpen: () => void

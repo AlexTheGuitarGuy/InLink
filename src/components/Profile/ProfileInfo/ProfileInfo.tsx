@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 
 import {
   followInProfile,
@@ -8,20 +8,20 @@ import {
 
 import placeholder from '../../../assets/pfps/placeholder.jpg'
 
-import { InputProfileData } from '../../../types/types'
 import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
+import { InputProfileData } from '../../../types/types'
 
-import Status from './Status/Status'
-import JobInfo from './JobInfo/JobInfo'
-import Contacts from './Contacts/Contacts'
-import FollowButton from '../../common/Buttons/FollowButton/FollowButton'
 import {
   getCurrentUserFollowed,
   getIsFollowingInProgress,
   getUserId,
 } from '../../../redux/profile-reducer/profile-selector'
-import EditProfileDialog from './EditProfileDialog/EditProfileDialog'
+import FollowButton from '../../common/Buttons/FollowButton/FollowButton'
 import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
+import Contacts from './Contacts/Contacts'
+import EditProfileDialog from './EditProfileDialog/EditProfileDialog'
+import JobInfo from './JobInfo/JobInfo'
+import Status from './Status/Status'
 
 export type ProfileInfoProps = {
   isOwner: boolean

@@ -1,11 +1,11 @@
-import { NavLink } from 'react-router-dom'
-import React, { LegacyRef, useState } from 'react'
-import cn from 'classnames'
 import { Menu } from '@mui/icons-material'
+import cn from 'classnames'
+import { LegacyRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
-import useTagBlur from '../../../hooks/useTagBlur'
 import { useLocation } from 'react-router'
 import useScreenSize from '../../../hooks/useScreenSize'
+import useTagBlur from '../../../hooks/useTagBlur'
 import { NavItem } from '../../../types/types'
 
 const Navbar = () => {

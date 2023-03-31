@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react'
 import cn from 'classnames'
+import { FC, useState } from 'react'
 
 type PaginatorProps = {
   totalElems: number

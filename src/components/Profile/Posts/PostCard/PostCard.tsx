@@ -1,12 +1,12 @@
-import { ThumbUpOffAlt, ThumbUpAlt } from '@mui/icons-material'
-import React, { FC, useState } from 'react'
+import { ThumbUpAlt, ThumbUpOffAlt } from '@mui/icons-material'
+import { FC, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { profileActions } from '../../../../redux/profile-reducer/profile-reducer'
 import { Post } from '../../../../types/types'
+import ConfirmDialog from '../../../common/Dialogs/ConfirmDialog/ConfirmDialog'
 import EditOptions from '../../../common/Dropdown/EditOptions/EditOptions'
 import EditText from '../../../common/Inputs/EditText/EditText'
-import ConfirmDialog from '../../../common/Dialogs/ConfirmDialog/ConfirmDialog'
 
 type PostCardProps = {
   postData: Post

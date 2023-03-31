@@ -1,14 +1,12 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import ProfileButton from './ProfileButton/ProfileButton'
-import Navbar from './Navbar/Navbar'
-import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { KeyboardBackspace } from '@mui/icons-material'
+import { useSelector } from 'react-redux'
+import { NavLink, useLocation } from 'react-router-dom'
+import Navbar from './Navbar/Navbar'
+import ProfileButton from './ProfileButton/ProfileButton'
 
-import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
-import useScreenSize from '../../hooks/useScreenSize'
 import Placeholder from '../../assets/pfps/placeholder.jpg'
+import useScreenSize from '../../hooks/useScreenSize'
+import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
 import ThemesMenu from './ThemesMenu/ThemesMenu'
 
 const Header = () => {

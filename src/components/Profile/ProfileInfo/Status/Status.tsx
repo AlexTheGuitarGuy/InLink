@@ -1,9 +1,9 @@
-import React, { useEffect, useState, ChangeEvent, FC } from 'react'
 import cn from 'classnames'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 
+import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
 import { updateStatus } from '../../../../redux/profile-reducer/profile-reducer'
 import { getStatus } from '../../../../redux/profile-reducer/profile-selector'
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
 import RegularInput from '../../../common/Inputs/RegularInput/RegularInput'
 
 type StatusProps = {

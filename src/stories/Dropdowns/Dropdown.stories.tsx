@@ -1,6 +1,5 @@
-import { ComponentMeta } from '@storybook/react'
 import { Delete, Edit } from '@mui/icons-material'
-import React from 'react'
+import { ComponentMeta } from '@storybook/react'
 
 import Dropdown, { DropdownProps } from '../../components/common/Dropdown/Dropdown'
 import DropdownItem from '../../components/common/Dropdown/DropdownItem/DropdownItem'

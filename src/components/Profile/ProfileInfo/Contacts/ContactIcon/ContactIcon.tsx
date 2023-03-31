@@ -1,8 +1,8 @@
-import { FC } from 'react'
 import { Facebook, GitHub, Instagram, Twitter, YouTube } from '@mui/icons-material'
+import { FC } from 'react'
 
-import { ContactProps } from '../Contacts'
 import VkIcon from '../../../../common/Icons/VkIcon/VkIcon'
+import { ContactProps } from '../Contacts'
 
 const ContactIcon: FC<ContactProps> = ({ contactName, contactAddress }) => {
   const iconsMap = {

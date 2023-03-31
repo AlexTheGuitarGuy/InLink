@@ -1,6 +1,6 @@
-import React, { ComponentType } from 'react'
-import { Navigate } from 'react-router-dom'
+import { ComponentType } from 'react'
 import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 import { getIsLoggedIn } from '../redux/auth-reducer/auth-selector'
 
 function withAuthRedirect<P extends Object>(Component: ComponentType<P>) {

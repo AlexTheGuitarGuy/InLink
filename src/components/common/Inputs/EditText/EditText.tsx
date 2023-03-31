@@ -1,7 +1,7 @@
-import RegularInput from '../RegularInput/RegularInput'
-import React, { ChangeEvent, FC, useState } from 'react'
 import { Clear, Done } from '@mui/icons-material'
 import cn from 'classnames'
+import { ChangeEvent, FC, useState } from 'react'
+import RegularInput from '../RegularInput/RegularInput'
 
 export enum EditTextButtonColor {
   neutral = 'neutral',

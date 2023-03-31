@@ -1,5 +1,5 @@
-import { FC, MouseEventHandler, ReactNode } from 'react'
 import cn from 'classnames'
+import { FC, MouseEventHandler, ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 
 export enum ButtonColor {

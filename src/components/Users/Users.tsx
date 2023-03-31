@@ -1,16 +1,16 @@
-import React, { useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
-import { getPageSize, getTotalUsers, getUsers } from '../../redux/users-reducer/users-selector'
 import { requestUsers, usersActions } from '../../redux/users-reducer/users-reducer'
+import { getPageSize, getTotalUsers, getUsers } from '../../redux/users-reducer/users-selector'
 
-import useScreenSize from '../../hooks/useScreenSize'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
+import useScreenSize from '../../hooks/useScreenSize'
 
-import UserItems from './UserItems/UserItems'
-import UsersSearch from './UsersSearch/UsersSearch'
-import Paginator from '../common/Paginator/Paginator'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import Loading from '../common/Loading/Loading'
+import Paginator from '../common/Paginator/Paginator'
+import UserItems from './UserItems/UserItems'
+import UsersSearch from './UsersSearch/UsersSearch'
 
 const Users = () => {
   const totalUsers = useAppSelector(getTotalUsers)

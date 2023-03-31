@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 
 import { useAppSelector } from '../../../hooks/reduxHooks'
-import { getChatOpen, getMessages } from '../../../redux/chat-reducer/chat-selector'
-import { getUID } from '../../../redux/auth-reducer/auth-selector'
 import useScreenSize from '../../../hooks/useScreenSize'
+import { getUID } from '../../../redux/auth-reducer/auth-selector'
+import { getChatOpen, getMessages } from '../../../redux/chat-reducer/chat-selector'
 import UserMessage from '../../common/Messages/UserMessage/UserMessage'
 
 const Messages = () => {

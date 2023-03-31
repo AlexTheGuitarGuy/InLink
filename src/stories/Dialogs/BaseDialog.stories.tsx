@@ -1,5 +1,4 @@
 import { ComponentMeta } from '@storybook/react'
-import React from 'react'
 import BaseDialog, { BaseDialogProps } from '../../components/common/Dialogs/BaseDialog/BaseDialog'
 
 export default {

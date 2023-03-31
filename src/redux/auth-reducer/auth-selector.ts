@@ -1,17 +1,17 @@
-import { RootState } from '../store';
+import { RootState } from '../store'
 
 export const getIsLoggedIn = (state: RootState) => {
-  return state.auth.isLoggedIn;
-};
+  return state.auth.isLoggedIn
+}
 
 export const getCaptchaURL = (state: RootState) => {
-  return state.auth.captchaURL;
-};
+  return state.auth.captchaURL
+}
 
 export const getLogin = (state: RootState) => {
-  return state.auth.login;
-};
+  return state.auth.login
+}
 
 export const getUID = (state: RootState) => {
-  return state.auth.id;
-};
+  return state.auth.id
+}
