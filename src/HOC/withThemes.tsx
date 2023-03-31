@@ -7,8 +7,8 @@ export enum Color {
   red = 'red',
 }
 export enum Mode {
-  light = 'light',
   dark = 'dark',
+  light = 'light',
 }
 
 function withThemes<P extends Object>(Component: ComponentType<P>) {

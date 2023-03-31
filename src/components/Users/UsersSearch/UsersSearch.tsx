@@ -15,8 +15,11 @@ const UsersSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const formRef = useRef<FormikProps<SearchFormValues>>(null)
 
+  let usersType = 'all'
+  if (searchParams.get('friend') === 'true') usersType = 'friends'
+  else if (searchParams.get('friend') === 'false') usersType = 'non-friends'
   const initialValues = {
-    usersType: 'all',
+    usersType,
     search: searchParams.get('term') || '',
   }
 
