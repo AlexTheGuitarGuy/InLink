@@ -44,8 +44,8 @@ const PostCard: FC<PostCardProps> = ({
       {/* Header */}
       <div
         className='order-1 p-4
-      border border-onPrimaryBg
-      bg-primaryBg
+      border border-onNeutralBg
+      bg-neutralBg
       rounded-tl rounded-tr
       flex justify-between'
       >
