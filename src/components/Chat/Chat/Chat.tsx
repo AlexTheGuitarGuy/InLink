@@ -39,7 +39,7 @@ const Chat = () => {
     >
       <ChatStatus />
       <div
-        className='w-[90vw]
+        className='w-[90vw] h-max 
       bg-neutralBg font-semibold
       overflow-y-scroll overflow-x-hidden
       px-8'

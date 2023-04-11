@@ -9,7 +9,7 @@ import dialogsReducer from './dialogs-reducer/dialogs-reducer'
 import profileReducer from './profile-reducer/profile-reducer'
 import usersPageReducer from './users-reducer/users-reducer'
 
-const reducers = combineReducers({
+export const rootReducer = combineReducers({
   profilePage: profileReducer,
   chat: chatReducer,
   dialogsPage: dialogsReducer,
@@ -21,7 +21,7 @@ const reducers = combineReducers({
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)))
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 // @ts-ignore
 window.__store__ = store

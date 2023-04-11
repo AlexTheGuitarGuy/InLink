@@ -11,7 +11,7 @@ import { getIsLoggedIn, getUID } from './redux/auth-reducer/auth-selector'
 import { getMyProfile } from './redux/profile-reducer/profile-reducer'
 
 import { compose } from 'redux'
-import Alert from './components/Alert/Alert'
+import AlertContainer from './components/Alert/AlertContainer'
 import ChatFunctionality from './components/Chat/ChatFunctionality'
 import Loading from './components/common/Loading/Loading'
 import Header from './components/Header/Header'
@@ -77,7 +77,7 @@ const App = () => {
           'ml-60': isLoggedIn && !isSidebarHidden,
         })}
       >
-        <Alert />
+        <AlertContainer />
         <div className='mt-14'>
           <Routes>
             <Route path='/' element={<Navigate to='/profile' />} />

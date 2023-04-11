@@ -32,7 +32,7 @@ const EditOptions: FC<EditOptionsProps> = ({
     <div className='relative font-normal' ref={menuRef as RefObject<HTMLDivElement>}>
       <button
         onClick={() => menuOpenHandler(!menuOpen)}
-        className='cursor-pointer hover:bg-onPrimaryBg rounded'
+        className='cursor-pointer hover:bg-neutralChild rounded'
       >
         <MoreVert />
       </button>
