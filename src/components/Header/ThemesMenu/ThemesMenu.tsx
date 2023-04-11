@@ -77,7 +77,12 @@ const ThemesMenu = () => {
         {anythingChanged && <small className='text-onPrimaryBg'>please reload the page</small>}
       </div>
 
-      <button onClick={() => setShowThemesMenu(!showThemesMenu)} className={cn('transition-all flex items-center justify-center', {'rotate-90': showThemesMenu})}>
+      <button
+        onClick={() => setShowThemesMenu(!showThemesMenu)}
+        className={cn('transition-all flex items-center justify-center', {
+          'rotate-90': showThemesMenu,
+        })}
+      >
         <Settings />
       </button>
     </>

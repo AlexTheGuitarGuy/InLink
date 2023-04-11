@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-const VkIcon: FC<any> = (props) => {
+const VkIcon: FC<{className: string}> = (props) => {
   return (
     <svg
       className='-mb-2'
