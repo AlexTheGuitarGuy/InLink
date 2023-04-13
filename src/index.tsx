@@ -4,14 +4,14 @@ import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
 import App from './App'
 import './index.css'
-import { store } from './redux/store'
+import { setupStore } from './redux/store'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <StrictMode>
     <HashRouter>
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <App />
       </Provider>
     </HashRouter>

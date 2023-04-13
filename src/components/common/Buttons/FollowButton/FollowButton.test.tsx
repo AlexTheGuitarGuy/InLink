@@ -1,9 +1,7 @@
-import { render } from '../../../../test-utils'
+import { authActions } from '../../../../redux/auth-reducer/auth-reducer'
+import { setupStore } from '../../../../redux/store'
+import { render, screen, userEvent } from '../../../../test-utils'
 import FollowButton from './FollowButton'
-
-jest.mock('../../../../hooks/reduxHooks.ts', () => ({
-  useAppSelector: jest.fn(),
-}))
 
 describe('FollowButton component', () => {
   const onFollowMock = jest.fn()
@@ -14,20 +12,10 @@ describe('FollowButton component', () => {
     jest.clearAllMocks()
   })
 
-  it('renders', () => {
-    render(
-      <FollowButton
-        id={1}
-        followed={false}
-        onFollow={onFollowMock}
-        onUnfollow={onUnfollowMock}
-        checkIsDisabled={checkIsDisabledMock}
-      />,
-    )
-  })
+  it('renders button with "Follow" text when followed prop is false', () => {
+    const store = setupStore()
+    store.dispatch(authActions.setData({ login: 'test1', email: 'test2', isLoggedIn: true, id: 2 }))
 
-  /* it('renders button with "Follow" text when followed prop is false', () => {
-    ;(useAppSelector as jest.Mock).mockReturnValue({ getUID: 2, getIsLoggedIn: true })
     render(
       <FollowButton
         id={1}
@@ -36,13 +24,18 @@ describe('FollowButton component', () => {
         onUnfollow={onUnfollowMock}
         checkIsDisabled={checkIsDisabledMock}
       />,
+      {
+        store,
+      },
     )
     const button = screen.getByRole('button', { name: /follow/i })
     expect(button).toBeInTheDocument()
   })
 
   it('renders button with "Unfollow" text when followed prop is true', () => {
-    ;(useAppSelector as jest.Mock).mockReturnValue({ getUID: 2, getIsLoggedIn: true })
+    const store = setupStore()
+    store.dispatch(authActions.setData({ login: 'test1', email: 'test2', isLoggedIn: true, id: 2 }))
+
     render(
       <FollowButton
         id={1}
@@ -51,6 +44,9 @@ describe('FollowButton component', () => {
         onUnfollow={onUnfollowMock}
         checkIsDisabled={checkIsDisabledMock}
       />,
+      {
+        store,
+      },
     )
 
     const button = screen.getByRole('button', { name: /unfollow/i })
@@ -58,7 +54,9 @@ describe('FollowButton component', () => {
   })
 
   it('calls onFollow prop when button is clicked and followed prop is false', () => {
-    ;(useAppSelector as jest.Mock).mockReturnValue({ getUID: 2, getIsLoggedIn: true })
+    const store = setupStore()
+    store.dispatch(authActions.setData({ login: 'test1', email: 'test2', isLoggedIn: true, id: 2 }))
+
     render(
       <FollowButton
         id={1}
@@ -67,6 +65,7 @@ describe('FollowButton component', () => {
         onUnfollow={onUnfollowMock}
         checkIsDisabled={checkIsDisabledMock}
       />,
+      { store },
     )
 
     const button = screen.getByRole('button', { name: /follow/i })
@@ -77,7 +76,9 @@ describe('FollowButton component', () => {
   })
 
   it('calls onUnfollow prop when button is clicked and followed prop is true', () => {
-    ;(useAppSelector as jest.Mock).mockReturnValue({ getUID: 2, getIsLoggedIn: true })
+    const store = setupStore()
+    store.dispatch(authActions.setData({ login: 'test1', email: 'test2', isLoggedIn: true, id: 2 }))
+
     render(
       <FollowButton
         id={1}
@@ -86,6 +87,7 @@ describe('FollowButton component', () => {
         onUnfollow={onUnfollowMock}
         checkIsDisabled={checkIsDisabledMock}
       />,
+      { store },
     )
 
     const button = screen.getByRole('button', { name: /unfollow/i })
@@ -96,7 +98,9 @@ describe('FollowButton component', () => {
   })
 
   it('disables button when checkIsDisabled returns true', () => {
-    ;(useAppSelector as jest.Mock).mockReturnValue({ getUID: 2, getIsLoggedIn: true })
+    const store = setupStore()
+    store.dispatch(authActions.setData({ login: 'test1', email: 'test2', isLoggedIn: true, id: 2 }))
+
     checkIsDisabledMock.mockReturnValue(true)
 
     render(
@@ -107,6 +111,7 @@ describe('FollowButton component', () => {
         onUnfollow={onUnfollowMock}
         checkIsDisabled={checkIsDisabledMock}
       />,
+      { store },
     )
 
     const button = screen.getByRole('button')
@@ -115,7 +120,8 @@ describe('FollowButton component', () => {
   })
 
   it('does not render button when id prop is equal to myUID', () => {
-    ;(useAppSelector as jest.Mock).mockReturnValue({ getUID: 1, getIsLoggedIn: true })
+    const store = setupStore()
+    store.dispatch(authActions.setData({ login: 'test1', email: 'test2', isLoggedIn: true, id: 1 }))
 
     render(
       <FollowButton
@@ -125,10 +131,29 @@ describe('FollowButton component', () => {
         onUnfollow={onUnfollowMock}
         checkIsDisabled={checkIsDisabledMock}
       />,
+      { store },
     )
 
-    const button = screen.getByRole('button', { name: /follow/i })
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
+  })
 
-    expect(button).not.toBeInTheDocument()
-  }) */
+  it('does not render button when is not logged in', () => {
+    const store = setupStore()
+    store.dispatch(
+      authActions.setData({ login: 'test1', email: 'test2', isLoggedIn: false, id: 2 }),
+    )
+
+    render(
+      <FollowButton
+        id={1}
+        followed={true}
+        onFollow={onFollowMock}
+        onUnfollow={onUnfollowMock}
+        checkIsDisabled={checkIsDisabledMock}
+      />,
+      { store },
+    )
+
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
+  })
 })
