@@ -16,7 +16,7 @@ import ChatFunctionality from './components/Chat/ChatFunctionality'
 import Loading from './components/common/Loading/Loading'
 import Header from './components/Header/Header'
 import Login from './components/Login/Login'
-import Messages from './components/Messages/Messages'
+import Chats from './components/Chats/Chats'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Profile from './components/Profile/Profile'
 import Sidebar from './components/Sidebar/Sidebar'
@@ -83,7 +83,7 @@ const App = () => {
             <Route path='/' element={<Navigate to='/profile' />} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
-            <Route path='/messages/*' element={<Messages />} />
+            <Route path='/messages/*' element={<Chats />} />
 
             <Route path='/login' element={<Login />} />
             <Route path='/login/facebook' element={<div>facebook</div>} />

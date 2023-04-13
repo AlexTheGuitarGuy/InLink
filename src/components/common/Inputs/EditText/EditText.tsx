@@ -1,7 +1,8 @@
 import { Clear, Done } from '@mui/icons-material'
 import cn from 'classnames'
-import { ChangeEvent, FC, useState } from 'react'
-import RegularInput from '../RegularInput/RegularInput'
+import { Form, Formik } from 'formik'
+import { ChangeEvent, FC, FormEvent, MouseEventHandler, useState } from 'react'
+import FormInput from '../FormInput/FormInput'
 
 export enum EditTextButtonColor {
   neutral = 'neutral',
@@ -39,31 +40,50 @@ const EditText: FC<EditTextProps> = ({
   }
 
   return (
-    <div>
-      <RegularInput
-        as='textarea'
-        field={{ placeholder: 'Edit post...', className: textAreaClassName }}
-        restProps={{
-          onChange: (event: ChangeEvent<HTMLTextAreaElement>) => {
-            setDynamicText(event.target.value)
-          },
-          value: dynamicText,
-        }}
-      />
-      <div className={cn('flex justify-end mt-2 bg-neutral', buttonsTextColor)}>
-        <Done
-          className={cn('cursor-pointer rounded', buttonsBackground)}
-          onClick={() => onDone(dynamicText)}
-        />
-        <Clear
-          className={cn('cursor-pointer rounded', buttonsBackground)}
-          onClick={() => {
-            setDynamicText(text)
-            onClear()
-          }}
-        />
-      </div>
-    </div>
+    <Formik initialValues={{ dynamicText }} onSubmit={() => {}}>
+      {({ handleSubmit, handleReset }) => (
+        <Form>
+          <FormInput
+            field={{
+              name: 'dynamicText',
+              placeholder: 'Edit post...',
+              className: textAreaClassName,
+              as: 'textarea',
+              restprops: {
+                onChange: (event: ChangeEvent<HTMLTextAreaElement>) => {
+                  setDynamicText(event.target.value)
+                },
+                value: dynamicText,
+              },
+            }}
+          />
+          <div className={cn('flex justify-end mt-2 bg-neutral', buttonsTextColor)}>
+            <button
+              type='submit'
+              className={cn('cursor-pointer rounded', buttonsBackground)}
+              onClick={() => {
+                handleSubmit()
+                onDone(dynamicText)
+              }}
+            >
+              <Done />
+            </button>
+
+            <button
+              type='reset'
+              className={cn('cursor-pointer rounded', buttonsBackground)}
+              onClick={(event) => {
+                handleReset(event)
+                setDynamicText(text)
+                onClear()
+              }}
+            >
+              <Clear />
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   )
 }
 

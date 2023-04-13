@@ -5,7 +5,7 @@ import { FC } from 'react'
 type FormInputProps = {
   field: {
     type?: string
-    name: string
+    name?: string
     placeholder?: string
     as?: 'input' | 'textarea'
     className?: string
@@ -32,14 +32,14 @@ const FormInput: FC<FormInputProps> = ({
   return (
     <span className='flex flex-col w-full'>
       {label && (
-        <label htmlFor={field.name} className={cn(label.className, { 'text-rose-800': isError })}>
+        <label htmlFor={field.name || ''} className={cn(label.className, { 'text-rose-800': isError })}>
           {label.text}
         </label>
       )}
       <Field
         {...field}
         {...field.restprops}
-        id={field.name}
+        id={field.name || ''}
         type={type}
         className={cn(
           `rounded 
@@ -61,7 +61,7 @@ const FormInput: FC<FormInputProps> = ({
       >
         {otherError?.text || (
           <ErrorMessage
-            name={field.name}
+            name={field.name || ''}
             {...error}
             component='div'
             className={cn(error?.className)}
