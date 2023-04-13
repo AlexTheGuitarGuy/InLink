@@ -1,7 +1,7 @@
 import { Clear, Done } from '@mui/icons-material'
 import cn from 'classnames'
 import { Form, Formik } from 'formik'
-import { ChangeEvent, FC, FormEvent, MouseEventHandler, useState } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 import FormInput from '../FormInput/FormInput'
 
 export enum EditTextButtonColor {
