@@ -4,7 +4,7 @@ import { useStickyState } from '../hooks/useStickyState'
 export enum Color {
   blue = 'blue',
   green = 'green',
-  red = 'red',
+  purple = 'purple',
 }
 export enum Mode {
   dark = 'dark',
