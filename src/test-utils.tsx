@@ -6,7 +6,7 @@ import store from './redux/store'
 
 const customRender = (ui: ReactElement, options = {}) =>
   render(ui, {
-    wrapper: ({ children }) => <Provider store={store}>children</Provider>,
+    wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     ...options,
   })
 

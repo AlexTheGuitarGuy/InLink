@@ -4,7 +4,7 @@ import { getIsLoggedIn, getUID } from '../../../../redux/auth-reducer/auth-selec
 import Loading, { Dimensions } from '../../Loading/Loading'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 
-type FollowButtonProps = {
+export type FollowButtonProps = {
   id: number
   followed: boolean
   onFollow: (id: number) => void
