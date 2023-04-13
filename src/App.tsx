@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useEffect } from 'react'
+import { useEffect} from 'react'
 import { Navigate } from 'react-router'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
@@ -58,9 +58,6 @@ const App = () => {
 
   if (!isAppInitialized) return <Loading />
 
-  useEffect(()=>{
-
-  })
   return (
     <div className='text-neutralFocus bg-appBg min-h-screen'>
       {isLoggedIn && (
