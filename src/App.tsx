@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
@@ -13,10 +13,10 @@ import { getMyProfile } from './redux/profile-reducer/profile-reducer'
 import { compose } from 'redux'
 import AlertContainer from './components/Alert/AlertContainer'
 import ChatFunctionality from './components/Chat/ChatFunctionality'
+import Chats from './components/Chats/Chats'
 import Loading from './components/common/Loading/Loading'
 import Header from './components/Header/Header'
 import Login from './components/Login/Login'
-import Chats from './components/Chats/Chats'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Profile from './components/Profile/Profile'
 import Sidebar from './components/Sidebar/Sidebar'
@@ -58,6 +58,8 @@ const App = () => {
 
   if (!isAppInitialized) return <Loading />
 
+  const [test, setTest] = useState(false)
+  useEffect(() => {})
   return (
     <div className='text-neutralFocus bg-appBg min-h-screen'>
       {isLoggedIn && (
