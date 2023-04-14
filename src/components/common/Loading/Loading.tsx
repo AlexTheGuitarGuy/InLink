@@ -2,30 +2,30 @@ import cn from 'classnames'
 import { FC } from 'react'
 
 export enum Dimensions {
-  small = 'small',
-  medium = 'medium',
-  large = 'large',
-  fullscreen = 'fullscreen',
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
+  FULLSCREEN = 'fullscreen',
 }
 
 type LoadingProps = {
   dimensions?: Dimensions
 }
-const Loading: FC<LoadingProps> = ({ dimensions = Dimensions.fullscreen }) => {
+const Loading: FC<LoadingProps> = ({ dimensions = Dimensions.FULLSCREEN }) => {
   return (
     <div
       className={cn('flex justify-center items-center', {
-        'h-screen xl:h-[92vh] lg:h-[88vh]': dimensions === Dimensions.fullscreen,
+        'h-screen xl:h-[92vh] lg:h-[88vh]': dimensions === Dimensions.FULLSCREEN,
       })}
     >
       <svg
         data-testid='spinner'
         aria-hidden='true'
         className={cn('animate-spin fill-primaryBg', {
-          'w-4 h-4': dimensions === Dimensions.small,
-          'w-8 h-8': dimensions === Dimensions.medium,
-          'w-12 h-12': dimensions === Dimensions.large,
-          'w-60 h-60': dimensions === Dimensions.fullscreen,
+          'w-4 h-4': dimensions === Dimensions.SMALL,
+          'w-8 h-8': dimensions === Dimensions.MEDIUM,
+          'w-12 h-12': dimensions === Dimensions.LARGE,
+          'w-60 h-60': dimensions === Dimensions.FULLSCREEN,
         })}
         viewBox='0 0 100 101'
         fill='none'

@@ -33,7 +33,7 @@ const Status: FC<StatusProps> = ({ isOwner }) => {
     <div className='inline transition-colors break-words xl:text-xl relative'>
       {isLoading && (
         <div className='absolute z-40 top-3 left-36 flex justify-center items-center'>
-          <Loading dimensions={Dimensions.small} />
+          <Loading dimensions={Dimensions.SMALL} />
         </div>
       )}
 

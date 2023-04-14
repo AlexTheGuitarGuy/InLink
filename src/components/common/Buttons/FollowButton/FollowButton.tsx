@@ -35,7 +35,7 @@ const FollowButton: FC<FollowButtonProps> = ({
                           py-2 sm:px-6
                           mb-4 lg:mb-0'
         >
-          {(checkIsDisabled(id) && <Loading dimensions={Dimensions.small} />) || <>{buttonText}</>}
+          {(checkIsDisabled(id) && <Loading dimensions={Dimensions.SMALL} />) || <>{buttonText}</>}
         </PrimaryButton>
       )}
     </>

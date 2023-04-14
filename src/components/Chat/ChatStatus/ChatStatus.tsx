@@ -41,7 +41,7 @@ const ChatStatus = () => {
       {isPending && (
         <div className='flex space-x-3'>
           <div>Connecting...</div>
-          <Loading dimensions={Dimensions.small} />
+          <Loading dimensions={Dimensions.SMALL} />
         </div>
       )}
       {isError && 'An error has occurred.'}
