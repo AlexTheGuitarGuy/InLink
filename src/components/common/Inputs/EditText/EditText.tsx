@@ -5,8 +5,8 @@ import { ChangeEvent, FC, useState } from 'react'
 import FormInput from '../FormInput/FormInput'
 
 export enum EditTextButtonColor {
-  neutral = 'neutral',
-  primary = 'primary',
+  NEUTRAL = 'neutral',
+  PRIMARY = 'primary',
 }
 
 export type EditTextProps = {
@@ -22,18 +22,18 @@ const EditText: FC<EditTextProps> = ({
   onDone,
   onClear,
   textAreaClassName,
-  buttonsColor = EditTextButtonColor.neutral,
+  buttonsColor = EditTextButtonColor.NEUTRAL,
 }) => {
   const [dynamicText, setDynamicText] = useState(text)
   let buttonsTextColor = ''
   let buttonsBackground = ''
 
   switch (buttonsColor) {
-    case EditTextButtonColor.neutral: {
+    case EditTextButtonColor.NEUTRAL: {
       buttonsBackground = 'hover:bg-neutralBg'
       break
     }
-    case EditTextButtonColor.primary: {
+    case EditTextButtonColor.PRIMARY: {
       buttonsBackground = 'hover:bg-primaryChild'
       break
     }

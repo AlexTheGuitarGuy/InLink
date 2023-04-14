@@ -1,12 +1,14 @@
 import { Delete, Edit } from '@mui/icons-material'
 import { ComponentMeta } from '@storybook/react'
 
-import Dropdown, { DropdownProps } from '../../components/common/Dropdown/Dropdown'
-import DropdownItem from '../../components/common/Dropdown/DropdownItem/DropdownItem'
+import BaseDropdown, {
+  BaseDropdownProps,
+} from '../../components/common/Dropdowns/BaseDropdown/BaseDropdown'
+import DropdownItem from '../../components/common/Dropdowns/BaseDropdown/DropdownItem/DropdownItem'
 
 export default {
   title: 'Dropdowns/Dropdown',
-  component: Dropdown,
+  component: BaseDropdown,
   argTypes: {
     open: {
       control: {
@@ -14,11 +16,11 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof Dropdown>
+} as ComponentMeta<typeof BaseDropdown>
 
-export const Default = ({ open, ...rest }: DropdownProps) => {
+export const Default = ({ open, ...rest }: BaseDropdownProps) => {
   return (
-    <Dropdown open={open} {...rest}>
+    <BaseDropdown open={open} {...rest}>
       <DropdownItem>test1</DropdownItem>
       <DropdownItem>test22222 222222 2222 2222</DropdownItem>
       <DropdownItem>test3 3333333333333333</DropdownItem>
@@ -26,7 +28,7 @@ export const Default = ({ open, ...rest }: DropdownProps) => {
       <DropdownItem>test55</DropdownItem>
       <DropdownItem icon={<Edit />}>Edit</DropdownItem>
       <DropdownItem icon={<Delete />}>Delete</DropdownItem>
-    </Dropdown>
+    </BaseDropdown>
   )
 }
 

@@ -19,6 +19,7 @@ const Loading: FC<LoadingProps> = ({ dimensions = Dimensions.fullscreen }) => {
       })}
     >
       <svg
+        data-testid='spinner'
         aria-hidden='true'
         className={cn('animate-spin fill-primaryBg', {
           'w-4 h-4': dimensions === Dimensions.small,

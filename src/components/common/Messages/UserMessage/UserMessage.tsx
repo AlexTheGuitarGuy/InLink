@@ -1,10 +1,10 @@
 import cn from 'classnames'
 import { FC, useState } from 'react'
-
 import { NavLink } from 'react-router-dom'
+
 import Placeholder from '../../../../assets/pfps/placeholder.jpg'
 import ConfirmDialog from '../../Dialogs/ConfirmDialog/ConfirmDialog'
-import EditOptions from '../../Dropdown/EditOptions/EditOptions'
+import EditOptions from '../../Dropdowns/EditOptions/EditOptions'
 import EditText, { EditTextButtonColor } from '../../Inputs/EditText/EditText'
 
 type UserMessageProps = {
@@ -135,7 +135,7 @@ const UserMessage: FC<UserMessageProps> = ({
                 setIsEditing(false)
               }}
               textAreaClassName='h-20 w-full bg-primaryBg'
-              buttonsColor={EditTextButtonColor.primary}
+              buttonsColor={EditTextButtonColor.PRIMARY}
             />
           ) : (
             <>{message}</>

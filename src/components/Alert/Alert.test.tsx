@@ -8,7 +8,7 @@ describe('Alert component', () => {
     message: 'Something went wrong',
   } as AlertType
 
-  test('renders alert with correct title and message', () => {
+  it('renders alert with correct title and message', () => {
     render(<Alert alert={alert} isShown={true} />)
     const alertBox = screen.getByRole('alert')
     const { getByText } = within(alertBox)
@@ -16,13 +16,13 @@ describe('Alert component', () => {
     expect(getByText(/Something went wrong/i)).toBeInTheDocument()
   })
 
-  test('does not render alert when isShown is false', () => {
+  it('does not render alert when isShown is false', () => {
     render(<Alert alert={alert} isShown={false} />)
     const alertBox = screen.getByRole('alert')
     expect(alertBox).toHaveClass('opacity-0')
   })
 
-  test('renders different styles for different alert types', () => {
+  it('renders different styles for different alert types', () => {
     render(<Alert alert={{ type: 'success', message: 'Operation successful' }} isShown={true} />)
     const successAlertBox = screen.getByRole('alert')
     expect(successAlertBox).toHaveClass('bg-primaryBg')
