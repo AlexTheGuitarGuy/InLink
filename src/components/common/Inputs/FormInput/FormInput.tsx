@@ -13,7 +13,7 @@ type FormInputProps = {
   }
   error?: {
     className?: string
-    isError: boolean
+    iserror: boolean
   }
   otherError?: { text?: string; className?: string }
   label?: {
@@ -28,7 +28,7 @@ const FormInput: FC<FormInputProps> = ({
   otherError,
   label,
 }) => {
-  const isError = error?.isError || otherError?.text
+  const isError = error?.iserror || otherError?.text
   return (
     <span className='flex flex-col w-full'>
       {label && (

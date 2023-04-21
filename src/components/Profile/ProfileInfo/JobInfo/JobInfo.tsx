@@ -44,7 +44,7 @@ const JobInfo: FC<JobInfoProps> = ({
           <div className='order-2 mt-2 text-center w-full'>
             {lookingForAJob && isEditMode ? (
               <FormInput
-                error={{ isError: !!isError }}
+                error={{ iserror: !!isError }}
                 field={{
                   name: 'lookingForAJobDescription',
                   placeholder: 'Please enter your skills...',

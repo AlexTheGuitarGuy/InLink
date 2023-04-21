@@ -77,7 +77,7 @@ const EditProfileDialog: FC<EditProfileDialogProps> = ({
               <div>
                 <FormInput
                   label={{ text: 'Name' }}
-                  error={{ isError: !!errors.fullName }}
+                  error={{ iserror: !!errors.fullName }}
                   field={{
                     type: 'text',
                     name: 'fullName',
