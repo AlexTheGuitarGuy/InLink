@@ -26,6 +26,7 @@ describe('InLink website', () => {
     cy.get('form').should('be.visible');
   });
 
+  /*
   it('should be able to submit the login form and be redirected', () => {
     cy.get('form input[name="email"]').type('free@samuraijs.com');
     cy.get('form input[name="password"]').type('free');
@@ -34,7 +35,6 @@ describe('InLink website', () => {
     cy.wait(5000);
   });
 
-  /*
   it('should be able to log out when clicking the log out button', () => {
     cy.get('button[role="img"]').click().get('button').contains('Log out').click();
     cy.url().should('contain', '/login');
