@@ -1,56 +1,111 @@
-export const Mock = () => <div>mock</div>
+import { fireEvent, render, screen } from '../../../test-utils'
+import Paginator from './Paginator'
 
-/*import Paginator from './Paginator';
+const totalElems = 1000
+const portionSize = 5
+const pageSize = 10
+const changePageMock = jest.fn()
+const page = 10
 
-const ReactTestRenderer = require('react-test-renderer');*/
+describe('Paginator component', () => {
+  it('should render the correct number of pages', () => {
+    render(
+      <Paginator
+        totalElems={totalElems}
+        portionSize={portionSize}
+        pageSize={pageSize}
+        changePage={changePageMock}
+        page={page}
+      />,
+    )
 
-/*describe('Paginator component', () => {
-  test('selected page has separate style', () => {
-    const component = ReactTestRenderer.create(
-      <Paginator totalElems={100} portionSize={10} pageSize={5} page={5} />,
-    ).root;
+    const pageButtons = screen.getAllByRole('button')
 
-    expect(() => component.findByProps({ className: 'chosenPage' })).not.toThrow();
-  });
+    expect(pageButtons.length).toBe(portionSize + 4) // "+ 4" for the "<", ">", "<<" and ">>" buttons
+  })
 
-  test('portion size is consistent and described in parameters', () => {
-    const component = ReactTestRenderer.create(
-      <Paginator totalElems={100} portionSize={10} pageSize={5} page={5} />,
-    ).root;
+  it('should call the "changePage" function when a page button is clicked', () => {
+    render(
+      <Paginator
+        totalElems={totalElems}
+        portionSize={portionSize}
+        pageSize={pageSize}
+        changePage={changePageMock}
+        page={page}
+      />,
+    )
 
-    expect(() => component.findByProps({ portionSize: 10 })).not.toThrow();
-  });
+    const pageButton = screen.getByText('8')
+    fireEvent.click(pageButton)
 
-  test('selected page is at beginning of portion if it is first', () => {
-    const component = ReactTestRenderer.create(
-      <Paginator totalElems={100} portionSize={10} pageSize={5} page={1} />,
-    ).root;
+    expect(changePageMock).toHaveBeenCalledWith(8)
+  })
 
-    expect(component.children[0].children[0].props.className).toBe('chosenPage');
-  });
+  it('should move one page to the left when the "<" button is clicked', () => {
+    render(
+      <Paginator
+        totalElems={totalElems}
+        portionSize={portionSize}
+        pageSize={pageSize}
+        changePage={changePageMock}
+        page={page}
+      />,
+    )
 
-  test(`selected page doesn't get in the middle until it passes halfway point in portion`, () => {
-    const component = ReactTestRenderer.create(
-      <Paginator totalElems={100} portionSize={10} pageSize={5} page={5} />,
-    ).root;
+    const moveLeftButton = screen.getByText('<')
+    fireEvent.click(moveLeftButton)
 
-    expect(component.children[0].children[6].props.className).toBe('chosenPage');
-  });
+    expect(changePageMock).toHaveBeenCalledWith(page - 1)
+  })
 
-  test(`selected page is in the middle when it isn't close to the extremes`, () => {
-    const component = ReactTestRenderer.create(
-      <Paginator totalElems={100} portionSize={10} pageSize={5} page={7} />,
-    ).root;
+  it('should move one page to the right when the ">" button is clicked', () => {
+    render(
+      <Paginator
+        totalElems={totalElems}
+        portionSize={portionSize}
+        pageSize={pageSize}
+        changePage={changePageMock}
+        page={page}
+      />,
+    )
 
-    expect(component.children[0].children[7].props.className).toBe('chosenPage');
-  });
+    const moveRightButton = screen.getByText('>')
+    fireEvent.click(moveRightButton)
 
-  test('selected page is at the end of portion if it is last', () => {
-    const component = ReactTestRenderer.create(
-      <Paginator totalElems={100} portionSize={10} pageSize={5} page={20} />,
-    ).root;
+    expect(changePageMock).toHaveBeenCalledWith(page + 1)
+  })
 
-    expect(component.children[0].children[11].props.className).toBe('chosenPage');
-  });
-});
-*/
+  it('should move to the beginning of the pagination when the "<<" button is clicked', () => {
+    render(
+      <Paginator
+        totalElems={totalElems}
+        portionSize={portionSize}
+        pageSize={pageSize}
+        changePage={changePageMock}
+        page={page}
+      />,
+    )
+
+    const moveToBeginningButton = screen.getByText('<<')
+    fireEvent.click(moveToBeginningButton)
+
+    expect(changePageMock).toHaveBeenCalledWith(1)
+  })
+
+  it('should move to the end of the pagination when the ">>" button is clicked', () => {
+    render(
+      <Paginator
+        totalElems={totalElems}
+        portionSize={portionSize}
+        pageSize={pageSize}
+        changePage={changePageMock}
+        page={page}
+      />,
+    )
+
+    const moveToEndButton = screen.getByText('>>')
+    fireEvent.click(moveToEndButton)
+
+    expect(changePageMock).toHaveBeenCalledWith(Math.ceil(totalElems / pageSize))
+  })
+})

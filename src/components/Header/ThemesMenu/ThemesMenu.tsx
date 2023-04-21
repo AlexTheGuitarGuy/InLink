@@ -51,7 +51,7 @@ const ThemesMenu = () => {
             >
               <div
                 className={cn(`w-8 h-8 rounded-full`, {
-                  'bg-red-500': colorItem === 'red',
+                  'bg-purple-500': colorItem === 'purple',
                   'bg-green-500': colorItem === 'green',
                   'bg-blue-500': colorItem === 'blue',
                 })}
@@ -77,7 +77,12 @@ const ThemesMenu = () => {
         {anythingChanged && <small className='text-onPrimaryBg'>please reload the page</small>}
       </div>
 
-      <button onClick={() => setShowThemesMenu(!showThemesMenu)}>
+      <button
+        onClick={() => setShowThemesMenu(!showThemesMenu)}
+        className={cn('transition-all flex items-center justify-center', {
+          'rotate-90': showThemesMenu,
+        })}
+      >
         <Settings />
       </button>
     </>

@@ -37,7 +37,7 @@ const ChatShortcut: FC<ChatShortcutProps> = ({ onOpen }) => {
         let newX: number
         let newY = y.get()
         if (y.get() < 0) newY = 0
-        else if (y.get() > screenSize.dynamicHeight - 150) newY = screenSize.dynamicHeight - 150
+        else if (y.get() > screenSize.dynamicHeight - 100) newY = screenSize.dynamicHeight - 100
 
         if (x.get() < screenSize.dynamicWidth / 2) newX = 0
         else newX = startWidth
@@ -45,7 +45,6 @@ const ChatShortcut: FC<ChatShortcutProps> = ({ onOpen }) => {
         api.start({ x: newX, y: newY })
       },
       onClick: () => {
-        api.start({ x: startWidth, y: startHeight })
         onOpen && onOpen()
       },
     },

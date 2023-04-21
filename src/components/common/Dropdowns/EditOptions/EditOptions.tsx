@@ -2,8 +2,8 @@ import { Delete, Edit, MoreVert } from '@mui/icons-material'
 import { FC, RefObject, useState } from 'react'
 
 import useTagBlur from '../../../../hooks/useTagBlur'
-import Dropdown from '../Dropdown'
-import DropdownItem from '../DropdownItem/DropdownItem'
+import BaseDropdown from '../BaseDropdown/BaseDropdown'
+import DropdownItem from '../BaseDropdown/DropdownItem/DropdownItem'
 
 export type EditOptionsProps = {
   onEdit: () => void
@@ -32,11 +32,12 @@ const EditOptions: FC<EditOptionsProps> = ({
     <div className='relative font-normal' ref={menuRef as RefObject<HTMLDivElement>}>
       <button
         onClick={() => menuOpenHandler(!menuOpen)}
-        className='cursor-pointer hover:bg-onPrimaryBg rounded'
+        className='cursor-pointer hover:bg-neutralChild rounded'
+        aria-label='More Options'
       >
         <MoreVert />
       </button>
-      <Dropdown open={menuOpen} absolutePosition={absolutePosition}>
+      <BaseDropdown open={menuOpen} absolutePosition={absolutePosition} >
         {canEdit && (
           <DropdownItem icon={<Edit />} onClick={onEdit} setMenuOpen={menuOpenHandler}>
             Edit
@@ -45,7 +46,7 @@ const EditOptions: FC<EditOptionsProps> = ({
         <DropdownItem icon={<Delete />} onClick={onDelete} setMenuOpen={menuOpenHandler}>
           Delete
         </DropdownItem>
-      </Dropdown>
+      </BaseDropdown>
     </div>
   )
 }

@@ -2,15 +2,16 @@ import cn from 'classnames'
 import { FC, ReactNode } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 
-export type DropdownProps = {
+export type BaseDropdownProps = {
   open: boolean
   children: ReactNode[]
   absolutePosition?: string
 }
 
-const Dropdown: FC<DropdownProps> = ({ open, children, absolutePosition = 'right-0' }) => {
+const BaseDropdown: FC<BaseDropdownProps> = ({ open, children, absolutePosition = 'right-0' }) => {
   return (
     <div
+      role='list'
       className={cn(
         'z-40 absolute shadow-md flex flex-col bg-neutralBg py-1 -mt-2 rounded w-fit transition-all duration-75',
         {
@@ -27,4 +28,4 @@ const Dropdown: FC<DropdownProps> = ({ open, children, absolutePosition = 'right
   )
 }
 
-export default Dropdown
+export default BaseDropdown

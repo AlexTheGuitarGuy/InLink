@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { profileActions } from '../../../../redux/profile-reducer/profile-reducer'
 import { Post } from '../../../../types/types'
 import ConfirmDialog from '../../../common/Dialogs/ConfirmDialog/ConfirmDialog'
-import EditOptions from '../../../common/Dropdown/EditOptions/EditOptions'
+import EditOptions from '../../../common/Dropdowns/EditOptions/EditOptions'
 import EditText from '../../../common/Inputs/EditText/EditText'
 
 type PostCardProps = {

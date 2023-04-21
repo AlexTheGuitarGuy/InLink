@@ -38,7 +38,7 @@ const PublishPost = () => {
       {({ isSubmitting, isValid }: FormikProps<PostFormValues>) => (
         <Form>
           <FormInput
-            error={{ isError: !isValid }}
+            error={{ iserror: !isValid }}
             label={{ text: 'New Post', className: 'lg:text-lg xl:text-2xl xl:mb-2' }}
             field={{
               as: 'textarea',

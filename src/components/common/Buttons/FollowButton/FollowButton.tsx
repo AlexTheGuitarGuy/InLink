@@ -4,7 +4,7 @@ import { getIsLoggedIn, getUID } from '../../../../redux/auth-reducer/auth-selec
 import Loading, { Dimensions } from '../../Loading/Loading'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 
-type FollowButtonProps = {
+export type FollowButtonProps = {
   id: number
   followed: boolean
   onFollow: (id: number) => void
@@ -35,7 +35,7 @@ const FollowButton: FC<FollowButtonProps> = ({
                           py-2 sm:px-6
                           mb-4 lg:mb-0'
         >
-          {(checkIsDisabled(id) && <Loading dimensions={Dimensions.small} />) || <>{buttonText}</>}
+          {(checkIsDisabled(id) && <Loading dimensions={Dimensions.SMALL} />) || <>{buttonText}</>}
         </PrimaryButton>
       )}
     </>

@@ -50,7 +50,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
         <Form>
           <div className='flex flex-row justify-center'>
             <FormInput
-              error={{ isError: !isValid }}
+              error={{ iserror: !isValid }}
               field={{
                 as: 'textarea',
                 name: 'messageText',

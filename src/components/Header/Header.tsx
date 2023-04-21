@@ -49,6 +49,7 @@ const Header = () => {
           <div className='text-md mt-2 ml-2'>{currentDialogUser.name}</div>
         </div>
         <div
+          role='navigation'
           className='order-3
         lg:text-4xl sm:text-2xl font-semibold
         hover:opacity-90 active:opacity-70
@@ -78,6 +79,7 @@ const Header = () => {
       </div>
 
       <div
+        role='navigation'
         className='lg:order-1 sm:order-2
         lg:text-4xl sm:text-2xl font-semibold
         hover:opacity-90 active:opacity-70

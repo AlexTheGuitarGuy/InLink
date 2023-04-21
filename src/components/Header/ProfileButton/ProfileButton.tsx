@@ -34,7 +34,7 @@ const ProfileButton = () => {
     <div className='flex flex-col'>
       {isLoggedIn ? (
         <>
-          <button onClick={() => setShowProfileData(!showProfileData)} className='rounded-full'>
+          <button role='img' onClick={() => setShowProfileData(!showProfileData)} className='rounded-full'>
             <img
               src={myData?.photos?.small || placeholder}
               alt='pfp'

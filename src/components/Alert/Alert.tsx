@@ -1,24 +1,14 @@
 import cn from 'classnames'
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { getAlert } from '../../redux/app-reducer/app-selector'
+import { FC } from 'react'
+import { Alert as AlertType } from '../../types/types'
 
-const Alert = () => {
-  const [isShown, setIsShown] = useState(false)
+type AlertProps = {
+  alert: AlertType
+  isShown: boolean
+}
 
-  const alert = useSelector(getAlert)
+const Alert: FC<AlertProps> = ({ alert, isShown }) => {
   const { type, message } = alert
-
-  useEffect(() => {
-    message && setIsShown(true)
-  }, [alert, message])
-
-  useEffect(() => {
-    const timeOut = setTimeout(() => setIsShown(false), 3000)
-    return () => {
-      clearTimeout(timeOut)
-    }
-  }, [alert])
 
   let alertTitle
   switch (type) {
@@ -40,8 +30,8 @@ const Alert = () => {
           rounded
           transition-opacity
           absolute`,
-          { 'bg-red-100 border border-red-400 text-red-700': type === 'error' },
-          { 'bg-primaryBg border border-onPrimaryBg text-primaryFocus': type === 'success' },
+          { 'bg-rose-100 border border-rose-400 text-rose-700': type === 'error' },
+          { 'bg-primaryBg border border-onPrimaryBg': type === 'success' },
           { 'bg-yellow-100 border border-yellow-400 text-yellow-700': type === 'alert' },
           { 'opacity-100': isShown },
           { 'opacity-0 pointer-events-none': !isShown },

@@ -11,12 +11,12 @@ import { getIsLoggedIn, getUID } from './redux/auth-reducer/auth-selector'
 import { getMyProfile } from './redux/profile-reducer/profile-reducer'
 
 import { compose } from 'redux'
-import Alert from './components/Alert/Alert'
+import AlertContainer from './components/Alert/AlertContainer'
 import ChatFunctionality from './components/Chat/ChatFunctionality'
+import Chats from './components/Chats/Chats'
 import Loading from './components/common/Loading/Loading'
 import Header from './components/Header/Header'
 import Login from './components/Login/Login'
-import Messages from './components/Messages/Messages'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Profile from './components/Profile/Profile'
 import Sidebar from './components/Sidebar/Sidebar'
@@ -77,13 +77,13 @@ const App = () => {
           'ml-60': isLoggedIn && !isSidebarHidden,
         })}
       >
-        <Alert />
+        <AlertContainer />
         <div className='mt-14'>
           <Routes>
             <Route path='/' element={<Navigate to='/profile' />} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
-            <Route path='/messages/*' element={<Messages />} />
+            <Route path='/messages/*' element={<Chats />} />
 
             <Route path='/login' element={<Login />} />
             <Route path='/login/facebook' element={<div>facebook</div>} />

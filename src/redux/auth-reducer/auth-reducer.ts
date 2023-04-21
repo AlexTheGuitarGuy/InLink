@@ -38,7 +38,7 @@ type SetDataPayload = {
   isLoggedIn: boolean
 }
 
-const authActions = {
+export const authActions = {
   setData: ({ id, login, email, isLoggedIn }: SetDataPayload) =>
     ({
       type: 'IN_LINK/AUTH_REDUCER/SET_DATA',

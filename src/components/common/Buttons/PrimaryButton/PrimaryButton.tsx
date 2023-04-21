@@ -56,11 +56,12 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
         <button
           className={cn(
             `font-semibold
-	                    rounded
-	                    active:ring-1
-	                    shadow-md 
-	                    focus:outline-none focus:ring-0
-                        duration-150 ease-in-out transition-all`,
+              text-gray-200
+              rounded
+              active:ring-1
+              shadow-md 
+              focus:outline-none focus:ring-0
+                duration-150 ease-in-out transition-all`,
             {
               'hover:shadow-xl active:shadow-none ease-in-out': !disabled,
               [regularBackground]: regularBackground,

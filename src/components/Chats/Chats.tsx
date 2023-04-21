@@ -20,7 +20,7 @@ import UserMessage from '../common/Messages/UserMessage/UserMessage'
 import MessageForm from './MessagesForm/MessagesForm'
 import Users from './Users/Users'
 
-const Messages = () => {
+const Chats = () => {
   const userMessages = useSelector(getUserMessages)
   const users = useSelector(getFrontPageFriends)
   const myData = useSelector(getMyData)
@@ -74,7 +74,7 @@ const Messages = () => {
         element={
           <div className='flex flex-col h-full w-full relative'>
             <div className='space-y-1 h-[78vh] mt-4 mx-8 overflow-x-hidden'>
-              {conversationComponents[index]}
+              {conversationComponent}
             </div>
             <div
               className='fixed bottom-0 lg:w-3/5 sm:w-full self-center
@@ -104,4 +104,4 @@ const Messages = () => {
   )
 }
 
-export default compose(withAuthRedirect)(Messages)
+export default compose(withAuthRedirect)(Chats)

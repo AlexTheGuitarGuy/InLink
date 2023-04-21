@@ -43,7 +43,7 @@ const Login: FC<{}> = () => {
   }
 
   return (
-    <section className='h-screen relative'>
+    <section className='relative'>
       <div className='px-6 py-12 h-full'>
         <div className='flex justify-center items-center flex-wrap h-full'>
           <div className='sm:w-8/12 lg:w-6/12 mb-12 sm:mb-0'>
@@ -66,7 +66,7 @@ const Login: FC<{}> = () => {
                   <>
                     <div className='mb-6'>
                       <FormInput
-                        error={{ isError: !isValid }}
+                        error={{ iserror: !isValid }}
                         field={{
                           type: 'email',
                           name: 'email',
@@ -78,7 +78,7 @@ const Login: FC<{}> = () => {
 
                     <div className='mb-6'>
                       <FormInput
-                        error={{ isError: !isValid }}
+                        error={{ iserror: !isValid }}
                         field={{
                           type: 'password',
                           name: 'password',
@@ -125,7 +125,7 @@ const Login: FC<{}> = () => {
                           <img src={captchaURL} alt='captcha' className='mb-4 w-full' />
 
                           <FormInput
-                            error={{ isError: !isValid }}
+                            error={{ iserror: !isValid }}
                             field={{
                               type: 'text',
                               name: 'captcha',

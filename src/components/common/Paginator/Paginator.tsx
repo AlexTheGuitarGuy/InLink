@@ -13,7 +13,7 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
   const pagesNb = Math.ceil(totalElems / pageSize)
   const halfwayPoint = page - Math.floor(portionSize / 2)
 
-  const calcPagesBeginning = () => {
+  const calculatePagesBeginning = () => {
     if (halfwayPoint > 1) {
       if (halfwayPoint > pagesNb - portionSize) return pagesNb - portionSize + 1
       return halfwayPoint
@@ -22,7 +22,7 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
     return 1
   }
 
-  const [currentPagesBeginning, setCurrentPages] = useState(calcPagesBeginning())
+  const [currentPagesBeginning, setCurrentPages] = useState(calculatePagesBeginning())
 
   const changeOnClick = (page: number) => {
     const portionBeginning = page - Math.floor(portionSize / 2)
@@ -34,11 +34,11 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
   let mappedPages = []
   for (let i = 1; i <= pagesNb; i++) {
     mappedPages[i] = (
-      <span
+      <button
         key={i}
         onClick={() => changeOnClick(i)}
         className={cn(
-          `mx-1 cursor-pointer transition-colors 
+          `mx-1 transition-colors 
           p-0.5
           border-b-2`,
           {
@@ -48,7 +48,7 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
         )}
       >
         {`${i} `}
-      </span>
+      </button>
     )
   }
 
@@ -58,7 +58,7 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
   }
 
   const moveToExtreme = (pagesBeginning: number, page: number, symbol: string) => (
-    <span
+    <button
       onClick={() => {
         setCurrentPages(pagesBeginning)
         changePage(page)
@@ -67,20 +67,20 @@ const Paginator: FC<PaginatorProps> = ({ totalElems, portionSize, pageSize, chan
           border-b-2 border-transparent hover:border-onPrimaryBg p-0.5'
     >
       {symbol}
-    </span>
+    </button>
   )
 
   const firstPage = moveToExtreme(1, 1, '<< ')
   const lastPage = moveToExtreme(pagesNb - portionSize + 1, pagesNb, ' >>')
 
   const moveOnePage = (page: number, symbol: string) => (
-    <span
+  <button
       onClick={() => changeOnClick(page)}
       className='mx-1 cursor-pointer transition-colors
           border-b-2 border-transparent hover:border-onPrimaryBg p-0.5'
     >
       {symbol}
-    </span>
+    </button>
   )
 
   const moveLeft = moveOnePage(page - 1, '< ')

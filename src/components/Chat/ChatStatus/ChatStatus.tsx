@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
+import { Status } from '../../../api/chatAPI'
 import { useAppSelector } from '../../../hooks/reduxHooks'
 import { getStatus } from '../../../redux/chat-reducer/chat-selector'
 import Loading, { Dimensions } from '../../common/Loading/Loading'
@@ -16,9 +17,9 @@ const ChatStatus = () => {
     }
   }, [status])
 
-  const isReady = status === 'ready'
-  const isPending = status === 'pending'
-  const isError = status === 'error'
+  const isReady = status === Status.READY
+  const isPending = status === Status.PENDING
+  const isError = status === Status.ERROR
 
   if (isReady && !showSuccess) return <></>
 
@@ -39,8 +40,8 @@ const ChatStatus = () => {
       {isReady && 'Connected.'}
       {isPending && (
         <div className='flex space-x-3'>
-          <Loading dimensions={Dimensions.small} />
           <div>Connecting...</div>
+          <Loading dimensions={Dimensions.SMALL} />
         </div>
       )}
       {isError && 'An error has occurred.'}

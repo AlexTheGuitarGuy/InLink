@@ -31,8 +31,9 @@ export type GetProfileResponse = {
   userId: number
 } & InputProfileData
 
+export const baseURL = 'https://social-network.samuraijs.com/api/1.0/'
 export const instance = axios.default.create({
-  baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+  baseURL: baseURL,
   withCredentials: true,
   headers: {
     'API-KEY': 'b27ac241-a89b-4b50-8a5d-bba60c6cfbd1',

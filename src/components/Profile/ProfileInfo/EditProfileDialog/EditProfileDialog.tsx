@@ -51,8 +51,8 @@ const EditProfileDialog: FC<EditProfileDialogProps> = ({
     values: InputProfileData,
     { setStatus, setSubmitting, resetForm }: FormikHelpers<InputProfileData>,
   ) => {
-    dispatch(uploadProfileInfo(values, setStatus)).then(({ success }: { success: boolean }) => {
-      if (success) {
+    dispatch(uploadProfileInfo(values, setStatus)).then((result) => {
+      if (result?.success) {
         resetForm({ values: initialValues })
         onClose()
       }
@@ -77,7 +77,7 @@ const EditProfileDialog: FC<EditProfileDialogProps> = ({
               <div>
                 <FormInput
                   label={{ text: 'Name' }}
-                  error={{ isError: !!errors.fullName }}
+                  error={{ iserror: !!errors.fullName }}
                   field={{
                     type: 'text',
                     name: 'fullName',
