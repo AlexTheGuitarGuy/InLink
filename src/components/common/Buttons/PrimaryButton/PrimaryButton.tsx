@@ -80,6 +80,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
         <NavLink
           className={cn(
             `font-semibold
+                      text-gray-200
 	                    rounded
 	                    active:ring-1
 	                    shadow-md 

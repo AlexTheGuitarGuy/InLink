@@ -105,7 +105,7 @@ const UserMessage: FC<UserMessageProps> = ({
         <div
           className={cn('px-4 py-1 font-medium break-words', {
             'order-2 bg-neutralChild rounded-r-3xl': !isFromMe,
-            'order-1 bg-primaryBg rounded-l-3xl': isFromMe,
+            'order-1 bg-primaryBg rounded-l-3xl text-gray-100': isFromMe,
             'opacity-50': isPending,
 
             'rounded-tl-3xl': !isFromMe && (isFirst || !isPreviousFromSameUser),
