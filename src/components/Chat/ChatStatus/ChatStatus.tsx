@@ -28,11 +28,12 @@ const ChatStatus = () => {
       className={cn(
         `w-fit
               absolute right-4 top-16
+              text-gray-100
               p-2 my-2
               font-normal
               rounded border
               z-50`,
-        { 'bg-primaryBg border-onPrimaryBg': isReady },
+        { 'bg-onPrimaryBg border-onPrimaryBg': isReady },
         { 'bg-yellow-100 border-yellow-200': isPending },
         { 'bg-red-100 border-red-200': isError },
       )}
