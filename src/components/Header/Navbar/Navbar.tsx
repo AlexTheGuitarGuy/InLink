@@ -3,17 +3,16 @@ import cn from 'classnames'
 import { LegacyRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
 import useScreenSize from '../../../hooks/useScreenSize'
 import useTagBlur from '../../../hooks/useTagBlur'
-import { NavItem } from '../../../types/types'
 
 const Navbar = () => {
-  const navItems: NavItem[] = [
+  const navItems = [
     { to: '/profile', name: 'Profile' },
     { to: '/messages', name: 'Messages' },
     { to: '/users', name: 'Users' },
-  ]
+  ] as const
   const [shouldShowMenu, setShouldShowMenu] = useState(false)
 
   const menuRef = useTagBlur(shouldShowMenu, setShouldShowMenu)
@@ -21,7 +20,7 @@ const Navbar = () => {
 
   const location = useLocation()
 
-  let navElements = navItems.map((navItem: NavItem) => {
+  let navElements = navItems.map((navItem) => {
     let isActive = false
     if (location.pathname.match(navItem.to)) isActive = true
     return (
