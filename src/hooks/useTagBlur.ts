@@ -1,10 +1,13 @@
 import { useEffect, useRef } from 'react'
 
-const useTagBlur = (flag: boolean, setFlag: (newFlag: boolean) => void) => {
-  const ref = useRef<HTMLElement>(null)
+const useTagBlur = <TRef extends HTMLElement = HTMLElement>(
+  flag: boolean,
+  setFlag: (newFlag: boolean) => void,
+) => {
+  const ref = useRef<TRef>(null)
   useEffect(() => {
-    function handleClickOutside(event: any) {
-      if (ref.current && !ref.current.contains(event.target) && flag) {
+    function handleClickOutside(event: MouseEvent) {
+      if (ref.current && !ref.current.contains(event.target as Node) && flag) {
         setFlag(false)
       }
     }

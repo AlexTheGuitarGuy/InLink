@@ -21,7 +21,7 @@ const ThemesMenu = () => {
     setAnythingChanged(true)
   }
 
-  const ref = useTagBlur(showThemesMenu, setShowThemesMenu)
+  const ref = useTagBlur<HTMLDivElement>(showThemesMenu, setShowThemesMenu)
   return (
     <>
       <div
@@ -34,7 +34,7 @@ const ThemesMenu = () => {
             'opacity-0 pointer-events-none': !showThemesMenu,
           },
         )}
-        ref={ref as any}
+        ref={ref}
       >
         <span>Themes</span>
         <div className='flex'>

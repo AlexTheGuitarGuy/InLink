@@ -2,14 +2,14 @@ import cn from 'classnames'
 import { ErrorMessage, Field } from 'formik'
 import { FC } from 'react'
 
-type FormInputProps = {
+type FormInputProps<TRestProps extends object = object> = {
   field: {
     type?: string
     name?: string
     placeholder?: string
     as?: 'input' | 'textarea'
     className?: string
-    restprops?: any
+    restprops?: TRestProps
   }
   error?: {
     className?: string
@@ -32,7 +32,10 @@ const FormInput: FC<FormInputProps> = ({
   return (
     <span className='flex flex-col w-full'>
       {label && (
-        <label htmlFor={field.name || ''} className={cn(label.className, { 'text-rose-800': isError })}>
+        <label
+          htmlFor={field.name || ''}
+          className={cn(label.className, { 'text-rose-800': isError })}
+        >
           {label.text}
         </label>
       )}

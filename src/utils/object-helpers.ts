@@ -1,10 +1,10 @@
 import { EnumObject } from '../types/types'
 
-export function updateObjInArr<T, P>(
-  arr: T[],
-  idLabel: keyof T,
+export function updateObjInArr<TArray, TNewData>(
+  arr: TArray[],
+  idLabel: keyof TArray,
   replaceId: number | string,
-  newData: P,
+  newData: TNewData,
 ) {
   return arr.map((element) => {
     if (element[idLabel] === replaceId) return { ...element, ...newData }
@@ -13,5 +13,5 @@ export function updateObjInArr<T, P>(
 }
 
 export function getEnumValues(enumObject: EnumObject): string[] {
-  return Object.keys(enumObject).map((enumValue: any) => enumObject[enumValue])
+  return Object.keys(enumObject).map((enumValue: keyof EnumObject) => enumObject[enumValue])
 }

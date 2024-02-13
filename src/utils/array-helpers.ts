@@ -1,5 +1,5 @@
 export const swapElements = (
-  array: any[],
+  array: unknown[],
   firstElementIndex: number,
   secondElementIndex: number,
 ) => {
