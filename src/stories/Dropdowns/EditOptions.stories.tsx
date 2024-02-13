@@ -1,10 +1,10 @@
-import { ComponentMeta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import EditOptions from '../../components/common/Dropdowns/EditOptions/EditOptions'
 
 export default {
   title: 'Dropdowns/EditOptions',
   component: EditOptions,
-} as ComponentMeta<typeof EditOptions>
+} as Meta<typeof EditOptions>
 
 export const Default = () => {
   return (

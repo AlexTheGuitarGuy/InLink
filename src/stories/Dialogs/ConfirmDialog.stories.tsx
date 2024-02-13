@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import ConfirmDialog, {
   ConfirmDialogProps,
 } from '../../components/common/Dialogs/ConfirmDialog/ConfirmDialog'
@@ -6,7 +6,7 @@ import ConfirmDialog, {
 export default {
   title: 'Dialogs/ConfirmDialog',
   component: ConfirmDialog,
-} as ComponentMeta<typeof ConfirmDialog>
+} as Meta<typeof ConfirmDialog>
 
 export const Default = ({ name, confirmText, isShown }: ConfirmDialogProps) => {
   return (

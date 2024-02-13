@@ -1,5 +1,5 @@
 import { Delete, Edit } from '@mui/icons-material'
-import { ComponentMeta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import BaseDropdown, {
   BaseDropdownProps,
@@ -16,7 +16,7 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof BaseDropdown>
+} as Meta<typeof BaseDropdown>
 
 export const Default = ({ open, ...rest }: BaseDropdownProps) => {
   return (
