@@ -1,7 +1,6 @@
 import cn from 'classnames'
 import { useEffect } from 'react'
-import { Navigate } from 'react-router'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css'
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks'
 
@@ -80,7 +79,7 @@ const App = () => {
         <AlertContainer />
         <div className='mt-14'>
           <Routes>
-            <Route path='/' element={<Navigate to='/profile' />} />
+            <Route index element={<Profile />} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
             <Route path='/messages/*' element={<Chats />} />

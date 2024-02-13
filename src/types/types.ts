@@ -61,11 +61,6 @@ export type UserMessage = {
   text: string
 }
 
-export type NavItem = {
-  to: string
-  name: string
-}
-
 export type Post = {
   id: string
   text: string

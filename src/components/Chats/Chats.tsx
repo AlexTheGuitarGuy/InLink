@@ -1,7 +1,6 @@
 import { ReactNode, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import { compose } from 'redux'
 
 import { getUserMessages } from '../../redux/dialogs-reducer/dialogs-selector'

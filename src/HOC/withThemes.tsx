@@ -6,6 +6,7 @@ export enum Color {
   green = 'green',
   purple = 'purple',
 }
+
 export enum Mode {
   dark = 'dark',
   light = 'light',
