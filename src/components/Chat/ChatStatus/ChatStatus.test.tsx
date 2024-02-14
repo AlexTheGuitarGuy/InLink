@@ -7,10 +7,13 @@ import ChatStatus from './ChatStatus'
 describe('ChatStatus', () => {
   it('should show "Connected." when status is "ready"', () => {
     const store = setupStore()
-    store.dispatch(chatActions.statusChanged(Status.READY))
 
     render(<ChatStatus />, {
       store,
+    })
+
+    act(() => {
+      store.dispatch(chatActions.statusChanged(Status.READY))
     })
 
     expect(screen.getByText('Connected.')).toBeInTheDocument()
@@ -41,16 +44,31 @@ describe('ChatStatus', () => {
   it('hides "Connected." after 5 seconds', () => {
     jest.useFakeTimers()
     const store = setupStore()
-    store.dispatch(chatActions.statusChanged(Status.READY))
 
     render(<ChatStatus />, {
       store,
+    })
+
+    act(() => {
+      store.dispatch(chatActions.statusChanged(Status.READY))
     })
 
     expect(screen.getByText('Connected.')).toBeInTheDocument()
 
     act(() => {
       jest.advanceTimersByTime(5000)
+    })
+
+    expect(screen.queryByText('Connected.')).not.toBeInTheDocument()
+  })
+
+  it('doesn\'t show "Connected." if status is updated before dialog is open', () => {
+    const store = setupStore()
+
+    store.dispatch(chatActions.statusChanged(Status.READY))
+
+    render(<ChatStatus />, {
+      store,
     })
 
     expect(screen.queryByText('Connected.')).not.toBeInTheDocument()
