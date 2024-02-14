@@ -30,24 +30,18 @@ const Status: FC<StatusProps> = ({ isOwner }) => {
   }
 
   return (
-    <div className='inline transition-colors break-words xl:text-xl relative'>
-      {isLoading && (
-        <div className='absolute z-40 top-3 left-36 flex justify-center items-center'>
-          <Loading dimensions={Dimensions.SMALL} />
-        </div>
-      )}
-
+    <div className='transition-colors break-words xl:text-xl relative flex justify-between'>
       {!isEditing ? (
         <div
           onClick={activateEdit}
-          className={cn(`p-1 rounded max-w-sm transition-colors duration-150`, {
+          className={cn(`p-1 rounded max-w-sm transition-colors duration-150 w-full`, {
             'hover:bg-neutralChild cursor-pointer': isOwner,
           })}
         >
           {status ? '"' + status + '"' : 'No status'}
         </div>
       ) : (
-        <div>
+        <div className='w-full'>
           <Formik initialValues={{ status }} onSubmit={onSubmit}>
             {({ handleSubmit }) => (
               <Form>
@@ -69,6 +63,12 @@ const Status: FC<StatusProps> = ({ isOwner }) => {
               </Form>
             )}
           </Formik>
+        </div>
+      )}
+
+      {isLoading && (
+        <div className='z-40 flex justify-center items-center'>
+          <Loading dimensions={Dimensions.SMALL} />
         </div>
       )}
     </div>
