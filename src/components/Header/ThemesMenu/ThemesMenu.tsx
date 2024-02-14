@@ -1,25 +1,25 @@
 import { Settings } from '@mui/icons-material'
 import cn from 'classnames'
-import { useState } from 'react'
-import { Color, Mode } from '../../../HOC/withThemes'
-import { useStickyState } from '../../../hooks/useStickyState'
+import { useEffect, useState } from 'react'
+import { Color, Mode } from 'utils/theme-data'
 import useTagBlur from '../../../hooks/useTagBlur'
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks'
+import { getThemeFromStore } from 'redux/app-reducer/app-selector'
+import { appActions } from 'redux/app-reducer/app-reducer'
 
 const ThemesMenu = () => {
-  const [color, setColor] = useStickyState(Object.values(Color)[0], 'theme-color')
-  const [mode, setMode] = useStickyState(Object.values(Mode)[0], 'theme-mode')
+  const themeData = useAppSelector(getThemeFromStore)
+
+  const [color, setColor] = useState(themeData.color)
+  const [mode, setMode] = useState(themeData.mode)
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(appActions.setTheme({ color, mode }))
+  }, [color, mode, dispatch])
 
   const [showThemesMenu, setShowThemesMenu] = useState(false)
-
-  const [anythingChanged, setAnythingChanged] = useState(false)
-  const changeColor = (color: Color) => {
-    setColor(color)
-    setAnythingChanged(true)
-  }
-  const changeMode = (mode: Mode) => {
-    setMode(mode)
-    setAnythingChanged(true)
-  }
 
   const ref = useTagBlur<HTMLDivElement>(showThemesMenu, setShowThemesMenu)
   return (
@@ -41,7 +41,7 @@ const ThemesMenu = () => {
           {Object.values(Color).map((colorItem) => (
             <button
               key={colorItem}
-              onClick={() => changeColor(colorItem)}
+              onClick={() => setColor(colorItem)}
               className={cn(
                 'rounded-full w-10 h-10 transition-colors flex justify-center items-center',
                 {
@@ -64,7 +64,7 @@ const ThemesMenu = () => {
           <button
             className='w-16 rounded-full p-1 bg-neutralChild flex items-center'
             id='modeSwitch'
-            onClick={() => changeMode(mode === Mode.light ? Mode.dark : Mode.light)}
+            onClick={() => setMode(mode === Mode.light ? Mode.dark : Mode.light)}
           >
             <div
               className={cn('rounded-full w-4 h-4 bg-primaryBg transition-transform', {
@@ -74,7 +74,6 @@ const ThemesMenu = () => {
           </button>
           <label htmlFor='modeSwitch'>Dark</label>
         </div>
-        {anythingChanged && <small className='text-onPrimaryBg'>please reload the page</small>}
       </div>
 
       <button

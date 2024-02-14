@@ -11,3 +11,7 @@ export const getIsSidebarHidden = (state: RootState) => {
 export const getAlert = (state: RootState) => {
   return state.app.alert
 }
+
+export const getThemeFromStore = (state: RootState) => {
+  return state.app.theme
+}
