@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect,  } from 'react'
 import { useParams } from 'react-router-dom'
 import { compose } from 'redux'
 
@@ -10,7 +10,7 @@ import {
   getStatus,
   profileActions,
 } from '../../redux/profile-reducer/profile-reducer'
-import { getProfilePage } from '../../redux/profile-reducer/profile-selector'
+import { getIsLoading, getProfilePage } from '../../redux/profile-reducer/profile-selector'
 
 import withAuthRedirect from '../../HOC/withAuthRedirect'
 import Loading from '../common/Loading/Loading'
@@ -18,27 +18,26 @@ import Posts from './Posts/Posts'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 const Profile = () => {
+  const currentUserPageId = +(useParams<{ uid: string }>().uid || 0)
+
   const { profileData, myData } = useAppSelector(getProfilePage)
+  const isLoading = useAppSelector(getIsLoading)
   const myUID = useAppSelector(getUID)
-  const loggedUser = useAppSelector(getUID)
 
   const dispatch = useAppDispatch()
 
-  const currentUserPage = useParams().uid
+  const isOwner = currentUserPageId === myUID
 
   useEffect(() => {
-    const userId = (currentUserPage && +currentUserPage) || (loggedUser && +loggedUser)
-    if (userId) {
-      dispatch(profileActions.setUserId(userId))
-      dispatch(getProfile(userId))
-      dispatch(getStatus(userId))
-      dispatch(getIsCurrentUserFollowed(userId))
+    if (currentUserPageId) {
+      dispatch(profileActions.setUserId(currentUserPageId))
+      dispatch(getProfile(currentUserPageId))
+      dispatch(getStatus(currentUserPageId))
+      dispatch(getIsCurrentUserFollowed(currentUserPageId))
     }
-  }, [dispatch, loggedUser, currentUserPage])
+  }, [dispatch, currentUserPageId])
 
-  const isOwner = !!(currentUserPage && +currentUserPage === myUID)
-
-  if (!profileData || !myData) return <Loading />
+  if (!profileData || !myData || isLoading) return <Loading />
 
   const pfp = profileData.photos
 

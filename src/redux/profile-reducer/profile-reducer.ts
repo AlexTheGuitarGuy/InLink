@@ -192,6 +192,7 @@ const getData = (
     dispatch(profileActions.setLoading(true))
     const data = await profileAPI.getProfile(uid)
     dispatch(action(data))
+    dispatch(profileActions.setUserId(uid))
     dispatch(profileActions.setLoading(false))
   }
 }
@@ -210,10 +211,8 @@ export const getMyProfile = (uid: number): ProfileThunk => {
 
 export const getStatus = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(profileActions.setLoading(true))
     const data = await profileAPI.getStatus(uid)
     dispatch(profileActions.setStatus(data))
-    dispatch(profileActions.setLoading(false))
   }
 }
 
