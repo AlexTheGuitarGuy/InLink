@@ -38,6 +38,7 @@ const Posts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
       lg:border-none
 
       sm:border-t-2 sm:border-neutralFocus
+      min-h-[80vh]
     '
     >
       <div className='lg:w-3/4 sm:w-full mx-auto'>

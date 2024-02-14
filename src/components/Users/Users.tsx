@@ -55,9 +55,8 @@ const Users = () => {
 
   return (
     <div
-      className='flex justify-between flex-col
-                  lg:bg-neutralBg lg:rounded-lg
-                  lg:p-8 font-semibold'
+      className='lg:bg-neutralBg lg:rounded-lg
+                  p-8 font-semibold min-h-[88vh]'
     >
       {users === null ? (
         <Loading />
@@ -65,7 +64,7 @@ const Users = () => {
         <>
           <UsersSearch />
           {users.length ? (
-            <>
+            <div className='flex justify-between flex-col min-h-[65vh]'>
               <UserItems />
               <div className='mt-4'>
                 <Paginator
@@ -76,7 +75,7 @@ const Users = () => {
                   changePage={changePage}
                 />
               </div>
-            </>
+            </div>
           ) : (
             <div className='text-center'>No users match these parameters.</div>
           )}
