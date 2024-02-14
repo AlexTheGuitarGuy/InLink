@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '../../../../test-utils'
+import { fireEvent, render, screen } from '@/test-utils'
 import EditOptions from './EditOptions'
 
 describe('EditOptions', () => {
@@ -45,5 +45,5 @@ describe('EditOptions', () => {
 
     fireEvent.click(screen.getByText('Edit'))
     expect(mockOnToggleMenu).toHaveBeenCalledWith(false)
-  }) 
+  })
 })

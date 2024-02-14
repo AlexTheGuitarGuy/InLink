@@ -3,13 +3,13 @@ import { FC } from 'react'
 import { Navigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
-import { login } from '../../redux/auth-reducer/auth-reducer'
-import { getCaptchaURL, getIsLoggedIn } from '../../redux/auth-reducer/auth-selector'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { login } from '@/redux/auth-reducer/auth-reducer'
+import { getCaptchaURL, getIsLoggedIn } from '@/redux/auth-reducer/auth-selector'
 
-import { LoginPayload } from '../../types/types'
-import PrimaryButton from '../common/Buttons/PrimaryButton/PrimaryButton'
-import FormInput from '../common/Inputs/FormInput/FormInput'
+import { LoginPayload } from '@/types'
+import PrimaryButton from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 
 const Login: FC<{}> = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn)

@@ -1,14 +1,14 @@
 import { useCallback, useEffect } from 'react'
 
-import { requestUsers, usersActions } from '../../redux/users-reducer/users-reducer'
-import { getPageSize, getTotalUsers, getUsers } from '../../redux/users-reducer/users-selector'
+import { requestUsers, usersActions } from '@/redux/users-reducer/users-reducer'
+import { getPageSize, getTotalUsers, getUsers } from '@/redux/users-reducer/users-selector'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
-import useScreenSize from '../../hooks/useScreenSize'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import useScreenSize from '@/hooks/useScreenSize'
 
 import { useLocation, useSearchParams } from 'react-router-dom'
-import Loading from '../common/Loading/Loading'
-import Paginator from '../common/Paginator/Paginator'
+import Loading from '@/components/common/Loading/Loading'
+import Paginator from '@/components/common/Paginator/Paginator'
 import UserItems from './UserItems/UserItems'
 import UsersSearch from './UsersSearch/UsersSearch'
 
@@ -45,10 +45,9 @@ const Users = () => {
   }, [dispatch, screenSize.dynamicWidth])
   const count = useAppSelector(getPageSize)
 
-  const screenSizeCategory =
-    (Object.keys(screenSizeToPortionSizeMap).find(
-      (key) => screenSize.dynamicWidth < parseInt(key, 10),
-    ) || 'Infinity') as keyof typeof screenSizeToPortionSizeMap
+  const screenSizeCategory = (Object.keys(screenSizeToPortionSizeMap).find(
+    (key) => screenSize.dynamicWidth < parseInt(key, 10),
+  ) || 'Infinity') as keyof typeof screenSizeToPortionSizeMap
   const portionSize = screenSizeToPortionSizeMap[screenSizeCategory]
 
   const location = useLocation()

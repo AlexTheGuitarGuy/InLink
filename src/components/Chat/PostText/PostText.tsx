@@ -2,12 +2,12 @@ import { Send } from '@mui/icons-material'
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from 'yup'
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
-import { sendMessage } from '../../../redux/chat-reducer/chat-reducer'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { sendMessage } from '@/redux/chat-reducer/chat-reducer'
 
-import { getStatus } from '../../../redux/chat-reducer/chat-selector'
-import PrimaryButton, { ButtonColor } from '../../common/Buttons/PrimaryButton/PrimaryButton'
-import FormInput from '../../common/Inputs/FormInput/FormInput'
+import { getStatus } from '@/redux/chat-reducer/chat-selector'
+import PrimaryButton, { ButtonColor } from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 
 type ChatFormValues = {
   messageText: string

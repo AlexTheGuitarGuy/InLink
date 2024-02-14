@@ -1,7 +1,7 @@
 import { StoryFn } from '@storybook/react'
 
-import ChatShortcut from '../components/Chat/ChatShortcut/ChatShortcut'
-import withThemes from '../HOC/withThemes'
+import ChatShortcut from '@/components/Chat/ChatShortcut/ChatShortcut'
+import withThemes from '@/HOC/withThemes'
 
 export default {
   title: 'Chat/ChatShortcut',

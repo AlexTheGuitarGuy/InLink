@@ -1,7 +1,7 @@
 import { ErrorOutline } from '@mui/icons-material'
 import { FC } from 'react'
 
-import PrimaryButton, { ButtonColor } from '../../Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
 import BaseDialog, { BaseDialogProps } from '../BaseDialog/BaseDialog'
 
 export type ConfirmDialogProps = {

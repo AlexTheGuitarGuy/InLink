@@ -4,20 +4,20 @@ import {
   followInProfile,
   unfollowInProfile,
   uploadPFP,
-} from '../../../redux/profile-reducer/profile-reducer'
+} from '@/redux/profile-reducer/profile-reducer'
 
-import placeholder from '../../../assets/pfps/placeholder.jpg'
+import placeholder from '@/assets/pfps/placeholder.jpg'
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
-import { InputProfileData } from '../../../types/types'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { InputProfileData } from '@/types'
 
 import {
   getCurrentUserFollowed,
   getIsFollowingInProgress,
   getUserId,
-} from '../../../redux/profile-reducer/profile-selector'
-import FollowButton from '../../common/Buttons/FollowButton/FollowButton'
-import PrimaryButton from '../../common/Buttons/PrimaryButton/PrimaryButton'
+} from '@/redux/profile-reducer/profile-selector'
+import FollowButton from '@/components/common/Buttons/FollowButton/FollowButton'
+import PrimaryButton from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
 import Contacts from './Contacts/Contacts'
 import EditProfileDialog from './EditProfileDialog/EditProfileDialog'
 import JobInfo from './JobInfo/JobInfo'

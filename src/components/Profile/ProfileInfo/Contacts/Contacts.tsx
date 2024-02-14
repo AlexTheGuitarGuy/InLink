@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { ContactsObj } from '../../../../types/types'
+import { ContactsObj } from '@/types'
 import ContactIcon from './ContactIcon/ContactIcon'
 import InputContact from './InputContact/InputContact'
 
@@ -61,7 +61,9 @@ const Contacts: FC<ContactsProps> = ({ contacts, isEditMode, status }) => {
           {isEditMode ? (
             <div className='space-y-2 flex flex-col'>{parsedContacts}</div>
           ) : (
-            <div className='w-fit space-x-2 flex'>{parsedContacts.filter((element) => !!element)}</div>
+            <div className='w-fit space-x-2 flex'>
+              {parsedContacts.filter((element) => !!element)}
+            </div>
           )}
         </div>
       )}

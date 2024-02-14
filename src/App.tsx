@@ -4,23 +4,23 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 import './App.css'
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks'
 
-import { appActions, initializeApp } from './redux/app-reducer/app-reducer'
-import { getIsAppInitialized, getIsSidebarHidden } from './redux/app-reducer/app-selector'
-import { getIsLoggedIn, getUID } from './redux/auth-reducer/auth-selector'
-import { getMyProfile } from './redux/profile-reducer/profile-reducer'
+import { appActions, initializeApp } from '@/redux/app-reducer/app-reducer'
+import { getIsAppInitialized, getIsSidebarHidden } from '@/redux/app-reducer/app-selector'
+import { getIsLoggedIn, getUID } from '@/redux/auth-reducer/auth-selector'
+import { getMyProfile } from '@/redux/profile-reducer/profile-reducer'
 
 import { compose } from 'redux'
-import AlertContainer from './components/Alert/AlertContainer'
-import ChatFunctionality from './components/Chat/ChatFunctionality'
-import Loading from './components/common/Loading/Loading'
-import Header from './components/Header/Header'
-import Login from './components/Login/Login'
-import PageNotFound from './components/PageNotFound/PageNotFound'
-import Profile from './components/Profile/Profile'
-import Sidebar from './components/Sidebar/Sidebar'
-import InboxMessages from 'components/InboxMessages/InboxMessages'
-import Users from './components/Users/Users'
-import withThemes from './HOC/withThemes'
+import AlertContainer from '@/components/Alert/AlertContainer'
+import ChatFunctionality from '@/components/Chat/ChatFunctionality'
+import Loading from '@/components/common/Loading/Loading'
+import Header from '@/components/Header/Header'
+import Login from '@/components/Login/Login'
+import PageNotFound from '@/components/PageNotFound/PageNotFound'
+import Profile from '@/components/Profile/Profile'
+import Sidebar from '@/components/Sidebar/Sidebar'
+import InboxMessages from '@/components/InboxMessages/InboxMessages'
+import Users from '@/components/Users/Users'
+import withThemes from '@/HOC/withThemes'
 
 const App = () => {
   const isAppInitialized = useAppSelector(getIsAppInitialized)
@@ -79,7 +79,7 @@ const App = () => {
         <AlertContainer />
         <div className='mt-14'>
           <Routes>
-            <Route index element={<Navigate to='/profile'/>} />
+            <Route index element={<Navigate to='/profile' />} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
             <Route path='/messages/*' element={<InboxMessages />} />

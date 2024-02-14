@@ -1,7 +1,7 @@
-import { useAppSelector } from '../../../hooks/reduxHooks'
-import { getIsLoading, getUsers } from '../../../redux/users-reducer/users-selector'
-import { User } from '../../../types/types'
-import Loading from '../../common/Loading/Loading'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import { getIsLoading, getUsers } from '@/redux/users-reducer/users-selector'
+import { User } from '@/types'
+import Loading from '@/components/common/Loading/Loading'
 import UserItem from './UserItem/UserItem'
 
 const UserItems = () => {

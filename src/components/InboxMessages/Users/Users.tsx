@@ -1,8 +1,8 @@
 import cn from 'classnames'
 import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
-import Placeholder from '../../../assets/pfps/placeholder.jpg'
-import { User } from '../../../types/types'
+import Placeholder from '@/assets/pfps/placeholder.jpg'
+import { User } from '@/types'
 
 type UsersProps = {
   users: User[]

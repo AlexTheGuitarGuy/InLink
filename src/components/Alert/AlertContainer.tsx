@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getAlert } from '../../redux/app-reducer/app-selector'
+import { getAlert } from '@/redux/app-reducer/app-selector'
 import Alert from './Alert'
-import { useAppSelector } from 'hooks/reduxHooks'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const AlertContainer = () => {
   const alert = useAppSelector(getAlert)

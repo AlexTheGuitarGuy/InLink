@@ -1,8 +1,8 @@
-import { ResultCodes, ResultCodesWithCaptcha } from '../../api/API'
-import { securityAPI } from '../../api/securityAPI'
-import { LoginPayload } from '../../types/types'
-import { setAlertFromThunk } from '../app-reducer/app-reducer'
-import { InferAction, InferThunk } from '../store'
+import { ResultCodes, ResultCodesWithCaptcha } from '@/api/API'
+import { securityAPI } from '@/api/securityAPI'
+import { LoginPayload } from '@/types'
+import { setAlertFromThunk } from '@/redux/app-reducer/app-reducer'
+import { InferAction, InferThunk } from '@/redux/store'
 
 const initialState = {
   id: 0,

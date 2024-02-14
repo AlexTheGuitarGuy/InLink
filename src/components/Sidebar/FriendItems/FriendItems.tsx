@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
 
-import Placeholder from '../../../assets/pfps/placeholder.jpg'
-import { getFrontPageFriends } from '../../../redux/users-reducer/users-selector'
-import { useAppSelector } from 'hooks/reduxHooks'
+import Placeholder from '@/assets/pfps/placeholder.jpg'
+import { getFrontPageFriends } from '@/redux/users-reducer/users-selector'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const FriendItems = () => {
   const friends = useAppSelector(getFrontPageFriends)

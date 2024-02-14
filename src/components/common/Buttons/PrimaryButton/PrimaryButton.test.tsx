@@ -1,5 +1,5 @@
-import { HashRouter} from 'react-router-dom'
-import { fireEvent, render, screen } from '../../../../test-utils'
+import { HashRouter } from 'react-router-dom'
+import { fireEvent, render, screen } from '@/test-utils'
 import PrimaryButton, { ButtonColor } from './PrimaryButton'
 
 describe('PrimaryButton', () => {

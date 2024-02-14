@@ -1,12 +1,12 @@
 import { v1 as uuidv1 } from 'uuid'
 
-import { GetProfileResponse, ResultCodes } from '../../api/API'
-import { profileAPI } from '../../api/profileAPI'
-import { userAPI } from '../../api/userAPI'
-import { FormikStatus, InputProfileData, Photo, Post } from '../../types/types'
-import { updateObjInArr } from '../../utils/object-helpers'
-import { setAlertFromThunk } from '../app-reducer/app-reducer'
-import { InferAction, InferThunk } from '../store'
+import { GetProfileResponse, ResultCodes } from '@/api/API'
+import { profileAPI } from '@/api/profileAPI'
+import { userAPI } from '@/api/userAPI'
+import { FormikStatus, InputProfileData, Photo, Post } from '@/types'
+import { updateObjInArr } from '@/utils/object-helpers'
+import { setAlertFromThunk } from '@/redux/app-reducer/app-reducer'
+import { InferAction, InferThunk } from '@/redux/store'
 
 const initialState = {
   posts: [

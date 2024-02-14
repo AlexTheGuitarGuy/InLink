@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react'
-import EditOptions from '../../components/common/Dropdowns/EditOptions/EditOptions'
+import EditOptions from '@/components/common/Dropdowns/EditOptions/EditOptions'
 
 export default {
   title: 'Dropdowns/EditOptions',

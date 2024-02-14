@@ -1,6 +1,6 @@
-import { authActions } from '../../../../redux/auth-reducer/auth-reducer'
-import { setupStore } from '../../../../redux/store'
-import { render, screen, userEvent } from '../../../../test-utils'
+import { authActions } from '@/redux/auth-reducer/auth-reducer'
+import { setupStore } from '@/redux/store'
+import { render, screen, userEvent } from '@/test-utils'
 import FollowButton from './FollowButton'
 
 describe('FollowButton component', () => {

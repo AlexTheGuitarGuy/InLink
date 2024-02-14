@@ -4,8 +4,8 @@ import { LegacyRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { useLocation } from 'react-router-dom'
-import useScreenSize from '../../../hooks/useScreenSize'
-import useTagBlur from '../../../hooks/useTagBlur'
+import useScreenSize from '@/hooks/useScreenSize'
+import useTagBlur from '@/hooks/useTagBlur'
 
 const Navbar = () => {
   const navItems = [

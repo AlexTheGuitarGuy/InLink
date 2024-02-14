@@ -2,11 +2,11 @@ import cn from 'classnames'
 import { Form, Formik } from 'formik'
 import { FC, FormEvent, useState } from 'react'
 
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
-import { updateStatus } from '../../../../redux/profile-reducer/profile-reducer'
-import { getStatus } from '../../../../redux/profile-reducer/profile-selector'
-import FormInput from '../../../common/Inputs/FormInput/FormInput'
-import Loading, { Dimensions } from '../../../common/Loading/Loading'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { updateStatus } from '@/redux/profile-reducer/profile-reducer'
+import { getStatus } from '@/redux/profile-reducer/profile-selector'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
+import Loading, { Dimensions } from '@/components/common/Loading/Loading'
 
 type StatusProps = {
   isOwner: boolean

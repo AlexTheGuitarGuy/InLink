@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react'
-import BaseDialog, { BaseDialogProps } from '../../components/common/Dialogs/BaseDialog/BaseDialog'
+import BaseDialog, { BaseDialogProps } from '@/components/common/Dialogs/BaseDialog/BaseDialog'
 
 export default {
   title: 'Dialogs/BaseDialog',

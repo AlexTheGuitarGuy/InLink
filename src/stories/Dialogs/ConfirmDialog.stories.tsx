@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react'
 import ConfirmDialog, {
   ConfirmDialogProps,
-} from '../../components/common/Dialogs/ConfirmDialog/ConfirmDialog'
+} from '@/components/common/Dialogs/ConfirmDialog/ConfirmDialog'
 
 export default {
   title: 'Dialogs/ConfirmDialog',

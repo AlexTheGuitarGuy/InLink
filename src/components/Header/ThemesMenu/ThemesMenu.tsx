@@ -1,11 +1,11 @@
 import { Settings } from '@mui/icons-material'
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
-import { Color, Mode } from 'utils/theme-data'
-import useTagBlur from '../../../hooks/useTagBlur'
-import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks'
-import { getThemeFromStore } from 'redux/app-reducer/app-selector'
-import { appActions } from 'redux/app-reducer/app-reducer'
+import { Color, Mode } from '@/utils/theme-data'
+import useTagBlur from '@/hooks/useTagBlur'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { getThemeFromStore } from '@/redux/app-reducer/app-selector'
+import { appActions } from '@/redux/app-reducer/app-reducer'
 
 const ThemesMenu = () => {
   const themeData = useAppSelector(getThemeFromStore)

@@ -1,4 +1,4 @@
-import { User } from '../types/types'
+import { User } from '@/types'
 import { CommonResponse, GetItemsResponse, instance, ResultCodes } from './API'
 
 export const userAPI = {

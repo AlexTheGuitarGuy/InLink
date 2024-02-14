@@ -1,4 +1,4 @@
-import { THEME_MODE_KEY, THEME_COLOR_KEY } from '../constants/local-storage'
+import { THEME_MODE_KEY, THEME_COLOR_KEY } from '@/constants'
 
 export enum Color {
   blue = 'blue',

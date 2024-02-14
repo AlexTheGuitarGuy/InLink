@@ -1,9 +1,8 @@
-import { ResultCodes } from '../../api/API'
-import { userAPI } from '../../api/userAPI'
-import { User } from '../../types/types'
-import { updateObjInArr } from '../../utils/object-helpers'
-
-import { InferAction, InferThunk } from '../store'
+import { ResultCodes } from '@/api/API'
+import { userAPI } from '@/api/userAPI'
+import { User } from '@/types'
+import { updateObjInArr } from '@/utils/object-helpers'
+import { InferAction, InferThunk } from '@/redux/store'
 
 const initialState = {
   users: null as User[] | null,

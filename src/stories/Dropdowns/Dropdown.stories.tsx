@@ -3,8 +3,8 @@ import { Meta } from '@storybook/react'
 
 import BaseDropdown, {
   BaseDropdownProps,
-} from '../../components/common/Dropdowns/BaseDropdown/BaseDropdown'
-import DropdownItem from '../../components/common/Dropdowns/BaseDropdown/DropdownItem/DropdownItem'
+} from '@/components/common/Dropdowns/BaseDropdown/BaseDropdown'
+import DropdownItem from '@/components/common/Dropdowns/BaseDropdown/DropdownItem/DropdownItem'
 
 export default {
   title: 'Dropdowns/Dropdown',

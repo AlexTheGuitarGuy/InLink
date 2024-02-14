@@ -1,15 +1,15 @@
 import cn from 'classnames'
 import { LegacyRef, useState } from 'react'
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
-import { logout } from '../../../redux/auth-reducer/auth-reducer'
-import { getIsLoggedIn, getLogin } from '../../../redux/auth-reducer/auth-selector'
-import { getMyData } from '../../../redux/profile-reducer/profile-selector'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { logout } from '@/redux/auth-reducer/auth-reducer'
+import { getIsLoggedIn, getLogin } from '@/redux/auth-reducer/auth-selector'
+import { getMyData } from '@/redux/profile-reducer/profile-selector'
 
-import placeholder from '../../../assets/pfps/placeholder.jpg'
-import useTagBlur from '../../../hooks/useTagBlur'
+import placeholder from '@/assets/pfps/placeholder.jpg'
+import useTagBlur from '@/hooks/useTagBlur'
 
-import PrimaryButton, { ButtonColor } from '../../common/Buttons/PrimaryButton/PrimaryButton'
+import PrimaryButton, { ButtonColor } from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
 
 const ProfileButton = () => {
   const [showProfileData, setShowProfileData] = useState(false)
@@ -34,7 +34,11 @@ const ProfileButton = () => {
     <div className='flex flex-col'>
       {isLoggedIn ? (
         <>
-          <button role='img' onClick={() => setShowProfileData(!showProfileData)} className='rounded-full'>
+          <button
+            role='img'
+            onClick={() => setShowProfileData(!showProfileData)}
+            className='rounded-full'
+          >
             <img
               src={myData?.photos?.small || placeholder}
               alt='pfp'

@@ -1,10 +1,10 @@
-import { fireEvent, render, screen } from '../../../../../test-utils'
+import { fireEvent, render, screen } from '@/test-utils'
 import DropdownItem from './DropdownItem'
 
 describe('DropdownItem', () => {
   const props = {
     children: 'Menu Item',
-    icon: <svg/>,
+    icon: <svg />,
     onClick: jest.fn(),
     setMenuOpen: jest.fn(),
   }

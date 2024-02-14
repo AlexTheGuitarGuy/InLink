@@ -1,4 +1,4 @@
-import { EnumObject } from '../types/types'
+import { EnumObject } from '@/types'
 
 export function updateObjInArr<TArray, TNewData>(
   arr: TArray[],

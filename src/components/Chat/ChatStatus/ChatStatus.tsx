@@ -1,9 +1,9 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
-import { Status } from '../../../api/chatAPI'
-import { useAppSelector } from '../../../hooks/reduxHooks'
-import { getStatus } from '../../../redux/chat-reducer/chat-selector'
-import Loading, { Dimensions } from '../../common/Loading/Loading'
+import { Status } from '@/api/chatAPI'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import { getStatus } from '@/redux/chat-reducer/chat-selector'
+import Loading, { Dimensions } from '@/components/common/Loading/Loading'
 
 const ChatStatus = () => {
   const status = useAppSelector(getStatus)

@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'
-import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector'
-import { useAppSelector } from 'hooks/reduxHooks'
+import { getIsSidebarHidden } from '@/redux/app-reducer/app-selector'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const PageNotFound = () => {
   const isSidebarHidden = useAppSelector(getIsSidebarHidden)

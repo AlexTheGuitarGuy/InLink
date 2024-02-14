@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import FormInput from '../../common/Inputs/FormInput/FormInput'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 
 type SearchFormValues = {
   usersType: string

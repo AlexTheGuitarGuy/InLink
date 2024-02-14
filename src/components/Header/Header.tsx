@@ -3,11 +3,11 @@ import { NavLink, useLocation } from 'react-router-dom'
 import Navbar from './Navbar/Navbar'
 import ProfileButton from './ProfileButton/ProfileButton'
 
-import Placeholder from '../../assets/pfps/placeholder.jpg'
-import useScreenSize from '../../hooks/useScreenSize'
-import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
+import Placeholder from '@/assets/pfps/placeholder.jpg'
+import useScreenSize from '@/hooks/useScreenSize'
+import { getFrontPageFriends } from '@/redux/users-reducer/users-selector'
+import { useAppSelector } from '@/hooks/reduxHooks'
 import ThemesMenu from './ThemesMenu/ThemesMenu'
-import { useAppSelector } from 'hooks/reduxHooks'
 
 const Header = () => {
   const location = useLocation()

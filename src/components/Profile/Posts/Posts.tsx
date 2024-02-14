@@ -1,12 +1,12 @@
 import { FC } from 'react'
 
-import placeholder from '../../../assets/pfps/placeholder.jpg'
-import { getPosts } from '../../../redux/profile-reducer/profile-selector'
-import { Post } from '../../../types/types'
+import placeholder from '@/assets/pfps/placeholder.jpg'
+import { getPosts } from '@/redux/profile-reducer/profile-selector'
+import { Post } from '@/types'
 
 import PostCard from './PostCard/PostCard'
 import PublishPost from './PublishPost/PublishPost'
-import { useAppSelector } from 'hooks/reduxHooks'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 type MyPostsProps = {
   pfp: string

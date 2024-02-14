@@ -2,12 +2,12 @@ import cn from 'classnames'
 import { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import placeholder from '../../../../assets/pfps/placeholder.jpg'
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks'
-import { followInUsers, unfollowInUsers } from '../../../../redux/users-reducer/users-reducer'
-import { getFollowQueue } from '../../../../redux/users-reducer/users-selector'
-import { User } from '../../../../types/types'
-import FollowButton from '../../../common/Buttons/FollowButton/FollowButton'
+import placeholder from '@/assets/pfps/placeholder.jpg'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { followInUsers, unfollowInUsers } from '@/redux/users-reducer/users-reducer'
+import { getFollowQueue } from '@/redux/users-reducer/users-selector'
+import { User } from '@/types'
+import FollowButton from '@/components/common/Buttons/FollowButton/FollowButton'
 
 type UserItemProps = {
   user: User

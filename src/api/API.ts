@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-import { InputProfileData, Photo } from '../types/types'
+import { InputProfileData, Photo } from '@/types'
 
 export type GetItemsResponse<T> = {
   items: T[]

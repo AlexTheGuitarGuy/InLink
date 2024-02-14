@@ -1,7 +1,7 @@
 import { v1 as uuidv1 } from 'uuid'
-import { UserMessage } from '../../types/types'
-import { updateObjInArr } from '../../utils/object-helpers'
-import { InferAction } from '../store'
+import { UserMessage } from '@/types'
+import { updateObjInArr } from '@/utils/object-helpers'
+import { InferAction } from '@/redux/store'
 
 const initialState = {
   userMessages: [

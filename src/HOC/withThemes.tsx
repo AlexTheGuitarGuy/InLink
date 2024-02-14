@@ -1,6 +1,6 @@
-import { useAppSelector } from 'hooks/reduxHooks'
+import { useAppSelector } from '@/hooks/reduxHooks'
 import { ComponentType } from 'react'
-import { getThemeFromStore } from 'redux/app-reducer/app-selector'
+import { getThemeFromStore } from '@/redux/app-reducer/app-selector'
 
 function withThemes<P extends Object>(Component: ComponentType<P>) {
   return (props: P) => {

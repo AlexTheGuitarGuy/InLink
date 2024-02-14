@@ -1,7 +1,7 @@
-import { Status } from '../../../api/chatAPI'
-import { chatActions } from '../../../redux/chat-reducer/chat-reducer'
-import { setupStore } from '../../../redux/store'
-import { act, render, screen } from '../../../test-utils'
+import { Status } from '@/api/chatAPI'
+import { chatActions } from '@/redux/chat-reducer/chat-reducer'
+import { setupStore } from '@/redux/store'
+import { act, render, screen } from '@/test-utils'
 import ChatStatus from './ChatStatus'
 
 describe('ChatStatus', () => {
