@@ -67,7 +67,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/TRIGGER_LIKE': {
       const newPosts = [...state.posts]
 
-      const likedPost = newPosts.find((post) => post.id === action.postId)
+      const likedPost = { ...newPosts.find((post) => post.id === action.postId) } as Post
 
       if (!likedPost) return { ...state }
 
@@ -81,7 +81,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
 
       return {
         ...state,
-        posts: [...newPosts],
+        posts: newPosts.map((post) => (post.id === action.postId ? likedPost : post)),
       }
     }
 
