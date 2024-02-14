@@ -19,7 +19,7 @@ import UserMessage from '../common/Messages/UserMessage/UserMessage'
 import MessageForm from './MessagesForm/MessagesForm'
 import Users from './Users/Users'
 
-const Chats = () => {
+const InboxMesssages = () => {
   const userMessages = useSelector(getUserMessages)
   const users = useSelector(getFrontPageFriends)
   const myData = useSelector(getMyData)
@@ -103,4 +103,4 @@ const Chats = () => {
   )
 }
 
-export default compose(withAuthRedirect)(Chats)
+export default compose(withAuthRedirect)(InboxMesssages)
