@@ -53,11 +53,11 @@ const Contacts: FC<ContactsProps> = ({ contacts, isEditMode, status }) => {
 
   return (
     <div className='mt-2'>
-      Contacts:
+      <div className='mb-1'>Contacts:</div>
       {isEmpty && !isEditMode ? (
         <div>None</div>
       ) : (
-        <div className='mt-3'>
+        <div>
           {isEditMode ? (
             <div className='space-y-2 flex flex-col'>{parsedContacts}</div>
           ) : (

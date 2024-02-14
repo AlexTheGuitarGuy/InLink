@@ -14,6 +14,7 @@ import { InputProfileData } from '@/types'
 import {
   getCurrentUserFollowed,
   getIsFollowingInProgress,
+  getIsUploadingPfp,
   getUserId,
 } from '@/redux/profile-reducer/profile-selector'
 import FollowButton from '@/components/common/Buttons/FollowButton/FollowButton'
@@ -22,6 +23,7 @@ import Contacts from './Contacts/Contacts'
 import EditProfileDialog from './EditProfileDialog/EditProfileDialog'
 import JobInfo from './JobInfo/JobInfo'
 import Status from './Status/Status'
+import Loading, { Dimensions } from '@/components/common/Loading/Loading'
 
 export type ProfileInfoProps = {
   isOwner: boolean
@@ -36,6 +38,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
 }) => {
   const dispatch = useAppDispatch()
   const currentUserFollowed = useAppSelector(getCurrentUserFollowed)
+  const isUploadingPfp = useAppSelector(getIsUploadingPfp)
   const id = useAppSelector(getUserId)!
   const isFollowingInProgress = useAppSelector(getIsFollowingInProgress)
   const updatePFP = (event: ChangeEvent<HTMLInputElement>) => {
@@ -106,12 +109,31 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
             <div className='my-4'>
               <div>Upload profile picture:</div>
 
-              <input
-                type='file'
-                onChange={updatePFP}
-                className='font-semibold
-                              transition-colors cursor-pointer'
-              />
+              <div className='flex align-middle'>
+                <input
+                  type='file'
+                  onChange={updatePFP}
+                  className='text-gray-500 mt-1
+                  file:lg:py-0.5 file:lg:px-4
+                  file:py-2 file:sm:px-6
+                  file:bg-primaryChild file:ring-primaryFocus
+                  file:border-0
+                  file:text-sm
+                  hover:file:cursor-pointer
+                  file:font-semibold
+                  file:text-gray-200
+                  file:rounded
+                  file:active:ring-1
+                  file:shadow-md 
+                  file:focus:outline-none file:focus:ring-0
+                  file:duration-150 file:ease-in-out file:transition-all'
+                />
+                {isUploadingPfp ? (
+                  <div className='ml-2 my-auto'>
+                    <Loading dimensions={Dimensions.SMALL} />
+                  </div>
+                ) : null}
+              </div>
             </div>
           )}
         </div>

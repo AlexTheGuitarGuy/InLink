@@ -29,6 +29,7 @@ const initialState = {
   profileStatus: '',
   storedText: '',
   isLoading: false,
+  isUploadingPfp: false,
   currentUserFollowed: false,
   isFollowingInProgress: false,
   userId: null as number | null,
@@ -92,6 +93,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/SET_LOADING':
     case 'IN_LINK/PROFILE_REDUCER/SET_CURRENT_USER_FOLLOWED':
     case 'IN_LINK/PROFILE_REDUCER/SET_USER_ID':
+    case 'IN_LINK/PROFILE_REDUCER/SET_IS_UPLOADING_PFP':
       return {
         ...state,
         ...action.payload,
@@ -182,6 +184,11 @@ export const profileActions = {
       type: 'IN_LINK/PROFILE_REDUCER/SET_IS_FOLLOWING_IN_PROGRESS',
       payload: { isFollowingInProgress },
     } as const),
+  setIsUploadingPfp: (isUploadingPfp: boolean) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_IS_UPLOADING_PFP',
+      payload: { isUploadingPfp },
+    } as const),
 }
 
 const getData = (
@@ -225,11 +232,14 @@ export const updateStatus = (payload: string): ProfileThunk => {
 
 export const uploadPFP = (file: File): ProfileThunk => {
   return async (dispatch) => {
+    dispatch(profileActions.setIsUploadingPfp(true))
     const { data, resultCode } = await profileAPI.uploadPFP(file)
 
     if (resultCode === ResultCodes.Success) {
       dispatch(profileActions.uploadSuccess(data.photos))
     }
+
+    dispatch(profileActions.setIsUploadingPfp(false))
   }
 }
 

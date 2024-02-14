@@ -47,3 +47,7 @@ export const getPosts = (state: RootState) => {
 export const getStatus = (state: RootState) => {
   return getProfilePage(state).profileStatus
 }
+
+export const getIsUploadingPfp = (state: RootState) => {
+  return getProfilePage(state).isUploadingPfp
+}
