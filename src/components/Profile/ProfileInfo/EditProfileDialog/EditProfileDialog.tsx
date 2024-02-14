@@ -1,10 +1,10 @@
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
-import { FC } from 'react'
+import { FC, useMemo } from 'react'
 import * as Yup from 'yup'
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { uploadProfileInfo } from '@/redux/profile-reducer/profile-reducer'
 import { getUserId } from '@/redux/profile-reducer/profile-selector'
-import { InputProfileData } from '@/types'
+import { ContactsObj, InputProfileData } from '@/types'
 import BaseDialog from '@/components/common/Dialogs/BaseDialog/BaseDialog'
 import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 import Contacts from '../Contacts/Contacts'
@@ -24,9 +24,15 @@ const EditProfileDialog: FC<EditProfileDialogProps> = ({
   const dispatch = useAppDispatch()
   const id = useAppSelector(getUserId)!
 
+  const formattedContacts = useMemo(() => {
+    return Object.entries(contacts)
+      .map(([key, value]) => ({ key, value: value || '' }))
+      .reduce((acc, { key, value }) => ({ ...acc, [key]: value }), {} as ContactsObj)
+  }, [contacts])
+
   const initialValues = {
     aboutMe: 'about me',
-    contacts,
+    contacts: formattedContacts,
     fullName,
     lookingForAJob,
     lookingForAJobDescription,
