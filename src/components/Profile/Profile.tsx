@@ -10,7 +10,7 @@ import {
   getStatus,
   profileActions,
 } from '@/redux/profile-reducer/profile-reducer'
-import { getIsLoading, getProfilePage } from '@/redux/profile-reducer/profile-selector'
+import { getIsLoading, getMyData, getProfileData } from '@/redux/profile-reducer/profile-selector'
 
 import withAuthRedirect from '@/HOC/withAuthRedirect'
 import Loading from '@/components/common/Loading/Loading'
@@ -20,7 +20,8 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 const Profile = () => {
   const currentUserPageId = +(useParams<{ uid: string }>().uid || 0)
 
-  const { profileData, myData } = useAppSelector(getProfilePage)
+  const profileData = useAppSelector(getProfileData)
+  const myData = useAppSelector(getMyData)
   const isLoading = useAppSelector(getIsLoading)
   const myUID = useAppSelector(getUID)
 

@@ -4,6 +4,10 @@ export const getProfilePage = (state: RootState) => {
   return state.profilePage
 }
 
+export const getProfileData = (state: RootState) => {
+  return getProfilePage(state).profileData
+}
+
 export const getCurrentUserFollowed = (state: RootState) => {
   return state.profilePage.currentUserFollowed
 }
@@ -16,16 +20,12 @@ export const getUserId = (state: RootState) => {
   return state.profilePage.userId
 }
 
-export const getCurrentUserData = (state: RootState) => {
-  return getProfilePage(state).profileData
-}
-
 export const getPFP = (state: RootState) => {
-  return getCurrentUserData(state)?.photos
+  return getProfileData(state)?.photos
 }
 
 export const getUserName = (state: RootState) => {
-  return getCurrentUserData(state)?.fullName
+  return getProfileData(state)?.fullName
 }
 
 export const getMyData = (state: RootState) => {
