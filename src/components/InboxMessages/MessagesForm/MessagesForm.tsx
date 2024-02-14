@@ -46,7 +46,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {({ isSubmitting, isValid, handleChange }: FormikProps<MessageFormValues>) => (
+      {({ isSubmitting, isValid, handleChange, values }: FormikProps<MessageFormValues>) => (
         <Form>
           <div className='flex flex-row justify-center'>
             <FormInput
@@ -66,7 +66,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
             />
             <div className='flex items-center'>
               <PrimaryButton
-                disabled={isSubmitting || !isValid}
+                disabled={isSubmitting || !isValid || !values.messageText.trim()}
                 type='submit'
                 className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg shadow-none'
                 color={ButtonColor.transparent}

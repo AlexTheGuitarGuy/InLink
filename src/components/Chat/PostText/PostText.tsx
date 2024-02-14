@@ -42,7 +42,7 @@ const PostText = () => {
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {({ isSubmitting, isValid }: FormikProps<ChatFormValues>) => (
+      {({ isSubmitting, isValid, values }: FormikProps<ChatFormValues>) => (
         <Form>
           <div className='flex flex-row justify-center'>
             <FormInput
@@ -56,7 +56,7 @@ const PostText = () => {
             />
             <div className='flex items-center'>
               <PrimaryButton
-                disabled={isSubmitting || !isValid || status !== 'ready'}
+                disabled={isSubmitting || !isValid || status !== 'ready' || !values.messageText.trim()}
                 type='submit'
                 className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg shadow-none'
                 color={ButtonColor.transparent}

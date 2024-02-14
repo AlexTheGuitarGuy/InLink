@@ -118,13 +118,14 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
         return {
           ...state,
           userMessages: state.userMessages.map((messages, conversationIndex) => {
+            const newMessages = [...messages]
             if (conversationIndex === action.to)
-              messages.push({
+              newMessages.push({
                 id: uuidv1(),
                 text: action.text,
                 type: 'sent',
               })
-            return messages
+            return newMessages
           }),
         }
       }
