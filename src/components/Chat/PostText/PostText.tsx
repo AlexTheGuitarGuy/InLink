@@ -56,7 +56,9 @@ const PostText = () => {
             />
             <div className='flex items-center'>
               <PrimaryButton
-                disabled={isSubmitting || !isValid || status !== 'ready' || !values.messageText.trim()}
+                disabled={
+                  isSubmitting || !isValid || status !== 'ready' || !values.messageText.trim()
+                }
                 type='submit'
                 className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg shadow-none'
                 color={ButtonColor.transparent}

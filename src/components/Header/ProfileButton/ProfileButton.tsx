@@ -3,7 +3,7 @@ import { LegacyRef, useState } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { logout } from '@/redux/auth-reducer/auth-reducer'
-import { getIsLoggedIn, getLogin } from '@/redux/auth-reducer/auth-selector'
+import { getIsLoggedIn } from '@/redux/auth-reducer/auth-selector'
 import { getMyData } from '@/redux/profile-reducer/profile-selector'
 
 import placeholder from '@/assets/pfps/placeholder.jpg'
@@ -15,7 +15,6 @@ const ProfileButton = () => {
   const [showProfileData, setShowProfileData] = useState(false)
 
   const isLoggedIn = useAppSelector(getIsLoggedIn)
-  const login = useAppSelector(getLogin)
   const myData = useAppSelector(getMyData)
 
   const dispatch = useAppDispatch()
@@ -62,7 +61,7 @@ const ProfileButton = () => {
             ref={profileDataRef as LegacyRef<HTMLDivElement>}
           >
             <>
-              <div className='font-semibold sm:text-lg lg:text-base'>{login}</div>
+              <div className='font-semibold sm:text-lg lg:text-base'>{myData?.fullName}</div>
               <PrimaryButton
                 as='navlink'
                 to='/profile'

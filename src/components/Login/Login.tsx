@@ -11,7 +11,7 @@ import { LoginPayload } from '@/types'
 import PrimaryButton from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
 import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 
-const Login: FC<{}> = () => {
+const Login: FC = () => {
   const isLoggedIn = useAppSelector(getIsLoggedIn)
   const captchaURL = useAppSelector(getCaptchaURL)
 
