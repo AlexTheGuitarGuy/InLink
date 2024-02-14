@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/InLink/static/css/main.a6813748.css",
-    "main.js": "/InLink/static/js/main.c045a3d9.js",
-    "static/js/787.60a21c7b.chunk.js": "/InLink/static/js/787.60a21c7b.chunk.js",
+    "main.css": "/InLink/static/css/main.b797b34a.css",
+    "main.js": "/InLink/static/js/main.28504713.js",
+    "static/js/860.a4dc5b94.chunk.js": "/InLink/static/js/860.a4dc5b94.chunk.js",
     "index.html": "/InLink/index.html",
-    "main.a6813748.css.map": "/InLink/static/css/main.a6813748.css.map",
-    "main.c045a3d9.js.map": "/InLink/static/js/main.c045a3d9.js.map",
-    "787.60a21c7b.chunk.js.map": "/InLink/static/js/787.60a21c7b.chunk.js.map"
+    "main.b797b34a.css.map": "/InLink/static/css/main.b797b34a.css.map",
+    "main.28504713.js.map": "/InLink/static/js/main.28504713.js.map",
+    "860.a4dc5b94.chunk.js.map": "/InLink/static/js/860.a4dc5b94.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a6813748.css",
-    "static/js/main.c045a3d9.js"
+    "static/css/main.b797b34a.css",
+    "static/js/main.28504713.js"
   ]
 }
