@@ -12,6 +12,22 @@ import Paginator from '../common/Paginator/Paginator'
 import UserItems from './UserItems/UserItems'
 import UsersSearch from './UsersSearch/UsersSearch'
 
+const screenSizeToPageSizeMap = {
+  1366: 8,
+  1600: 10,
+  1920: 12,
+  2560: 14,
+  Infinity: 16,
+}
+
+const screenSizeToPortionSizeMap = {
+  1366: 5,
+  1600: 7,
+  1920: 8,
+  2560: 10,
+  Infinity: 12,
+}
+
 const Users = () => {
   const totalUsers = useAppSelector(getTotalUsers)
   const users = useAppSelector(getUsers)
@@ -21,11 +37,19 @@ const Users = () => {
   const screenSize = useScreenSize()
 
   useEffect(() => {
-    dispatch(usersActions.setPageSize(screenSize.dynamicWidth < 1366 ? 11 : 6))
+    const screenSizeCategory = (Object.keys(screenSizeToPageSizeMap).find(
+      (key) => screenSize.dynamicWidth < parseInt(key, 10),
+    ) || 'Infinity') as keyof typeof screenSizeToPageSizeMap
+
+    dispatch(usersActions.setPageSize(screenSizeToPageSizeMap[screenSizeCategory]))
   }, [dispatch, screenSize.dynamicWidth])
   const count = useAppSelector(getPageSize)
 
-  const portionSize = screenSize.dynamicWidth < 1366 ? 5 : 10
+  const screenSizeCategory =
+    (Object.keys(screenSizeToPortionSizeMap).find(
+      (key) => screenSize.dynamicWidth < parseInt(key, 10),
+    ) || 'Infinity') as keyof typeof screenSizeToPortionSizeMap
+  const portionSize = screenSizeToPortionSizeMap[screenSizeCategory]
 
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
