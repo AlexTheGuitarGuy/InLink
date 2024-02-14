@@ -2,7 +2,7 @@ import { getIsLoggedIn } from 'redux/auth-reducer/auth-selector'
 import { getChatOpen } from 'redux/chat-reducer/chat-selector'
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { chatActions } from '../../redux/chat-reducer/chat-reducer'
-import Chat from './Chat/Chat'
+import ChatDialog from './ChatDialog/ChatDialog'
 import ChatShortcut from './ChatShortcut/ChatShortcut'
 
 const ChatFunctionality = () => {
@@ -13,7 +13,7 @@ const ChatFunctionality = () => {
   return (
     <>
       {isLoggedIn && <ChatShortcut onOpen={() => dispatch(chatActions.setChatOpen(true))} />}
-      {chatOpen && <Chat />}
+      {chatOpen && <ChatDialog />}
     </>
   )
 }

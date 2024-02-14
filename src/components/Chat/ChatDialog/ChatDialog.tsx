@@ -13,7 +13,7 @@ import ChatStatus from '../ChatStatus/ChatStatus'
 import Messages from '../Messages/Messages'
 import PostText from '../PostText/PostText'
 
-const Chat = () => {
+const ChatDialog = () => {
   const chatOpen = useAppSelector(getChatOpen)
 
   const dispatch = useAppDispatch()
@@ -39,7 +39,7 @@ const Chat = () => {
     >
       <ChatStatus />
       <div
-        className='w-[90vw] h-max 
+        className='w-[90vw] h-[90vh]
       font-semibold
       overflow-y-scroll overflow-x-hidden
       px-8'
@@ -50,4 +50,4 @@ const Chat = () => {
   )
 }
 
-export default Chat
+export default ChatDialog

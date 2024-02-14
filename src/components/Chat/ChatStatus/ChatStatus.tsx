@@ -8,7 +8,7 @@ import Loading, { Dimensions } from '../../common/Loading/Loading'
 const ChatStatus = () => {
   const status = useAppSelector(getStatus)
 
-  const [showSuccess, setShowSuccess] = useState(true)
+  const [showSuccess, setShowSuccess] = useState(status !== Status.READY)
 
   useEffect(() => {
     const timeout = setTimeout(() => setShowSuccess(false), 5000)
@@ -34,7 +34,7 @@ const ChatStatus = () => {
               rounded border
               z-50`,
         { 'bg-onPrimaryBg border-onPrimaryBg': isReady },
-        { 'bg-yellow-100 border-yellow-200': isPending },
+        { 'bg-yellow-100 border-yellow-200 text-gray-400': isPending },
         { 'bg-red-100 border-red-200': isError },
       )}
     >
