@@ -12,13 +12,13 @@ import { getMyProfile } from './redux/profile-reducer/profile-reducer'
 import { compose } from 'redux'
 import AlertContainer from './components/Alert/AlertContainer'
 import ChatFunctionality from './components/Chat/ChatFunctionality'
-import Chats from './components/Chats/Chats'
 import Loading from './components/common/Loading/Loading'
 import Header from './components/Header/Header'
 import Login from './components/Login/Login'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Profile from './components/Profile/Profile'
 import Sidebar from './components/Sidebar/Sidebar'
+import InboxMessages from 'components/InboxMessages/InboxMessages'
 import Users from './components/Users/Users'
 import withThemes from './HOC/withThemes'
 
@@ -82,7 +82,7 @@ const App = () => {
             <Route index element={<Profile />} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
-            <Route path='/messages/*' element={<Chats />} />
+            <Route path='/messages/*' element={<InboxMessages />} />
 
             <Route path='/login' element={<Login />} />
             <Route path='/login/facebook' element={<div>facebook</div>} />
