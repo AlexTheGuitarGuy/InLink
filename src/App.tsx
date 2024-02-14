@@ -79,7 +79,7 @@ const App = () => {
         <AlertContainer />
         <div className='mt-14'>
           <Routes>
-            <Route index element={<Profile />} />
+            <Route index element={<Navigate to='/profile'/>} />
             <Route path='/profile/:uid' element={<Profile />} />
             <Route path='/profile' element={<Navigate to={`/profile/${uid}`} />} />
             <Route path='/messages/*' element={<InboxMessages />} />
