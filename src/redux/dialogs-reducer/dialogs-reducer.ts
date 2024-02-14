@@ -1,7 +1,7 @@
 import { v1 as uuidv1 } from 'uuid'
-import { UserMessage } from '../../types/types'
-import { updateObjInArr } from '../../utils/object-helpers'
-import { InferAction } from '../store'
+import { UserMessage } from '@/types'
+import { updateObjInArr } from '@/utils/object-helpers'
+import { InferAction } from '@/redux/store'
 
 const initialState = {
   userMessages: [
@@ -118,13 +118,14 @@ const dialogsReducer = (state = initialState, action: DialogAction): DialogsRedu
         return {
           ...state,
           userMessages: state.userMessages.map((messages, conversationIndex) => {
+            const newMessages = [...messages]
             if (conversationIndex === action.to)
-              messages.push({
+              newMessages.push({
                 id: uuidv1(),
                 text: action.text,
                 type: 'sent',
               })
-            return messages
+            return newMessages
           }),
         }
       }

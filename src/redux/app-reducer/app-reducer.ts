@@ -1,16 +1,19 @@
-import { Alert } from '../../types/types'
-import { auth } from '../auth-reducer/auth-reducer'
-import { InferAction, InferThunk } from '../store'
-import { fetchFrontPageFriends } from '../users-reducer/users-reducer'
+import { Alert } from '@/types'
+import { auth } from '@/redux/auth-reducer/auth-reducer'
+import { InferAction, InferThunk } from '@/redux/store'
+import { fetchFrontPageFriends } from '@/redux/users-reducer/users-reducer'
+import { ThemeData, getThemeData, setThemeData } from '@/utils/theme-data'
 
 const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED'
 const SET_ALERT = 'IN_LINK/APP_REDUCER/SET_ALERT'
 const SET_SIDEBAR_HIDDEN = 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN'
+const SET_THEME = 'IN_LINK/APP_REDUCER/SET_THEME'
 
 const initialState = {
   isAppInitialized: false,
   isSidebarHidden: false,
   alert: { message: '', type: 'alert' } as Alert,
+  theme: getThemeData(),
 }
 
 export type AppReducerState = typeof initialState
@@ -28,6 +31,15 @@ const appReducer = (state = initialState, action: AppAction): AppReducerState =>
         ...state,
         ...action.payload,
       }
+
+    case SET_THEME: {
+      setThemeData(action.payload.theme)
+
+      return {
+        ...state,
+        ...action.payload,
+      }
+    }
     default:
       return state
   }
@@ -50,6 +62,11 @@ export const appActions = {
     ({
       type: SET_SIDEBAR_HIDDEN,
       payload: { isSidebarHidden },
+    } as const),
+  setTheme: (theme: ThemeData) =>
+    ({
+      type: SET_THEME,
+      payload: { theme },
     } as const),
 }
 

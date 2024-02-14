@@ -1,14 +1,14 @@
 import cn from 'classnames'
 import { useEffect, useState } from 'react'
-import { Status } from '../../../api/chatAPI'
-import { useAppSelector } from '../../../hooks/reduxHooks'
-import { getStatus } from '../../../redux/chat-reducer/chat-selector'
-import Loading, { Dimensions } from '../../common/Loading/Loading'
+import { Status } from '@/api/chatAPI'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import { getStatus } from '@/redux/chat-reducer/chat-selector'
+import Loading, { Dimensions } from '@/components/common/Loading/Loading'
 
 const ChatStatus = () => {
   const status = useAppSelector(getStatus)
 
-  const [showSuccess, setShowSuccess] = useState(true)
+  const [showSuccess, setShowSuccess] = useState(status !== Status.READY)
 
   useEffect(() => {
     const timeout = setTimeout(() => setShowSuccess(false), 5000)
@@ -34,7 +34,7 @@ const ChatStatus = () => {
               rounded border
               z-50`,
         { 'bg-onPrimaryBg border-onPrimaryBg': isReady },
-        { 'bg-yellow-100 border-yellow-200': isPending },
+        { 'bg-yellow-100 border-yellow-200 text-gray-400': isPending },
         { 'bg-red-100 border-red-200': isError },
       )}
     >

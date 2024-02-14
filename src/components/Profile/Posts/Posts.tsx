@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { useSelector } from 'react-redux'
 
-import placeholder from '../../../assets/pfps/placeholder.jpg'
-import { getPosts } from '../../../redux/profile-reducer/profile-selector'
-import { Post } from '../../../types/types'
+import placeholder from '@/assets/pfps/placeholder.jpg'
+import { getPosts } from '@/redux/profile-reducer/profile-selector'
+import { Post } from '@/types'
 
 import PostCard from './PostCard/PostCard'
 import PublishPost from './PublishPost/PublishPost'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 type MyPostsProps = {
   pfp: string
@@ -15,7 +15,7 @@ type MyPostsProps = {
 }
 
 const Posts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
-  const posts = useSelector(getPosts)
+  const posts = useAppSelector(getPosts)
 
   let postElements = posts.map((postData: Post) => (
     <PostCard
@@ -38,6 +38,7 @@ const Posts: FC<MyPostsProps> = ({ pfp, isOwner, userName }) => {
       lg:border-none
 
       sm:border-t-2 sm:border-neutralFocus
+      min-h-[80vh]
     '
     >
       <div className='lg:w-3/4 sm:w-full mx-auto'>

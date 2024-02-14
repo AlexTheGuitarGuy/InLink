@@ -1,12 +1,12 @@
 import { v1 as uuidv1 } from 'uuid'
 
-import { GetProfileResponse, ResultCodes } from '../../api/API'
-import { profileAPI } from '../../api/profileAPI'
-import { userAPI } from '../../api/userAPI'
-import { FormikStatus, InputProfileData, Photo, Post } from '../../types/types'
-import { updateObjInArr } from '../../utils/object-helpers'
-import { setAlertFromThunk } from '../app-reducer/app-reducer'
-import { InferAction, InferThunk } from '../store'
+import { GetProfileResponse, ResultCodes } from '@/api/API'
+import { profileAPI } from '@/api/profileAPI'
+import { userAPI } from '@/api/userAPI'
+import { FormikStatus, InputProfileData, Photo, Post } from '@/types'
+import { updateObjInArr } from '@/utils/object-helpers'
+import { setAlertFromThunk } from '@/redux/app-reducer/app-reducer'
+import { InferAction, InferThunk } from '@/redux/store'
 
 const initialState = {
   posts: [
@@ -29,6 +29,7 @@ const initialState = {
   profileStatus: '',
   storedText: '',
   isLoading: false,
+  isUploadingPfp: false,
   currentUserFollowed: false,
   isFollowingInProgress: false,
   userId: null as number | null,
@@ -67,7 +68,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/TRIGGER_LIKE': {
       const newPosts = [...state.posts]
 
-      const likedPost = newPosts.find((post) => post.id === action.postId)
+      const likedPost = { ...newPosts.find((post) => post.id === action.postId) } as Post
 
       if (!likedPost) return { ...state }
 
@@ -81,7 +82,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
 
       return {
         ...state,
-        posts: [...newPosts],
+        posts: newPosts.map((post) => (post.id === action.postId ? likedPost : post)),
       }
     }
 
@@ -92,6 +93,7 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/SET_LOADING':
     case 'IN_LINK/PROFILE_REDUCER/SET_CURRENT_USER_FOLLOWED':
     case 'IN_LINK/PROFILE_REDUCER/SET_USER_ID':
+    case 'IN_LINK/PROFILE_REDUCER/SET_IS_UPLOADING_PFP':
       return {
         ...state,
         ...action.payload,
@@ -182,6 +184,11 @@ export const profileActions = {
       type: 'IN_LINK/PROFILE_REDUCER/SET_IS_FOLLOWING_IN_PROGRESS',
       payload: { isFollowingInProgress },
     } as const),
+  setIsUploadingPfp: (isUploadingPfp: boolean) =>
+    ({
+      type: 'IN_LINK/PROFILE_REDUCER/SET_IS_UPLOADING_PFP',
+      payload: { isUploadingPfp },
+    } as const),
 }
 
 const getData = (
@@ -192,6 +199,7 @@ const getData = (
     dispatch(profileActions.setLoading(true))
     const data = await profileAPI.getProfile(uid)
     dispatch(action(data))
+    dispatch(profileActions.setUserId(uid))
     dispatch(profileActions.setLoading(false))
   }
 }
@@ -210,10 +218,8 @@ export const getMyProfile = (uid: number): ProfileThunk => {
 
 export const getStatus = (uid: number): ProfileThunk => {
   return async (dispatch) => {
-    dispatch(profileActions.setLoading(true))
     const data = await profileAPI.getStatus(uid)
     dispatch(profileActions.setStatus(data))
-    dispatch(profileActions.setLoading(false))
   }
 }
 
@@ -226,11 +232,14 @@ export const updateStatus = (payload: string): ProfileThunk => {
 
 export const uploadPFP = (file: File): ProfileThunk => {
   return async (dispatch) => {
+    dispatch(profileActions.setIsUploadingPfp(true))
     const { data, resultCode } = await profileAPI.uploadPFP(file)
 
     if (resultCode === ResultCodes.Success) {
       dispatch(profileActions.uploadSuccess(data.photos))
     }
+
+    dispatch(profileActions.setIsUploadingPfp(false))
   }
 }
 

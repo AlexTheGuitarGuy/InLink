@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-import Placeholder from '../../../assets/pfps/placeholder.jpg'
-import { getFrontPageFriends } from '../../../redux/users-reducer/users-selector'
+import Placeholder from '@/assets/pfps/placeholder.jpg'
+import { getFrontPageFriends } from '@/redux/users-reducer/users-selector'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const FriendItems = () => {
-  const friends = useSelector(getFrontPageFriends)
+  const friends = useAppSelector(getFrontPageFriends)
 
   let friendList = friends.map(({ name, photos }, index: number) => {
     if (index < 5) {
@@ -26,7 +26,7 @@ const FriendItems = () => {
               xl:h-16 xl:w-16
               rounded-full'
             />
-            <div className='ml-2 text-sm font-semibold xl:ml-4'>{name}</div>
+            <div className='ml-2 text-sm font-semibold xl:ml-4 truncate'>{name}</div>
           </div>
         </NavLink>
       )

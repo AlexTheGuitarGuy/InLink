@@ -1,18 +1,18 @@
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik'
-import { useDispatch } from 'react-redux'
 import * as Yup from 'yup'
 
-import { profileActions } from '../../../../redux/profile-reducer/profile-reducer'
+import { profileActions } from '@/redux/profile-reducer/profile-reducer'
 
-import PrimaryButton from '../../../common/Buttons/PrimaryButton/PrimaryButton'
-import FormInput from '../../../common/Inputs/FormInput/FormInput'
+import PrimaryButton from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
+import { useAppDispatch } from '@/hooks/reduxHooks'
 
 type PostFormValues = {
   postText: string
 }
 
 const PublishPost = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const initialValues: PostFormValues = {
     postText: '',

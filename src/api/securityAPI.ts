@@ -1,4 +1,4 @@
-import { LoginPayload } from '../types/types'
+import { LoginPayload } from '@/types'
 import {
   CommonResponse,
   GetCaptchaURLResponse,

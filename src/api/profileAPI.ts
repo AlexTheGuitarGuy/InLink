@@ -1,4 +1,4 @@
-import { InputProfileData, Photo } from '../types/types'
+import { InputProfileData, Photo } from '@/types'
 import { CommonResponse, GetProfileResponse, instance, ResultCodes } from './API'
 
 export const profileAPI = {

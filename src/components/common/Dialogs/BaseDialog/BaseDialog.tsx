@@ -1,8 +1,8 @@
 import { Close } from '@mui/icons-material'
 import cn from 'classnames'
 import { FC, ReactNode, RefObject } from 'react'
-import useTagBlur from '../../../../hooks/useTagBlur'
-import PrimaryButton, { ButtonColor } from '../../Buttons/PrimaryButton/PrimaryButton'
+import useTagBlur from '@/hooks/useTagBlur'
+import PrimaryButton, { ButtonColor } from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
 
 export type BaseDialogProps = {
   isShown: boolean

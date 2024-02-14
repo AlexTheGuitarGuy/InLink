@@ -1,19 +1,27 @@
 import cn from 'classnames'
-import { useSelector } from 'react-redux'
-import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector'
+import WarningAmberIcon from '@mui/icons-material/WarningAmber'
+import { getIsSidebarHidden } from '@/redux/app-reducer/app-selector'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const PageNotFound = () => {
-  const isSidebarHidden = useSelector(getIsSidebarHidden)
+  const isSidebarHidden = useAppSelector(getIsSidebarHidden)
   return (
     <div
-      className={cn(
-        `flex justify-center items-center mt-96 
-                                text-9xl
-                                font-semibold`,
-        { '-ml-14': !isSidebarHidden },
-      )}
+      className='lg:bg-neutralBg lg:rounded-lg
+                  p-8 h-[88vh]'
     >
-      404
+      <div
+        className={cn(
+          `flex flex-col justify-center items-center h-full
+          text-9xl
+          font-semibold
+          `,
+          { '-ml-14': !isSidebarHidden },
+        )}
+      >
+        <WarningAmberIcon fontSize='inherit' />
+        <div className='mr-8 text-5xl'>404 Not Found</div>
+      </div>
     </div>
   )
 }

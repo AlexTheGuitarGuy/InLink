@@ -1,7 +1,11 @@
-import { RootState } from '../store'
+import { RootState } from '@/redux/store'
 
 export const getProfilePage = (state: RootState) => {
   return state.profilePage
+}
+
+export const getProfileData = (state: RootState) => {
+  return getProfilePage(state).profileData
 }
 
 export const getCurrentUserFollowed = (state: RootState) => {
@@ -16,16 +20,12 @@ export const getUserId = (state: RootState) => {
   return state.profilePage.userId
 }
 
-export const getCurrentUserData = (state: RootState) => {
-  return getProfilePage(state).profileData
-}
-
 export const getPFP = (state: RootState) => {
-  return getCurrentUserData(state)?.photos
+  return getProfileData(state)?.photos
 }
 
 export const getUserName = (state: RootState) => {
-  return getCurrentUserData(state)?.fullName
+  return getProfileData(state)?.fullName
 }
 
 export const getMyData = (state: RootState) => {
@@ -46,4 +46,8 @@ export const getPosts = (state: RootState) => {
 
 export const getStatus = (state: RootState) => {
   return getProfilePage(state).profileStatus
+}
+
+export const getIsUploadingPfp = (state: RootState) => {
+  return getProfilePage(state).isUploadingPfp
 }

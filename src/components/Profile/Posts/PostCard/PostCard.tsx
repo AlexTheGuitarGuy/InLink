@@ -1,12 +1,12 @@
 import { ThumbUpAlt, ThumbUpOffAlt } from '@mui/icons-material'
 import { FC, useState } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { profileActions } from '../../../../redux/profile-reducer/profile-reducer'
-import { Post } from '../../../../types/types'
-import ConfirmDialog from '../../../common/Dialogs/ConfirmDialog/ConfirmDialog'
-import EditOptions from '../../../common/Dropdowns/EditOptions/EditOptions'
-import EditText from '../../../common/Inputs/EditText/EditText'
+import { profileActions } from '@/redux/profile-reducer/profile-reducer'
+import { Post } from '@/types'
+import ConfirmDialog from '@/components/common/Dialogs/ConfirmDialog/ConfirmDialog'
+import EditOptions from '@/components/common/Dropdowns/EditOptions/EditOptions'
+import EditText from '@/components/common/Inputs/EditText/EditText'
+import { useAppDispatch } from '@/hooks/reduxHooks'
 
 type PostCardProps = {
   postData: Post
@@ -24,7 +24,7 @@ const PostCard: FC<PostCardProps> = ({
   const [isEditing, setIsEditing] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   return (
     <div className='mt-4 flex flex-col lg:text-l sm:text-sm'>

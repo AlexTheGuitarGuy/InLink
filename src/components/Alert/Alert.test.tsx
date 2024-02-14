@@ -1,5 +1,5 @@
-import { render, screen, within } from '../../test-utils'
-import { Alert as AlertType } from '../../types/types'
+import { render, screen, within } from '@/test-utils'
+import { Alert as AlertType } from '@/types'
 import Alert from './Alert'
 
 describe('Alert component', () => {

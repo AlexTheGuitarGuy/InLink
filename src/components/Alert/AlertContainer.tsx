@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { getAlert } from '../../redux/app-reducer/app-selector'
+import { getAlert } from '@/redux/app-reducer/app-selector'
 import Alert from './Alert'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const AlertContainer = () => {
-  const alert = useSelector(getAlert)
+  const alert = useAppSelector(getAlert)
   const [isShown, setIsShown] = useState(false)
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { animated, useSpring } from 'react-spring'
 import cn from 'classnames'
 import { FC, useState } from 'react'
 import { useGesture } from 'react-use-gesture'
-import useScreenSize from '../../../hooks/useScreenSize'
+import useScreenSize from '@/hooks/useScreenSize'
 
 type ChatShortcutProps = {
   onOpen: () => void

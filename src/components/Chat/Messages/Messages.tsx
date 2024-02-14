@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react'
 import { v1 as uuidv1 } from 'uuid'
 
-import { useAppSelector } from '../../../hooks/reduxHooks'
-import useScreenSize from '../../../hooks/useScreenSize'
-import { getUID } from '../../../redux/auth-reducer/auth-selector'
-import { getChatOpen, getMessages } from '../../../redux/chat-reducer/chat-selector'
-import UserMessage from '../../common/Messages/UserMessage/UserMessage'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import useScreenSize from '@/hooks/useScreenSize'
+import { getUID } from '@/redux/auth-reducer/auth-selector'
+import { getChatOpen, getMessages, getStatus } from '@/redux/chat-reducer/chat-selector'
+import UserMessage from '@/components/common/Messages/UserMessage/UserMessage'
 
 const Messages = () => {
+  const status = useAppSelector(getStatus)
   const messages = useAppSelector(getMessages)
   const myUID = useAppSelector(getUID)
   const chatOpen = useAppSelector(getChatOpen)
@@ -17,7 +18,11 @@ const Messages = () => {
   const { dynamicHeight } = useScreenSize()
 
   useEffect(() => {
-    setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 1000)
+    setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 400)
+  }, [status])
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView()
   }, [chatOpen])
 
   useEffect(() => {

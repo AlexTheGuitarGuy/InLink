@@ -3,11 +3,11 @@ import { ChangeEvent, FC } from 'react'
 import * as Yup from 'yup'
 
 import { Send } from '@mui/icons-material'
-import { useAppDispatch, useAppSelector } from '../../../hooks/reduxHooks'
-import { dialogsActions } from '../../../redux/dialogs-reducer/dialogs-reducer'
-import { getStoredMessages } from '../../../redux/dialogs-reducer/dialogs-selector'
-import PrimaryButton, { ButtonColor } from '../../common/Buttons/PrimaryButton/PrimaryButton'
-import FormInput from '../../common/Inputs/FormInput/FormInput'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { dialogsActions } from '@/redux/dialogs-reducer/dialogs-reducer'
+import { getStoredMessages } from '@/redux/dialogs-reducer/dialogs-selector'
+import PrimaryButton, { ButtonColor } from '@/components/common/Buttons/PrimaryButton/PrimaryButton'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 
 type MessageFormValues = {
   messageText: string
@@ -46,7 +46,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {({ isSubmitting, isValid, handleChange }: FormikProps<MessageFormValues>) => (
+      {({ isSubmitting, isValid, handleChange, values }: FormikProps<MessageFormValues>) => (
         <Form>
           <div className='flex flex-row justify-center'>
             <FormInput
@@ -66,7 +66,7 @@ const MessagesForm: FC<SendTextProps> = ({ index }) => {
             />
             <div className='flex items-center'>
               <PrimaryButton
-                disabled={isSubmitting || !isValid}
+                disabled={isSubmitting || !isValid || !values.messageText.trim()}
                 type='submit'
                 className='rounded-full ml-4 h-12 w-12 flex justify-center items-center active:ring-onPrimaryBg shadow-none'
                 color={ButtonColor.transparent}

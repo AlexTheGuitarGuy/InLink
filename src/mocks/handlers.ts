@@ -1,5 +1,5 @@
 import { rest } from 'msw'
-import { baseURL } from '../api/API'
+import { baseURL } from '@/api/API'
 
 export const handlers = [
   rest.get(`${baseURL}auth/me`, (req, res, ctx) => {

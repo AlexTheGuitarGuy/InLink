@@ -1,7 +1,7 @@
 import { Delete, Edit, MoreVert } from '@mui/icons-material'
 import { FC, RefObject, useState } from 'react'
 
-import useTagBlur from '../../../../hooks/useTagBlur'
+import useTagBlur from '@/hooks/useTagBlur'
 import BaseDropdown from '../BaseDropdown/BaseDropdown'
 import DropdownItem from '../BaseDropdown/DropdownItem/DropdownItem'
 
@@ -37,7 +37,7 @@ const EditOptions: FC<EditOptionsProps> = ({
       >
         <MoreVert />
       </button>
-      <BaseDropdown open={menuOpen} absolutePosition={absolutePosition} >
+      <BaseDropdown open={menuOpen} absolutePosition={absolutePosition}>
         {canEdit && (
           <DropdownItem icon={<Edit />} onClick={onEdit} setMenuOpen={menuOpenHandler}>
             Edit

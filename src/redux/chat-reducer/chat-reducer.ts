@@ -1,12 +1,6 @@
 import { Dispatch } from 'redux'
-import {
-  chatAPI,
-  MessageData,
-  MessageSubscriber,
-  Status,
-  StatusSubscriber,
-} from '../../api/chatAPI'
-import { InferAction, InferThunk, RootState } from '../store'
+import { chatAPI, MessageData, MessageSubscriber, Status, StatusSubscriber } from '@/api/chatAPI'
+import { InferAction, InferThunk, RootState } from '@/redux/store'
 
 const initialState = {
   messages: null as MessageData[] | null,

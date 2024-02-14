@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { Field } from 'formik'
 import { FC } from 'react'
 
-import FormInput from '../../../common/Inputs/FormInput/FormInput'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 
 type JobInfoProps = {
   lookingForAJob: boolean

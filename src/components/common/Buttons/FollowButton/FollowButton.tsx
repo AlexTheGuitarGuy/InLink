@@ -1,7 +1,8 @@
-import { FC } from 'react'
-import { useAppSelector } from '../../../../hooks/reduxHooks'
-import { getIsLoggedIn, getUID } from '../../../../redux/auth-reducer/auth-selector'
-import Loading, { Dimensions } from '../../Loading/Loading'
+import { FC, useMemo } from 'react'
+import cn from 'classnames'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import { getIsLoggedIn, getUID } from '@/redux/auth-reducer/auth-selector'
+import Loading, { Dimensions } from '@/components/common/Loading/Loading'
 import PrimaryButton from '../PrimaryButton/PrimaryButton'
 
 export type FollowButtonProps = {
@@ -21,6 +22,8 @@ const FollowButton: FC<FollowButtonProps> = ({
   const myUID = useAppSelector(getUID)
   const isLoggedIn = useAppSelector(getIsLoggedIn)
 
+  const isDisabled = useMemo(() => checkIsDisabled(id), [id, checkIsDisabled])
+
   const buttonText = followed ? 'Unfollow' : 'Follow'
   const buttonAction = followed ? (id: number) => onUnfollow(id) : (id: number) => onFollow(id)
   return (
@@ -33,9 +36,17 @@ const FollowButton: FC<FollowButtonProps> = ({
           }}
           className='lg:py-0.5 lg:px-4
                           py-2 sm:px-6
-                          mb-4 lg:mb-0'
+                          mb-4 lg:mb-0
+                          relative'
         >
-          {(checkIsDisabled(id) && <Loading dimensions={Dimensions.SMALL} />) || <>{buttonText}</>}
+          <div
+            className={cn('absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2', {
+              'opacity-0': !isDisabled,
+            })}
+          >
+            <Loading dimensions={Dimensions.SMALL} />
+          </div>
+          <div className={cn({ 'opacity-0': isDisabled })}>{buttonText}</div>
         </PrimaryButton>
       )}
     </>

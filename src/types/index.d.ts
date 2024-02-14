@@ -1,7 +1,7 @@
 import { FormikErrors } from 'formik'
 
 export interface EnumObject {
-  [enumValue: number]: string
+  [enumValue: number | string]: string
 }
 
 export type Alert = {

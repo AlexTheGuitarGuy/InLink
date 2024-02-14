@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { FC } from 'react'
-import { Alert as AlertType } from '../../types/types'
+import { Alert as AlertType } from '@/types'
 
 type AlertProps = {
   alert: AlertType

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import FormInput from '../../../../common/Inputs/FormInput/FormInput'
+import FormInput from '@/components/common/Inputs/FormInput/FormInput'
 import { ContactProps } from '../Contacts'
 
 const InputContact: FC<ContactProps> = ({ contactName, error }) => {
@@ -10,7 +10,7 @@ const InputContact: FC<ContactProps> = ({ contactName, error }) => {
         name: `contacts.${contactName}`,
         placeholder: `insert ${contactName}`,
       }}
-      label={{ text: contactName }}
+      label={{ text: contactName, className: 'mb-1' }}
       otherError={{ text: error }}
     />
   )

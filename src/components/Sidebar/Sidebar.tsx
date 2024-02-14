@@ -1,20 +1,20 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
-import { appActions } from '../../redux/app-reducer/app-reducer'
-import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector'
+import { appActions } from '@/redux/app-reducer/app-reducer'
+import { getIsSidebarHidden } from '@/redux/app-reducer/app-selector'
 
-import useScreenSize from '../../hooks/useScreenSize'
+import useScreenSize from '@/hooks/useScreenSize'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 
 import FriendItems from './FriendItems/FriendItems'
 
 const Sidebar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const screenSize = useScreenSize()
   const location = useLocation()
 
-  const isSidebarHidden = useSelector(getIsSidebarHidden)
+  const isSidebarHidden = useAppSelector(getIsSidebarHidden)
 
   useEffect(() => {
     if (location.pathname.match('/messages') || screenSize.dynamicWidth < 1366) {

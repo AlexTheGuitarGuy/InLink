@@ -1,21 +1,10 @@
+import { useAppSelector } from '@/hooks/reduxHooks'
 import { ComponentType } from 'react'
-import { useStickyState } from '../hooks/useStickyState'
-
-export enum Color {
-  blue = 'blue',
-  green = 'green',
-  purple = 'purple',
-}
-
-export enum Mode {
-  dark = 'dark',
-  light = 'light',
-}
+import { getThemeFromStore } from '@/redux/app-reducer/app-selector'
 
 function withThemes<P extends Object>(Component: ComponentType<P>) {
   return (props: P) => {
-    const [color] = useStickyState(Object.values(Color)[0], 'theme-color')
-    const [mode] = useStickyState(Object.values(Mode)[0], 'theme-mode')
+    const { color, mode } = useAppSelector(getThemeFromStore)
 
     return (
       <div

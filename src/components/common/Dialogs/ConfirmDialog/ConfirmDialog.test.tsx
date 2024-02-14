@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '../../../../test-utils'
+import { fireEvent, render, screen } from '@/test-utils'
 import ConfirmDialog from './ConfirmDialog'
 
 const mockOnSubmit = jest.fn()

@@ -1,7 +1,7 @@
-import { ComponentStory } from '@storybook/react'
+import { StoryFn } from '@storybook/react'
 
-import ChatShortcut from '../components/Chat/ChatShortcut/ChatShortcut'
-import withThemes from '../HOC/withThemes'
+import ChatShortcut from '@/components/Chat/ChatShortcut/ChatShortcut'
+import withThemes from '@/HOC/withThemes'
 
 export default {
   title: 'Chat/ChatShortcut',
@@ -9,7 +9,7 @@ export default {
   decorators: [withThemes(ChatShortcut)],
 }
 
-export const Template: ComponentStory<typeof ChatShortcut> = (args) => <ChatShortcut {...args} />
+export const Template: StoryFn<typeof ChatShortcut> = (args) => <ChatShortcut {...args} />
 
 Template.args = {
   onOpen: () => {},

@@ -1,17 +1,17 @@
 import { KeyboardBackspace } from '@mui/icons-material'
-import { useSelector } from 'react-redux'
 import { NavLink, useLocation } from 'react-router-dom'
 import Navbar from './Navbar/Navbar'
 import ProfileButton from './ProfileButton/ProfileButton'
 
-import Placeholder from '../../assets/pfps/placeholder.jpg'
-import useScreenSize from '../../hooks/useScreenSize'
-import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
+import Placeholder from '@/assets/pfps/placeholder.jpg'
+import useScreenSize from '@/hooks/useScreenSize'
+import { getFrontPageFriends } from '@/redux/users-reducer/users-selector'
+import { useAppSelector } from '@/hooks/reduxHooks'
 import ThemesMenu from './ThemesMenu/ThemesMenu'
 
 const Header = () => {
   const location = useLocation()
-  const users = useSelector(getFrontPageFriends)
+  const users = useAppSelector(getFrontPageFriends)
   const screenSize = useScreenSize()
 
   if (!users) return null

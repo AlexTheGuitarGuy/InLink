@@ -1,28 +1,27 @@
 import { ReactNode, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { compose } from 'redux'
 
-import { getUserMessages } from '../../redux/dialogs-reducer/dialogs-selector'
-import { getMyData } from '../../redux/profile-reducer/profile-selector'
-import { getFrontPageFriends } from '../../redux/users-reducer/users-selector'
+import { getUserMessages } from '@/redux/dialogs-reducer/dialogs-selector'
+import { getMyData } from '@/redux/profile-reducer/profile-selector'
+import { getFrontPageFriends } from '@/redux/users-reducer/users-selector'
 
-import withAuthRedirect from '../../HOC/withAuthRedirect'
-import useScreenSize from '../../hooks/useScreenSize'
+import withAuthRedirect from '@/HOC/withAuthRedirect'
+import useScreenSize from '@/hooks/useScreenSize'
 
-import { UserMessage as UserMessageType } from '../../types/types'
+import { UserMessage as UserMessageType } from '@/types'
 
-import { useAppDispatch } from '../../hooks/reduxHooks'
-import { dialogsActions } from '../../redux/dialogs-reducer/dialogs-reducer'
-import Loading from '../common/Loading/Loading'
-import UserMessage from '../common/Messages/UserMessage/UserMessage'
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import { dialogsActions } from '@/redux/dialogs-reducer/dialogs-reducer'
+import Loading from '@/components/common/Loading/Loading'
+import UserMessage from '@/components/common/Messages/UserMessage/UserMessage'
 import MessageForm from './MessagesForm/MessagesForm'
 import Users from './Users/Users'
 
-const Chats = () => {
-  const userMessages = useSelector(getUserMessages)
-  const users = useSelector(getFrontPageFriends)
-  const myData = useSelector(getMyData)
+const InboxMesssages = () => {
+  const userMessages = useAppSelector(getUserMessages)
+  const users = useAppSelector(getFrontPageFriends)
+  const myData = useAppSelector(getMyData)
 
   const dispatch = useAppDispatch()
 
@@ -103,4 +102,4 @@ const Chats = () => {
   )
 }
 
-export default compose(withAuthRedirect)(Chats)
+export default compose(withAuthRedirect)(InboxMesssages)
