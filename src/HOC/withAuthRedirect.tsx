@@ -1,11 +1,11 @@
 import { ComponentType } from 'react'
-import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { getIsLoggedIn } from '../redux/auth-reducer/auth-selector'
+import { useAppSelector } from 'hooks/reduxHooks'
 
 function withAuthRedirect<P extends Object>(Component: ComponentType<P>) {
   return (props: P) => {
-    const isLoggedIn = useSelector(getIsLoggedIn)
+    const isLoggedIn = useAppSelector(getIsLoggedIn)
     if (!isLoggedIn) return <Navigate to='/login' />
     return <Component {...props} />
   }

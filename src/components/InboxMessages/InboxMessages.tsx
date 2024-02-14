@@ -1,5 +1,4 @@
 import { ReactNode, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import { compose } from 'redux'
 
@@ -12,7 +11,7 @@ import useScreenSize from '../../hooks/useScreenSize'
 
 import { UserMessage as UserMessageType } from '../../types/types'
 
-import { useAppDispatch } from '../../hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks'
 import { dialogsActions } from '../../redux/dialogs-reducer/dialogs-reducer'
 import Loading from '../common/Loading/Loading'
 import UserMessage from '../common/Messages/UserMessage/UserMessage'
@@ -20,9 +19,9 @@ import MessageForm from './MessagesForm/MessagesForm'
 import Users from './Users/Users'
 
 const InboxMesssages = () => {
-  const userMessages = useSelector(getUserMessages)
-  const users = useSelector(getFrontPageFriends)
-  const myData = useSelector(getMyData)
+  const userMessages = useAppSelector(getUserMessages)
+  const users = useAppSelector(getFrontPageFriends)
+  const myData = useAppSelector(getMyData)
 
   const dispatch = useAppDispatch()
 

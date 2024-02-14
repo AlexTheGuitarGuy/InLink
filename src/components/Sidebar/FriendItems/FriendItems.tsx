@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import Placeholder from '../../../assets/pfps/placeholder.jpg'
 import { getFrontPageFriends } from '../../../redux/users-reducer/users-selector'
+import { useAppSelector } from 'hooks/reduxHooks'
 
 const FriendItems = () => {
-  const friends = useSelector(getFrontPageFriends)
+  const friends = useAppSelector(getFrontPageFriends)
 
   let friendList = friends.map(({ name, photos }, index: number) => {
     if (index < 5) {

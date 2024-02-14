@@ -1,9 +1,9 @@
 import cn from 'classnames'
-import { useSelector } from 'react-redux'
 import { getIsSidebarHidden } from '../../redux/app-reducer/app-selector'
+import { useAppSelector } from 'hooks/reduxHooks'
 
 const PageNotFound = () => {
-  const isSidebarHidden = useSelector(getIsSidebarHidden)
+  const isSidebarHidden = useAppSelector(getIsSidebarHidden)
   return (
     <div
       className={cn(
