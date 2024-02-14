@@ -26,7 +26,7 @@ const FriendItems = () => {
               xl:h-16 xl:w-16
               rounded-full'
             />
-            <div className='ml-2 text-sm font-semibold xl:ml-4'>{name}</div>
+            <div className='ml-2 text-sm font-semibold xl:ml-4 truncate'>{name}</div>
           </div>
         </NavLink>
       )
