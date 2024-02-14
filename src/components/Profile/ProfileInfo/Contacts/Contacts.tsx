@@ -1,7 +1,6 @@
 import { FC } from 'react'
 
 import { ContactsObj } from '../../../../types/types'
-import { swapElements } from '../../../../utils/array-helpers'
 import ContactIcon from './ContactIcon/ContactIcon'
 import InputContact from './InputContact/InputContact'
 
@@ -20,42 +19,37 @@ export type ContactProps = {
 }
 
 const Contacts: FC<ContactsProps> = ({ contacts, isEditMode, status }) => {
-  let isEmpty = true
-  for (let contact in contacts) {
-    if (contacts.hasOwnProperty(contact)) {
-      if (contacts[contact as keyof ContactsObj]) {
-        isEmpty = false
-        break
-      }
-    }
-  }
+  let isEmpty = Object.values(contacts).every((element) => !element)
 
-  const contactKeys = Object.keys(contacts)
+  const contactKeys = Object.keys(contacts) as Array<keyof ContactsObj>
 
-  swapElements(contactKeys, contactKeys.indexOf('vk'), contactKeys.length - 3)
-  swapElements(contactKeys, contactKeys.indexOf('website'), contactKeys.length - 2)
-  swapElements(contactKeys, contactKeys.indexOf('mainLink'), contactKeys.length - 1)
+  // I don't know what the API wants me to use these fields for.
+  const excludedFields = ['mainLink', 'website']
 
-  const parsedContacts = contactKeys.map((key: string) => {
-    let error: string = ''
-    const asyncErrorKey = status?.error && Object.keys(status?.error)[0]
-    const asyncErrorValue = status?.error && Object.values(status?.error)[0]
+  const parsedContacts = contactKeys
+    .filter((element) => !excludedFields.includes(element))
+    .map((key) => {
+      let error: string = ''
+      const asyncErrorKey = status?.error && Object.keys(status?.error)[0]
+      const asyncErrorValue = status?.error && Object.values(status?.error)[0]
 
-    if (asyncErrorKey && asyncErrorKey.includes('contacts') && asyncErrorKey.includes(key))
-      error = asyncErrorValue!
+      if (asyncErrorKey && asyncErrorKey.includes('contacts') && asyncErrorKey.includes(key))
+        error = asyncErrorValue!
 
-    return (
-      <span key={key}>
-        {isEditMode ? (
-          <InputContact contactName={key} error={error} />
-        ) : (
-          contacts[key as keyof ContactsObj] && (
-            <ContactIcon contactName={key} contactAddress={contacts[key as keyof ContactsObj]} />
-          )
-        )}
-      </span>
-    )
-  })
+      if (!contacts[key as keyof ContactsObj] && !isEditMode) return null
+
+      return (
+        <span key={key}>
+          {isEditMode ? (
+            <InputContact contactName={key} error={error} />
+          ) : (
+            contacts[key as keyof ContactsObj] && (
+              <ContactIcon contactName={key} contactAddress={contacts[key as keyof ContactsObj]} />
+            )
+          )}
+        </span>
+      )
+    })
 
   return (
     <div className='mt-2'>
@@ -67,10 +61,7 @@ const Contacts: FC<ContactsProps> = ({ contacts, isEditMode, status }) => {
           {isEditMode ? (
             <div className='space-y-2 flex flex-col'>{parsedContacts}</div>
           ) : (
-            <div className='w-fit'>
-              <div>{parsedContacts.slice(0, parsedContacts.length - 2)}</div>
-              <div>{parsedContacts.slice(parsedContacts.length - 2)}</div>
-            </div>
+            <div className='w-fit space-x-2'>{parsedContacts.filter((element) => !!element)}</div>
           )}
         </div>
       )}
