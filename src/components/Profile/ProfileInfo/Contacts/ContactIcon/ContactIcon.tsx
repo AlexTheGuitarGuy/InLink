@@ -10,13 +10,17 @@ const ContactIcon: FC<ContactProps> = ({ contactName, contactAddress }) => {
     github: <GitHub fontSize='large' />,
     instagram: <Instagram fontSize='large' />,
     twitter: <Twitter fontSize='large' />,
-    vk: <VkIcon className='fill-neutralFocus mt-40' />,
+    vk: <VkIcon className='fill-neutralFocus mt-40' width={32} height={32} />,
     youtube: <YouTube fontSize='large' />,
   }
 
+  if (!contactAddress) return null
+
   return (
     <a
-      href={contactAddress}
+      href={contactAddress.startsWith('http') ? contactAddress : `https://${contactAddress}`}
+      target='_blank'
+      rel='noreferrer'
       className='hover:opacity-80 transition-opacity ease-in-out duration-75'
     >
       {iconsMap[contactName as keyof typeof iconsMap]}
