@@ -4,12 +4,8 @@ import { InferAction, InferThunk } from '@/redux/store'
 import { fetchFrontPageFriends } from '@/redux/users-reducer/users-reducer'
 import { ThemeData, getThemeData, setThemeData } from '@/utils/theme-data'
 
-const APP_INITIALIZED = 'IN_LINK/APP_REDUCER/APP_INITIALIZED'
-const SET_ALERT = 'IN_LINK/APP_REDUCER/SET_ALERT'
-const SET_SIDEBAR_HIDDEN = 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN'
-const SET_THEME = 'IN_LINK/APP_REDUCER/SET_THEME'
-
 const initialState = {
+  isInitializingApp: false,
   isAppInitialized: false,
   isSidebarHidden: false,
   alert: { message: '', type: 'alert' } as Alert,
@@ -24,15 +20,16 @@ type AppThunk = InferThunk<AppAction>
 
 const appReducer = (state = initialState, action: AppAction): AppReducerState => {
   switch (action.type) {
-    case APP_INITIALIZED:
-    case SET_SIDEBAR_HIDDEN:
-    case SET_ALERT:
+    case 'IN_LINK/APP_REDUCER/APP_INITIALIZED':
+    case 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN':
+    case 'IN_LINK/APP_REDUCER/SET_ALERT':
+    case 'IN_LINK/APP_REDUCER/SET_IS_INITIALIZING_APP':
       return {
         ...state,
         ...action.payload,
       }
 
-    case SET_THEME: {
+    case 'IN_LINK/APP_REDUCER/SET_THEME': {
       setThemeData(action.payload.theme)
 
       return {
@@ -48,25 +45,31 @@ const appReducer = (state = initialState, action: AppAction): AppReducerState =>
 export const appActions = {
   initializeSuccess: () =>
     ({
-      type: APP_INITIALIZED,
+      type: 'IN_LINK/APP_REDUCER/APP_INITIALIZED',
       payload: { isAppInitialized: true },
     } as const),
 
   setAlert: (alert: Alert) =>
     ({
-      type: SET_ALERT,
+      type: 'IN_LINK/APP_REDUCER/SET_ALERT',
       payload: { alert },
     } as const),
 
   setIsSidebarHidden: (isSidebarHidden: boolean) =>
     ({
-      type: SET_SIDEBAR_HIDDEN,
+      type: 'IN_LINK/APP_REDUCER/SET_SIDEBAR_HIDDEN',
       payload: { isSidebarHidden },
     } as const),
   setTheme: (theme: ThemeData) =>
     ({
-      type: SET_THEME,
+      type: 'IN_LINK/APP_REDUCER/SET_THEME',
       payload: { theme },
+    } as const),
+
+  setIsInitializingApp: (isInitializingApp: boolean) =>
+    ({
+      type: 'IN_LINK/APP_REDUCER/SET_IS_INITIALIZING_APP',
+      payload: { isInitializingApp },
     } as const),
 }
 
@@ -76,12 +79,21 @@ export const setAlertFromThunk =
     dispatch(appActions.setAlert(alert))
   }
 
-export const initializeApp = (): AppThunk => async (dispatch) => {
-  const authPromise = dispatch(auth())
-  const usersPromise = dispatch(fetchFrontPageFriends())
+export const initializeApp = (): AppThunk => async (dispatch, getState) => {
+  const { isAppInitialized, isInitializingApp } = getState().app
+  if (isAppInitialized || isInitializingApp) return void 0
+  dispatch(appActions.setIsInitializingApp(true))
 
-  await Promise.all([authPromise, usersPromise])
+  const authUser = getState().auth.id
+  const frontPageFriends = getState().usersPage.frontPageFriends
 
+  const promises: Promise<unknown>[] = []
+  if (!authUser) promises.push(dispatch(auth()))
+  if (!frontPageFriends.length) promises.push(dispatch(fetchFrontPageFriends()))
+
+  await Promise.all(promises)
+
+  dispatch(appActions.setIsInitializingApp(false))
   dispatch(appActions.initializeSuccess())
 }
 

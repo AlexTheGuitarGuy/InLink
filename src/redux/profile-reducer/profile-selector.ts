@@ -17,7 +17,7 @@ export const getIsFollowingInProgress = (state: RootState) => {
 }
 
 export const getUserId = (state: RootState) => {
-  return state.profilePage.userId
+  return state.profilePage.profileData?.userId
 }
 
 export const getPFP = (state: RootState) => {

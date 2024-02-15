@@ -98,7 +98,10 @@ export const usersActions = {
 }
 
 export const requestUsers = (params: string): UsersThunk => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const isLoading = getState().usersPage.isLoading
+    if (isLoading) return void 0
+
     dispatch(usersActions.setLoading(true))
 
     let newURL = `users${params}`
