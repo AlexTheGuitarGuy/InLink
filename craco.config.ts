@@ -2,7 +2,7 @@ import path from 'path'
 import { pathsToModuleNameMapper } from 'ts-jest'
 import { compilerOptions } from './tsconfig.json'
 
-module.exports = {
+    module.exports = {
   webpack: {
     alias: {
       '@': path.resolve(__dirname, './src/'),

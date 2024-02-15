@@ -10,7 +10,7 @@ import { getIsLoggedIn, getUID } from '@/redux/auth-reducer/auth-selector'
 import { getMyProfile } from '@/redux/profile-reducer/profile-reducer'
 
 import { compose } from 'redux'
-import AlertContainer from '@/components/Alert/AlertContainer'
+    import AlertContainer from '@/components/Alert/AlertContainer'
 import ChatFunctionality from '@/components/Chat/ChatFunctionality'
 import Loading from '@/components/common/Loading/Loading'
 import Header from '@/components/Header/Header'
