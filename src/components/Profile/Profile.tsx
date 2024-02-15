@@ -4,12 +4,7 @@ import { compose } from 'redux'
 
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import { getUID } from '@/redux/auth-reducer/auth-selector'
-import {
-  getIsCurrentUserFollowed,
-  getProfile,
-  getStatus,
-  profileActions,
-} from '@/redux/profile-reducer/profile-reducer'
+import { getProfile } from '@/redux/profile-reducer/profile-reducer'
 import { getIsLoading, getMyData, getProfileData } from '@/redux/profile-reducer/profile-selector'
 
 import withAuthRedirect from '@/HOC/withAuthRedirect'
@@ -30,12 +25,7 @@ const Profile = () => {
   const isOwner = currentUserPageId === myUID
 
   useEffect(() => {
-    if (currentUserPageId) {
-      dispatch(profileActions.setUserId(currentUserPageId))
-      dispatch(getProfile(currentUserPageId))
-      dispatch(getStatus(currentUserPageId))
-      dispatch(getIsCurrentUserFollowed(currentUserPageId))
-    }
+    if (currentUserPageId) dispatch(getProfile(currentUserPageId))
   }, [dispatch, currentUserPageId])
 
   if (!profileData || !myData || isLoading) return <Loading />

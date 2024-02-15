@@ -32,7 +32,6 @@ const initialState = {
   isUploadingPfp: false,
   currentUserFollowed: false,
   isFollowingInProgress: false,
-  userId: null as number | null,
 }
 
 export type ProfileReducerState = typeof initialState
@@ -92,7 +91,6 @@ const profileReducer = (state = initialState, action: ProfileAction): ProfileRed
     case 'IN_LINK/PROFILE_REDUCER/SET_STATUS':
     case 'IN_LINK/PROFILE_REDUCER/SET_LOADING':
     case 'IN_LINK/PROFILE_REDUCER/SET_CURRENT_USER_FOLLOWED':
-    case 'IN_LINK/PROFILE_REDUCER/SET_USER_ID':
     case 'IN_LINK/PROFILE_REDUCER/SET_IS_UPLOADING_PFP':
       return {
         ...state,
@@ -176,9 +174,6 @@ export const profileActions = {
       type: 'IN_LINK/PROFILE_REDUCER/SET_CURRENT_USER_FOLLOWED',
       payload: { currentUserFollowed },
     } as const),
-  setUserId: (userId: number) =>
-    ({ type: 'IN_LINK/PROFILE_REDUCER/SET_USER_ID', payload: { userId } } as const),
-
   setIsFollowingInProgress: (isFollowingInProgress: boolean) =>
     ({
       type: 'IN_LINK/PROFILE_REDUCER/SET_IS_FOLLOWING_IN_PROGRESS',
@@ -199,19 +194,24 @@ const getData = (
     dispatch(profileActions.setLoading(true))
     const data = await profileAPI.getProfile(uid)
     dispatch(action(data))
-    dispatch(profileActions.setUserId(uid))
     dispatch(profileActions.setLoading(false))
   }
 }
 
 export const getProfile = (uid: number): ProfileThunk => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const isLoading = getState().profilePage.isLoading
+    if (isLoading) return void 0
+    dispatch(getStatus(uid))
+    dispatch(getIsCurrentUserFollowed(uid))
     dispatch(getData(uid, profileActions.setProfile))
   }
 }
 
 export const getMyProfile = (uid: number): ProfileThunk => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const isLoading = getState().profilePage.isLoading
+    if (isLoading) return void 0
     dispatch(getData(uid, profileActions.setMyProfile))
   }
 }

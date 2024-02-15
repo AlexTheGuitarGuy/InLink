@@ -67,9 +67,7 @@ const Users = () => {
   )
 
   useEffect(() => {
-    if (!allParams.page) {
-      changePage(1)
-    }
+    if (!allParams.page) changePage(1)
   }, [changePage, allParams.page])
 
   useEffect(() => {
