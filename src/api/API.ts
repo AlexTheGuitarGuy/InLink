@@ -31,7 +31,10 @@ export type GetProfileResponse = {
   userId: number
 } & InputProfileData
 
-export const baseURL = 'http://localhost:3000/'
+export const baseURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/'
+    : 'https://social-network.samuraijs.com/api/1.0/'
 export const instance = axios.default.create({
   baseURL: baseURL,
   withCredentials: true,
